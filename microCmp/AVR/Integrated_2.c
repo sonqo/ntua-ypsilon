@@ -1,6 +1,6 @@
 #include <avr/io.h>
 
-char x, y;
+char x;
 
 int main(void)
 {
@@ -26,7 +26,7 @@ int main(void)
 					x = x>>1;
 		}
 		if ((PINC & 0x04) == 4){ //MSB led on
-			while ((PINCy & 0x04) == 4);
+			while ((PINC & 0x04) == 4);
 				x = 128;
 		}
 		if ((PINC & 0x08) == 8){ //LSB led on
