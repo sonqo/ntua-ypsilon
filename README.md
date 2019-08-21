@@ -4,4 +4,4 @@ Personal projects from studying years at the National Technical University of At
 
 *Included courses:*
 
-		1. Microprocessors Systems -> AVR C, AVR Assembly
+		1. Microprocessors Systems: AVR C, AVR Assembly
