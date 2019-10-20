@@ -2,7 +2,7 @@
 
 .org 0x0
 rjmp reset
-.org 0x4
+.org 0x4					; INT1 address
 rjmp isr1
 
 reset:
@@ -13,9 +13,9 @@ reset:
 	
 	ldi r24, (1<<ISC11)|(1<<ISC10)		; rising edge of INT1 will cause an interrupt request
 	out MCUCR, r24
-	ldi r24, (1<<INT0)		; enabling INT1 interrupt
+	ldi r24, (1<<INT1)		; enabling INT1 interrupt
 	out GICR, r24
-	sei
+	sei						; enable global interrupts
 
 	ser r24	
 	out DDRA, r24			; initializing PORTA for output = counter of interrupts				
@@ -34,22 +34,29 @@ main:
 	rjmp main
 
 isr1:
-	ldi r24, (1<<INTF1)		; loading 1 to 7-bit of GIFR
-	out GIFR, r24
-	ldi r24, low(0005)		; 5ms dealy
-	ldi r25, high(0005)
+	ldi r24, (1<<INTF1)		; button debouncing handling
+	out GIFR, r24			; loading 1 to 7-bit of GIFR for INT1 interrupt
+	ldi r24, low(5)			; 5ms dealy
+	ldi r25, high(5)
 	rcall wait_msec
 	in r24, GIFR
-	ori r24, (1<<PB7)		; if 7-bit of GIFR is not zero, wait to avoid multiple interrupts
+	andi r24, (1<<PB7)		; if 7-bit of GIFR is not zero, wait to avoid multiple interrupts
 	cpi r24, 0x00			; else proceed with the interrupt code
 	brne isr1
 	
 	in r23, SREG			; saving SREG to stack
 	push r23
-	push r24
+	push r24				; saving delay registers to stack
 	push r25
-	inc r27
-	out PORTA, r27
+	inc r27					; increase interrupts counter by one
+
+	in r23, PIND			; check PIND(7) status
+	andi r23, (1<<PB7)
+	cpi r23, 0x00			
+	breq no_display			; if PIND(7) == 0 don't update PORTA LEDs
+	out PORTA, r27			; else update them
+
+no_display:	
 	pop r25
 	pop r24
 	pop r23					; retrieving SREG from stack
