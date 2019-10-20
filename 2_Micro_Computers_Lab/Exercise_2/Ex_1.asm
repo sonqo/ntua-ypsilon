@@ -16,6 +16,8 @@ reset:
 	ldi r24, (1<<INT1)		; enabling INT1 interrupt
 	out GICR, r24
 
+	clr r24
+	out DDRD, r24			; initialization PORTD for input
 	ser r24	
 	out DDRA, r24			; initializing PORTA for output = counter of interrupts				
 	out DDRB, r24			; initializing PORTB for output = timer
@@ -34,8 +36,8 @@ main:
 	rjmp main
 
 isr1:
-	ldi r24, (1<<INTF1)		; button debouncing handling
-	out GIFR, r24			; loading 1 to 7-bit of GIFR for INT1 interrupt
+	ldi r23, (1<<INTF1)		; button debouncing handling
+	out GIFR, r23			; loading 1 to 7-bit of GIFR for INT1 interrupt
 	ldi r24, low(5)			; 5ms dealy
 	ldi r25, high(5)
 	rcall wait_msec
@@ -46,8 +48,6 @@ isr1:
 	
 	in r23, SREG			; saving SREG to stack
 	push r23
-	push r24				; saving delay registers to stack
-	push r25
 	inc r27					; increase interrupts counter by one
 
 	in r23, PIND			; check PIND(7) status
@@ -56,9 +56,9 @@ isr1:
 	breq no_display			; if PIND(7) == 0 don't update PORTA LEDs
 	out PORTA, r27			; else update them
 
-no_display:	
-	pop r25
-	pop r24
+no_display:
+	ldi r24, low(500)
+	ldi r25, high(500)	
 	pop r23					; retrieving SREG from stack
 	out SREG, r23
 	reti
