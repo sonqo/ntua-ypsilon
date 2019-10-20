@@ -15,13 +15,13 @@ reset:
 	out MCUCR, r24
 	ldi r24, (1<<INT1)		; enabling INT1 interrupt
 	out GICR, r24
-	sei						; enable global interrupts
 
 	ser r24	
 	out DDRA, r24			; initializing PORTA for output = counter of interrupts				
 	out DDRB, r24			; initializing PORTB for output = timer
 	clr r26					; initializing time counter
 	clr r27					; initializing interrupts counter
+	sei						; enable global interrupts
 
 main:
 	out PORTB, r26			
