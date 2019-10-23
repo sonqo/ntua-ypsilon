@@ -48,12 +48,12 @@ isr1:
 	
 	in r23, SREG			; saving SREG to stack
 	push r23
-	inc r27					; increase interrupts counter by one
 
 	in r23, PIND			; check PIND(7) status
 	andi r23, (1<<PB7)
 	cpi r23, 0x00			
 	breq no_display			; if PIND(7) == 0 don't update PORTA LEDs
+	inc r27					; increase interrupts counter by one
 	out PORTA, r27			; else update them
 
 no_display:
