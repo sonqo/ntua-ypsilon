@@ -1,9 +1,9 @@
 .include "m16def.inc"
 
 .org 0x0
-rjmp reset
+	rjmp reset
 .org 0x4					; INT1 address
-rjmp isr1
+	rjmp isr1
 
 reset:
 	ldi r24, low(RAMEND)	; initializing stack pointer
