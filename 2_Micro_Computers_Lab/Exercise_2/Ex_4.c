@@ -22,7 +22,7 @@ ISR(TIMER1_OVF_vect){ // TIMER1 ISR
 		PORTB = 0x00;
 	}
 	else if (flag == 2){
-		flag = 0;
+		flag--;
 		PORTB = 0x01;
 		TCNT1 = 0x85EE;
 	}
@@ -35,7 +35,7 @@ ISR(INT1_vect){
 		PORTB = 0x01;
 		TCNT1 = 0x85EE; // 4 seconds delay
 	}
-	else{
+	else if (flag == 1){
 		flag++;
 		PORTB = 0xFF;
 		TCNT1 = 0xF0BD; // 1/2 a second delay
@@ -62,7 +62,7 @@ int main(void){
 				PORTB = 0x01;
 				TCNT1 = 0x85EE; // 4 seconds delay
 			}
-			else{
+			else if (flag == 1){
 				flag++;
 				PORTB = 0xFF;
 				TCNT1 = 0xF0BD; // 1/2 a second delay
