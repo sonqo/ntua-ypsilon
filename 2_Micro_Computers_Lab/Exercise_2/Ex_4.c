@@ -18,7 +18,7 @@ void initTIMER1(){
 ISR(TIMER1_OVF_vect){ // TIMER1 ISR
 	
 	if (flag == 1){
-		flag--;
+		flag = 0;
 		PORTB = 0x00;
 	}
 	else if (flag == 2){
@@ -44,8 +44,8 @@ ISR(INT1_vect){
 
 int main(void){
 	
-	DDRA = 0X00; // initializing PORTA as input
-	DDRB = 0XFF; // initializing PORTB as output
+	DDRA = 0x00; // initializing PORTA as input
+	DDRB = 0xFF; // initializing PORTB as output
 	
 	flag = 0; // initialization of flag
 	
@@ -55,7 +55,9 @@ int main(void){
 	
     while (1) {
 		
-		if (PA7 == 1){
+		if ((PINA & 0x80) == 0x80){
+			
+			while ((PINA & 0x80) == 0x80);
 			
 			if (flag == 0){
 				flag++;
