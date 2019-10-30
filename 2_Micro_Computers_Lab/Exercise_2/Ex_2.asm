@@ -41,7 +41,7 @@ isr0:
 	ldi r25, high(5)
 	rcall wait_msec
 	in r24, GIFR
-	andi r24, (1<<PB6)		; if 7-bit of GIFR is not zero, wait to avoid multiple interrupts
+	andi r24, 0x40			; if 6-bit of GIFR is not zero, wait to avoid multiple interrupts
 	cpi r24, 0x00			; else proceed with the interrupt code
 	brne isr0
 	
