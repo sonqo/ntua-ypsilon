@@ -32,10 +32,16 @@ reset:
 
 main:
 	in r23, PINA
-	andi r23, (1<<PB7)		; if MSB(A) is not 1, do nothing
+	andi r23, 0x80		; if MSB(A) is not 1, do nothing
 	cpi r23, 0x80
 	brne main
 	
+loop:
+	in r20, PINA
+	andi r20, 0x80
+	cpi r20, 0x00
+	brne loop
+
 	ldi r23, 0x85			; else initialize TIMER1 for 4 seconds interrupt
 	out TCNT1H, r23			
 	ldi r23, 0xEE
@@ -51,13 +57,13 @@ main:
 	rcall wait_msec
 	
 first_time:					; if LEDs are close, open just the LSB(B)
-	ldi r21, 0x01			; set flag to 1
+	inc r21					; set flag to 1
 	ldi r23, 0x01
 	out PORTB, r23
 	rjmp main				
 	
 isr1:
-	ldi r23, (1<<INTF0)		; button debouncing handling
+	ldi r23, (1<<INTF1)		; button debouncing handling
 	out GIFR, r23			; loading 1 to 7-bit of GIFR for INT1 interrupt
 	ldi r24, low(5)			; 5ms dealy
 	ldi r25, high(5)
@@ -66,9 +72,6 @@ isr1:
 	andi r24, (1<<PB6)		; if 7-bit of GIFR is not zero, wait to avoid multiple interrupts
 	cpi r24, 0x00			; else proceed with the interrupt code
 	brne isr1
-
-	in r23, SREG			; saving SREG to stack
-	push r23
 
 	ldi r23, 0x85			; initialize TIMER1 for 4 seconds interrupt
 	out TCNT1H, r23			
@@ -85,24 +88,18 @@ isr1:
 	rcall wait_msec
 	
 first_time_int:
-	ldi r21, 0x01			; set flag to 1
+	inc r21					; set flag to 1
 	ldi r23, 0x01
 	out PORTB, r23			; turn just the MSB(B) on
 
-	pop r23
-	out SREG, r23			; retrieving SREG from stack
 	ldi r24, low(500)		; reloading correct delay values before return
 	ldi r25, high(500)
 	reti
 
 timer1:						; TIMER1 rotuine
-	in r20, SREG			; save SREG to stack
-	push r20
-	ldi r21, 0x00			; set flag back to 0, since all LED's will be turned off
+	clr r21					; set flag back to 0, since all LED's will be turned off
 	clr r23
 	out PORTB, r23
-	pop r20					; retrieve SREG from stack
-	out SREG, r20
 	reti
 
 wait_msec:					; interrupt routine, calls wait_usec
