@@ -48,3 +48,14 @@ scan_keypad_rising_edge:
 		pop r22
 		and r24, r22			; discard
 		and r25, r23
+		ldi r26, low(_tmp_)
+		ldi r27, high(_tmp_)
+		ld r23, X+
+		ld r22, X
+		st X, r24 
+		st -X, r25 
+		com r23
+		com r22 
+		and r24, r22
+		and r25, r23
+		ret
