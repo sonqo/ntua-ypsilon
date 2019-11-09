@@ -3,7 +3,7 @@
 
 .CSEG
 		ldi r24, (1<<PC7)|(1<<PC6)|(1<<PC5)|(1<<PC4)		; initializing PORTC for keypad scanning
-		out DDR4, r24
+		out DDRC, r24
 
 scan_row:						; scanning row number r24 for pressed keys, returns respective status in r24
 		ldi r25, 0x08
@@ -19,18 +19,18 @@ back:	lsl r25
 
 scan_keypad:					; returns in register pair r25:r24 the keypad status of all 16 keys - calls scan row
 		ldi r24, 0x01
-		rcall scan_now			; checking 1st line
+		rcall scan_row			; checking 1st line
 		swap r24
 		mov r27, r24
 		ldi r24, 0x02
-		rcall scan_now			; checking 2nd line
+		rcall scan_row			; checking 2nd line
 		add r27, r24
 		ldi r24, 0x03
-		rcall scan_now			; checking 3rd line
+		rcall scan_row			; checking 3rd line
 		swap r24
 		mov r26, r24
 		ldi r24, 0x04
-		rcall scan_now			; checking 4th line
+		rcall scan_row			; checking 4th line
 		add r26, r24
 		movw r24, r26
 		ret
@@ -59,3 +59,24 @@ scan_keypad_rising_edge:
 		and r24, r22
 		and r25, r23
 		ret
+
+wait_msec:						; delay routine, calls wait_usec
+		push r24 
+		push r25 
+		ldi r24 , low(998) 
+		ldi r25 , high(998) 
+		rcall wait_usec
+		pop r25 
+		pop r24 
+		sbiw r24 , 1 
+		brne wait_msec 
+		ret
+
+wait_usec:
+		sbiw r24 ,1 
+		nop 
+		nop 
+		nop 
+		nop 
+		brne wait_usec 
+		ret 
