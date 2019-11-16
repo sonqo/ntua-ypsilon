@@ -59,7 +59,8 @@ blink:
 
 scan_row:					; scanning row number r24 for pressed keys, returns respective status in r24
 		ldi r25, 0x08
-back:	lsl r25
+back:	
+		lsl r25
 		dec r24
 		brne back
 		out PORTC, r25
