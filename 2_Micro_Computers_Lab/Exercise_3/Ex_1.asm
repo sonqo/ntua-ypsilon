@@ -1,9 +1,61 @@
+.include "m16def.inc"
+
 .DSEG
-	_tmp_: .byte 2
+		_tmp_: .byte 2
 
 .CSEG
+
+main:
 		ldi r24, (1<<PC7)|(1<<PC6)|(1<<PC5)|(1<<PC4)		; initializing PORTC for keypad scanning
 		out DDRC, r24
+		ser r24												; initializing PORTB for output
+		out DDRB, r24
+		ldi r24 , low(RAMEND) 								; initializing stack pointer
+		out SPL , r24		
+		ldi r24 , high(RAMEND)
+		out SPH , r24
+		clr r24               								; initialize _tmp_ = 0
+		ldi XH, 0x00
+		ldi XL, 0x00
+		st X+,r24
+		st X,r24
+
+		ldi r24, low(20)									; initializing debouncing delay
+		rcall scan_keypad_rising_edge
+		rcall keypad_to_ascii
+		push r24											; save first number typed to stack
+		rcall scan_keypad_rising_edge
+		rcall keypad_to_ascii
+		pop r25
+
+		ldi r20, 0x10										; initializing counter in case of blink
+		ldi r21, 0x00										; initializing status of LEDs
+		cpi r25, '1'
+		brne blink
+		cpi r24, '1'
+		brne blink
+
+light_all:
+		ldi r21, 0xFF										; light all LEDs
+		out PORTB, r21
+		ldi r24, low(4000)									; for 4 seconds
+		ldi r25, high(4000)
+		rcall wait_msec
+		clr r21
+		out PORTB, r21
+		rjmp main
+
+blink:
+		ldi r21, 0xFF
+		out PORTB, r21
+		ldi r24, low(250)
+		ldi r25, high(250)
+		rcall wait_msec
+		dec r20
+		cpi r20, 0x00
+		brne blink
+		rjmp main
+
 
 scan_row:						; scanning row number r24 for pressed keys, returns respective status in r24
 		ldi r25, 0x08
@@ -35,7 +87,7 @@ scan_keypad:					; returns in register pair r25:r24 the keypad status of all 16 
 		movw r24, r26
 		ret
 
-scan_keypad_rising_edge:		
+scan_keypad_rising_edge:		; return result in r25:r24
 		mov r22, r24			; save delay timer(r24) before first read
 		rcall scan_keypad
 		push r24				; save status to stack
@@ -58,6 +110,59 @@ scan_keypad_rising_edge:
 		com r22 
 		and r24, r22
 		and r25, r23
+		ret
+
+keypad_to_ascii: 
+		movw r26 ,r24 
+		ldi r24 ,'*'
+		sbrc r26 ,0
+		ret
+		ldi r24 ,'0'
+		sbrc r26 ,1
+		ret
+		ldi r24 ,'#'
+		sbrc r26 ,2
+		ret
+		ldi r24 ,'D'
+		sbrc r26 ,3 
+		ret 
+		ldi r24 ,'7'
+		sbrc r26 ,4
+		ret
+		ldi r24 ,'8'
+		sbrc r26 ,5
+		ret
+		ldi r24 ,'9'
+		sbrc r26 ,6
+		ret
+		ldi r24 ,'C'
+		sbrc r26 ,7
+		ret
+		ldi r24 ,'4'
+		sbrc r27 ,0 
+		ret
+		ldi r24 ,'5'
+		sbrc r27 ,1
+		ret
+		ldi r24 ,'6'
+		sbrc r27 ,2
+		ret
+		ldi r24 ,'B'
+		sbrc r27 ,3
+		ret
+		ldi r24 ,'1'
+		sbrc r27 ,4
+		ret
+		ldi r24 ,'2'
+		sbrc r27 ,5
+		ret
+		ldi r24 ,'3'
+		sbrc r27 ,6
+		ret
+		ldi r24 ,'A'
+		sbrc r27 ,7
+		ret
+		clr r24
 		ret
 
 wait_msec:						; delay routine, calls wait_usec
