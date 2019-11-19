@@ -67,6 +67,43 @@ increment_last:
 	rjmp loop
 
 display:
+	mov r24, r18
+	rcall hex_to_ascii
+	rcall lcd_data
+	mov r24, r19
+	rcall hex_to_ascii
+	rcall lcd_data
+	ldi r24, ' '
+	rcall lcd_data
+	ldi r24, 'M'
+	rcall lcd_data
+	ldi r24, 'I'
+	rcall lcd_data
+	ldi r24, 'N'
+	rcall lcd_data
+	ldi r24, ' '
+	rcall lcd_data
+	ldi r24, ':'
+	rcall lcd_data
+	ldi r24, ' '
+	rcall lcd_data
+	mov r24, r20
+	rcall hex_to_ascii
+	rcall lcd_data
+	mov r24, r21
+	rcall hex_to_ascii
+	rcall lcd_data
+	ldi r24, ' '
+	rcall lcd_data
+	ldi r24, 'S'
+	rcall lcd_data
+	ldi r24, 'E'
+	rcall lcd_data
+	ldi r24, 'C'
+	rcall lcd_data
+	ldi r24, 0x02		; cursor home command
+	rcall lcd_command
+	ret
 
 write_2_nibbles:
 	push r24
