@@ -11,18 +11,62 @@ main:
 	rcall lcd_init
 
 zerofy:
+	ldi r18, 0x00			; first digit of minutes
+	ldi r19, 0x00			; second digit of minutes
+	ldi r20, 0x00			; first digit of seconds
+	ldi r21, 0x00			; second digit of seconds
+	rcall display
+	ldi r24, low(500)
+	ldi r25, high(500)
+	rcall wait_msec
+
+loop:
+	inc r21
+	cpi r20, 0x0A
+	breq increment_seconds
+	rcall display
+	ldi r24, low(500)
+	ldi r25, high(500)
+	rcall wait_msec
+	rjmp loop
+
+increment_seconds:
+	ldi r21, 0x00
+	inc r20
+	cpi r20, 0x06
+	breq increment_minutes
+	rcall display
+	ldi r24, low(500)
+	ldi r25, high(500)
+	rcall wait_msec
+	rjmp loop
+
+increment_minutes:
 	ldi r20, 0x00
 	ldi r21, 0x00
-loop:
-	inc r20
-	cpi r20, 0x3B
-	breq increment_minutes
+	inc r19
+	cpi r19, 0x0A
+	breq increment_last
+	rcall display
+	ldi r24, low(500)
+	ldi r25, high(500)
+	rcall wait_msec
 	rjmp loop
-increment_minutes:
-	inc r21
-	cpi r21, 0x3B
+
+increment_last:
+	ldi r19, 0x00
+	ldi r20, 0x00
+	ldi r21, 0x00
+	inc r18
+	cpi r18, 0x06
 	breq zerofy
+	rcall display
+	ldi r24, low(500)
+	ldi r25, high(500)
+	rcall wait_msec
 	rjmp loop
+
+display:
 
 write_2_nibbles:
 	push r24
