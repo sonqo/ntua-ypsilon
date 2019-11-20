@@ -54,14 +54,16 @@ scan_second:
 
 ; NEW ROUTINE - IN PROGRESS ;
 	add r24, r25
-	ror r24
+	ror r24				; check sign of number
 	brcc minus
 	ldi r17, '+'
 	rjmp digits
 minus:
 	ldi r17, '-'
 digits:
-	
+	rol r24				; re-aquire number
+
+
 write_2_nibbles:
 	push r24
 	in r25, PIND 
@@ -190,57 +192,37 @@ scan_keypad_rising_edge:
 	and r25, r23
 	ret
 
-keypad_to_ascii: 
+hex_to_ascii: 
 	movw r26, r24 
-	ldi r24, '*'
-	sbrc r26, 0
-	ret
 	ldi r24, '0'
-	sbrc r26, 1
-	ret
-	ldi r24, '#'
-	sbrc r26, 2
-	ret
-	ldi r24, 'D'
-	sbrc r26, 3 
-	ret 
-	ldi r24, '7'
-	sbrc r26, 4
-	ret
-	ldi r24, '8'
-	sbrc r26, 5
-	ret
-	ldi r24, '9'
-	sbrc r26, 6
-	ret
-	ldi r24, 'C'
-	sbrc r26, 7
-	ret
-	ldi r24, '4'
-	sbrc r27, 0 
-	ret
-	ldi r24, '5'
-	sbrc r27, 1
-	ret
-	ldi r24, '6'
-	sbrc r27, 2
-	ret
-	ldi r24, 'B'
-	sbrc r27, 3
-	ret
+	cpi r26, 0x00
+	breq end
 	ldi r24, '1'
-	sbrc r27, 4
-	ret
+	cpi r26, 0x01
+	breq end
 	ldi r24, '2'
-	sbrc r27, 5
-	ret
+	cpi r26, 0x02
+	breq end
 	ldi r24, '3'
-	sbrc r27, 6
-	ret
-	ldi r24, 'A'
-	sbrc r27, 7
-	ret
-	clr r24
+	cpi r26, 0x03
+	breq end
+	ldi r24, '4'
+	cpi r26, 0x04
+	breq end
+	ldi r24, '5'
+	cpi r26, 0x05
+	breq end
+	ldi r24, '6'
+	cpi r26, 0x06
+	breq end
+	ldi r24, '7'
+	cpi r26, 0x07
+	breq end
+	ldi r24, '8'
+	cpi r26, 0x08
+	breq end
+	ldi r24, '9'
+end:
 	ret
 
 keypad_to_hex: 
