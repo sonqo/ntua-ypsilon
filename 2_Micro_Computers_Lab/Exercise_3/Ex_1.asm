@@ -124,54 +124,54 @@ scan_keypad_rising_edge:	; return result in r25:r24
 	ret
 
 keypad_to_ascii: 
-	movw r26 ,r24 
-	ldi r24 ,'*'
-	sbrc r26 ,0
+	movw r26, r24 
+	ldi r24, '*'
+	sbrc r26, 0
 	ret
-	ldi r24 ,'0'
-	sbrc r26 ,1
+	ldi r24, '0'
+	sbrc r26, 1
 	ret
-	ldi r24 ,'#'
-	sbrc r26 ,2
+	ldi r24, '#'
+	sbrc r26, 2
 	ret
-	ldi r24 ,'D'
-	sbrc r26 ,3 
+	ldi r24, 'D'
+	sbrc r26, 3 
 	ret 
-	ldi r24 ,'7'
-	sbrc r26 ,4
+	ldi r24, '7'
+	sbrc r26, 4
 	ret
-	ldi r24 ,'8'
-	sbrc r26 ,5
+	ldi r24, '8'
+	sbrc r26, 5
 	ret
-	ldi r24 ,'9'
-	sbrc r26 ,6
+	ldi r24, '9'
+	sbrc r26, 6
 	ret
-	ldi r24 ,'C'
-	sbrc r26 ,7
+	ldi r24, 'C'
+	sbrc r26, 7
 	ret
-	ldi r24 ,'4'
-	sbrc r27 ,0 
+	ldi r24, '4'
+	sbrc r27, 0 
 	ret
-	ldi r24 ,'5'
-	sbrc r27 ,1
+	ldi r24, '5'
+	sbrc r27, 1
 	ret
-	ldi r24 ,'6'
-	sbrc r27 ,2
+	ldi r24, '6'
+	sbrc r27, 2
 	ret
-	ldi r24 ,'B'
-	sbrc r27 ,3
+	ldi r24, 'B'
+	sbrc r27, 3
 	ret
-	ldi r24 ,'1'
-	sbrc r27 ,4
+	ldi r24, '1'
+	sbrc r27, 4
 	ret
-	ldi r24 ,'2'
-	sbrc r27 ,5
+	ldi r24, '2'
+	sbrc r27, 5
 	ret
-	ldi r24 ,'3'
-	sbrc r27 ,6
+	ldi r24, '3'
+	sbrc r27, 6
 	ret
-	ldi r24 ,'A'
-	sbrc r27 ,7
+	ldi r24, 'A'
+	sbrc r27, 7
 	ret
 	clr r24
 	ret
