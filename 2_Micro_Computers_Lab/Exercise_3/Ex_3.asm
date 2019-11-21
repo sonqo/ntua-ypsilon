@@ -62,7 +62,23 @@ minus:
 	ldi r17, '-'
 digits:
 	rol r24				; re-aquire number
-
+	ldi r18, 0x00		; E = 0
+	ldi r19, 0x00		; D = 0
+	ldi r20, 0x00		; M = 0
+	cpi r24, 0x64
+	brlt hunderds
+	inc r18
+	subi r24, 0x64
+hunderds:
+	cpi r24, 0x0A
+	brlt tens
+	inc r19
+	subi r24, 0x0A
+	rjmp hunderds
+tens:
+	mov r20, r24
+	rcall display
+	rjmp start
 
 write_2_nibbles:
 	push r24
@@ -136,6 +152,22 @@ lcd_init:
 	rcall lcd_command 
 	ret
 
+display:
+	mov r24, r17
+	rcall lcd_data
+	mov r24, r18
+	rcall hex_to_ascii
+	rcall lcd_data
+	mov r24, r19
+	rcall hex_to_ascii
+	rcall lcd_data
+	mov r24, r20
+	rcall hex_to_ascii
+	rcall lcd_data
+	ldi r24, 0x02		; cursor home command
+	rcall lcd_command
+	ret
+
 scan_row:				; scanning row number r24 for pressed keys, returns respective status in r24
 	ldi r25, 0x08
 back_:	
@@ -190,6 +222,59 @@ scan_keypad_rising_edge:
 	com r22 
 	and r24, r22
 	and r25, r23
+	ret
+
+keypad_to_ascii: 
+	movw r26, r24 
+	ldi r24, '*'
+	sbrc r26, 0
+	ret
+	ldi r24, '0'
+	sbrc r26, 1
+	ret
+	ldi r24, '#'
+	sbrc r26, 2
+	ret
+	ldi r24, 'D'
+	sbrc r26, 3 
+	ret 
+	ldi r24, '7'
+	sbrc r26, 4
+	ret
+	ldi r24, '8'
+	sbrc r26, 5
+	ret
+	ldi r24, '9'
+	sbrc r26, 6
+	ret
+	ldi r24, 'C'
+	sbrc r26, 7
+	ret
+	ldi r24, '4'
+	sbrc r27, 0 
+	ret
+	ldi r24, '5'
+	sbrc r27, 1
+	ret
+	ldi r24, '6'
+	sbrc r27, 2
+	ret
+	ldi r24, 'B'
+	sbrc r27, 3
+	ret
+	ldi r24, '1'
+	sbrc r27, 4
+	ret
+	ldi r24, '2'
+	sbrc r27, 5
+	ret
+	ldi r24, '3'
+	sbrc r27, 6
+	ret
+	ldi r24, 'A'
+	sbrc r27, 7
+	ret
+	clr r24
 	ret
 
 hex_to_ascii: 
