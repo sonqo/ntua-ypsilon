@@ -3,7 +3,7 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
-volatile short int min_1, min_2, sec_1, sec_2;
+volatile int min_1, min_2, sec_1, sec_2;
 
 void lcd_command(unsigned char command){
 	
@@ -69,16 +69,23 @@ void zerofy(void){
 
 void lcd_display(void){
 	
-	lcd_data('min_1');
-	lcd_data('min_2');
+	int min_1_ascii, min_2_ascii, sec_1_ascii, sec_2_ascii;
+	
+	min_1_ascii = hex_to_ascii(min_1);
+	min_2_ascii = hex_to_ascii(min_2);
+	sec_1_ascii = hex_to_ascii(sec_1);
+	sec_2_ascii = hex_to_ascii(sec_2);
+	
+	lcd_data(min_1_ascii);
+	lcd_data(min_2_ascii);
 	lcd_data(' ');
 	lcd_data('M');
 	lcd_data('I');
 	lcd_data('N');
 	lcd_data(' ');
 	lcd_data(':');
-	lcd_data('sec_1');
-	lcd_data('sec_2');
+	lcd_data(sec_1_ascii);
+	lcd_data(sec_2_ascii);
 	lcd_data(' ');
 	lcd_data('S');
 	lcd_data('E');
@@ -87,9 +94,9 @@ void lcd_display(void){
 	lcd_command(0x02); // cursor home command
 }
 
-char hex_to_ascii(char key_reg){ // converts a hex number to the ASCII code of the respective character
+int hex_to_ascii(int number){ // converts a hex number to the ASCII code of the respective character
 	
-	switch (key_reg){
+	switch (number){
 		case 0x00:
 			return '0';
 		case 0x01:
