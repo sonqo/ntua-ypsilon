@@ -8,7 +8,9 @@ main:
 	ser r24					; initializing PORTD for output
 	out DDRD, r24
 	clr r24
+	out DDRB, r24			; initializing PORTB for input
 	rcall lcd_init
+	clr r16
 
 zerofy:
 	ldi r18, 0x00			; first digit of minutes
@@ -21,6 +23,11 @@ zerofy:
 	rcall wait_msec
 
 loop:
+	in r16, PINB
+	cpi r16, 0x80
+	breq zerofy
+	cpi r16, 0x01
+	brne loop
 	inc r21
 	cpi r20, 0x0A
 	breq increment_seconds
