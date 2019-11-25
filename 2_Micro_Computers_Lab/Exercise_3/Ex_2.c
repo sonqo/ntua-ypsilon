@@ -5,7 +5,6 @@
 
 int scan_row(short n){ // scanning the nth row of keypad
 	
-	//DDRC = 0xF0;
 	PORTC = 0b00001000 << n;
 	asm ("nop");
 	asm ("nop");
@@ -74,7 +73,6 @@ char keypad_to_ascii(short int key_reg){ // converts a status register to the AS
 int main(void){
 	
 	DDRC = 0xF0; // initializing PORTC for keypad scanning
-	//PORTC = 0;
     DDRB = 0xFF; // initializing PORTB for output
 	PORTB = 0;
 	

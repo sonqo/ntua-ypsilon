@@ -6,29 +6,29 @@
 .CSEG
 
 main:
-	ldi r24, 0xF0		; initializing PORTC for keypad scanning
+	ldi r24, 0xF0 ; initializing PORTC for keypad scanning
 	out DDRC, r24
-	ser r24				; initializing PORTB for output
+	ser r24 ; initializing PORTB for output
 	out DDRB, r24
-	ldi r24 , low(RAMEND)	; initializing stack pointer
+	ldi r24 , low(RAMEND) ; initializing stack pointer
 	out SPL , r24		
 	ldi r24 , high(RAMEND)
 	out SPH , r24
 	
 start:
-	clr r24				; initialize _tmp_ = 0
+	clr r24 ; initialize _tmp_ = 0
 	ldi XH, high(_tmp_)
 	ldi XL, low(_tmp_)
 	st X+,r24
 	st X,r24
 
 scan_first:
-	ldi r24, low(20)	; initializing debouncing delay
+	ldi r24, low(20) ; initializing debouncing delay
 	rcall scan_keypad_rising_edge
 	rcall keypad_to_ascii
 	cpi r24, 0x00
 	breq scan_first
-	push r24			; save first number typed to stack
+	push r24 ; save first number typed to stack
 
 scan_second:
 	ldi r24, low(20)
@@ -44,9 +44,9 @@ scan_second:
 	brne blink
 
 light_all:
-	ldi r22, 0xFF		; light all LEDs
+	ldi r22, 0xFF ; light all LEDs
 	out PORTB, r22
-	ldi r24, low(4000)	; for 4 seconds
+	ldi r24, low(4000) ; for 4 seconds
 	ldi r25, high(4000)
 	rcall wait_msec
 	ldi r22, 0x00
@@ -67,49 +67,49 @@ loop:
 	rjmp start
 
 
-scan_row:				; scanning row number r24 for pressed keys, returns respective status in r24
+scan_row: ; scanning row number r24 for pressed keys, returns respective status in r24
 	ldi r25, 0x08
 back:	
 	lsl r25
 	dec r24
 	brne back
 	out PORTC, r25
-	nop					; waitng for status switching to take place
+	nop ; waitng for status switching to take place
 	nop
 	in r24, PINC
-	andi r24, 0x0F		; status isolated in LSBs of r24
+	andi r24, 0x0F ; status isolated in LSBs of r24
 	ret
 
-scan_keypad:			; returns in register pair r25:r24 the keypad status of all 16 keys - calls scan row
+scan_keypad: ; returns in register pair r25:r24 the keypad status of all 16 keys - calls scan row
 	ldi r24, 0x01
-	rcall scan_row		; checking 1st line
+	rcall scan_row ; checking 1st line
 	swap r24
 	mov r27, r24
 	ldi r24, 0x02
-	rcall scan_row		; checking 2nd line
+	rcall scan_row ; checking 2nd line
 	add r27, r24
 	ldi r24, 0x03
-	rcall scan_row		; checking 3rd line
+	rcall scan_row ; checking 3rd line
 	swap r24
 	mov r26, r24
 	ldi r24, 0x04
-	rcall scan_row		; checking 4th line
+	rcall scan_row ; checking 4th line
 	add r26, r24
 	movw r24, r26
 	ret
 
-scan_keypad_rising_edge:	; return result in r25:r24
-	mov r22, r24		; save delay timer(r24) before first read
+scan_keypad_rising_edge: ; returns result in r25:r24
+	mov r22, r24 ; save delay timer(r24) before first read
 	rcall scan_keypad
-	push r24			; save status to stack
+	push r24 ; save status to stack
 	push r25
 	mov r24, r22	
 	ldi r25, 0x00
-	rcall wait_msec		; delay before rechecking
+	rcall wait_msec ; delay before rechecking
 	rcall scan_keypad
 	pop r23
 	pop r22
-	and r24, r22		; discard
+	and r24, r22 ; discard
 	and r25, r23
 	ldi r26, low(_tmp_)
 	ldi r27, high(_tmp_)
@@ -176,7 +176,7 @@ keypad_to_ascii:
 	clr r24
 	ret
 
-wait_msec:				; delay routine, calls wait_usec
+wait_msec: ; delay routine, calls wait_usec
 	push r24 
 	push r25 
 	ldi r24 , low(998) 
