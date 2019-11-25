@@ -10,12 +10,9 @@ void lcd_command(unsigned char command){
 	PORTD = (PORTD & 0x0F) | (command & 0xF0); // sending upper nibble
 	PORTD &= ~ (1<<PD2); // low PD2: sending command		
 	PORTD |= (1<<PD3); // activate enable pulse 		
-	//_delay_us(1);
 	PORTD &= ~ (1<<PD3); // deactivate enable pulse
-	//_delay_us(200);
 	PORTD = (PORTD & 0x0F) | (command << 4); // sending lower nibble
 	PORTD |= (1<<PD3);
-	//_delay_us(1);
 	PORTD &= ~ (1<<PD3);
 	_delay_us(39);
 }
@@ -25,12 +22,9 @@ void lcd_data(unsigned char data){
 	PORTD = (PORTD & 0x0F) | (data & 0xF0); // sending upper nibble
 	PORTD |= (1<<PD2); // high PD2: sending data		
 	PORTD|= (1<<PD3);
-	//_delay_us(1);
 	PORTD &= ~ (1<<PD3);
-	//_delay_us(200);
 	PORTD = (PORTD & 0x0F) | (data << 4); // sending lower nibble
 	PORTD |= (1<<PD3);
-	//_delay_us(1);
 	PORTD &= ~ (1<<PD3);
 	_delay_us(39);
 }
@@ -59,6 +53,34 @@ void lcd_init(void){
 	lcd_command(0x06); // automatic display increment, disable shifting
 }
 
+int hex_to_ascii(int number){ // converts a hex number to the ASCII code of the respective character
+	
+	switch (number){
+		case 0x00:
+		return '0';
+		case 0x01:
+		return '1';
+		case 0x02:
+		return '2';
+		case 0x03:
+		return '3';
+		case 0x04:
+		return '4';
+		case 0x05:
+		return '5';
+		case 0x06:
+		return '6';
+		case 0x07:
+		return '7';
+		case 0x08:
+		return '8';
+		case 0x09:
+		return '9';
+		default:
+		return 'A';
+	}
+}
+
 void zerofy(void){
 	
 	min_1 = 0x00;
@@ -84,6 +106,7 @@ void lcd_display(void){
 	lcd_data('N');
 	lcd_data(' ');
 	lcd_data(':');
+	lcd_data(' ');
 	lcd_data(sec_1_ascii);
 	lcd_data(sec_2_ascii);
 	lcd_data(' ');
@@ -94,43 +117,25 @@ void lcd_display(void){
 	lcd_command(0x02); // cursor home command
 }
 
-int hex_to_ascii(int number){ // converts a hex number to the ASCII code of the respective character
-	
-	switch (number){
-		case 0x00:
-			return '0';
-		case 0x01:
-			return '1';
-		case 0x02:
-			return '2';
-		case 0x03:
-			return '3';
-		case 0x04:
-			return '4';
-		case 0x05:
-			return '5';
-		case 0x06:
-			return '6';
-		case 0x07:
-			return '7';
-		case 0x08:
-			return '8';
-		case 0x09:
-			return '9';
-	}
-}	
-
 int main(void){
 	
 	DDRB = 0x00; // initialization of PORTB for input
 	lcd_init(); // initialization of LCD
 	zerofy(); // initialize variables
+	lcd_display();
 		
     while (1){
-		 
-		while (PINB & 0x01 == 0x01){
-			if (PINB & 0x80 == 0x80){
+		
+		 if ((PINB & 0x80) == 0x80){ // prioritizing PB0
+			 zerofy();
+			 lcd_display();
+			 _delay_ms(50);
+		 }
+		while ((PINB & 0x01) == 0x01){
+			if ((PINB & 0x81) == 0x81){ // prioritizing PB0
 				zerofy();
+				lcd_display();
+				_delay_ms(50);
 			}
 			sec_2++;
 			if (sec_2 == 0x0A){
@@ -151,7 +156,8 @@ int main(void){
 					}
 				}
 			}
+			_delay_ms(50);
+			lcd_display();
 		}
-		lcd_display();
 	}
 }
