@@ -3,11 +3,10 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
-int volatile sign, hundreds, tens, ones;
+char volatile sign, hundreds, tens, ones;
 
 int scan_row(short n){ // scanning the nth row of keypad
 	
-	//DDRC = 0xF0;
 	PORTC = 0b00001000 << n;
 	asm ("nop");
 	asm ("nop");
@@ -32,69 +31,71 @@ short int scan_keypad(void){ // scanning keypad for pressed characters, returns 
 	return key_reg;
 }
 
-int keypad_to_hex(int character){
+char keypad_to_hex(short int character){
 	
 	switch(character){
 		case 1:
-		return 0x0E;
+			return 0x0E;
 		case 2:
-		return 0x00;
+			return 0x00;
 		case 4:
-		return 0x0F;
+			return 0x0F;
 		case 8:
-		return 0x0D;
+			return 0x0D;
 		case 16:
-		return 0x07;
+			return 0x07;
 		case 32:
-		return 0x08;
+			return 0x08;
 		case 64:
-		return 0x09;
+			return 0x09;
 		case 128:
-		return 0x0C;
+			return 0x0C;
 		case 256:
-		return 0x04;
+			return 0x04;
 		case 512:
-		return 0x05;
+			return 0x05;
 		case 1024:
-		return 0x06;
+			return 0x06;
 		case 2048:
-		return 0x0B;
+			return 0x0B;
 		case 4096:
-		return 0x01;
+			return 0x01;
 		case 8192:
-		return 0x02;
+			return 0x02;
 		case 16384:
-		return 0x03;
+			return 0x03;
 		case 32768:
-		return 0x0A;
+			return 0x0A;
 		default:
-		return 0xFF; // error handling
+			return 0xFF; // error handling
 	}
 }
 
-int hex_to_ascii(int number){
+char hex_to_ascii(char number){
 	
 	switch(number){
 		case 0x00:
-		return '0';
+			return '0';
 		case 0x01:
-		return '1';
+			return '1';
 		case 0x02:
-		return '2';
+			return '2';
 		case 0x03:
-		return '3';
+			return '3';
 		case 0x04:
-		return '4';
+			return '4';
 		case 0x05:
-		return '5';
+			return '5';
 		case 0x06:
-		return '6';
+			return '6';
 		case 0x07:
-		return '7';
+			return '7';
 		case 0x08:
-		return '8';
+			return '8';
 		case 0x09:
-		return '9';
+			return '9';
+		default:
+			return 'A';
 	}
 }
 
@@ -103,12 +104,9 @@ void lcd_command(unsigned char command){
 	PORTD = (PORTD & 0x0F) | (command & 0xF0); // sending upper nibble
 	PORTD &= ~ (1<<PD2); // low PD2: sending command
 	PORTD |= (1<<PD3); // activate enable pulse
-	//_delay_us(1);
 	PORTD &= ~ (1<<PD3); // deactivate enable pulse
-	//_delay_us(200);
 	PORTD = (PORTD & 0x0F) | (command << 4); // sending lower nibble
 	PORTD |= (1<<PD3);
-	//_delay_us(1);
 	PORTD &= ~ (1<<PD3);
 	_delay_us(39);
 }
@@ -118,12 +116,9 @@ void lcd_data(unsigned char data){
 	PORTD = (PORTD & 0x0F) | (data & 0xF0); // sending upper nibble
 	PORTD |= (1<<PD2); // high PD2: sending data
 	PORTD|= (1<<PD3);
-	//_delay_us(1);
 	PORTD &= ~ (1<<PD3);
-	//_delay_us(200);
 	PORTD = (PORTD & 0x0F) | (data << 4); // sending lower nibble
 	PORTD |= (1<<PD3);
-	//_delay_us(1);
 	PORTD &= ~ (1<<PD3);
 	_delay_us(39);
 }
@@ -154,7 +149,7 @@ void lcd_init(void){
 
 void lcd_display(void){
 	
-	int hundreds_ascii, tens_ascii, ones_ascii;
+	char hundreds_ascii, tens_ascii, ones_ascii;
 	
 	hundreds_ascii = hex_to_ascii(hundreds);
 	tens_ascii = hex_to_ascii(tens);
@@ -170,11 +165,11 @@ void lcd_display(void){
 
 int main(void){
 	
-	DDRC = 0xF0;
+	DDRC = 0xF0; // initialize PORTC for keypad scanning
 	
 	lcd_init();
 	
-	int dig1, dig2, sum;
+	char dig1, dig2, sum;
 	short int scan, repeat_scan;
 	
 	hundreds = 0;
@@ -210,7 +205,7 @@ int main(void){
 		}
 		
 		sum = dig1 + dig2;
-		if (sum & 0x80 == 0x80){
+		if ((sum & 0x80) == 0x80){
 			sign = '-';
 		}
 		else{
