@@ -6,18 +6,20 @@
 .CSEG
 
 main:
-	ldi r24, low(RAMEND)	; initializing stack pointer
+	ldi r24, low(RAMEND) ; initializing stack pointer
 	out SPL, r24
 	ldi r24, high(RAMEND)
-	out SPH, r24			
-	ser r24					; initializing PORTD for output
+	out SPH, r24
+	ldi r24, 0xF0 ; initializing PORTC for keypad scanning
+	out DDRC, r24		
+	ser r24 ; initializing PORTD for output
 	out DDRD, r24
 	
 	clr r24
 	rcall lcd_init
 
 start:
-	clr r24					; initialize _tmp_ = 0
+	clr r24 ; initialize _tmp_ = 0
 	ldi XH, high(_tmp_)
 	ldi XL, low(_tmp_)
 	st X+,r24
@@ -29,7 +31,6 @@ scan_first:
 	rcall keypad_to_hex
 	cpi r24, 0xFF
 	breq scan_first
-	;rcall keypad_to_hex
 	push r24
 
 scan_second:
@@ -38,33 +39,20 @@ scan_second:
 	rcall keypad_to_hex
 	cpi r24, 0xFF
 	breq scan_second
-	;rcall keypad_to_hex
 	pop r25
 
-	mov r26, r24
-	mov r24, r25
-	rcall keypad_to_ascii
-	rcall lcd_data
-	mov r24, r26
-	rcall keypad_to_ascii
-	rcall lcd_data
-	ldi r24, 0x02
-	rcall lcd_command
-	rjmp start
-
-; NEW ROUTINE - IN PROGRESS ;
 	add r24, r25
-	ror r24				; check sign of number
+	ror r24 ; check sign of number
 	brcc minus
 	ldi r17, '+'
 	rjmp digits
 minus:
 	ldi r17, '-'
 digits:
-	rol r24				; re-aquire number
-	ldi r18, 0x00		; E = 0
-	ldi r19, 0x00		; D = 0
-	ldi r20, 0x00		; M = 0
+	rol r24 ; re-aquire number
+	ldi r18, 0x00 ; E = 0
+	ldi r19, 0x00 ; D = 0
+	ldi r20, 0x00 ; M = 0
 	cpi r24, 0x64
 	brlt hunderds
 	inc r18
@@ -224,59 +212,6 @@ scan_keypad_rising_edge:
 	and r25, r23
 	ret
 
-keypad_to_ascii: 
-	movw r26, r24 
-	ldi r24, '*'
-	sbrc r26, 0
-	ret
-	ldi r24, '0'
-	sbrc r26, 1
-	ret
-	ldi r24, '#'
-	sbrc r26, 2
-	ret
-	ldi r24, 'D'
-	sbrc r26, 3 
-	ret 
-	ldi r24, '7'
-	sbrc r26, 4
-	ret
-	ldi r24, '8'
-	sbrc r26, 5
-	ret
-	ldi r24, '9'
-	sbrc r26, 6
-	ret
-	ldi r24, 'C'
-	sbrc r26, 7
-	ret
-	ldi r24, '4'
-	sbrc r27, 0 
-	ret
-	ldi r24, '5'
-	sbrc r27, 1
-	ret
-	ldi r24, '6'
-	sbrc r27, 2
-	ret
-	ldi r24, 'B'
-	sbrc r27, 3
-	ret
-	ldi r24, '1'
-	sbrc r27, 4
-	ret
-	ldi r24, '2'
-	sbrc r27, 5
-	ret
-	ldi r24, '3'
-	sbrc r27, 6
-	ret
-	ldi r24, 'A'
-	sbrc r27, 7
-	ret
-	clr r24
-	ret
-
 hex_to_ascii: 
 	movw r26, r24 
 	ldi r24, '0'
@@ -360,10 +295,10 @@ keypad_to_hex:
 	ldi r24, 0x0A
 	sbrc r27, 7
 	ret
-	ldi r24, 0xFF	; error handling
+	ldi r24, 0xFF ; error handling
 	ret
 
-wait_msec:			; delay routine, calls wait_usec
+wait_msec: ; delay routine, calls wait_usec
 	push r24 
 	push r25 
 	ldi r24, low(998) 
