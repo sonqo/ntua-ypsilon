@@ -3,6 +3,7 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
+volatile short int _tmp_;
 char volatile sign, hundreds, tens, ones;
 
 int scan_row(short n){ // scanning the nth row of keypad
@@ -35,39 +36,39 @@ char keypad_to_hex(short int character){
 	
 	switch(character){
 		case 1:
-			return 0x0E;
+		return 0x0E;
 		case 2:
-			return 0x00;
+		return 0x00;
 		case 4:
-			return 0x0F;
+		return 0x0F;
 		case 8:
-			return 0x0D;
+		return 0x0D;
 		case 16:
-			return 0x07;
+		return 0x07;
 		case 32:
-			return 0x08;
+		return 0x08;
 		case 64:
-			return 0x09;
+		return 0x09;
 		case 128:
-			return 0x0C;
+		return 0x0C;
 		case 256:
-			return 0x04;
+		return 0x04;
 		case 512:
-			return 0x05;
+		return 0x05;
 		case 1024:
-			return 0x06;
+		return 0x06;
 		case 2048:
-			return 0x0B;
+		return 0x0B;
 		case 4096:
-			return 0x01;
+		return 0x01;
 		case 8192:
-			return 0x02;
+		return 0x02;
 		case 16384:
-			return 0x03;
+		return 0x03;
 		case 32768:
-			return 0x0A;
+		return 0x0A;
 		default:
-			return 0xFF; // error handling
+		return 0xAA; // error handling
 	}
 }
 
@@ -75,27 +76,27 @@ char hex_to_ascii(char number){
 	
 	switch(number){
 		case 0x00:
-			return '0';
+		return '0';
 		case 0x01:
-			return '1';
+		return '1';
 		case 0x02:
-			return '2';
+		return '2';
 		case 0x03:
-			return '3';
+		return '3';
 		case 0x04:
-			return '4';
+		return '4';
 		case 0x05:
-			return '5';
+		return '5';
 		case 0x06:
-			return '6';
+		return '6';
 		case 0x07:
-			return '7';
+		return '7';
 		case 0x08:
-			return '8';
+		return '8';
 		case 0x09:
-			return '9';
+		return '9';
 		default:
-			return 'A';
+		return 'A';
 	}
 }
 
@@ -163,50 +164,60 @@ void lcd_display(void){
 	lcd_command(0x02); // cursor home command
 }
 
+
 int main(void){
 	
 	DDRC = 0xF0; // initialize PORTC for keypad scanning
+	DDRB = 0XFF;
 	
 	lcd_init();
 	
+	int flag;
 	char dig1, dig2, sum;
 	short int scan, repeat_scan;
 	
-	hundreds = 0;
-	tens = 0;
-	ones = 0;
-	
-    while (1){
+	while (1){
+
+		hundreds = 0;
+		tens = 0;
+		ones = 0;
 		
+		flag = 0;
+
 		scan = scan_keypad();
-		_delay_ms(20);
+		_delay_ms(50);
 		repeat_scan = scan_keypad(); // debouncing handling
 		scan &= repeat_scan;
 		dig1 = keypad_to_hex(scan);
-		while (dig1 == 0xFF){ // while no key is pressed, repeat
+		while (dig1 == 0xAA){ // while no key is pressed, repeat
 			scan = scan_keypad();
 			_delay_ms(20);
 			repeat_scan = scan_keypad();
 			scan &= repeat_scan;
 			dig1 = keypad_to_hex(scan);
 		}
-		_delay_ms(20);
+		flag++;
+		_delay_ms(200);
 		scan = scan_keypad();
 		_delay_ms(20);
 		repeat_scan = scan_keypad();
 		scan &= repeat_scan;
 		dig2 = keypad_to_hex(scan);
-		while ( dig2 == 0xFF) {
+		while (dig2 == 0xAA){
 			scan = scan_keypad();
 			_delay_ms(20);
 			repeat_scan = scan_keypad();
 			scan &= repeat_scan;
 			dig2 = keypad_to_hex(scan);
 		}
-		
+		flag++;
+		dig1 <<= 4;
 		sum = dig1 + dig2;
+		_tmp_ = sum;
 		if ((sum & 0x80) == 0x80){
 			sign = '-';
+			sum ^= 0xFF;
+			sum++;
 		}
 		else{
 			sign = '+';
@@ -215,12 +226,15 @@ int main(void){
 			hundreds++;
 			sum -= 0x64;
 		}
-		while (sum > 0x0A){
+		while (sum >= 0x0A){
 			tens++;
 			sum -= 0x0A;
 		}
 		ones = sum;
-		lcd_display();
-    }
+		if (flag == 2){
+			lcd_display();
+		}
+		_delay_ms(100);
+	}
 }
 

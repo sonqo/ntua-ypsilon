@@ -26,6 +26,10 @@ start:
 	st X,r24
 
 scan_first:
+	ldi r18, 0x00 ; E = 0
+	ldi r19, 0x00 ; D = 0
+	ldi r20, 0x00 ; M = 0
+
 	ldi r24, low(20)
 	rcall scan_keypad_rising_edge
 	rcall keypad_to_hex
@@ -41,32 +45,35 @@ scan_second:
 	breq scan_second
 	pop r25
 
+	lsl r25
+	lsl r25
+	lsl r25
+	lsl r25
 	add r24, r25
-	ror r24 ; check sign of number
-	brcc minus
+	rol r24 ; check sign of number
+	brcs minus
 	ldi r17, '+'
+	ror r24
 	rjmp digits
 minus:
 	ldi r17, '-'
+	ror r24
+	neg r24
 digits:
-	rol r24 ; re-aquire number
-	ldi r18, 0x00 ; E = 0
-	ldi r19, 0x00 ; D = 0
-	ldi r20, 0x00 ; M = 0
 	cpi r24, 0x64
-	brlt hunderds
+	brlt no_hunderds
 	inc r18
 	subi r24, 0x64
-hunderds:
+no_hunderds:
 	cpi r24, 0x0A
-	brlt tens
+	brlt no_tens
 	inc r19
 	subi r24, 0x0A
-	rjmp hunderds
-tens:
+	rjmp no_hunderds
+no_tens:
 	mov r20, r24
 	rcall display
-	rjmp start
+	rjmp scan_first
 
 write_2_nibbles:
 	push r24
@@ -75,21 +82,21 @@ write_2_nibbles:
 	andi r24, 0xF0
 	add r24, r25 
 	out PORTD, r24 
-	sbi PORTD, PD3		; enable pulse
+	sbi PORTD, PD3 ; enable pulse
 	cbi PORTD, PD3 
 	pop r24 
 	swap r24 
 	andi r24, 0xF0 
 	add r24, r25
 	out PORTD, r24
-	sbi PORTD, PD3		; enable pulse
+	sbi PORTD, PD3 ; enable pulse
 	cbi PORTD, PD3
 	ret
 
-lcd_data:				; data transfered located in register r24
+lcd_data: ; data transfered located in register r24
 	sbi PORTD, PD2 
 	rcall write_2_nibbles
-	ldi r24, 43			; 43ms delay
+	ldi r24, 43 ; 43us delay
 	ldi r25, 0
 	rcall wait_usec
 	ret
@@ -97,7 +104,7 @@ lcd_data:				; data transfered located in register r24
 lcd_command:
 	cbi PORTD, PD2 
 	rcall write_2_nibbles
-	ldi r24, 39			; 39ms delay
+	ldi r24, 39 ; 39us delay
 	ldi r25, 0 
 	rcall wait_usec 
 	ret
@@ -105,38 +112,38 @@ lcd_command:
 lcd_init:
 	ldi r24, 40
 	ldi r25, 0 
-	rcall wait_msec		; initial delay of 40ms
-	ldi r24, 0x30		; setting to 8-bit mode
+	rcall wait_msec ; initial delay of 40ms
+	ldi r24, 0x30 ; setting to 8-bit mode
 	out PORTD, r24 
-	sbi PORTD, PD3		; enable pulse
+	sbi PORTD, PD3 ; enable pulse
 	cbi PORTD, PD3 
 	ldi r24, 39
 	ldi r25, 0 
 	rcall wait_usec 
-	ldi r24, 0x30		; re-setting to 8-bit mode
+	ldi r24, 0x30 ; re-setting to 8-bit mode
 	out PORTD, r24
-	sbi PORTD, PD3		; enable pulse
+	sbi PORTD, PD3 ; enable pulse
 	cbi PORTD, PD3
 	ldi r24, 39
 	ldi r25, 0
 	rcall wait_usec
-	ldi r24, 0x20		; switch to 4-bit mode
+	ldi r24, 0x20 ; switch to 4-bit mode
 	out PORTD, r24
-	sbi PORTD, PD3		; enable pulse
+	sbi PORTD, PD3 ; enable pulse
 	cbi PORTD, PD3
 	ldi r24, 39
 	ldi r25, 0
 	rcall wait_usec
-	ldi r24, 0x28		; two-line display in a 5x8 mannner
+	ldi r24, 0x28 ; two-line display in a 5x8 mannner
 	rcall lcd_command 
-	ldi r24, 0x0c		; hide cursor
+	ldi r24, 0x0c ; hide cursor
 	rcall lcd_command
-	ldi r24, 0x01		; clear display
+	ldi r24, 0x01 ; clear display
 	rcall lcd_command
 	ldi r24, low(1530)
 	ldi r25, high(1530)
 	rcall wait_usec
-	ldi r24, 0x06		; disable screen shifting
+	ldi r24, 0x06 ; disable screen shifting
 	rcall lcd_command 
 	ret
 
@@ -152,33 +159,33 @@ display:
 	mov r24, r20
 	rcall hex_to_ascii
 	rcall lcd_data
-	ldi r24, 0x02		; cursor home command
+	ldi r24, 0x02 ; cursor home command
 	rcall lcd_command
 	ret
 
-scan_row:				; scanning row number r24 for pressed keys, returns respective status in r24
+scan_row: ; scanning row number r24 for pressed keys, returns respective status in r24
 	ldi r25, 0x08
 back_:	
 	lsl r25
 	dec r24
 	brne back_
 	out PORTC, r25
-	nop				; waitng for status switching to take place
+	nop	; waitng for status switching to take place
 	nop
 	in r24, PINC
-	andi r24, 0x0F	; status isolated in LSBs of r24
+	andi r24, 0x0F ; status isolated in LSBs of r24
 	ret
 
-scan_keypad:			; returns in register pair r25:r24 the keypad status of all 16 keys - calls scan row
+scan_keypad: ; returns in register pair r25:r24 the keypad status of all 16 keys - calls scan row
 	ldi r24, 0x01
-	rcall scan_row	; checking 1st line
+	rcall scan_row ; checking 1st line
 	swap r24
 	mov r27, r24
 	ldi r24, 0x02
-	rcall scan_row	; checking 2nd line
+	rcall scan_row ; checking 2nd line
 	add r27, r24
 	ldi r24, 0x03
-	rcall scan_row	; checking 3rd line
+	rcall scan_row ; checking 3rd line
 	swap r24
 	mov r26, r24
 	ldi r24, 0x04
@@ -188,9 +195,9 @@ scan_keypad:			; returns in register pair r25:r24 the keypad status of all 16 ke
 	ret
 
 scan_keypad_rising_edge:	
-	mov r22, r24	; save delay timer(r24) before first read
+	mov r22, r24 ; save delay timer(r24) before first read
 	rcall scan_keypad
-	push r24		; save status to stack
+	push r24 ; save status to stack
 	push r25
 	mov r24, r22	
 	ldi r25, 0x00
@@ -198,7 +205,7 @@ scan_keypad_rising_edge:
 	rcall scan_keypad
 	pop r23
 	pop r22
-	and r24, r22	; discard
+	and r24, r22 ; discard
 	and r25, r23
 	ldi r26, low(_tmp_)
 	ldi r27, high(_tmp_)
