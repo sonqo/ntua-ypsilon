@@ -170,7 +170,7 @@ back_:
 	dec r24
 	brne back_
 	out PORTC, r25
-	nop	; waitng for status switching to take place
+	nop ; waitng for status switching to take place
 	nop
 	in r24, PINC
 	andi r24, 0x0F ; status isolated in LSBs of r24
