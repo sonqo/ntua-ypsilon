@@ -232,9 +232,8 @@ int main(void){
 		}
 		ones = sum;
 		if (flag == 2){
-			lcd_display();
+			lcd_display(); // display only when 2 digits are read
 		}
-		_delay_ms(100);
+		_delay_ms(200);
 	}
 }
-

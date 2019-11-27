@@ -45,7 +45,7 @@ scan_second:
 	breq scan_second
 	pop r25
 
-	lsl r25
+	lsl r25 ; move first digit to higher nibble
 	lsl r25
 	lsl r25
 	lsl r25
@@ -55,23 +55,27 @@ scan_second:
 	ldi r17, '+'
 	ror r24
 	rjmp digits
+
 minus:
 	ldi r17, '-'
 	ror r24
 	neg r24
+
 digits:
-	cpi r24, 0x64
-	brlt no_hunderds
+	cpi r24, 0x64 ; check if number is greater than 100
+	brlt no_hunderds ; if true, increment hundreds
 	inc r18
 	subi r24, 0x64
+
 no_hunderds:
 	cpi r24, 0x0A
-	brlt no_tens
+	brlt no_tens ; increment tens, as long as the number is greater than 10
 	inc r19
 	subi r24, 0x0A
 	rjmp no_hunderds
+
 no_tens:
-	mov r20, r24
+	mov r20, r24 ; ones is equal to the result of all above functions
 	rcall display
 	rjmp scan_first
 
