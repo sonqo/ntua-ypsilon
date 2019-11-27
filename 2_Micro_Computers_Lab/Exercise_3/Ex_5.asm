@@ -18,8 +18,8 @@ zerofy:
 	ldi r20, 0x00 ; first digit of seconds
 	ldi r21, 0x00 ; second digit of seconds
 	rcall display
-	ldi r24, low(50)
-	ldi r25, high(50)
+	ldi r24, low(500)
+	ldi r25, high(500)
 	rcall wait_msec
 
 loop:
@@ -34,8 +34,8 @@ loop:
 	cpi r21, 0x0A
 	breq increment_seconds
 	rcall display
-	ldi r24, low(50)
-	ldi r25, high(50)
+	ldi r24, low(500)
+	ldi r25, high(500)
 	rcall wait_msec
 	rjmp loop
 
@@ -45,8 +45,8 @@ increment_seconds:
 	cpi r20, 0x06
 	breq increment_minutes
 	rcall display
-	ldi r24, low(50)
-	ldi r25, high(50)
+	ldi r24, low(500)
+	ldi r25, high(500)
 	rcall wait_msec
 	rjmp loop
 
@@ -57,8 +57,8 @@ increment_minutes:
 	cpi r19, 0x0A
 	breq increment_last
 	rcall display
-	ldi r24, low(50)
-	ldi r25, high(50)
+	ldi r24, low(500)
+	ldi r25, high(500)
 	rcall wait_msec
 	rjmp loop
 
@@ -70,8 +70,8 @@ increment_last:
 	cpi r18, 0x06
 	breq zerofy
 	rcall display
-	ldi r24, low(50)
-	ldi r25, high(50)
+	ldi r24, low(500)
+	ldi r25, high(500)
 	rcall wait_msec
 	rjmp loop
 
@@ -240,4 +240,4 @@ wait_usec:
 	nop 
 	nop 
 	brne wait_usec 
-	ret 
+	ret

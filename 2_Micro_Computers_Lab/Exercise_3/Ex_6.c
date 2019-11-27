@@ -141,7 +141,7 @@ int main(void){
 			if (sec_2 == 0x0A){
 				sec_2 = 0x00;
 				sec_1++;
-				if (sec_1 == 0x07){
+				if (sec_1 == 0x06){
 					sec_1 = 0x00;
 					sec_2 = 0x00;
 					min_2++;
@@ -150,7 +150,7 @@ int main(void){
 						sec_2 = 0x00;
 						min_2 = 0x00;
 						min_1++;
-						if (min_1 == 0x07){
+						if (min_1 == 0x06){
 							zerofy();
 						}
 					}
