@@ -56,13 +56,7 @@ scan_forth:
 	pop r26 ; 2nd digit
 	pop r27 ; 1st digit
 
-	cpi r27, 0x80
-	brne valid
-	cpi r26, 0x00
-	brne valid
-	cpi r25, 0x00
-	brne valid
-	cpi r24, 0x00
+	cpi r27, 0x80 ; NO DEVICE code: 0x8000
 	brne valid
 	rcall display_false
 	rjmp scan_first
@@ -73,7 +67,11 @@ valid:
 	lsl r25
 	lsl r25
 	add r24, r25 ; temperature is stored in r24
-	rol r27 ; check for sign
+	lsl r27
+	lsl r27
+	lsl r27
+	lsl r27
+	rol r27 ; check for sign of temperature
 	brcs minus
 	ldi r17, '+'
 	rjmp digits
@@ -103,6 +101,7 @@ no_tens:
 	rjmp scan_first
 
 display_true: ; display in case a valid temperature is given
+	rcall lcd_init 
 	mov r24, r17
 	rcall lcd_data
 	mov r24, r18
