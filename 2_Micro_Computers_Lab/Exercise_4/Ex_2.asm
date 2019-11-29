@@ -62,17 +62,8 @@ scan_forth:
 	rjmp scan_first
 
 valid:
-	lsl r25
-	lsl r25
-	lsl r25
-	lsl r25
-	add r24, r25 ; temperature is stored in r24
-	lsl r27
-	lsl r27
-	lsl r27
-	lsl r27
-	rol r27 ; check for sign of temperature
-	brcs minus
+	cpi r27, 0x0F ; check for 0xFF** code
+	breq minus
 	ldi r17, '+'
 	rjmp digits
 minus:
