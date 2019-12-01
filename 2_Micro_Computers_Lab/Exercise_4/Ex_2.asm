@@ -72,7 +72,7 @@ minus:
 digits:
 	ror r24 ; divide temperature by 2
 	brcs increment ; if carry is set, increment r24 by one = rounding up the number
-	rjmp continue
+	rjmp continue ; 
 increment:
 	inc r24
 continue:
