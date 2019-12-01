@@ -1,5 +1,44 @@
 .include "m16def.inc"
 
+reset:
+	ldi r24, low(RAMEND) ; initializing stack pointer
+	out SPL, r24
+	ldi r24, high(RAMEND)
+	out SPH, r24		
+	ser r24 ; initializing PORTB for output
+	out DDRB, r24
+
+ds1820_routine:
+	rcall one_wire_reset
+	sbrs r24, 0 ; if no device is connected, return 0x8000
+	rjmp no_device
+	ldi r24, 0xCC ; skip device selection
+	rcall one_wire_transmit_byte
+	ldi r24, 0x44 ; start temperature measurement
+	rcall one_wire_transmit_byte
+loop:	
+	rcall one_wire_receive_bit
+	sbrs r24, 0 ; wait until measurement is completed
+	rjmp loop
+	rcall one_wire_reset
+	sbrs r24, 0
+	rjmp no_device
+	ldi r24, 0xCC
+	rcall one_wire_transmit_byte
+	ldi r24, 0xBE
+	rcall one_wire_transmit_byte
+	rcall one_wire_receive_byte
+	mov r20, r24 ; 1st temperature
+	rcall one_wire_receive_byte
+	mov r21, r24 ; 2nd temperature
+	out PINB, r20
+
+no_device:
+	ldi r24, 0x00
+	ldi r25, 0x80
+end:
+	ret
+
 one_wire_reset: ; transmits a reset pulse across the wire, returns 1 to r24 if a device is connected, else 0
 	sbi DDRA, PA4 ; PA4 configured for output
 	cbi PORTA, PA4 ; set PA4 to 0
