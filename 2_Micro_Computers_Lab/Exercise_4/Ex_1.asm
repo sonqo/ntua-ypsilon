@@ -9,6 +9,12 @@ reset:
 	out DDRB, r24 ; initializing PORTB for output
 	out DDRC, r24 ; initializing PORTC for output
 
+main:
+	rcall ds1820_routine
+	out PORTB, r24
+	out PORTC, r25
+	rjmp main
+
 ds1820_routine:
 	rcall one_wire_reset
 	sbrs r24, 0 ; if no device is connected, return 0x8000
@@ -33,12 +39,10 @@ loop:
 	rcall one_wire_receive_byte
 	rjmp end
 no_device:
-	ldi r24, 0x00
-	ldi r25, 0x80
+	ldi r24, 0xFF
+	ldi r25, 0xFF
 end:
-	out PORTB, r24
-	out PORTC, r25
-	rjmp ds1820_routine
+	ret
 
 one_wire_reset: ; transmits a reset pulse across the wire, returns 1 to r24 if a device is connected, else 0
 	sbi DDRA, PA4 ; PA4 configured for output
