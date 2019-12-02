@@ -18,6 +18,23 @@ main:
 	clr r24
 	rcall lcd_init
 
+program:
+	rcall ds1820_routine
+	cpi r25, 0x80
+	breq scan_first
+	cpi r25, 0xFF
+	breq minus_
+	ldi r17, '+'
+	rjmp con_
+minus_:
+	ldi r17, '-'
+	neg r24
+con_:
+	ldi r18, 0x00 ; E = 0
+	ldi r19, 0x00 ; D = 0
+	ldi r20, 0x00 ; M = 0
+	rjmp digits
+
 scan_first:
 	ldi r18, 0x00 ; E = 0
 	ldi r19, 0x00 ; D = 0
@@ -59,7 +76,7 @@ scan_forth:
 	cpi r27, 0x80 ; NO DEVICE code: 0x8000
 	brne valid
 	rcall display_false
-	rjmp scan_first
+	rjmp main
 
 valid:
 	cpi r27, 0x0F ; check for 0xFF** code
@@ -89,7 +106,7 @@ no_hunderds:
 no_tens:
 	mov r20, r24 ; ones is equal to the result of all above functions
 	rcall display_true
-	rjmp scan_first
+	rjmp main
 
 display_true: ; display in case a valid temperature is given
 	rcall lcd_init 
@@ -103,6 +120,10 @@ display_true: ; display in case a valid temperature is given
 	rcall lcd_data
 	mov r24, r20
 	rcall hex_to_ascii
+	rcall lcd_data
+	ldi r24, '°'
+	rcall lcd_data
+	ldi r24, 'C'
 	rcall lcd_data
 	ldi r24, 0x02 ; cursor home command
 	rcall lcd_command
@@ -129,6 +150,38 @@ display_false: ; display in case NO DEVICE code is given
 	rcall lcd_data
 	ldi r24, 0x02
 	rcall lcd_command
+	ret
+
+ds1820_routine:
+	rcall one_wire_reset
+	sbrs r24, 0 ; if no device is connected, return 0x8000
+	rjmp no_device
+	ldi r24, 0xCC ; skip device selection
+	rcall one_wire_transmit_byte
+	ldi r24, 0x44 ; start temperature measurement
+	rcall one_wire_transmit_byte
+loop:	
+	rcall one_wire_receive_bit
+	sbrs r24, 0 ; wait until measurement is completed
+	rjmp loop
+	rcall one_wire_reset
+	sbrs r24, 0
+	rjmp no_device
+	ldi r24, 0xCC
+	rcall one_wire_transmit_byte
+	ldi r24, 0xBE
+	rcall one_wire_transmit_byte
+	rcall one_wire_receive_byte
+	mov r23, r24 ; LSB temperature in r23
+	rcall one_wire_receive_byte
+	mov r25, r24 ; MSB of temperature in r25
+	mov r24, r23 ; LSB of temperature in r24
+	lsr r24 ; rounding temperature
+	rjmp finish
+no_device:
+	ldi r24, 0x00
+	ldi r25, 0x80
+finish:
 	ret
 
 write_2_nibbles:
