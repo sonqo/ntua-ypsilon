@@ -5,8 +5,9 @@ reset:
 	out SPL, r24
 	ldi r24, high(RAMEND)
 	out SPH, r24		
-	ser r24 ; initializing PORTB for output
-	out DDRB, r24
+	ser r24
+	out DDRB, r24 ; initializing PORTB for output
+	out DDRC, r24 ; initializing PORTC for output
 
 ds1820_routine:
 	rcall one_wire_reset
@@ -28,16 +29,16 @@ loop:
 	ldi r24, 0xBE
 	rcall one_wire_transmit_byte
 	rcall one_wire_receive_byte
-	mov r20, r24 ; 1st temperature
+	mov r25, r24 ; 1st temperature
 	rcall one_wire_receive_byte
-	mov r21, r24 ; 2nd temperature
-	out PINB, r20
-
+	rjmp end
 no_device:
 	ldi r24, 0x00
 	ldi r25, 0x80
 end:
-	ret
+	out PORTB, r24
+	out PORTC, r25
+	rjmp ds1820_routine
 
 one_wire_reset: ; transmits a reset pulse across the wire, returns 1 to r24 if a device is connected, else 0
 	sbi DDRA, PA4 ; PA4 configured for output
