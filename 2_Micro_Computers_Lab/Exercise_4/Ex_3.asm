@@ -72,11 +72,15 @@ scan_forth:
 	pop r25 ; 3rd digit
 	pop r26 ; 2nd digit
 	pop r27 ; 1st digit
-
+	lsl r25
+	lsl r25
+	lsl r25
+	lsl r25
+	add r24, r25 ; r24 has total temperature
 	cpi r27, 0x80 ; NO DEVICE code: 0x8000
 	brne valid
 	rcall display_false
-	rjmp program
+	rjmp main
 
 valid:
 	cpi r27, 0x0F ; check for 0xFF** code
@@ -106,7 +110,7 @@ no_hunderds:
 no_tens:
 	mov r20, r24 ; ones is equal to the result of all above functions
 	rcall display_true
-	rjmp program
+	rjmp main
 
 display_true: ; display in case a valid temperature is given
 	rcall lcd_init 
