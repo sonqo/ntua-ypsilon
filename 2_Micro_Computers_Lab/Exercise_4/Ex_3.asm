@@ -76,7 +76,7 @@ scan_forth:
 	cpi r27, 0x80 ; NO DEVICE code: 0x8000
 	brne valid
 	rcall display_false
-	rjmp main
+	rjmp program
 
 valid:
 	cpi r27, 0x0F ; check for 0xFF** code
@@ -106,7 +106,7 @@ no_hunderds:
 no_tens:
 	mov r20, r24 ; ones is equal to the result of all above functions
 	rcall display_true
-	rjmp main
+	rjmp program
 
 display_true: ; display in case a valid temperature is given
 	rcall lcd_init 
