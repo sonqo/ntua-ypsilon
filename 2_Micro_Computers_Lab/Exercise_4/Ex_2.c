@@ -91,9 +91,9 @@ char one_wire_receive_byte(void){
 }
 
 int ds1820_routine(void) {
-	char MSB,LSB;
+	int MSB,LSB;
 	int result = 0;
-	char control = 0;
+	char control = 0x00;
 	control = one_wire_reset();
 	if (control == 0x01){
 		one_wire_transmit_byte(0xCC);
@@ -106,14 +106,13 @@ int ds1820_routine(void) {
 			LSB = one_wire_receive_byte();
 			MSB = one_wire_receive_byte();
 			result = (MSB << 8) + LSB;
-			result >>= 1;
 			return result;
 		}
-		else{ 
+		else{
 			return 0x8000;
 		}
 	}
-	else{ 
+	else{
 		return 0x8000;
 	}
 }
@@ -121,11 +120,17 @@ int ds1820_routine(void) {
 int main(void)
 {
 	DDRB = 0xFF;
-	char temperature;
+	int temperature;
 	
-    while (1){
+	while (1){
 		temperature = ds1820_routine();
-		PORTB = temperature;
-    }
+		if (temperature == 0x8000){ // no device detected
+			PORTB = temperature;
+		}
+		else{
+			temperature &= 0x00FF; // ignore sign
+			temperature >>= 1; // rounding up temperature
+			PORTB = temperature;
+		}
+	}
 }
-
