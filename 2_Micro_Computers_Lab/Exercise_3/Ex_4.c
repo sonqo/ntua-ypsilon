@@ -3,7 +3,6 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
-volatile short int _tmp_;
 char volatile sign, hundreds, tens, ones;
 
 int scan_row(short n){ // scanning the nth row of keypad
@@ -164,7 +163,6 @@ void lcd_display(void){
 	lcd_command(0x02); // cursor home command
 }
 
-
 int main(void){
 	
 	DDRC = 0xF0; // initialize PORTC for keypad scanning
@@ -213,7 +211,6 @@ int main(void){
 		flag++;
 		dig1 <<= 4;
 		sum = dig1 + dig2;
-		_tmp_ = sum;
 		if ((sum & 0x80) == 0x80){
 			sign = '-';
 			sum ^= 0xFF;

@@ -69,7 +69,6 @@ char keypad_to_ascii(short int key_reg){ // converts a status register to the AS
 	}
 }
 	
-
 int main(void){
 	
 	DDRC = 0xF0; // initializing PORTC for keypad scanning
