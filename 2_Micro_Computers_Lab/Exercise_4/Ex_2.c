@@ -16,10 +16,10 @@ char one_wire_reset(void){
 	scan = PINA; // sample the line
 	_delay_us(380);
 	if ((scan & 0x10) == 0x10){
-		return 0x01;
+		return 0x00;
 	}
 	else{
-		return 0x00;
+		return 0x01;
 	}
 }
 
@@ -90,7 +90,7 @@ char one_wire_receive_byte(void){
 	return byte;
 }
 
-int ds1820_routine(void) {
+short ds1820_routine(void) {
 	int MSB,LSB;
 	int result = 0;
 	char control = 0x00;
@@ -106,10 +106,11 @@ int ds1820_routine(void) {
 			LSB = one_wire_receive_byte();
 			MSB = one_wire_receive_byte();
 			result = (MSB << 8) + LSB;
+			result >>= 1; // rounding down temperature
 			return result;
 		}
 		else{
-			return 0x8000;
+			return 0x8000; // no device detected code
 		}
 	}
 	else{
@@ -119,17 +120,16 @@ int ds1820_routine(void) {
 
 int main(void)
 {
-	DDRB = 0xFF;
-	int temperature;
+	DDRB = 0xFF; // initialize PORTB for output
+	short temperature;
 	
 	while (1){
 		temperature = ds1820_routine();
-		if (temperature == 0x8000){ // no device detected
+		if (temperature == 0x8000){ // in case no device is detected
 			PORTB = temperature;
 		}
 		else{
 			temperature &= 0x00FF; // ignore sign
-			temperature >>= 1; // rounding up temperature
 			PORTB = temperature;
 		}
 	}
