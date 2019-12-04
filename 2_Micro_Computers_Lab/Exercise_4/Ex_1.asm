@@ -5,8 +5,8 @@ reset:
 	out SPL, r24
 	ldi r24, high(RAMEND)
 	out SPH, r24		
-	ser r24 ; initializing PORTB for output
-	out DDRB, r24
+	ser r24
+	out DDRB, r24 ; initializing PORTB for output
 
 main:
 	rcall ds1820_routine
@@ -33,14 +33,14 @@ loop:
 	ldi r24, 0xBE
 	rcall one_wire_transmit_byte
 	rcall one_wire_receive_byte
-	mov r23, r24 ; LSB temperature in r23
+	mov r23, r24 ; LSB of temperature in r23
 	rcall one_wire_receive_byte
 	mov r25, r24 ; MSB of temperature in r25
 	mov r24, r23 ; LSB of temperature in r24
-	lsr r24 ; rounding temperature
+	lsr r24 ; right shift for rounding down temperature	
 	rjmp end
 no_device:
-	ldi r24, 0x00
+	ldi r24, 0x00 ; no device code
 	ldi r25, 0x80
 end:
 	ret
