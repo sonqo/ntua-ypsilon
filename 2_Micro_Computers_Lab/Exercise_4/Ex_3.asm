@@ -18,6 +18,12 @@ main:
 	clr r24
 	rcall lcd_init
 
+	clr r24 ; initialize _tmp_ = 0
+	ldi XH, high(_tmp_)
+	ldi XL, low(_tmp_)
+	st X+,r24
+	st X,r24
+
 program:
 	rcall ds1820_routine
 	cpi r25, 0x80
@@ -33,7 +39,7 @@ con_:
 	ldi r18, 0x00 ; E = 0
 	ldi r19, 0x00 ; D = 0
 	ldi r20, 0x00 ; M = 0
-	rjmp digits
+	rjmp digits_
 
 scan_first:
 	ldi r18, 0x00 ; E = 0
@@ -77,10 +83,10 @@ scan_forth:
 	lsl r25
 	lsl r25
 	add r24, r25 ; r24 has total temperature
-	cpi r27, 0x80 ; NO DEVICE code: 0x8000
+	cpi r27, 0x08 ; NO DEVICE code: 0x8000
 	brne valid
 	rcall display_false
-	rjmp main
+	rjmp program
 
 valid:
 	cpi r27, 0x0F ; check for 0xFF** code
@@ -91,12 +97,8 @@ minus:
 	ldi r17, '-'
 	neg r24
 digits:
-	ror r24 ; divide temperature by 2
-	brcs increment ; if carry is set, increment r24 by one = rounding up the number
-	rjmp continue ; 
-increment:
-	inc r24
-continue:
+	lsr r24
+digits_:
 	cpi r24, 0x64 ; check if number is greater than 100
 	brlt no_hunderds ; if true, increment hundreds
 	inc r18
@@ -110,7 +112,7 @@ no_hunderds:
 no_tens:
 	mov r20, r24 ; ones is equal to the result of all above functions
 	rcall display_true
-	rjmp main
+	rjmp program
 
 display_true: ; display in case a valid temperature is given
 	rcall lcd_init 
@@ -176,14 +178,14 @@ loop:
 	ldi r24, 0xBE
 	rcall one_wire_transmit_byte
 	rcall one_wire_receive_byte
-	mov r23, r24 ; LSB temperature in r23
+	mov r23, r24 ; LSB of temperature in r23
 	rcall one_wire_receive_byte
 	mov r25, r24 ; MSB of temperature in r25
 	mov r24, r23 ; LSB of temperature in r24
-	lsr r24 ; rounding temperature
+	lsr r24 ; right shift to delete the .0 / .5 part	
 	rjmp finish
 no_device:
-	ldi r24, 0x00
+	ldi r24, 0xFF ; light all PORTB LEDs
 	ldi r25, 0x80
 finish:
 	ret
