@@ -69,7 +69,7 @@ char one_wire_receive_bit(void){
 		bit = 1;
 	}
 	else{
-		bit =0;
+		bit = 0;
 	}
 	_delay_us(49);
 	return bit;
