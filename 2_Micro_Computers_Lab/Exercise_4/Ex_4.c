@@ -160,10 +160,10 @@ char one_wire_reset(void){
 	scan = PINA; // sample the line
 	_delay_us(380);
 	if ((scan & 0x10) == 0x10){
-		return 0x01;
+		return 0x00;
 	}
 	else{
-		return 0x00;
+		return 0x01;
 	}
 }
 
@@ -213,7 +213,7 @@ char one_wire_receive_bit(void){
 		bit = 1;
 	}
 	else{
-		bit =0;
+		bit = 0;
 	}
 	_delay_us(49);
 	return bit;
@@ -250,6 +250,7 @@ int ds1820_routine(void) {
 			LSB = one_wire_receive_byte();
 			MSB = one_wire_receive_byte();
 			result = (MSB << 8) + LSB;
+			result >>= 1; // rounding down temperature
 			return result;
 		}
 		else{
@@ -262,6 +263,8 @@ int ds1820_routine(void) {
 }
 
 void lcd_display(void){
+	
+	lcd_init();
 	
 	char hundreds_ascii, tens_ascii, ones_ascii;
 	
@@ -277,13 +280,29 @@ void lcd_display(void){
 	lcd_command(0x02); // cursor home command
 }
 
+void lcd_nodevice(void){
+	
+	lcd_data('N');
+	lcd_data('o');
+	lcd_data(' ');
+	lcd_data('D');
+	lcd_data('e');
+	lcd_data('v');
+	lcd_data('i');
+	lcd_data('c');
+	lcd_data('e');
+
+	lcd_command(0x02); // cursor home command
+}
+
 int main(void)
 {
 	DDRC = 0xF0; // initialize PORTC for keypad scanning
 	
-	int flag, temperature;
-	short int scan, repeat_scan;
+	int flag;
 	char dig1, dig2, dig3, dig4, sum;
+	short scan, repeat_scan, temperature;
+	
 	lcd_init();
 	
 	flag = 0;
@@ -291,9 +310,40 @@ int main(void)
 	tens = 0;
 	hundreds = 0;
 	
+	temperature = ds1820_routine();
+	if (temperature == 0x8000){
+		lcd_nodevice();
+	}
+	
 	while (1){
-		temperature = ds1820_routine();
-		if (temperature == 0x8000){ // no device detected
+		flag = 0;
+		ones = 0;
+		tens = 0;
+		hundreds = 0;
+		temperature = thermometer();
+		if (temperature != 0x8000){
+			if ((temperature & 0xF000) == 0xE000){
+				sign = '-';
+				temperature &= 0x00FF;
+				temperature ^= 0xFF; // 2's complement in case of negative number
+				temperature++;
+			}
+			else{
+				sign = '+';
+				temperature &= 0x00FF;
+			}
+			if (temperature >= 0x64){
+				hundreds++;
+				temperature -= 0x64;
+			}
+			while (temperature >= 0x0A){
+				tens++;
+				temperature -= 0x0A;
+			}
+			ones = temperature;
+			lcd_display();
+		}
+		else{
 			scan = scan_keypad();
 			_delay_ms(50);
 			repeat_scan = scan_keypad(); // debouncing handling
@@ -349,15 +399,12 @@ int main(void)
 				dig4 = keypad_to_hex(scan);
 			}
 			flag++;
-			if (dig1 == 0x0F){ // check for 0xFF** code == minus
-				sign = '-';
-			}
-			else{
-				sign = '+';
-			}
+			_delay_ms(200);
+
 			dig3 <<= 4;
 			sum = dig3 + dig4;
-			if ((sum & 0x80) == 0x80){
+
+			if (dig1 == 0x0F){ // check for 0xFF** code == minus
 				sign = '-';
 				sum ^= 0xFF;
 				sum++;
@@ -365,6 +412,7 @@ int main(void)
 			else{
 				sign = '+';
 			}
+			sum >>= 1;
 			if (sum >= 0x64){
 				hundreds++;
 				sum -= 0x64;
@@ -377,30 +425,6 @@ int main(void)
 			if (flag == 4){
 				lcd_display(); // display only when all digits are read
 			}
-			_delay_ms(200);
-		}
-		else{
-			if ((temperature & 0xFF00) == 0xFF00){
-				sign = '-';
-				temperature &= 0x00FF;
-				temperature ^= 0xFF; // 2's complement in case of negative number
-				temperature++;
-			}
-			else{
-				sign = '+';
-				temperature &= 0x00FF;
-			}
-			temperature >>= 1; // rounding temperature
-			if (temperature >= 0x64){
-				hundreds++;
-				temperature -= 0x64;
-			}
-			while (temperature >= 0x0A){
-				tens++;
-				temperature -= 0x0A;
-			}
-			ones = temperature;
-			lcd_display();
 		}
 	}
 }
