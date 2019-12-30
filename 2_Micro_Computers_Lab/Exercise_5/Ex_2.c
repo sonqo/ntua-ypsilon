@@ -14,12 +14,12 @@ void usart_init(){
 }
 
 void usart_transmit(char data){
-	while ((UCSRA & 0x10) != 0x10);
+	while (!( UCSRA & (1<<UDRE)));
 	UDR = data;
 }
 
 char usart_receive(){
-	while ((UCSRA & 0x80) != 0x80);
+	while (!(UCSRA) & (1<<RXC));
 	return UDR;
 }
 
