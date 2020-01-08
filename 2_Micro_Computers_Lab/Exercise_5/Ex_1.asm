@@ -1,11 +1,23 @@
 .include "m16def.inc"
 
+.dseg
+	_tmp_: .byte 0x10
+
+.cseg
+
 main:
+	ldi r24, low(RAMEND) ; initialize stack pointer
+	out SPL, r24
+	ldi r24, high(RAMEND)
+	out SPH, r24
+
+	ldi XL, low(_tmp_)
+	ldi XH, high(_tmp_)
 	rcall save_string2RAM 
 	rcall usart_init			
 
-	clr XL				
-	clr XH 
+	ldi XL, low(_tmp_)
+	ldi XH, high(_tmp_)
 
 send2UART:
 	ld r24, X+
@@ -13,8 +25,9 @@ send2UART:
 	breq end_of_string ; if '\0' is met, the string is over
 	rcall usart_transmit ; transmit through the USART
 	rjmp send2UART
+
 end_of_string:
-	ret
+	rjmp end_of_string
 
 usart_init:
 	clr r24	; initialize UCSRA to zero
@@ -27,29 +40,29 @@ usart_init:
 	out UBRRL, r24
 	ldi r24, (1<<URSEL)|(3<<UCSZ0) ; 8-bit character size,
 	out UCSRC, r24 ; 1 stop bit
-ret
+	ret
 
 usart_transmit:
 	sbis UCSRA, UDRE ; check if usart is ready to transmit
 	rjmp usart_transmit ; if no check again, else transmit
 	out UDR, r24 ; content of r24
-ret
+	ret
 
 save_string2RAM:
 	ldi r16, 'T'
-	sts 0x0000, r16
+	st X+, r16	
 	ldi r16, 'e'
-	sts 0x0001, r16
+	st X+, r16
 	ldi r16, 'a'
-	sts 0x0002, r16
+	st X+, r16
 	ldi r16, 'm'
-	sts 0x0003, r16
+	st X+, r16
 	ldi r16, ' '
-	sts 0x0004, r16
+	st X+, r16
 	ldi r16, '0'
-	sts 0x0005, r16
+	st X+, r16
 	ldi r16, '5'
-	sts 0x0006, r16
+	st X+, r16
 	ldi r16, '\0'
-	sts 0x0007, r16
-ret
+	st X+, r16
+	ret
