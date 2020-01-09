@@ -4,17 +4,23 @@
 	rjmp ADC_routine
 
 reset:
-	rcall usart_init
 	rcall ADC_init
+	rcall usart_init
+	
 	ser r24	
 	out DDRB, r24 ; initializing PORTB for output
 	ldi r20, 0x00 ; initializing counter
+	out PORTB, r20
+	
 	sei
 
 main:
+	inc r20
+	out PORTB, r20 ; increment LED
+	
 	ldi r24, (1<<ADSC) ; initiate conversion
 	out ADCSRA, r24
-	out PORTB, 20
+	
 	ldi r24, low(500)
 	ldi r25, high(500)
 	rcall wait_msec
@@ -28,8 +34,30 @@ main:
 	 ret
 
 ADC_routine:
-	/* INSERT CODE HERE */
-	inc r20
+	in r16, ADCL ;low
+	in r17, ADCH ;high
+	andi r17, 0x03 ; 10-bit number
+	
+	/* Multiplication with 5 */
+	mov r18, r16
+	mov r19, r17
+	clc
+	rol r18 ; multiply with 2
+	rol r19
+	clc
+	rol r18 ; multiply with 4
+	rol r19
+	add r18, r16 ; mu;tiply with 5
+	adc r19, r17
+
+	/* Deviation by 1024 */
+	clc
+	ror r19
+	ror r18
+	clc
+	ror r19	; integer digits
+	ror r18 ; decimal digits
+	
 	reti
 
 usart_init:
@@ -49,6 +77,39 @@ usart_transmit:
 	sbis UCSRA, UDRE ; check if usart is ready to transmit
 	rjmp usart_transmit ; if no check again, else transmit
 	out UDR, r24 ; content of r24
+	ret
+
+hex_to_ascii: 
+	movw r26, r24 
+	ldi r24, '0'
+	cpi r26, 0x00
+	breq end
+	ldi r24, '1'
+	cpi r26, 0x01
+	breq end
+	ldi r24, '2'
+	cpi r26, 0x02
+	breq end
+	ldi r24, '3'
+	cpi r26, 0x03
+	breq end
+	ldi r24, '4'
+	cpi r26, 0x04
+	breq end
+	ldi r24, '5'
+	cpi r26, 0x05
+	breq end
+	ldi r24, '6'
+	cpi r26, 0x06
+	breq end
+	ldi r24, '7'
+	cpi r26, 0x07
+	breq end
+	ldi r24, '8'
+	cpi r26, 0x08
+	breq end
+	ldi r24, '9'
+end:
 	ret
 
 wait_msec: ; delay routine, calls wait_usec
