@@ -1,5 +1,7 @@
 .include "m16def.inc"
 
+rjmp reset
+
 .org 0x1C ; ADC address
 	rjmp ADC_routine
 
@@ -21,12 +23,12 @@ main:
 	ldi r24, (1<<ADSC) ; initiate conversion
 	out ADCSRA, r24
 	
-	ldi r24, low(500)
-	ldi r25, high(500)
+	ldi r24, low(200)
+	ldi r25, high(200)
 	rcall wait_msec
 	rjmp main
 
- ADC_init:
+ADC_init:
 	 ldi r24, (1<<REFS0) ; Vref: Vcc
 	 out ADMUX, r24
 	 ldi r24, (1<<ADEN)|(1<<ADIE)|(1<<ADPS2)|(1<<ADPS1)|(1<<ADPS0)
@@ -47,17 +49,63 @@ ADC_routine:
 	clc
 	rol r18 ; multiply with 4
 	rol r19
-	add r18, r16 ; mu;tiply with 5
+	add r18, r16 ; multiply with 5
 	adc r19, r17
 
 	/* Deviation by 1024 */
 	clc
-	ror r19
+	ror r19 ; shift word r19-r18 2 bits right
 	ror r18
 	clc
 	ror r19	; integer digits
 	ror r18 ; decimal digits
+
+	mov r24, r19 ; move interger digit to UART
+	rcall hex_to_ascii
+	rcall usart_transmit
+
+	ldi r24, '.' ; move dot symbol '.' to UART 
+	rcall usart_transmit 
+
+	ldi r21, 0x00
+	rol r18
+	brcc 2nd
+	ldi r22, 50
+	add r21, r22
+2nd:
+	rol r18
+	brcc 3rd
+	ldi r22, 25
+	add r21, r22
+3rd:
+	rol r18
+	brcc 4th
+	ldi r22, 12
+	add r21, r22
+4th:
+	rol r18
+	brcc 5th
+	ldi r22, 12
+	add r21, r22
+5th:
+	rol r18
+	brcc 6th
+	ldi r22, 6
+	add r21, r22
+6th:
+	rol r18
+	brcc end
+	ldi r22, 1
+	add r21, r22
+
+end:
+	mov r24, r21 ; move 2nd decimal digit to UART
+	rcall hex_to_ascii
+	rcall usart_transmit
 	
+	ldi r24, 0x0A ; move new line character to UART  
+	rcall usart_transmit
+
 	reti
 
 usart_init:
