@@ -92,6 +92,9 @@ void usart_string(char* message){
 
 int main(void){
 	
+	lcd_init();
+	usart_init();
+	
 	char connect = "connect";
 	char teamname = "Team 05\n";
 	
