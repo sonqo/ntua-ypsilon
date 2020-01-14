@@ -4,7 +4,161 @@
 #include <string.h>
 #include <util/delay.h>
 
-volatile char curr;
+char volatile sign, hundreds, tens, ones;
+char* curr1;
+char* curr2;
+char* curr3;
+
+char one_wire_reset(void){
+	
+	char scan;
+	
+	DDRA |= (1 << PA4); // PA4 configured for output
+	PORTA &= ~(1 << PA4); // set PA4 to 0
+	_delay_us(480);
+	DDRA &= ~(1 << PA4); // PA4 configured for input
+	PORTA &= ~(1 << PA4); // set PA4 to 0
+	_delay_us(100);
+	scan = PINA; // sample the line
+	_delay_us(380);
+	if ((scan & 0x10) == 0x10)
+		return 0x00;
+	else
+		return 0x01;
+}
+
+void one_wire_transmit_bit(char bit){
+	
+	bit   &= 0b00000001; // clear all but the LSB
+	
+	DDRA |= (1 << PA4); // PA4 configured for output
+	PORTA &= ~(1 << PA4); // set PA4 to 0
+	_delay_us(2);
+	if (bit == 1)
+		PORTA |= (1 << PA4);
+	else
+		PORTA &= ~(1 << PA4);
+	_delay_us(58);
+	DDRA  &= ~(1 << PA4);
+	PORTA &= ~(1 << PA4);
+	_delay_us(1);
+	return;
+}
+
+void one_wire_transmit_byte(char byte){
+	
+	for (int i=0; i<8; i++){
+		if ((byte & 0x01) == 0x01)
+			one_wire_transmit_bit(1);
+		else
+			one_wire_transmit_bit(0);
+		byte >>= 1; // right shift one place
+	}
+}
+
+char one_wire_receive_bit(void){
+	
+	short bit;
+	
+	DDRA |= (1 << PA4);
+	PORTA &= ~(1 << PA4);
+	_delay_us(2);
+	DDRA  &= ~(1 << PA4);
+	PORTA &= ~(1 << PA4);
+	_delay_us(10);
+	if ((PINA & 0x10 ) == 0x10)
+		bit = 1;
+	else
+		bit = 0;
+	_delay_us(49);
+	return bit;
+}
+
+char one_wire_receive_byte(void){
+	
+	char bit;
+	char byte = 0x00;
+	
+	for (int i=0; i<8; i++){
+		bit = one_wire_receive_bit();
+		byte >>= 1;
+		if (bit == 1)
+			byte |= 0x80;
+	}
+	return byte;
+}
+
+int ds1820_routine(void) {
+	
+	int MSB,LSB;
+	int result = 0;
+	char control = 0x00;
+	
+	control = one_wire_reset();
+	if (control == 0x01){
+		one_wire_transmit_byte(0xCC);
+		one_wire_transmit_byte(0x44);
+		while (!one_wire_receive_bit()) ;
+		control = one_wire_reset();
+		if (control == 0x01) {
+			one_wire_transmit_byte(0xCC);
+			one_wire_transmit_byte(0xBE);
+			LSB = one_wire_receive_byte();
+			MSB = one_wire_receive_byte();
+			result = (MSB << 8) + LSB;
+			result >>= 4; // rounding down temperature
+			return result;
+		}
+		else
+			return 0x8000;
+	}
+	else
+		return 0x8000;
+}
+
+void usart_init(){
+	
+	UCSRA = 0;
+	UCSRB = (1<<RXEN)|(1<<TXEN); // activate transmitter/receiver
+	UBRRH = 0; // BAUD rate: 9600
+	UBRRL = 51;
+	UCSRC = (1<<URSEL)|(3<<UCSZ0); // 8bit character size, 1 stop-bit
+}
+
+char usart_receive(){
+	
+	while (!(UCSRA & (1<<RXC))); // waiting till RXC is equal to 1
+	return UDR;
+}
+
+void usart_transmit(char data){
+	
+	while (!(UCSRA & (1<<UDRE)));
+	UDR = data;
+}
+
+void usart_transmit_string(char* message){
+	
+	while (*message != '\0'){
+		usart_transmit(*message);
+		message++;
+	}
+}
+
+char* usart_receive_string(){
+
+	static char acc[50];
+	for (int j = 0; j < 50; j++) acc[j] = '\0';
+
+	char character = usart_receive();
+	int i =0;
+	while (character != '\n'){
+		acc[i++] = character;
+		character = usart_receive();
+	}
+
+	return acc;
+}
 
 void lcd_command(unsigned char command){
 	
@@ -55,9 +209,7 @@ void lcd_init(void){
 }
 
 void lcd_display(char* message){
-	
-	lcd_command(0x01); // clear display
-	
+
 	while (*message != '\0'){
 		lcd_data(*message);
 		message++;
@@ -65,58 +217,122 @@ void lcd_display(char* message){
 	lcd_command(0x02); // cursor-home
 }
 
-void usart_init(){
-	UCSRA = 0;
-	UCSRB = (1<<RXEN)|(1<<TXEN); // activate transmitter/receiver
-	UBRRH = 0; // BAUD rate: 9600
-	UBRRL = 51;
-	UCSRC = (1<<URSEL)|(3<<UCSZ0); // 8bit character size, 1 stop-bit
-}
-
-char usart_receive(){
-	while (!(UCSRA & (1<<RXC))); // waiting till RXC is equal to 1
-	return UDR;
-}
-
-void usart_transmit(char data){
-	while (!(UCSRA & (1<<UDRE)));
-	UDR = data;
-}
-
-void usart_string(char* message){
-	while (*message != '\0'){
-		usart_transmit(*message);
-		message++;
+char hex_to_ascii(char number){
+	
+	switch(number){
+		case 0x00:
+		return '0';
+		case 0x01:
+		return '1';
+		case 0x02:
+		return '2';
+		case 0x03:
+		return '3';
+		case 0x04:
+		return '4';
+		case 0x05:
+		return '5';
+		case 0x06:
+		return '6';
+		case 0x07:
+		return '7';
+		case 0x08:
+		return '8';
+		case 0x09:
+		return '9';
+		default:
+		return 'A';
 	}
 }
 
 int main(void){
-	
-	lcd_init();
+
 	usart_init();
 	
-	char connect = "connect";
-	char teamname = "Team 05\n";
+	lcd_init();
 	
-	char success_1 = "1. Success";
-	char fail_1 = "1. Fail";
-	
-	char success_2 = "2. Success";
-	char fail_2 = "2. Fail";
-	
-    while (1){
-		usart_string(teamname);
-		curr = usart_receive();
-		if (strcmp(curr, "Success") == 0)
-			lcd_display(success_1);
-		else
-			lcd_display(fail_1);
-		_delay_ms(2000);
-		usart_string(connect);
-		curr = usart_receive();
-		if (strcmp(curr, "Success") == 0)
-			lcd_display(success_1);
-		else
-			lcd_display(fail_1);
-    }
+	one_wire_reset();
+
+	while (1) { 	// loop
+
+		lcd_command(0x01);
+		
+		int flag;
+		short temperature;
+		
+		static char final[5];
+
+		static char* message_start = "payload: {[\"name\": \"Temperature:\",\"value\": ";
+		static char* message_end = "]} ";
+
+		/* TeamName command */
+
+		usart_transmit_string("A5\n");
+		curr1 = usart_receive_string();
+		lcd_data('1');
+		lcd_data('.');
+		lcd_display(curr1);
+		_delay_ms(3000);
+		if ( strcmp( curr1 , "\"Success\"" ) != 0 ) continue; // if not "Success" restart
+
+		/* Connect command */
+
+		usart_transmit_string("connect\n");
+		curr2 = usart_receive_string();
+		lcd_init();
+		lcd_data('2');
+		lcd_data('.');
+		lcd_display(curr2);
+		_delay_ms(3000);
+		if ( strcmp( curr2 , "\"Success\"" ) != 0 ) continue; // if not "Success" restart
+
+		/* DS1820 payload command */
+
+		temperature = ds1820_routine();
+		if (temperature == 0x8000)
+		usart_transmit_string("No Device!");
+		else {
+			flag = 0;
+			ones = 0;
+			tens = 0;
+			hundreds = 0;
+			if ((temperature & 0xF000) == 0xE000){
+				sign = '-';
+				temperature &= 0x00FF;
+				temperature ^= 0xFF; // 2's complement in case of negative number
+				temperature++;
+			}
+			else{
+				sign = '+';
+				temperature &= 0x00FF;
+			}
+
+			if (temperature >= 0x64){
+				hundreds++;
+				temperature -= 0x64;
+			}
+			while (temperature >= 0x0A){
+				tens++;
+				temperature -= 0x0A;
+			}
+			ones = temperature;
+
+			final[0] = hex_to_ascii(tens);
+			final[1] = hex_to_ascii(ones);
+			final[2] = '\0';
+
+			usart_transmit_string(message_start);
+			usart_transmit_string(final);
+			usart_transmit_string(message_end);
+
+			curr3 = usart_receive_string();
+			lcd_init();
+			lcd_data('3');
+			lcd_data('.');
+			lcd_display(curr3);
+			_delay_ms(3000);
+			if ( strcmp( curr3 , "\"Success\"" ) != 0 ) continue; // if not "Success" restart
+
+		}
+	}
 }
