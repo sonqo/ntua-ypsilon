@@ -5,9 +5,7 @@
 #include <util/delay.h>
 
 char volatile sign, hundreds, tens, ones;
-char* curr1;
-char* curr2;
-char* curr3;
+char* curr1, *curr2, *curr3, *curr4, *curr5;
 
 char one_wire_reset(void){
 	
@@ -22,9 +20,9 @@ char one_wire_reset(void){
 	scan = PINA; // sample the line
 	_delay_us(380);
 	if ((scan & 0x10) == 0x10)
-		return 0x00;
+	return 0x00;
 	else
-		return 0x01;
+	return 0x01;
 }
 
 void one_wire_transmit_bit(char bit){
@@ -35,9 +33,9 @@ void one_wire_transmit_bit(char bit){
 	PORTA &= ~(1 << PA4); // set PA4 to 0
 	_delay_us(2);
 	if (bit == 1)
-		PORTA |= (1 << PA4);
+	PORTA |= (1 << PA4);
 	else
-		PORTA &= ~(1 << PA4);
+	PORTA &= ~(1 << PA4);
 	_delay_us(58);
 	DDRA  &= ~(1 << PA4);
 	PORTA &= ~(1 << PA4);
@@ -49,9 +47,9 @@ void one_wire_transmit_byte(char byte){
 	
 	for (int i=0; i<8; i++){
 		if ((byte & 0x01) == 0x01)
-			one_wire_transmit_bit(1);
+		one_wire_transmit_bit(1);
 		else
-			one_wire_transmit_bit(0);
+		one_wire_transmit_bit(0);
 		byte >>= 1; // right shift one place
 	}
 }
@@ -67,9 +65,9 @@ char one_wire_receive_bit(void){
 	PORTA &= ~(1 << PA4);
 	_delay_us(10);
 	if ((PINA & 0x10 ) == 0x10)
-		bit = 1;
+	bit = 1;
 	else
-		bit = 0;
+	bit = 0;
 	_delay_us(49);
 	return bit;
 }
@@ -83,7 +81,7 @@ char one_wire_receive_byte(void){
 		bit = one_wire_receive_bit();
 		byte >>= 1;
 		if (bit == 1)
-			byte |= 0x80;
+		byte |= 0x80;
 	}
 	return byte;
 }
@@ -110,10 +108,10 @@ int ds1820_routine(void) {
 			return result;
 		}
 		else
-			return 0x8000;
+		return 0x8000;
 	}
 	else
-		return 0x8000;
+	return 0x8000;
 }
 
 void usart_init(){
@@ -158,6 +156,72 @@ char* usart_receive_string(){
 	}
 
 	return acc;
+}
+
+int scan_row(short n){ // scanning the nth row of keypad
+	
+	PORTC = 0b00001000 << n;
+	asm ("nop");
+	asm ("nop");
+	return (PINC & 0x0F);
+}
+
+short int scan_keypad(void){ // scanning keypad for pressed characters, returns a 16-bit status register representing all keys
+	
+	int r24 = 0; // 8-bit reg
+	int r25 = 0; // 8-bit reg
+	short int key_reg = 0;
+	
+	r25 = scan_row(1);
+	r25 = (r25 << 4) & 0xF0;
+	r25 += scan_row(2);
+	r24 = scan_row(3);
+	r24 = (r24 << 4) & 0xF0;
+	r24 += scan_row(4);
+	key_reg = r25;
+	key_reg <<= 8;
+	key_reg += r24;
+	return key_reg;
+}
+
+char keypad_to_ascii(short int key_reg){ // converts a status register to the ASCII code of the first key pressed
+	
+	switch (key_reg){
+		case 1:
+		return '*';
+		case 2:
+		return '0';
+		case 4:
+		return '#';
+		case 8:
+		return 'D';
+		case 16:
+		return '7';
+		case 32:
+		return '8';
+		case 64:
+		return '9';
+		case 128:
+		return 'C';
+		case 256:
+		return '4';
+		case 512:
+		return '5';
+		case 1024:
+		return '6';
+		case 2048:
+		return 'B';
+		case 4096:
+		return '1';
+		case 8192:
+		return '2';
+		case 16384:
+		return '3';
+		case 32768:
+		return 'A';
+		default:
+		return '?'; // error handling
+	}
 }
 
 void lcd_command(unsigned char command){
@@ -253,21 +317,13 @@ int main(void){
 	
 	one_wire_reset();
 
-	while (1) { 	// loop
+	DDRC = 0xF0; // initializing PORTC for keypad scanning
 
-		lcd_command(0x01);
-		
-		int flag;
-		short temperature;
-		
-		static char final[5];
+	/* TeamName command */
 
-		static char* message_start = "payload: {[\"name\": \"Temperature:\",\"value\": ";
-		static char* message_end = "]} ";
+	while(1){
 
-		/* TeamName command */
-
-		usart_transmit_string("A5\n");
+		usart_transmit_string("teamname: \"A5\"\n");
 		curr1 = usart_receive_string();
 		lcd_data('1');
 		lcd_data('.');
@@ -285,6 +341,23 @@ int main(void){
 		lcd_display(curr2);
 		_delay_ms(3000);
 		if ( strcmp( curr2 , "\"Success\"" ) != 0 ) continue; // if not "Success" restart
+		break;
+	}
+
+	while (1) { 	// loop
+
+		lcd_command(0x01);
+		
+		int flag;
+		short temperature;
+		
+		static char final[5];
+
+		static char* message_start = "payload: [{\"name\": \"Temperature\",\"value\": ";
+		static char* message_end = "}]\n";
+
+		char dig;
+		short int scan, repeat_scan;
 
 		/* DS1820 payload command */
 
@@ -333,6 +406,31 @@ int main(void){
 			_delay_ms(3000);
 			if ( strcmp( curr3 , "\"Success\"" ) != 0 ) continue; // if not "Success" restart
 
+			/* Keypad command */
+
+			scan = scan_keypad();
+			_delay_ms(20);
+			repeat_scan = scan_keypad(); // debouncing handling
+			scan &= repeat_scan;
+			dig = keypad_to_ascii(scan);
+			if (dig == '5'){
+				usart_transmit_string("ready: \"true\"\n");
+				curr4 = usart_receive_string();
+				lcd_init();
+				lcd_data('4');
+				lcd_data('.');
+				lcd_display(curr4);
+
+			}
+			else
+				continue;
+
+			/* ESP8266 */
+
+			usart_transmit_string("transmit\n");
+			curr5 = usart_receive_string();
+			lcd_display(curr5);
+			_delay_ms(3000);
 		}
 	}
 }
