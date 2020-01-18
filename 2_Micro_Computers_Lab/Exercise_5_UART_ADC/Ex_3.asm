@@ -6,6 +6,11 @@ rjmp reset
 	rjmp ADC_routine
 
 reset:
+	ldi r24, low(RAMEND) ; initializing stack pointer
+	out SPL, r24
+	ldi r24, high(RAMEND)
+	out SPH, r24	
+
 	rcall ADC_init
 	rcall usart_init
 	

@@ -80,7 +80,6 @@ int main(void)
 		Vin *= 10;
 		digit = (int) Vin;					  // isolate second decimal digit
 		usart_transmit(hex_to_ascii(digit));  // transmit second decimal digit in UART
-		usart_transmit(' ');
+		usart_transmit('/n');
     }
 }
-
