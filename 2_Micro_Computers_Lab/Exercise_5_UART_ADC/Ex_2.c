@@ -1,9 +1,11 @@
 #define F_CPU 8000000UL
  
 #include <avr/io.h>
+#include <string.h>
 #include <util/delay.h>
 
-volatile char curr, curr_hex;
+volatile char* curr;
+volatile char curr_hex;
 
 void usart_init(){
 	UCSRA = 0;
@@ -57,20 +59,43 @@ char ascii_to_hex(int character){ // converts a hex number to the ASCII code of 
 	}
 }
 
+char* usart_receive_string(){
+
+	static char acc[50];
+	for (int j = 0; j < 50; j++) acc[j] = '\0';
+
+	char character = usart_receive();
+	int i =0;
+	while (character != '\n'){
+		acc[i++] = character;
+		character = usart_receive();
+	}
+
+	return acc;
+}
+
+void usart_transmit_string(char* message){
+	
+	while (*message != '\0'){
+		usart_transmit(*message);
+		message++;
+	}
+}
+
 char hamming_distance(char number){
+	
 	char res = 0x00;
-	for (int i=0; i<8; i++){
-		if ((number & 0x01) == 0x01){
+
+	for (int i=0; i<number; i++){
 			res <<= 1;
 			res++;
-		}
-		number >>= 1;
 	}
 	return res;
 }
 
 int main(void){
 	
+	char temp;
 	char valid = "Reading ";
 	char invalid = "Invalid Number";
 
@@ -79,15 +104,24 @@ int main(void){
 	DDRB = 0XFF; // initializing PORTB for output
 
     while (1){
-		curr = usart_receive();
-		curr_hex = ascii_to_hex(curr);
-		if ((curr_hex >= 0) && (curr_hex <=8)){
+		curr = usart_receive_string();
+		if (strlen(curr) == 1){
+			curr_hex = ascii_to_hex(curr[0]);
 			usart_string(valid);
-			usart_transmit(curr);
+			usart_transmit(curr[0]);
 			usart_transmit('\n');
-			PORTB = hamming_distance(curr_hex);
+			if ((curr_hex >= 0) && (curr_hex <=8)){
+				PORTB = hamming_distance(curr_hex);
+			}
+			else{
+				usart_string(invalid);
+				usart_transmit('\n');	
+			}
 		}
 		else{
+			usart_string(valid);
+			usart_transmit_string(curr);
+			usart_transmit('\n');
 			usart_string(invalid);
 			usart_transmit('\n');
 		}

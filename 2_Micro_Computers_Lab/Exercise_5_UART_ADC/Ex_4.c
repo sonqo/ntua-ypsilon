@@ -81,6 +81,6 @@ int main(void)
 		digit = (int) Vin;					  // isolate second decimal digit
 		usart_transmit(hex_to_ascii(digit));  // transmit second decimal digit in UART
 		usart_transmit('\n');
-		_delay_ms(1000);
+		_delay_ms(500);
     }
 }
