@@ -24,10 +24,10 @@ zerofy:
 
 loop:
 	in r16, PINB
-	cpi r16, 0x80 ; prioritizing PB0
+	cpi r16, 0x80 ; prioritizing PB7
 	breq zerofy
 	cpi r16, 0x81
-	breq zerofy ; prioritizing PB0
+	breq zerofy ; prioritizing PB7
 	cpi r16, 0x01
 	brne loop
 	inc r21

@@ -15,7 +15,7 @@ void initTIMER1(){
 	TIMSK = (1 << TOIE1) ;
 }
 
-ISR(TIMER1_OVF_vect){ // TIMER1 ISR
+ISR(TIMER1_OVF_vect){ // TIMER1 interrupt
 	
 	if (flag == 1){
 		flag = 0;
@@ -28,7 +28,7 @@ ISR(TIMER1_OVF_vect){ // TIMER1 ISR
 	}
 }
 
-ISR(INT1_vect){
+ISR(INT1_vect){ // INT1 interrupt
 	
 	if (flag == 0){
 		flag++;
