@@ -79,6 +79,22 @@ no_tens:
 	rcall display
 	rjmp scan_first
 
+display:
+	mov r24, r17
+	rcall lcd_data
+	mov r24, r18
+	rcall hex_to_ascii
+	rcall lcd_data
+	mov r24, r19
+	rcall hex_to_ascii
+	rcall lcd_data
+	mov r24, r20
+	rcall hex_to_ascii
+	rcall lcd_data
+	ldi r24, 0x02 ; cursor home command
+	rcall lcd_command
+	ret
+
 write_2_nibbles:
 	push r24
 	in r25, PIND 
@@ -149,22 +165,6 @@ lcd_init:
 	rcall wait_usec
 	ldi r24, 0x06 ; disable screen shifting
 	rcall lcd_command 
-	ret
-
-display:
-	mov r24, r17
-	rcall lcd_data
-	mov r24, r18
-	rcall hex_to_ascii
-	rcall lcd_data
-	mov r24, r19
-	rcall hex_to_ascii
-	rcall lcd_data
-	mov r24, r20
-	rcall hex_to_ascii
-	rcall lcd_data
-	ldi r24, 0x02 ; cursor home command
-	rcall lcd_command
 	ret
 
 scan_row: ; scanning row number r24 for pressed keys, returns respective status in r24
