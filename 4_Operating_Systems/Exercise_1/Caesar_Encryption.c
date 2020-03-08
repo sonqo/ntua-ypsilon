@@ -41,7 +41,7 @@ char caesarChar(unsigned char ch, encrypt_mode mode, int key) { // Encrypting ch
     return ch;
 }
 
-char* caesarString(char* string, encrypt_mode mode, int key, char* result){ // Encrypting strings
+char* caesarString(char* string, encrypt_mode mode, int key, char* result) { // Encrypting strings
     for (int i=0; i<=strlen(string); i++){
         result[i] = caesarChar(string[i], mode, key);
     }
@@ -99,11 +99,11 @@ int main(int argc, char **argv) {
         }
     }
 
-    if (!chosen_file || chosen_key == -1){
+    if (!chosen_file || chosen_key == -1) {
         correctUsage(argv[0]);
     }
     // Initialize processes
-    else{
+    else {
         pid_t first_pid = fork(); // parent initializes C1
         if (first_pid == 0){
             fp = fopen(chosen_file, "w");
@@ -111,20 +111,20 @@ int main(int argc, char **argv) {
             fclose(fp);
             // printf("CHILD_1: My pid is: %d, my father is: %d\n", getpid(), getppid());
         }
-        else{
+        else {
             // printf("PARENT: My pid is: %d\n", getpid());
             wait(NULL); // wait C1
         }
-        if (first_pid > 0){
+        if (first_pid > 0) {
             pid_t second_pid = fork(); // parent initializes C2
-            if (second_pid == 0){
+            if (second_pid == 0) {
                 fp = fopen(chosen_file, "r");
                 fgets(buff, BUFFER_SIZE, fp);
                 fclose(fp);
                 // printf("CHILD_2: My pid is: %d, my father is: %d\n", getpid(), getppid());
                 printf("%s", caesarString(buff, DECRYPT, chosen_key, result));
             }
-            else{
+            else {
                 // printf("PARENT: My pid is: %d\n", getpid());
                 wait(NULL);
             } 
