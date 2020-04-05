@@ -22,15 +22,13 @@ static void info_FatherHandler(){
     snprintf(buffer, BUFFER_SIZE, "\n[Father Process %d] Will ask current values from all active children processes:\n", getpid());
     int desc = write(1, buffer, strlen(buffer));
     if (desc < 0){
-        perror("Write failed");
-        exit(EXIT_FAILURE);
+        perror("Write failed\n");
     }
     for (int i = 0; i < global_argc; i++){ // Transmit SIGUSR1 signal to every child
         if (acc_bool[i] == true){
             int desc = kill(acc_pid[i], SIGUSR1);
             if (desc < 0){
-                perror("Kill failed\n");
-                exit(EXIT_FAILURE);
+                perror(buffer);
             }
         }
     }
@@ -42,6 +40,7 @@ static void info_ChildHandler(){
     int desc = write(1, buffer, strlen(buffer));
     if (desc < 0){
         perror("Write failed\n");
+        kill(getppid(), SIGTERM);
         exit(EXIT_FAILURE);
     }
 }
@@ -52,7 +51,6 @@ static void echo_FatherHandler(){
     int desc = write(1, buffer, strlen(buffer));
     if (desc < 0){
         perror("Write failed\n");
-        exit(EXIT_FAILURE);
     }
 }
 
@@ -62,6 +60,7 @@ static void echo_ChildHandler(){
     int desc = write(1, buffer, strlen(buffer));
     if (desc < 0){
         perror("Write failed\n");
+        kill(getppid(), SIGTERM);
         exit(EXIT_FAILURE);
     }
 }
@@ -72,11 +71,13 @@ static void alarm_ChildHandler(){
     int desc = write(1, buffer, strlen(buffer));
     if (desc < 0){
         perror("Write failed\n");
+        kill(getppid(), SIGTERM);
         exit(EXIT_FAILURE);
     }
     desc = kill(getpid(), SIGTERM); // Auto-terminate
     if (desc < 0){
         perror("Kill failed\n");
+        kill(getppid(), SIGTERM);
         exit(EXIT_FAILURE);
     }
 }
@@ -90,38 +91,15 @@ static void terminate_FatherHandler(){
             int desc = write(1, buffer, strlen(buffer));
             if (desc < 0){
                 perror("Write failed\n");
-                exit(EXIT_FAILURE);
             }
             desc = kill(acc_pid[i-1], SIGTERM);
             if (desc < 0){
-                perror("Kill failed\n");
-                exit(EXIT_FAILURE);
+                snprintf(buffer, BUFFER_SIZE, "[Father Process %d] Process %d: Kill failed", getpid(), acc_pid[i-1]);
+                perror(buffer);
             }
         }
     }
-}
-
-static void notify_FatherHandler(){
-    pid_t p;
-    int status;
-
-    char buffer[BUFFER_SIZE];
-    while ((p = waitpid(-1, &status, WNOHANG)) != -1){
-        if (p != 0){
-            for (int i = 0; i < global_argc; i++){
-                if (acc_pid[i] == p){
-                    acc_bool[i] = false;
-                }
-            }
-            global_prc--;
-            snprintf(buffer, BUFFER_SIZE, "\n[Father Process %d] Number of children running: %d\n", getpid(), global_prc);
-            int desc = write(1, buffer, strlen(buffer));
-            if (desc < 0){
-                perror("Write failed\n");
-                exit(EXIT_FAILURE);
-            }
-        }
-    }
+    write(1, "\n", 1);
 }
 
 // Starting point
@@ -134,16 +112,21 @@ int main(int argc, char **argv){
     global_prc = global_argc;
 
     // Setting signal handlers for father-childs
-    struct sigaction echoFather, echoChild, infoFather, infoChild, alarmChild, terminateFather, notifyFather;
+    struct sigaction echoFather, echoChild, infoFather, infoChild, alarmChild, terminateFather;
     
     infoFather.sa_handler = info_FatherHandler;
+    infoFather.sa_flags = SA_RESTART;
     echoFather.sa_handler = echo_FatherHandler;
-    notifyFather.sa_handler = notify_FatherHandler;
+    echoFather.sa_flags = SA_RESTART;
     terminateFather.sa_handler = terminate_FatherHandler;
+    terminateFather.sa_flags = SA_RESTART;
 
     infoChild.sa_handler = info_ChildHandler;
+    infoChild.sa_flags = SA_RESTART;
     echoChild.sa_handler = echo_ChildHandler;
+    echoChild.sa_flags = SA_RESTART;
     alarmChild.sa_handler = alarm_ChildHandler;
+    alarmChild.sa_flags = SA_RESTART;
 
     // Parse command-line arguments
     for (int i = 0; i < argc-1; i++){
@@ -181,6 +164,7 @@ int main(int argc, char **argv){
                 perror("Write failed\n");
                 exit(EXIT_FAILURE);
             }
+            // Main child functionality
             z = 0;
             while (1){
                 z++;
@@ -204,7 +188,6 @@ int main(int argc, char **argv){
         // Setting sigactions for father
         sigaction(SIGUSR1, &infoFather, NULL);
         sigaction(SIGUSR2, &echoFather, NULL);
-        sigaction(SIGCHLD, &notifyFather, NULL);
         sigaction(SIGINT, &terminateFather, NULL);
         sigaction(SIGTERM, &terminateFather, NULL);
         for (int i = 0; i < argc-1; i++){
@@ -213,38 +196,30 @@ int main(int argc, char **argv){
                 perror("Kill failed\n");
                 exit(EXIT_FAILURE);
             }
+            int wstatus;
+            while (waitpid(acc_pid[i], &wstatus, WCONTINUED) == 0); // Wait until child enters continue state
         }
         snprintf(buffer, BUFFER_SIZE, "\n[Father Process %d] Number of children running: %d\n", getpid(), global_prc);
         desc = write(1, buffer, strlen(buffer));
         if (desc < 0){
             perror("Write failed\n");
-            exit(EXIT_FAILURE);
         }
-        int status;
-        while (wait(&status) > 0);
-            // if (WIFSIGNALED(status)){
-            //     global_prc--;
-            //     snprintf(buffer, BUFFER_SIZE, "\n[Father Process %d] Number of children running: %d\n", getpid(), global_prc);
-            //     desc = write(1, buffer, strlen(buffer));
-            //     if (desc < 0){
-            //         perror("Write failed\n");
-            //         exit(EXIT_FAILURE);
-            //     }
-            // }
-        // }
-        while (errno == 4){ // In case of EINTR error, re-run wait
-            while (wait(&status) > 0); // Wait for every single child to terminate
-                // if (WIFSIGNALED(status)){
-                //     global_prc--;
-                //     snprintf(buffer, BUFFER_SIZE, "\n[Father Process %d] Number of children running: %d\n", getpid(), global_prc);
-                //     desc = write(1, buffer, strlen(buffer));
-                //     if (desc < 0){
-                //         perror("Write failed\n");
-                //         exit(EXIT_FAILURE);
-                //     }
-                // }
-            // }
+        pid_t p ;
+        int wstatus;
+        while ((p = wait(&wstatus)) > 0){ // Wait all children completion
+            for (int i = 0; i < argc-1; i++){
+                if ((acc_pid[i] == p) && (acc_bool[i] == true)){
+                    global_prc--;
+                    acc_bool[i] = false;
+                    snprintf(buffer, BUFFER_SIZE, "\n[Father Process %d] Number of children running: %d\n", getpid(), global_prc);
+                    desc = write(1, buffer, strlen(buffer));
+                    if (desc < 0){
+                        perror("Write failed\n");
+                    }
+                }
+            }
         }
     }
+    
     return 0;
 }
