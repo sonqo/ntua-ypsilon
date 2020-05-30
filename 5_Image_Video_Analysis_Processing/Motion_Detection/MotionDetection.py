@@ -82,9 +82,6 @@ def part3(filename):
         if ch == 113:
             break
 
-# press "Backspace" for next corner detection configuration
-# press "Escape" for next Lucas-Kanade configurations
-# press "q" to quit execution
 def part4(filename):
     video = cv.VideoCapture(filename)
     # different colors for Shi-Tomashi and Harris corner detector
@@ -544,12 +541,6 @@ lk_params = dict(winSize=(9, 9), maxLevel=3, criteria=(cv.TERM_CRITERIA_EPS | cv
 track_length = 50
 # number of frames between each refresh with corner detection
 refresh_interval = 30
-
-#part3(filename)
-#part4(filename)
-#part5(filename)
-#part6(filename)
-#part7(filename)
 
 # Video download link
 # https://data.kitware.com/api/v1/file/56f587848d777f753209cae8/download
