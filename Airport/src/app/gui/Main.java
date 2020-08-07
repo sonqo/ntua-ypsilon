@@ -1,5 +1,8 @@
-package app;
+package app.gui;
 
+import app.model.Flight;
+import app.model.Airport;
+import app.model.Station;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.Parent;
@@ -49,7 +52,7 @@ public class Main extends Application {
         while (line != null){
             List<String> rtmp = Arrays.asList(line.split(","));
             Flight flt = new Flight(); // for each file line, create a Flight instance
-            flt.setInfo(Integer.parseInt(rtmp.get(0)), rtmp.get(1), Integer.parseInt(rtmp.get(2)), Integer.parseInt(rtmp.get(3)), Integer.parseInt(rtmp.get(4)));
+            flt.setInfo(rtmp.get(0), rtmp.get(1), Integer.parseInt(rtmp.get(2)), Integer.parseInt(rtmp.get(3)), Integer.parseInt(rtmp.get(4)));
             airport.flight_list.add(flt); // append Flight class to Airport
             line = reader.readLine();
         }
