@@ -4,6 +4,7 @@ import app.model.Flight;
 import app.model.Airport;
 import app.model.station.*;
 
+import java.awt.*;
 import java.io.File;
 import java.net.URL;
 import java.util.List;
@@ -21,11 +22,11 @@ import javafx.animation.Timeline;
 import javafx.fxml.Initializable;
 import javafx.animation.Animation;
 import javafx.scene.control.Label;
+import java.net.URISyntaxException;
 import javafx.scene.control.MenuBar;
 
 public class Controller implements Initializable {
 
-//    Station stat = null;
     public MenuBar menuBar;
     public Label timerLabel, gateNum, tradeNum, zoneANum, zoneBNum, zoneCNum, generalNum, longNum;
 
@@ -98,30 +99,6 @@ public class Controller implements Initializable {
         }
         reader.close();
 
-        // Setting up GUI
-        for (int i=0; i<airport.station_list.size(); i++){
-            if (airport.station_list.get(i).gate_type == 1){
-                gateNum.textProperty().set(String.valueOf(airport.station_list.get(i).spot_num));
-            }
-            else if (airport.station_list.get(i).gate_type == 2){
-                tradeNum.textProperty().set(String.valueOf(airport.station_list.get(i).spot_num));
-            }
-            else if (airport.station_list.get(i).gate_type == 3){
-                zoneANum.textProperty().set(String.valueOf(airport.station_list.get(i).spot_num));
-            }
-            else if (airport.station_list.get(i).gate_type == 4){
-                zoneBNum.textProperty().set(String.valueOf(airport.station_list.get(i).spot_num));
-            }
-            else if (airport.station_list.get(i).gate_type == 5){
-                zoneCNum.textProperty().set(String.valueOf(airport.station_list.get(i).spot_num));
-            }
-            else if (airport.station_list.get(i).gate_type == 6){
-                generalNum.textProperty().set(String.valueOf(airport.station_list.get(i).spot_num));
-            }
-            else if (airport.station_list.get(i).gate_type == 7){
-                longNum.textProperty().set(String.valueOf(airport.station_list.get(i).spot_num));
-            }
-        }
     }
 
     private void runTimer(String name){
@@ -164,6 +141,10 @@ public class Controller implements Initializable {
         fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("TXT Files", "*.txt"));
         f = fc.showOpenDialog(null).toString();
         defaultAirport = f;
+    }
+
+    public void aboutApp() throws IOException, URISyntaxException {
+        Desktop.getDesktop().browse(new URL("https://github.com/Sonqo/Ntua_Lambda/tree/master/6_MediaLab/Airport").toURI());
     }
 
     public void exitApp(ActionEvent actionEvent) { // Exit button

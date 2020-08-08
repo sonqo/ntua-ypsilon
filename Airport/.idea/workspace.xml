@@ -24,15 +24,9 @@
       <change beforePath="$PROJECT_DIR$/out/production/5_MediaLab/app/gui/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/5_MediaLab/app/gui/Controller.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/5_MediaLab/app/gui/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/5_MediaLab/app/gui/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/5_MediaLab/app/gui/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/5_MediaLab/app/gui/sample.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/5_MediaLab/app/model/Airport.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/5_MediaLab/app/model/Airport.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/5_MediaLab/app/model/Flight.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/5_MediaLab/app/model/Flight.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/5_MediaLab/app/model/Station.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/gui/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/gui/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/gui/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/gui/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/gui/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/gui/sample.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/model/Airport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/model/Airport.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/model/Flight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/model/Flight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/model/Station.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/model/station/Station.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,17 +182,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -255,6 +238,8 @@
       <workItem from="1596871465645" duration="1447000" />
       <workItem from="1596881543765" duration="1982000" />
       <workItem from="1596889482705" duration="9277000" />
+      <workItem from="1596902612995" duration="1776000" />
+      <workItem from="1596904401907" duration="1640000" />
     </task>
     <servers />
   </component>
@@ -297,38 +282,38 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="666" y="281" key="FileChooserDialogImpl/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1596810801652" />
-    <state width="1877" height="363" key="GridCell.Tab.0.bottom" timestamp="1596901615490">
+    <state width="1877" height="363" key="GridCell.Tab.0.bottom" timestamp="1596906042842">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="363" key="GridCell.Tab.0.bottom/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1596901615490" />
-    <state width="1877" height="363" key="GridCell.Tab.0.center" timestamp="1596901615490">
+    <state width="1877" height="363" key="GridCell.Tab.0.bottom/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1596906042842" />
+    <state width="1877" height="363" key="GridCell.Tab.0.center" timestamp="1596906042842">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="363" key="GridCell.Tab.0.center/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1596901615490" />
-    <state width="1877" height="363" key="GridCell.Tab.0.left" timestamp="1596901615490">
+    <state width="1877" height="363" key="GridCell.Tab.0.center/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1596906042842" />
+    <state width="1877" height="363" key="GridCell.Tab.0.left" timestamp="1596906042842">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="363" key="GridCell.Tab.0.left/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1596901615490" />
-    <state width="1877" height="363" key="GridCell.Tab.0.right" timestamp="1596901615490">
+    <state width="1877" height="363" key="GridCell.Tab.0.left/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1596906042842" />
+    <state width="1877" height="363" key="GridCell.Tab.0.right" timestamp="1596906042842">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="363" key="GridCell.Tab.0.right/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1596901615490" />
-    <state width="1877" height="363" key="GridCell.Tab.1.bottom" timestamp="1596901615490">
+    <state width="1877" height="363" key="GridCell.Tab.0.right/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1596906042842" />
+    <state width="1877" height="363" key="GridCell.Tab.1.bottom" timestamp="1596906042842">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="363" key="GridCell.Tab.1.bottom/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1596901615490" />
-    <state width="1877" height="363" key="GridCell.Tab.1.center" timestamp="1596901615490">
+    <state width="1877" height="363" key="GridCell.Tab.1.bottom/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1596906042842" />
+    <state width="1877" height="363" key="GridCell.Tab.1.center" timestamp="1596906042842">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="363" key="GridCell.Tab.1.center/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1596901615490" />
-    <state width="1877" height="363" key="GridCell.Tab.1.left" timestamp="1596901615490">
+    <state width="1877" height="363" key="GridCell.Tab.1.center/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1596906042842" />
+    <state width="1877" height="363" key="GridCell.Tab.1.left" timestamp="1596906042842">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="363" key="GridCell.Tab.1.left/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1596901615490" />
-    <state width="1877" height="363" key="GridCell.Tab.1.right" timestamp="1596901615490">
+    <state width="1877" height="363" key="GridCell.Tab.1.left/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1596906042842" />
+    <state width="1877" height="363" key="GridCell.Tab.1.right" timestamp="1596906042842">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="363" key="GridCell.Tab.1.right/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1596901615490" />
+    <state width="1877" height="363" key="GridCell.Tab.1.right/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1596906042842" />
     <state x="417" y="145" key="SettingsEditor" timestamp="1596809770973">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
