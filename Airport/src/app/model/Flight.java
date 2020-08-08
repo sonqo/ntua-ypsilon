@@ -2,7 +2,7 @@ package app.model;
 
 public class Flight {
 
-    String city, flight_id;
+    String city, flight_id, state;
     int  flight_type, plane_type, min2departure;
 
     public void setInfo(String flight_id, String city, int flight_type, int plane_type, int min2departure){
