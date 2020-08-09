@@ -18,5 +18,17 @@ public class Station {
         return this.maxtime;
     }
 
+    public boolean canServeFlight(int flight_type) {
+        return false;
+    }
+
+    public boolean canServePlane(int flight_type) {
+        return false;
+    }
+
+    public boolean allServices(){
+        return false;
+    }
+
 }
 

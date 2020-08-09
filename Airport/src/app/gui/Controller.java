@@ -31,7 +31,7 @@ import javafx.scene.layout.AnchorPane;
 public class Controller implements Initializable {
 
     public MenuBar menuBar;
-    public Label timerLabel;
+    public Label timerLabel, statusMessage;
 
     @FXML
     private List<AnchorPane> globalGateAnchorList;
@@ -61,6 +61,8 @@ public class Controller implements Initializable {
     String defaultSetup = "C:/Users/Sonqo/Desktop/Ntua_Lambda/6_MediaLab/Airport/medialab/setup_SCENARIO-01.txt";
     String defaultAirport = "C:/Users/Sonqo/Desktop/Ntua_Lambda/6_MediaLab/Airport/medialab/airport_SCENARIO-01.txt";
 
+    private Airport airport = new Airport();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -68,9 +70,7 @@ public class Controller implements Initializable {
 
     private void setupState() throws IOException{
 
-        Airport airport = new Airport();
-
-        // Reading application state
+        // Reading application state - setting initial GUI
         BufferedReader reader = new BufferedReader(new FileReader(defaultAirport)); // Reading Airport_Scenario
         String line = reader.readLine();
         while (line != null) {
@@ -84,7 +84,7 @@ public class Controller implements Initializable {
                 }
                 airport.gateAnchorList = validGateAnchorList;
                 for (int i=0; i<airport.gateAnchorList.size(); i++){
-                    airport.gateAnchorList.get(i).setStyle("-fx-background-color: palevioletred; -fx-border-color: white");
+                    airport.gateAnchorList.get(i).setStyle("-fx-background-color: seagreen; -fx-border-color: white");
                 }
             }
             else if (Integer.parseInt(rtmp.get(0)) == 2){
@@ -96,7 +96,7 @@ public class Controller implements Initializable {
                 }
                 airport.tradeAnchorList = validTradeAnchorList;
                 for (int i=0; i<airport.tradeAnchorList.size(); i++){
-                    airport.tradeAnchorList.get(i).setStyle("-fx-background-color: palevioletred; -fx-border-color: white");
+                    airport.tradeAnchorList.get(i).setStyle("-fx-background-color: seagreen; -fx-border-color: white");
                 }
             }
             else if (Integer.parseInt(rtmp.get(0)) == 3){
@@ -108,7 +108,7 @@ public class Controller implements Initializable {
                 }
                 airport.zoneAAnchorList = validZoneAAnchorList;
                 for (int i=0; i<airport.zoneAAnchorList.size(); i++){
-                    airport.zoneAAnchorList.get(i).setStyle("-fx-background-color: palevioletred; -fx-border-color: white");
+                    airport.zoneAAnchorList.get(i).setStyle("-fx-background-color: seagreen; -fx-border-color: white");
                 }
             }
             else if (Integer.parseInt(rtmp.get(0)) == 4){
@@ -120,7 +120,7 @@ public class Controller implements Initializable {
                 }
                 airport.zoneBAnchorList = validZoneBAnchorList;
                 for (int i=0; i<airport.zoneBAnchorList.size(); i++){
-                    airport.zoneBAnchorList.get(i).setStyle("-fx-background-color: palevioletred; -fx-border-color: white");
+                    airport.zoneBAnchorList.get(i).setStyle("-fx-background-color: seagreen; -fx-border-color: white");
                 }
             }
             else if (Integer.parseInt(rtmp.get(0)) == 5){
@@ -132,7 +132,7 @@ public class Controller implements Initializable {
                 }
                 airport.zoneCAnchorList = validZoneCAnchorList;
                 for (int i=0; i<airport.zoneCAnchorList.size(); i++){
-                    airport.zoneCAnchorList.get(i).setStyle("-fx-background-color: palevioletred; -fx-border-color: white");
+                    airport.zoneCAnchorList.get(i).setStyle("-fx-background-color: seagreen; -fx-border-color: white");
                 }
             }
             else if (Integer.parseInt(rtmp.get(0)) == 6){
@@ -144,7 +144,7 @@ public class Controller implements Initializable {
                 }
                 airport.generalAnchorList = validGeneralAnchorList;
                 for (int i=0; i<airport.generalAnchorList.size(); i++){
-                    airport.generalAnchorList.get(i).setStyle("-fx-background-color: palevioletred; -fx-border-color: white");
+                    airport.generalAnchorList.get(i).setStyle("-fx-background-color: seagreen; -fx-border-color: white");
                 }
             }
             else if (Integer.parseInt(rtmp.get(0)) == 7){
@@ -156,7 +156,7 @@ public class Controller implements Initializable {
                 }
                 airport.longTermAnchorList = validLongTermAnchorList;
                 for (int i=0; i<airport.longTermAnchorList.size(); i++){
-                    airport.longTermAnchorList.get(i).setStyle("-fx-background-color: palevioletred; -fx-border-color: white");
+                    airport.longTermAnchorList.get(i).setStyle("-fx-background-color: seagreen; -fx-border-color: white");
                 }
             }
             line = reader.readLine();
@@ -173,6 +173,82 @@ public class Controller implements Initializable {
             line = reader.readLine();
         }
         reader.close();
+
+        // Serving initial flights
+        for (int i=0; i<airport.flightList.size(); i++){
+            for (int j=0; j<airport.gateStationList.size(); j++){
+                if ((airport.gateStationList.get(j).canServeFlight(airport.flightList.get(i).flight_type)) && (airport.flightList.get(i).state.equals("Unserviced"))){
+                    if (airport.gateStationList.get(j).canServePlane(airport.flightList.get(i).plane_type)) {
+                        airport.flightList.get(i).state = "Parked";
+                        airport.gateAnchorList.get(0).setStyle("-fx-background-color: orange; -fx-border-color: white");
+                        airport.flightList.get(i).pos = airport.gateAnchorList.remove(0);
+                        break;
+                    }
+                }
+            }
+            for (int j=0; j<airport.tradeStationList.size(); j++){
+                if ((airport.tradeStationList.get(j).canServeFlight(airport.flightList.get(i).flight_type)) && (airport.flightList.get(i).state.equals("Unserviced"))){
+                    if (airport.tradeStationList.get(j).canServePlane(airport.flightList.get(i).plane_type)) {
+                        airport.flightList.get(i).state = "Parked";
+                        airport.tradeAnchorList.get(0).setStyle("-fx-background-color: orange; -fx-border-color: white");
+                        airport.flightList.get(i).pos = airport.tradeAnchorList.remove(0);
+                        break;
+                    }
+                }
+            }
+            for (int j=0; j<airport.zoneAStationList.size(); j++){
+                if ((airport.zoneAStationList.get(j).canServeFlight(airport.flightList.get(i).flight_type)) && (airport.flightList.get(i).state.equals("Unserviced"))){
+                    if (airport.zoneAStationList.get(j).canServePlane(airport.flightList.get(i).plane_type)) {
+                        airport.flightList.get(i).state = "Parked";
+                        airport.zoneAAnchorList.get(0).setStyle("-fx-background-color: orange; -fx-border-color: white");
+                        airport.flightList.get(i).pos = airport.zoneAAnchorList.remove(0);
+                        break;
+                    }
+                }
+            }
+            for (int j=0; j<airport.zoneBStationList.size(); j++){
+                if ((airport.zoneBStationList.get(j).canServeFlight(airport.flightList.get(i).flight_type)) && (airport.flightList.get(i).state.equals("Unserviced"))){
+                    if (airport.zoneBStationList.get(j).canServePlane(airport.flightList.get(i).plane_type)) {
+                        airport.flightList.get(i).state = "Parked";
+                        airport.zoneBAnchorList.get(0).setStyle("-fx-background-color: orange; -fx-border-color: white");
+                        airport.flightList.get(i).pos = airport.zoneBAnchorList.remove(0);
+                        break;
+                    }
+                }
+            }
+            for (int j=0; j<airport.zoneCStationList.size(); j++){
+                if ((airport.zoneCStationList.get(j).canServeFlight(airport.flightList.get(i).flight_type)) && (airport.flightList.get(i).state.equals("Unserviced"))){
+                    if (airport.zoneCStationList.get(j).canServePlane(airport.flightList.get(i).plane_type)) {
+                        airport.flightList.get(i).state = "Parked";
+                        airport.zoneCAnchorList.get(0).setStyle("-fx-background-color: orange; -fx-border-color: white");
+                        airport.flightList.get(i).pos = airport.zoneCAnchorList.remove(0);
+                        break;
+                    }
+                }
+            }
+            for (int j=0; j<airport.generalStationList.size(); j++){
+                if ((airport.generalStationList.get(j).canServeFlight(airport.flightList.get(i).flight_type)) && (airport.flightList.get(i).state.equals("Unserviced"))){
+                    if (airport.generalStationList.get(j).canServePlane(airport.flightList.get(i).plane_type)) {
+                        airport.flightList.get(i).state = "Parked";
+                        airport.generalAnchorList.get(0).setStyle("-fx-background-color: orange; -fx-border-color: white");
+                        airport.flightList.get(i).pos = airport.generalAnchorList.remove(0);
+                        break;
+                    }
+                }
+            }
+            for (int j=0; j<airport.longTermStationList.size(); j++){
+                if ((airport.longTermStationList.get(j).canServeFlight(airport.flightList.get(i).flight_type)) && (airport.flightList.get(i).state.equals("Unserviced"))){
+                    if (airport.longTermStationList.get(j).canServePlane(airport.flightList.get(i).plane_type)) {
+                        airport.flightList.get(i).state = "Parked";
+                        airport.longTermAnchorList.get(0).setStyle("-fx-background-color: orange; -fx-border-color: white");
+                        airport.flightList.get(i).pos = airport.longTermAnchorList.remove(0);
+                        break;
+                    }
+                }
+            }
+        }
+
+        statusMessage.textProperty().set("Status: Airport state initialized, initial flights serviced"); // setting status message
 
     }
 
@@ -201,7 +277,7 @@ public class Controller implements Initializable {
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
 
-        setupState(); // setup files
+        setupState(); // read setup files, setup airport state
 
     }
 
