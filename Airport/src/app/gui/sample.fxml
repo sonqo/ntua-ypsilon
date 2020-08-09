@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
+<?import java.util.ArrayList?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.gui.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.gui.Controller">
    <children>
-      <SplitPane dividerPositions="0.22073578595317725" orientation="VERTICAL" prefHeight="600.0" prefWidth="1200.0">
+      <SplitPane dividerPositions="0.15" orientation="VERTICAL" prefHeight="800.0" prefWidth="1200.0">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="119.0" prefWidth="1198.0">
                <children>
                   <MenuBar fx:id="menuBar" layoutY="2.0" prefHeight="25.0" prefWidth="1200.0">
                     <menus>
@@ -33,29 +34,640 @@
                     </menus>
                   </MenuBar>
                   <ImageView fitHeight="70.0" fitWidth="85.0" layoutX="14.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fitHeight="70.0" fitWidth="285.0" layoutX="14.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="70.0" fitWidth="285.0" layoutX="14.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="file:/C:/Users/Sonqo/Desktop/Ntua_Lambda/6_MediaLab/Airport/images/stackoverflow_v2.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="timerLabel" layoutX="1062.0" layoutY="73.0" prefHeight="17.0" prefWidth="114.0" text="Total Time: " textAlignment="CENTER" />
+                  <Label fx:id="timerLabel" layoutX="1061.0" layoutY="57.0" prefHeight="17.0" prefWidth="114.0" text="Total Time: " textAlignment="CENTER" />
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="601.0" prefWidth="1198.0">
                <children>
-                  <SplitPane dividerPositions="0.85" orientation="VERTICAL" prefHeight="463.0" prefWidth="1200.0">
+                  <SplitPane dividerPositions="0.8945022288261516" orientation="VERTICAL" prefHeight="675.0" prefWidth="1198.0">
                     <items>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                            <children>
-                              <SplitPane dividerPositions="0.7" prefHeight="389.0" prefWidth="1198.0">
+                              <SplitPane dividerPositions="0.7" prefHeight="609.0" prefWidth="1196.0">
                                 <items>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                       <children>
+                                          <SplitPane dividerPositions="0.6688632619439868" orientation="VERTICAL" prefHeight="609.0" prefWidth="833.0">
+                                            <items>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                   <children>
+                                                      <SplitPane dividerPositions="0.8" orientation="VERTICAL" prefHeight="198.0" prefWidth="831.0">
+                                                        <items>
+                                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                               <children>
+                                                                  <GridPane layoutX="275.0" prefHeight="154.0" prefWidth="275.0">
+                                                                    <columnConstraints>
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                    </columnConstraints>
+                                                                    <rowConstraints>
+                                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                    </rowConstraints>
+                                                                      <children>
+                                                                          <AnchorPane fx:id="longterm4" prefHeight="200.0" prefWidth="200.0" />
+                                                                          <AnchorPane fx:id="longterm9" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
+                                                                          <AnchorPane fx:id="longterm14" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
+                                                                          <AnchorPane fx:id="longterm19" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" />
+                                                                          <AnchorPane fx:id="longterm24" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" />
+                                                                          <AnchorPane fx:id="longterm3" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                                                                          <AnchorPane fx:id="longterm8" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                                          <AnchorPane fx:id="longterm13" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                                                          <AnchorPane fx:id="longterm18" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                                                          <AnchorPane fx:id="longterm23" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                                                                          <AnchorPane fx:id="longterm2" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
+                                                                          <AnchorPane fx:id="longterm7" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                                          <AnchorPane fx:id="longterm12" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                                                          <AnchorPane fx:id="longterm17" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                                                          <AnchorPane fx:id="longterm22" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                                                                          <AnchorPane fx:id="longterm1" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3" />
+                                                                          <AnchorPane fx:id="longterm6" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                                          <AnchorPane fx:id="longterm11" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                                                          <AnchorPane fx:id="longterm16" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                                                          <AnchorPane fx:id="longterm21" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                                                                          <AnchorPane fx:id="longterm0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4" />
+                                                                          <AnchorPane fx:id="longterm5" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                                          <AnchorPane fx:id="longterm10" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                                                          <AnchorPane fx:id="longterm15" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                                                                          <AnchorPane fx:id="longterm20" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                                                                      </children>
+                                                                      <fx:define>
+                                                                          <ArrayList fx:id="globalLongTermAnchorList">
+                                                                              <fx:reference source="longterm0" />
+                                                                              <fx:reference source="longterm1" />
+                                                                              <fx:reference source="longterm2" />
+                                                                              <fx:reference source="longterm3" />
+                                                                              <fx:reference source="longterm4" />
+                                                                              <fx:reference source="longterm5" />
+                                                                              <fx:reference source="longterm6" />
+                                                                              <fx:reference source="longterm7" />
+                                                                              <fx:reference source="longterm8" />
+                                                                              <fx:reference source="longterm9" />
+                                                                              <fx:reference source="longterm10" />
+                                                                              <fx:reference source="longterm11" />
+                                                                              <fx:reference source="longterm12" />
+                                                                              <fx:reference source="longterm13" />
+                                                                              <fx:reference source="longterm14" />
+                                                                              <fx:reference source="longterm15" />
+                                                                              <fx:reference source="longterm16" />
+                                                                              <fx:reference source="longterm17" />
+                                                                              <fx:reference source="longterm18" />
+                                                                              <fx:reference source="longterm19" />
+                                                                              <fx:reference source="longterm20" />
+                                                                              <fx:reference source="longterm21" />
+                                                                              <fx:reference source="longterm22" />
+                                                                              <fx:reference source="longterm23" />
+                                                                              <fx:reference source="longterm24" />
+                                                                          </ArrayList>
+                                                                      </fx:define>
+                                                                  </GridPane>
+                                                               </children></AnchorPane>
+                                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                               <children>
+                                                                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="829.0" text="Long Term Area" textAlignment="CENTER" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                               </children></AnchorPane>
+                                                        </items>
+                                                      </SplitPane>
+                                                   </children>
+                                                </AnchorPane>
+                                            </items>
+                                          </SplitPane>
+                                          <GridPane prefHeight="607.0" prefWidth="833.0">
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <SplitPane dividerPositions="0.85" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+                                                  <items>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                         <children>
+                                                            <GridPane prefHeight="168.0" prefWidth="278.0">
+                                                              <columnConstraints>
+                                                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                              </columnConstraints>
+                                                              <rowConstraints>
+                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                              </rowConstraints>
+                                                               <children>
+                                                                  <AnchorPane fx:id="gate4" prefHeight="200.0" prefWidth="200.0" />
+                                                                  <AnchorPane fx:id="gate9" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
+                                                                  <AnchorPane fx:id="gate14" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
+                                                                  <AnchorPane fx:id="gate19" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" />
+                                                                  <AnchorPane fx:id="gate24" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" />
+                                                                  <AnchorPane fx:id="gate3" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                                                                  <AnchorPane fx:id="gate8" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                                  <AnchorPane fx:id="gate13" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                                                  <AnchorPane fx:id="gate18" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                                                  <AnchorPane fx:id="gate23" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                                                                  <AnchorPane fx:id="gate2" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
+                                                                  <AnchorPane fx:id="gate7" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                                  <AnchorPane fx:id="gate12" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                                                  <AnchorPane fx:id="gate17" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                                                  <AnchorPane fx:id="gate22" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                                                                  <AnchorPane fx:id="gate1" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3" />
+                                                                  <AnchorPane fx:id="gate6" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                                  <AnchorPane fx:id="gate11" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                                                  <AnchorPane fx:id="gate16" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                                                  <AnchorPane fx:id="gate21" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                                                                  <AnchorPane fx:id="gate0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4" />
+                                                                  <AnchorPane fx:id="gate5" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                                  <AnchorPane fx:id="gate10" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                                                  <AnchorPane fx:id="gate15" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                                                                  <AnchorPane fx:id="gate20" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                                                               </children>
+                                                                <fx:define>
+                                                                    <ArrayList fx:id="globalGateAnchorList">
+                                                                        <fx:reference source="gate0" />
+                                                                        <fx:reference source="gate1" />
+                                                                        <fx:reference source="gate2" />
+                                                                        <fx:reference source="gate3" />
+                                                                        <fx:reference source="gate4" />
+                                                                        <fx:reference source="gate5" />
+                                                                        <fx:reference source="gate6" />
+                                                                        <fx:reference source="gate7" />
+                                                                        <fx:reference source="gate8" />
+                                                                        <fx:reference source="gate9" />
+                                                                        <fx:reference source="gate10" />
+                                                                        <fx:reference source="gate11" />
+                                                                        <fx:reference source="gate12" />
+                                                                        <fx:reference source="gate13" />
+                                                                        <fx:reference source="gate14" />
+                                                                        <fx:reference source="gate15" />
+                                                                        <fx:reference source="gate16" />
+                                                                        <fx:reference source="gate17" />
+                                                                        <fx:reference source="gate18" />
+                                                                        <fx:reference source="gate19" />
+                                                                        <fx:reference source="gate20" />
+                                                                        <fx:reference source="gate21" />
+                                                                        <fx:reference source="gate22" />
+                                                                        <fx:reference source="gate23" />
+                                                                        <fx:reference source="gate24" />
+                                                                    </ArrayList>
+                                                                </fx:define>
+                                                            </GridPane>
+                                                         </children>
+                                                      </AnchorPane>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                         <children>
+                                                            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="103.0" layoutY="5.0" prefHeight="17.0" prefWidth="70.0" text="Gate" textAlignment="CENTER" />
+                                                         </children></AnchorPane>
+                                                  </items>
+                                                </SplitPane>
+                                                <SplitPane dividerPositions="0.85" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" GridPane.columnIndex="1">
+                                                  <items>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                         <children>
+                                                            <GridPane prefHeight="167.0" prefWidth="275.0">
+                                                              <columnConstraints>
+                                                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                              </columnConstraints>
+                                                              <rowConstraints>
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                              </rowConstraints>
+                                                               <children>
+                                                                  <AnchorPane fx:id="trade4" prefHeight="200.0" prefWidth="200.0" />
+                                                                  <AnchorPane fx:id="trade9" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
+                                                                  <AnchorPane fx:id="trade14" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
+                                                                  <AnchorPane fx:id="trade3" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                                                                  <AnchorPane fx:id="trade8" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                                  <AnchorPane fx:id="trade13" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                                                  <AnchorPane fx:id="trade2" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
+                                                                  <AnchorPane fx:id="trade1" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3" />
+                                                                  <AnchorPane fx:id="trade0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4" />
+                                                                  <AnchorPane fx:id="trade5" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                                  <AnchorPane fx:id="trade6" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                                  <AnchorPane fx:id="trade7" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                                  <AnchorPane fx:id="trade10" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                                                  <AnchorPane fx:id="trade15" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                                                                  <AnchorPane fx:id="trade20" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                                                                  <AnchorPane fx:id="trade16" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                                                  <AnchorPane fx:id="trade21" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                                                                  <AnchorPane fx:id="trade17" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                                                  <AnchorPane fx:id="trade12" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                                                  <AnchorPane fx:id="trade19" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" />
+                                                                  <AnchorPane fx:id="trade18" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                                                  <AnchorPane fx:id="trade24" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" />
+                                                                  <AnchorPane fx:id="trade23" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                                                                  <AnchorPane fx:id="trade22" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                                                                  <AnchorPane fx:id="trade11" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                                               </children>
+                                                                <fx:define>
+                                                                    <ArrayList fx:id="globalTradeAnchorList">
+                                                                        <fx:reference source="trade0" />
+                                                                        <fx:reference source="trade1" />
+                                                                        <fx:reference source="trade2" />
+                                                                        <fx:reference source="trade3" />
+                                                                        <fx:reference source="trade4" />
+                                                                        <fx:reference source="trade5" />
+                                                                        <fx:reference source="trade6" />
+                                                                        <fx:reference source="trade7" />
+                                                                        <fx:reference source="trade8" />
+                                                                        <fx:reference source="trade9" />
+                                                                        <fx:reference source="trade10" />
+                                                                        <fx:reference source="trade11" />
+                                                                        <fx:reference source="trade12" />
+                                                                        <fx:reference source="trade13" />
+                                                                        <fx:reference source="trade14" />
+                                                                        <fx:reference source="trade15" />
+                                                                        <fx:reference source="trade16" />
+                                                                        <fx:reference source="trade17" />
+                                                                        <fx:reference source="trade18" />
+                                                                        <fx:reference source="trade19" />
+                                                                        <fx:reference source="trade20" />
+                                                                        <fx:reference source="trade21" />
+                                                                        <fx:reference source="trade22" />
+                                                                        <fx:reference source="trade23" />
+                                                                        <fx:reference source="trade24" />
+                                                                    </ArrayList>
+                                                                </fx:define>
+                                                            </GridPane>
+                                                         </children></AnchorPane>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                         <children>
+                                                            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="109.0" layoutY="5.0" prefHeight="17.0" prefWidth="70.0" text="Trade Gate" textAlignment="CENTER" />
+                                                         </children></AnchorPane>
+                                                  </items>
+                                                </SplitPane>
+                                                <SplitPane dividerPositions="0.85" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" GridPane.columnIndex="2">
+                                                  <items>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                         <children>
+                                                            <GridPane prefHeight="167.0" prefWidth="277.0">
+                                                              <columnConstraints>
+                                                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                              </columnConstraints>
+                                                              <rowConstraints>
+                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                              </rowConstraints>
+                                                               <children>
+                                                                  <AnchorPane fx:id="zoneA4" prefHeight="200.0" prefWidth="200.0" />
+                                                                  <AnchorPane fx:id="zoneA3" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                                                                  <AnchorPane fx:id="zoneA2" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
+                                                                  <AnchorPane fx:id="zoneA1" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3" />
+                                                                  <AnchorPane fx:id="zoneA0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4" />
+                                                                  <AnchorPane fx:id="zoneA9" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
+                                                                  <AnchorPane fx:id="zoneA8" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                                  <AnchorPane fx:id="zoneA7" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                                  <AnchorPane fx:id="zoneA6" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                                  <AnchorPane fx:id="zoneA5" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                                  <AnchorPane fx:id="zoneA14" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
+                                                                  <AnchorPane fx:id="zoneA13" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                                                  <AnchorPane fx:id="zoneA12" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                                                  <AnchorPane fx:id="zoneA11" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                                                  <AnchorPane fx:id="zoneA10" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                                                  <AnchorPane fx:id="zoneA19" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" />
+                                                                  <AnchorPane fx:id="zoneA18" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                                                  <AnchorPane fx:id="zoneA17" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                                                  <AnchorPane fx:id="zoneA16" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                                                  <AnchorPane fx:id="zoneA15" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                                                                  <AnchorPane fx:id="zoneA24" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" />
+                                                                  <AnchorPane fx:id="zoneA23" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                                                                  <AnchorPane fx:id="zoneA22" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                                                                  <AnchorPane fx:id="zoneA21" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                                                                  <AnchorPane fx:id="zoneA20" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                                                               </children>
+                                                                <fx:define>
+                                                                    <ArrayList fx:id="globalZoneAAnchorList">
+                                                                        <fx:reference source="zoneA0" />
+                                                                        <fx:reference source="zoneA1" />
+                                                                        <fx:reference source="zoneA2" />
+                                                                        <fx:reference source="zoneA3" />
+                                                                        <fx:reference source="zoneA4" />
+                                                                        <fx:reference source="zoneA5" />
+                                                                        <fx:reference source="zoneA6" />
+                                                                        <fx:reference source="zoneA7" />
+                                                                        <fx:reference source="zoneA8" />
+                                                                        <fx:reference source="zoneA9" />
+                                                                        <fx:reference source="zoneA10" />
+                                                                        <fx:reference source="zoneA11" />
+                                                                        <fx:reference source="zoneA12" />
+                                                                        <fx:reference source="zoneA13" />
+                                                                        <fx:reference source="zoneA14" />
+                                                                        <fx:reference source="zoneA15" />
+                                                                        <fx:reference source="zoneA16" />
+                                                                        <fx:reference source="zoneA17" />
+                                                                        <fx:reference source="zoneA18" />
+                                                                        <fx:reference source="zoneA19" />
+                                                                        <fx:reference source="zoneA20" />
+                                                                        <fx:reference source="zoneA21" />
+                                                                        <fx:reference source="zoneA22" />
+                                                                        <fx:reference source="zoneA23" />
+                                                                        <fx:reference source="zoneA24" />
+                                                                    </ArrayList>
+                                                                </fx:define>
+                                                            </GridPane>
+                                                         </children></AnchorPane>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                         <children>
+                                                            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="103.0" layoutY="5.0" prefHeight="17.0" prefWidth="70.0" text="Zone A" textAlignment="CENTER" />
+                                                         </children></AnchorPane>
+                                                  </items>
+                                                </SplitPane>
+                                                <SplitPane dividerPositions="0.85" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" GridPane.rowIndex="1">
+                                                  <items>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                         <children>
+                                                            <GridPane prefHeight="168.0" prefWidth="275.0">
+                                                              <columnConstraints>
+                                                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                              </columnConstraints>
+                                                              <rowConstraints>
+                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                              </rowConstraints>
+                                                                <children>
+                                                                    <AnchorPane fx:id="zoneB4" prefHeight="200.0" prefWidth="200.0" />
+                                                                    <AnchorPane fx:id="zoneB3" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                                                                    <AnchorPane fx:id="zoneB2" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
+                                                                    <AnchorPane fx:id="zoneB1" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3" />
+                                                                    <AnchorPane fx:id="zoneB0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4" />
+                                                                    <AnchorPane fx:id="zoneB9" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
+                                                                    <AnchorPane fx:id="zoneB8" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                                    <AnchorPane fx:id="zoneB7" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                                    <AnchorPane fx:id="zoneB6" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                                    <AnchorPane fx:id="zoneB5" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                                    <AnchorPane fx:id="zoneB14" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
+                                                                    <AnchorPane fx:id="zoneB13" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                                                    <AnchorPane fx:id="zoneB12" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                                                    <AnchorPane fx:id="zoneB11" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                                                    <AnchorPane fx:id="zoneB10" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                                                    <AnchorPane fx:id="zoneB19" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" />
+                                                                    <AnchorPane fx:id="zoneB18" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                                                    <AnchorPane fx:id="zoneB17" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                                                    <AnchorPane fx:id="zoneB16" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                                                    <AnchorPane fx:id="zoneB15" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                                                                    <AnchorPane fx:id="zoneB24" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" />
+                                                                    <AnchorPane fx:id="zoneB23" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                                                                    <AnchorPane fx:id="zoneB22" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                                                                    <AnchorPane fx:id="zoneB21" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                                                                    <AnchorPane fx:id="zoneB20" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                                                                </children>
+                                                                <fx:define>
+                                                                    <ArrayList fx:id="globalZoneBAnchorList">
+                                                                        <fx:reference source="zoneB0" />
+                                                                        <fx:reference source="zoneB1" />
+                                                                        <fx:reference source="zoneB2" />
+                                                                        <fx:reference source="zoneB3" />
+                                                                        <fx:reference source="zoneB4" />
+                                                                        <fx:reference source="zoneB5" />
+                                                                        <fx:reference source="zoneB6" />
+                                                                        <fx:reference source="zoneB7" />
+                                                                        <fx:reference source="zoneB8" />
+                                                                        <fx:reference source="zoneB9" />
+                                                                        <fx:reference source="zoneB10" />
+                                                                        <fx:reference source="zoneB11" />
+                                                                        <fx:reference source="zoneB12" />
+                                                                        <fx:reference source="zoneB13" />
+                                                                        <fx:reference source="zoneB14" />
+                                                                        <fx:reference source="zoneB15" />
+                                                                        <fx:reference source="zoneB16" />
+                                                                        <fx:reference source="zoneB17" />
+                                                                        <fx:reference source="zoneB18" />
+                                                                        <fx:reference source="zoneB19" />
+                                                                        <fx:reference source="zoneB20" />
+                                                                        <fx:reference source="zoneB21" />
+                                                                        <fx:reference source="zoneB22" />
+                                                                        <fx:reference source="zoneB23" />
+                                                                        <fx:reference source="zoneB24" />
+                                                                    </ArrayList>
+                                                                </fx:define>
+                                                            </GridPane>
+                                                         </children></AnchorPane>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                         <children>
+                                                            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="103.0" layoutY="5.0" prefHeight="17.0" prefWidth="70.0" text="Zone B" textAlignment="CENTER" />
+                                                         </children></AnchorPane>
+                                                  </items>
+                                                </SplitPane>
+                                                <SplitPane dividerPositions="0.85" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                  <items>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                         <children>
+                                                            <GridPane prefHeight="168.0" prefWidth="276.0">
+                                                              <columnConstraints>
+                                                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                              </columnConstraints>
+                                                              <rowConstraints>
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                              </rowConstraints>
+                                                                <children>
+                                                                    <AnchorPane fx:id="zoneC4" prefHeight="200.0" prefWidth="200.0" />
+                                                                    <AnchorPane fx:id="zoneC3" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                                                                    <AnchorPane fx:id="zoneC2" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
+                                                                    <AnchorPane fx:id="zoneC1" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3" />
+                                                                    <AnchorPane fx:id="zoneC0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4" />
+                                                                    <AnchorPane fx:id="zoneC9" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
+                                                                    <AnchorPane fx:id="zoneC8" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                                    <AnchorPane fx:id="zoneC7" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                                    <AnchorPane fx:id="zoneC6" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                                    <AnchorPane fx:id="zoneC5" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                                    <AnchorPane fx:id="zoneC14" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
+                                                                    <AnchorPane fx:id="zoneC13" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                                                    <AnchorPane fx:id="zoneC12" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                                                    <AnchorPane fx:id="zoneC11" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                                                    <AnchorPane fx:id="zoneC10" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                                                    <AnchorPane fx:id="zoneC19" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" />
+                                                                    <AnchorPane fx:id="zoneC18" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                                                    <AnchorPane fx:id="zoneC17" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                                                    <AnchorPane fx:id="zoneC16" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                                                    <AnchorPane fx:id="zoneC15" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                                                                    <AnchorPane fx:id="zoneC24" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" />
+                                                                    <AnchorPane fx:id="zoneC23" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                                                                    <AnchorPane fx:id="zoneC22" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                                                                    <AnchorPane fx:id="zoneC21" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                                                                    <AnchorPane fx:id="zoneC20" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                                                                </children>
+                                                                <fx:define>
+                                                                    <ArrayList fx:id="globalZoneCAnchorList">
+                                                                        <fx:reference source="zoneC0" />
+                                                                        <fx:reference source="zoneC1" />
+                                                                        <fx:reference source="zoneC2" />
+                                                                        <fx:reference source="zoneC3" />
+                                                                        <fx:reference source="zoneC4" />
+                                                                        <fx:reference source="zoneC5" />
+                                                                        <fx:reference source="zoneC6" />
+                                                                        <fx:reference source="zoneC7" />
+                                                                        <fx:reference source="zoneC8" />
+                                                                        <fx:reference source="zoneC9" />
+                                                                        <fx:reference source="zoneC10" />
+                                                                        <fx:reference source="zoneC11" />
+                                                                        <fx:reference source="zoneC12" />
+                                                                        <fx:reference source="zoneC13" />
+                                                                        <fx:reference source="zoneC14" />
+                                                                        <fx:reference source="zoneC15" />
+                                                                        <fx:reference source="zoneC16" />
+                                                                        <fx:reference source="zoneC17" />
+                                                                        <fx:reference source="zoneC18" />
+                                                                        <fx:reference source="zoneC19" />
+                                                                        <fx:reference source="zoneC20" />
+                                                                        <fx:reference source="zoneC21" />
+                                                                        <fx:reference source="zoneC22" />
+                                                                        <fx:reference source="zoneC23" />
+                                                                        <fx:reference source="zoneC24" />
+                                                                    </ArrayList>
+                                                                </fx:define>
+                                                            </GridPane>
+                                                         </children></AnchorPane>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                         <children>
+                                                            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="96.0" layoutY="5.0" prefHeight="17.0" prefWidth="70.0" text="Zone C" textAlignment="CENTER" />
+                                                         </children></AnchorPane>
+                                                  </items>
+                                                </SplitPane>
+                                                <SplitPane dividerPositions="0.85" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                                  <items>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                         <children>
+                                                            <GridPane prefHeight="167.0" prefWidth="275.0">
+                                                              <columnConstraints>
+                                                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                              </columnConstraints>
+                                                              <rowConstraints>
+                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                              </rowConstraints>
+                                                                <children>
+                                                                    <AnchorPane fx:id="general4" prefHeight="200.0" prefWidth="200.0" />
+                                                                    <AnchorPane fx:id="general3" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                                                                    <AnchorPane fx:id="general2" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
+                                                                    <AnchorPane fx:id="general1" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3" />
+                                                                    <AnchorPane fx:id="general0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4" />
+                                                                    <AnchorPane fx:id="general9" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
+                                                                    <AnchorPane fx:id="general8" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                                    <AnchorPane fx:id="general7" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                                    <AnchorPane fx:id="general6" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                                    <AnchorPane fx:id="general5" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                                    <AnchorPane fx:id="general14" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
+                                                                    <AnchorPane fx:id="general13" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                                                    <AnchorPane fx:id="general12" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                                                    <AnchorPane fx:id="general11" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                                                    <AnchorPane fx:id="general10" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                                                    <AnchorPane fx:id="general19" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" />
+                                                                    <AnchorPane fx:id="general18" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                                                    <AnchorPane fx:id="general17" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                                                    <AnchorPane fx:id="general16" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                                                    <AnchorPane fx:id="general15" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                                                                    <AnchorPane fx:id="general24" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" />
+                                                                    <AnchorPane fx:id="general23" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                                                                    <AnchorPane fx:id="general22" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                                                                    <AnchorPane fx:id="general21" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                                                                    <AnchorPane fx:id="general20" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                                                                </children>
+                                                                <fx:define>
+                                                                    <ArrayList fx:id="globalGeneralAnchorList">
+                                                                        <fx:reference source="general0" />
+                                                                        <fx:reference source="general1" />
+                                                                        <fx:reference source="general2" />
+                                                                        <fx:reference source="general3" />
+                                                                        <fx:reference source="general4" />
+                                                                        <fx:reference source="general5" />
+                                                                        <fx:reference source="general6" />
+                                                                        <fx:reference source="general7" />
+                                                                        <fx:reference source="general8" />
+                                                                        <fx:reference source="general9" />
+                                                                        <fx:reference source="general10" />
+                                                                        <fx:reference source="general11" />
+                                                                        <fx:reference source="general12" />
+                                                                        <fx:reference source="general13" />
+                                                                        <fx:reference source="general14" />
+                                                                        <fx:reference source="general15" />
+                                                                        <fx:reference source="general16" />
+                                                                        <fx:reference source="general17" />
+                                                                        <fx:reference source="general18" />
+                                                                        <fx:reference source="general19" />
+                                                                        <fx:reference source="general20" />
+                                                                        <fx:reference source="general21" />
+                                                                        <fx:reference source="general22" />
+                                                                        <fx:reference source="general23" />
+                                                                        <fx:reference source="general24" />
+                                                                    </ArrayList>
+                                                                </fx:define>
+                                                            </GridPane>
+                                                         </children></AnchorPane>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                         <children>
+                                                            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="103.0" layoutY="5.0" prefHeight="17.0" prefWidth="70.0" text="General Area" textAlignment="CENTER" />
+                                                         </children></AnchorPane>
+                                                  </items>
+                                                </SplitPane>
+                                             </children>
+                                          </GridPane>
+                                       </children>
+                                    </AnchorPane>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
                                 </items>
                               </SplitPane>
                            </children>
                         </AnchorPane>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <Label fx:id="statusMessage" alignment="CENTER" contentDisplay="CENTER" layoutX="584.0" layoutY="24.0" prefHeight="17.0" prefWidth="70.0" text="Status: " />
+                           </children></AnchorPane>
                     </items>
                   </SplitPane>
                </children>
