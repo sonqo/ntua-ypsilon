@@ -28,14 +28,7 @@
       <change beforePath="$PROJECT_DIR$/src/app/gui/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/gui/sample.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/model/Airport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/model/Airport.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/model/Flight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/model/Flight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/model/station/GateStation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/model/station/GateStation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/model/station/GeneralStation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/model/station/GeneralStation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/model/station/LongTermStation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/model/station/LongTermStation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/model/station/Station.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/model/station/Station.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/model/station/TradeStation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/model/station/TradeStation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/model/station/ZoneAStation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/model/station/ZoneAStation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/model/station/ZoneBStation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/model/station/ZoneBStation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/model/station/ZoneCStation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/model/station/ZoneCStation.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -262,6 +255,7 @@
       <workItem from="1596962923006" duration="142000" />
       <workItem from="1596963075584" duration="1427000" />
       <workItem from="1596975513295" duration="5826000" />
+      <workItem from="1596991102947" duration="5094000" />
     </task>
     <servers />
   </component>
@@ -304,26 +298,30 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="664" y="306" key="#com.intellij.refactoring.encapsulateFields.EncalpsulateFieldsDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1596895877151" />
+    <state x="690" y="286" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog" timestamp="1596994836139">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="690" y="286" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1596994836139" />
     <state x="666" y="281" key="FileChooserDialogImpl" timestamp="1596810801652">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="666" y="281" key="FileChooserDialogImpl/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1596810801652" />
-    <state width="1167" height="380" key="GridCell.Tab.0.bottom" timestamp="1596981345037">
+    <state width="1167" height="380" key="GridCell.Tab.0.bottom" timestamp="1596996210534">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1167" height="380" key="GridCell.Tab.0.bottom/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1596981345037" />
-    <state width="1167" height="380" key="GridCell.Tab.0.center" timestamp="1596981345036">
+    <state width="1167" height="380" key="GridCell.Tab.0.bottom/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1596996210534" />
+    <state width="1167" height="380" key="GridCell.Tab.0.center" timestamp="1596996210534">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1167" height="380" key="GridCell.Tab.0.center/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1596981345036" />
-    <state width="1167" height="380" key="GridCell.Tab.0.left" timestamp="1596981345036">
+    <state width="1167" height="380" key="GridCell.Tab.0.center/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1596996210534" />
+    <state width="1167" height="380" key="GridCell.Tab.0.left" timestamp="1596996210534">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1167" height="380" key="GridCell.Tab.0.left/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1596981345036" />
-    <state width="1167" height="380" key="GridCell.Tab.0.right" timestamp="1596981345036">
+    <state width="1167" height="380" key="GridCell.Tab.0.left/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1596996210534" />
+    <state width="1167" height="380" key="GridCell.Tab.0.right" timestamp="1596996210534">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1167" height="380" key="GridCell.Tab.0.right/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1596981345036" />
+    <state width="1167" height="380" key="GridCell.Tab.0.right/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1596996210534" />
     <state width="1877" height="363" key="GridCell.Tab.1.bottom" timestamp="1596962910915">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

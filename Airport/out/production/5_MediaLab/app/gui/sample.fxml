@@ -23,9 +23,11 @@
                       </Menu>
                       <Menu mnemonicParsing="false" text="Details">
                         <items>
-                          <MenuItem mnemonicParsing="false" text="Gates" />
-                              <MenuItem mnemonicParsing="false" text="Parked Flights" />
-                              <MenuItem mnemonicParsing="false" text="Delayed Flights" />
+                          <MenuItem fx:id="gatesMenu" mnemonicParsing="false" text="Gates" />
+                              <MenuItem fx:id="parkedMenu" mnemonicParsing="false" text="Parked Flights" />
+                              <MenuItem fx:id="delayedMenu" mnemonicParsing="false" text="Delayed Flights" />
+                              <MenuItem fx:id="holdingMenu" mnemonicParsing="false" text="Holding Flights" />
+                              <MenuItem fx:id="departureMenu" mnemonicParsing="false" text="Upcoming Departures" />
                         </items>
                       </Menu>
                         <Menu mnemonicParsing="false" text="About">
