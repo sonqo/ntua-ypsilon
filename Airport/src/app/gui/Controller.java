@@ -9,8 +9,8 @@ import java.io.File;
 import java.net.URL;
 import java.util.List;
 import java.util.Arrays;
+
 import javafx.fxml.FXML;
-import javafx.stage.Stage;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.io.IOException;
@@ -24,14 +24,18 @@ import javafx.animation.Timeline;
 import javafx.fxml.Initializable;
 import javafx.animation.Animation;
 import javafx.scene.control.Label;
+import javafx.scene.control.Button;
 import java.net.URISyntaxException;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 public class Controller implements Initializable {
 
     public MenuBar menuBar;
-    public Label timerLabel, statusMessage;
+    public Button submitButton;
+    public Label timerLabel, statusMessage, holdingMessage;
+    public TextField flightIdField, destinationField, flightTypeField, planeTypeField, departureField;
 
     @FXML
     private List<AnchorPane> globalGateAnchorList;
@@ -70,16 +74,16 @@ public class Controller implements Initializable {
 
     private void setupState() throws IOException{
 
-        // Reading application state - setting initial GUI
+        // Reading Airport_Scenario
         BufferedReader reader = new BufferedReader(new FileReader(defaultAirport)); // Reading Airport_Scenario
         String line = reader.readLine();
         while (line != null) {
             List<String> rtmp = Arrays.asList(line.split(","));
             if (Integer.parseInt(rtmp.get(0)) == 1) {
-                GateStation stat = new GateStation();
-                stat.setInfo(Integer.parseInt(rtmp.get(0)), Integer.parseInt(rtmp.get(1)), Integer.parseInt(rtmp.get(2)), rtmp.get(3));
-                airport.gateStationList.add(stat);
-                for (int i=0; i<airport.gateStationList.get(0).spot_num; i++){
+                for (int i=0; i<Integer.parseInt(rtmp.get(1)); i++) {
+                    GateStation stat = new GateStation();
+                    stat.setInfo(Integer.parseInt(rtmp.get(0)), Integer.parseInt(rtmp.get(2)), rtmp.get(3) + Integer.toString(i+1));
+                    airport.gateStationList.add(stat);
                     validGateAnchorList.add(globalGateAnchorList.remove(0));
                 }
                 airport.gateAnchorList = validGateAnchorList;
@@ -88,10 +92,10 @@ public class Controller implements Initializable {
                 }
             }
             else if (Integer.parseInt(rtmp.get(0)) == 2){
-                TradeStation stat = new TradeStation();
-                stat.setInfo(Integer.parseInt(rtmp.get(0)), Integer.parseInt(rtmp.get(1)), Integer.parseInt(rtmp.get(2)), rtmp.get(3));
-                airport.tradeStationList.add(stat);
-                for (int i=0; i<airport.tradeStationList.get(0).spot_num; i++){
+                for (int i=0; i<Integer.parseInt(rtmp.get(1)); i++) {
+                    TradeStation stat = new TradeStation();
+                    stat.setInfo(Integer.parseInt(rtmp.get(0)), Integer.parseInt(rtmp.get(2)), rtmp.get(3) + Integer.toString(i+1));
+                    airport.tradeStationList.add(stat);
                     validTradeAnchorList.add(globalTradeAnchorList.remove(0));
                 }
                 airport.tradeAnchorList = validTradeAnchorList;
@@ -100,10 +104,10 @@ public class Controller implements Initializable {
                 }
             }
             else if (Integer.parseInt(rtmp.get(0)) == 3){
-                ZoneAStation stat = new ZoneAStation();
-                stat.setInfo(Integer.parseInt(rtmp.get(0)), Integer.parseInt(rtmp.get(1)), Integer.parseInt(rtmp.get(2)), rtmp.get(3));
-                airport.zoneAStationList.add(stat);
-                for (int i=0; i<airport.zoneAStationList.get(0).spot_num; i++){
+                for (int i=0; i<Integer.parseInt(rtmp.get(1)); i++) {
+                    ZoneAStation stat = new ZoneAStation();
+                    stat.setInfo(Integer.parseInt(rtmp.get(0)), Integer.parseInt(rtmp.get(2)), rtmp.get(3) + Integer.toString(i+1));
+                    airport.zoneAStationList.add(stat);
                     validZoneAAnchorList.add(globalZoneAAnchorList.remove(0));
                 }
                 airport.zoneAAnchorList = validZoneAAnchorList;
@@ -112,10 +116,10 @@ public class Controller implements Initializable {
                 }
             }
             else if (Integer.parseInt(rtmp.get(0)) == 4){
-                ZoneBStation stat = new ZoneBStation();
-                stat.setInfo(Integer.parseInt(rtmp.get(0)), Integer.parseInt(rtmp.get(1)), Integer.parseInt(rtmp.get(2)), rtmp.get(3));
-                airport.zoneBStationList.add(stat);
-                for (int i=0; i<airport.zoneBStationList.get(0).spot_num; i++){
+                for (int i=0; i<Integer.parseInt(rtmp.get(1)); i++) {
+                    ZoneBStation stat = new ZoneBStation();
+                    stat.setInfo(Integer.parseInt(rtmp.get(0)), Integer.parseInt(rtmp.get(2)), rtmp.get(3) + Integer.toString(i+1));
+                    airport.zoneBStationList.add(stat);
                     validZoneBAnchorList.add(globalZoneBAnchorList.remove(0));
                 }
                 airport.zoneBAnchorList = validZoneBAnchorList;
@@ -124,10 +128,10 @@ public class Controller implements Initializable {
                 }
             }
             else if (Integer.parseInt(rtmp.get(0)) == 5){
-                ZoneCStation stat = new ZoneCStation();
-                stat.setInfo(Integer.parseInt(rtmp.get(0)), Integer.parseInt(rtmp.get(1)), Integer.parseInt(rtmp.get(2)), rtmp.get(3));
-                airport.zoneCStationList.add(stat);
-                for (int i=0; i<airport.zoneCStationList.get(0).spot_num; i++){
+                for (int i=0; i<Integer.parseInt(rtmp.get(1)); i++) {
+                    ZoneCStation stat = new ZoneCStation();
+                    stat.setInfo(Integer.parseInt(rtmp.get(0)), Integer.parseInt(rtmp.get(2)), rtmp.get(3) + Integer.toString(i+1));
+                    airport.zoneCStationList.add(stat);
                     validZoneCAnchorList.add(globalZoneCAnchorList.remove(0));
                 }
                 airport.zoneCAnchorList = validZoneCAnchorList;
@@ -136,10 +140,10 @@ public class Controller implements Initializable {
                 }
             }
             else if (Integer.parseInt(rtmp.get(0)) == 6){
-                GeneralStation stat = new GeneralStation();
-                stat.setInfo(Integer.parseInt(rtmp.get(0)), Integer.parseInt(rtmp.get(1)), Integer.parseInt(rtmp.get(2)), rtmp.get(3));
-                airport.generalStationList.add(stat);
-                for (int i=0; i<airport.generalStationList.get(0).spot_num; i++){
+                for (int i=0; i<Integer.parseInt(rtmp.get(1)); i++) {
+                    GeneralStation stat = new GeneralStation();
+                    stat.setInfo(Integer.parseInt(rtmp.get(0)), Integer.parseInt(rtmp.get(2)), rtmp.get(3) + Integer.toString(i+1));
+                    airport.generalStationList.add(stat);
                     validGeneralAnchorList.add(globalGeneralAnchorList.remove(0));
                 }
                 airport.generalAnchorList = validGeneralAnchorList;
@@ -148,10 +152,10 @@ public class Controller implements Initializable {
                 }
             }
             else if (Integer.parseInt(rtmp.get(0)) == 7){
-                LongTermStation stat = new LongTermStation();
-                stat.setInfo(Integer.parseInt(rtmp.get(0)), Integer.parseInt(rtmp.get(1)), Integer.parseInt(rtmp.get(2)), rtmp.get(3));
-                airport.longTermStationList.add(stat);
-                for (int i=0; i<airport.longTermStationList.get(0).spot_num; i++){
+                for (int i=0; i<Integer.parseInt(rtmp.get(1)); i++) {
+                    LongTermStation stat = new LongTermStation();
+                    stat.setInfo(Integer.parseInt(rtmp.get(0)), Integer.parseInt(rtmp.get(2)), rtmp.get(3) + Integer.toString(i+1));
+                    airport.longTermStationList.add(stat);
                     validLongTermAnchorList.add(globalLongTermAnchorList.remove(0));
                 }
                 airport.longTermAnchorList = validLongTermAnchorList;
@@ -163,7 +167,8 @@ public class Controller implements Initializable {
         }
         reader.close();
 
-        reader = new BufferedReader(new FileReader(defaultSetup)); // Reading Setup_Scenario
+        // Reading Setup_Scenario
+        reader = new BufferedReader(new FileReader(defaultSetup));
         line = reader.readLine();
         while (line != null){
             List<String> rtmp = Arrays.asList(line.split(","));
@@ -174,86 +179,19 @@ public class Controller implements Initializable {
         }
         reader.close();
 
-        // Serving initial flights
-        for (int i=0; i<airport.flightListQueue.size(); i++){
-            if (!airport.gateStationList.isEmpty()){
-                if ((airport.gateStationList.get(0).canServeFlight(airport.flightListQueue.get(i).flight_type))
-                        && (airport.gateStationList.get(0).canServePlane(airport.flightListQueue.get(i).plane_type))) {
-                    airport.flightListServiced.add(airport.flightListQueue.get(i));
-                    airport.gateAnchorList.get(0).setStyle("-fx-background-color: crimson; -fx-border-color: white");
-                    airport.flightListServiced.get(airport.flightListServiced.size()-1).pos = airport.gateAnchorList.remove(0);
-                    airport.flightListServiced.get(airport.flightListServiced.size()-1).station = airport.gateStationList.remove(0);
-                }
-            }
-            else if (!airport.tradeStationList.isEmpty()){
-                if ((airport.tradeStationList.get(0).canServeFlight(airport.flightListQueue.get(i).flight_type))
-                        && (airport.tradeStationList.get(0).canServePlane(airport.flightListQueue.get(i).plane_type))) {
-                    airport.flightListServiced.add(airport.flightListQueue.get(i));
-                    airport.tradeAnchorList.get(0).setStyle("-fx-background-color: crimson; -fx-border-color: white");
-                    airport.flightListServiced.get(airport.flightListServiced.size()-1).pos = airport.tradeAnchorList.remove(0);
-                    airport.flightListServiced.get(airport.flightListServiced.size()-1).station = airport.tradeStationList.remove(0);
-                }
-            }
-            else if (!airport.zoneAStationList.isEmpty()){
-                if ((airport.zoneAStationList.get(0).canServeFlight(airport.flightListQueue.get(i).flight_type))
-                        && (airport.zoneAStationList.get(0).canServePlane(airport.flightListQueue.get(i).plane_type))) {
-                    airport.flightListServiced.add(airport.flightListQueue.get(i));
-                    airport.zoneAAnchorList.get(0).setStyle("-fx-background-color: crimson; -fx-border-color: white");
-                    airport.flightListServiced.get(airport.flightListServiced.size()-1).pos = airport.zoneAAnchorList.remove(0);
-                    airport.flightListServiced.get(airport.flightListServiced.size()-1).station = airport.zoneAStationList.remove(0);
-                }
-            }
-            else if (!airport.zoneBStationList.isEmpty()){
-                if ((airport.zoneBStationList.get(0).canServeFlight(airport.flightListQueue.get(i).flight_type))
-                        && (airport.zoneBStationList.get(0).canServePlane(airport.flightListQueue.get(i).plane_type))) {
-                    airport.flightListServiced.add(airport.flightListQueue.get(i));
-                    airport.zoneBAnchorList.get(0).setStyle("-fx-background-color: palevioletred; -fx-border-color: white");
-                    airport.flightListServiced.get(airport.flightListServiced.size()-1).pos = airport.zoneBAnchorList.remove(0);
-                    airport.flightListServiced.get(airport.flightListServiced.size()-1).station = airport.zoneBStationList.remove(0);
-                }
-            }
-            else if (!airport.zoneCStationList.isEmpty()){
-                if ((airport.zoneCStationList.get(0).canServeFlight(airport.flightListQueue.get(i).flight_type))
-                        && (airport.zoneCStationList.get(0).canServePlane(airport.flightListQueue.get(i).plane_type))) {
-                    airport.flightListServiced.add(airport.flightListQueue.get(i));
-                    airport.zoneCAnchorList.get(0).setStyle("-fx-background-color: crimson; -fx-border-color: white");
-                    airport.flightListServiced.get(airport.flightListServiced.size()-1).pos = airport.zoneCAnchorList.remove(0);
-                    airport.flightListServiced.get(airport.flightListServiced.size()-1).station = airport.zoneCStationList.remove(0);
-                }
-            }
-            else if (!airport.generalStationList.isEmpty()){
-                if ((airport.generalStationList.get(0).canServeFlight(airport.flightListQueue.get(i).flight_type))
-                        && (airport.generalStationList.get(0).canServePlane(airport.flightListQueue.get(i).plane_type))) {
-                    airport.flightListServiced.add(airport.flightListQueue.get(i));
-                    airport.generalAnchorList.get(0).setStyle("-fx-background-color: crimson; -fx-border-color: white");
-                    airport.flightListServiced.get(airport.flightListServiced.size()-1).pos = airport.generalAnchorList.remove(0);
-                    airport.flightListServiced.get(airport.flightListServiced.size()-1).station = airport.generalStationList.remove(0);
-                }
-            }
-            else if (!airport.longTermStationList.isEmpty()){
-                if ((airport.longTermStationList.get(0).canServeFlight(airport.flightListQueue.get(i).flight_type))
-                        && (airport.longTermStationList.get(0).canServePlane(airport.flightListQueue.get(i).plane_type))) {
-                    airport.flightListServiced.add(airport.flightListQueue.get(i));
-                    airport.longTermAnchorList.get(0).setStyle("-fx-background-color: crimson; -fx-border-color: white");
-                    airport.flightListServiced.get(airport.flightListServiced.size()-1).pos = airport.longTermAnchorList.remove(0);
-                    airport.flightListServiced.get(airport.flightListServiced.size()-1).station = airport.longTermStationList.remove(0);
-                }
-            }
-        }
-        airport.flightListQueue.removeAll(airport.flightListServiced);
+        statusMessage.textProperty().set("Status: Airport state initialized, initial flights serviced"); // setting status message
+    }
 
+    private void holdingMessage(){
         String msg;
         if (!airport.flightListQueue.isEmpty()){
-            msg = "Status: Holding flights ";
+            msg = "Holding Flights: ";
             for (int i=0; i<airport.flightListQueue.size(); i++){
                 msg += airport.flightListQueue.get(i).flight_id;
                 msg += " ";
             }
-            statusMessage.textProperty().set(msg);
+            holdingMessage.textProperty().set(msg);
         }
-
-        statusMessage.textProperty().set("Status: Airport state initialized, initial flights serviced"); // setting status message
-
     }
 
     private void scheduleDeparture(){
@@ -261,12 +199,15 @@ public class Controller implements Initializable {
             Flight curr = airport.flightListServiced.get(i);
             Timeline timeline = new Timeline(new KeyFrame(
                     Duration.millis(curr.min2departure*1000),
-                    ae -> departFlights(curr)));
+                    ae -> departingFlights(curr)));
             timeline.play();
+        }
+        while (!airport.flightListServiced.isEmpty()){
+            airport.flightListServiced.remove(0);
         }
     }
 
-    private void departFlights(Flight flight){
+    private void departingFlights(Flight flight){
         if (flight.station instanceof GateStation){
             airport.gateStationList.add((GateStation) flight.station);
             airport.gateAnchorList.add(flight.pos);
@@ -296,7 +237,6 @@ public class Controller implements Initializable {
             airport.longTermAnchorList.add(flight.pos);
         }
         flight.pos.setStyle("-fx-background-color: seagreen; -fx-border-color: white");
-        airport.flightListServiced.remove(flight);
     }
 
     private void runTimer(String name){
@@ -312,6 +252,83 @@ public class Controller implements Initializable {
         timerLabel.textProperty().set(name + String.format("%02d:%02d", hours, minutes));
     }
 
+    private void serviceFlights(){
+        for (int i=0; i<airport.flightListQueue.size(); i++){
+            if (!airport.gateStationList.isEmpty()){
+                if ((airport.gateStationList.get(0).canServeFlight(airport.flightListQueue.get(i).flight_type))
+                        && (airport.gateStationList.get(0).canServePlane(airport.flightListQueue.get(i).plane_type))) {
+                    airport.flightListServiced.add(airport.flightListQueue.get(i));
+                    airport.gateAnchorList.get(0).setStyle("-fx-background-color: crimson; -fx-border-color: white");
+                    airport.flightListServiced.get(airport.flightListServiced.size()-1).pos = airport.gateAnchorList.remove(0);
+                    airport.flightListServiced.get(airport.flightListServiced.size()-1).station = airport.gateStationList.remove(0);
+                    continue;
+                }
+            }
+            if (!airport.tradeStationList.isEmpty()){
+                if ((airport.tradeStationList.get(0).canServeFlight(airport.flightListQueue.get(i).flight_type))
+                        && (airport.tradeStationList.get(0).canServePlane(airport.flightListQueue.get(i).plane_type))) {
+                    airport.flightListServiced.add(airport.flightListQueue.get(i));
+                    airport.tradeAnchorList.get(0).setStyle("-fx-background-color: crimson; -fx-border-color: white");
+                    airport.flightListServiced.get(airport.flightListServiced.size()-1).pos = airport.tradeAnchorList.remove(0);
+                    airport.flightListServiced.get(airport.flightListServiced.size()-1).station = airport.tradeStationList.remove(0);
+                    continue;
+                }
+            }
+            if (!airport.zoneAStationList.isEmpty()){
+                if ((airport.zoneAStationList.get(0).canServeFlight(airport.flightListQueue.get(i).flight_type))
+                        && (airport.zoneAStationList.get(0).canServePlane(airport.flightListQueue.get(i).plane_type))) {
+                    airport.flightListServiced.add(airport.flightListQueue.get(i));
+                    airport.zoneAAnchorList.get(0).setStyle("-fx-background-color: crimson; -fx-border-color: white");
+                    airport.flightListServiced.get(airport.flightListServiced.size()-1).pos = airport.zoneAAnchorList.remove(0);
+                    airport.flightListServiced.get(airport.flightListServiced.size()-1).station = airport.zoneAStationList.remove(0);
+                    continue;
+                }
+            }
+            if (!airport.zoneBStationList.isEmpty()){
+                if ((airport.zoneBStationList.get(0).canServeFlight(airport.flightListQueue.get(i).flight_type))
+                        && (airport.zoneBStationList.get(0).canServePlane(airport.flightListQueue.get(i).plane_type))) {
+                    airport.flightListServiced.add(airport.flightListQueue.get(i));
+                    airport.zoneBAnchorList.get(0).setStyle("-fx-background-color: crimson; -fx-border-color: white");
+                    airport.flightListServiced.get(airport.flightListServiced.size()-1).pos = airport.zoneBAnchorList.remove(0);
+                    airport.flightListServiced.get(airport.flightListServiced.size()-1).station = airport.zoneBStationList.remove(0);
+                    continue;
+                }
+            }
+            if (!airport.zoneCStationList.isEmpty()){
+                if ((airport.zoneCStationList.get(0).canServeFlight(airport.flightListQueue.get(i).flight_type))
+                        && (airport.zoneCStationList.get(0).canServePlane(airport.flightListQueue.get(i).plane_type))) {
+                    airport.flightListServiced.add(airport.flightListQueue.get(i));
+                    airport.zoneCAnchorList.get(0).setStyle("-fx-background-color: crimson; -fx-border-color: white");
+                    airport.flightListServiced.get(airport.flightListServiced.size()-1).pos = airport.zoneCAnchorList.remove(0);
+                    airport.flightListServiced.get(airport.flightListServiced.size()-1).station = airport.zoneCStationList.remove(0);
+                    continue;
+                }
+            }
+            if (!airport.generalStationList.isEmpty()){
+                if ((airport.generalStationList.get(0).canServeFlight(airport.flightListQueue.get(i).flight_type))
+                        && (airport.generalStationList.get(0).canServePlane(airport.flightListQueue.get(i).plane_type))) {
+                    airport.flightListServiced.add(airport.flightListQueue.get(i));
+                    airport.generalAnchorList.get(0).setStyle("-fx-background-color: crimson; -fx-border-color: white");
+                    airport.flightListServiced.get(airport.flightListServiced.size()-1).pos = airport.generalAnchorList.remove(0);
+                    airport.flightListServiced.get(airport.flightListServiced.size()-1).station = airport.generalStationList.remove(0);
+                    continue;
+                }
+            }
+            if (!airport.longTermStationList.isEmpty()){
+                if ((airport.longTermStationList.get(0).canServeFlight(airport.flightListQueue.get(i).flight_type))
+                        && (airport.longTermStationList.get(0).canServePlane(airport.flightListQueue.get(i).plane_type))) {
+                    airport.flightListServiced.add(airport.flightListQueue.get(i));
+                    airport.longTermAnchorList.get(0).setStyle("-fx-background-color: crimson; -fx-border-color: white");
+                    airport.flightListServiced.get(airport.flightListServiced.size()-1).pos = airport.longTermAnchorList.remove(0);
+                    airport.flightListServiced.get(airport.flightListServiced.size()-1).station = airport.longTermStationList.remove(0);
+                    continue;
+                }
+            }
+        }
+        airport.flightListQueue.removeAll(airport.flightListServiced);
+        scheduleDeparture();
+    }
+
     public void startApp(ActionEvent actionEvent) throws IOException { // Start button
         hours = 0;
         minutes = 0;
@@ -323,19 +340,20 @@ public class Controller implements Initializable {
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
 
-        setupState(); // read setup files, setup airport state
-        scheduleDeparture();
+        setupState();
+        serviceFlights();
+        holdingMessage();
     }
 
     public void loadApp(ActionEvent actionEvent) { // Load button
         FileChooser fc = new FileChooser();
         fc.setTitle("Select Setup-Scenario");
         fc.setInitialDirectory(new File("C:/Users/Sonqo/Desktop/Ntua_Lambda/6_MediaLab/Airport/medialab"));
-        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("TXT Files", "*.txt"));
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
         String f = fc.showOpenDialog(null).toString();
         defaultSetup = f;
         fc.setTitle("Select Airport-Scenario");
-        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("TXT Files", "*.txt"));
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
         f = fc.showOpenDialog(null).toString();
         defaultAirport = f;
     }
@@ -345,8 +363,16 @@ public class Controller implements Initializable {
     }
 
     public void exitApp(ActionEvent actionEvent) { // Exit button
-        Stage stage = (Stage) menuBar.getScene().getWindow();
-        stage.close();
+        System.exit(0);
+    }
+
+    public void handleSubmit(){
+        Flight flt = new Flight();
+        flt.setInfo(flightIdField.textProperty().get(), destinationField.textProperty().get(),
+                Integer.parseInt(flightTypeField.textProperty().get()), Integer.parseInt(planeTypeField.textProperty().get()), Integer.parseInt(departureField.textProperty().get()));
+        airport.flightListQueue.add(flt);
+        serviceFlights();
+        holdingMessage();
     }
 
 }

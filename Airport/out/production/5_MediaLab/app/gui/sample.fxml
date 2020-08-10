@@ -42,7 +42,10 @@
                         <Image url="file:/C:/Users/Sonqo/Desktop/Ntua_Lambda/6_MediaLab/Airport/images/stackoverflow_v2.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="timerLabel" layoutX="1061.0" layoutY="57.0" prefHeight="17.0" prefWidth="114.0" text="Total Time: " textAlignment="CENTER" />
+                  <Label fx:id="timerLabel" layoutX="966.0" layoutY="62.0" prefHeight="22.0" prefWidth="204.0" text="Total Time: " textAlignment="CENTER">
+                     <font>
+                        <Font name="Consolas" size="18.0" />
+                     </font></Label>
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="601.0" prefWidth="1198.0">
@@ -662,17 +665,38 @@
                                           </GridPane>
                                        </children>
                                     </AnchorPane>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                       <children>
+                                          <TextField fx:id="flightIdField" layoutX="23.0" layoutY="113.0" prefHeight="25.0" prefWidth="310.0" promptText="Flight ID" />
+                                          <Label fx:id="timerLabel1" alignment="CENTER" layoutX="61.0" layoutY="26.0" prefHeight="35.0" prefWidth="235.0" text="Flight Manager" textAlignment="CENTER">
+                                             <font>
+                                                <Font name="Consolas Bold" size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="destinationField" layoutX="24.0" layoutY="166.0" prefHeight="25.0" prefWidth="310.0" promptText="Destination" />
+                                          <TextField fx:id="flightTypeField" layoutX="24.0" layoutY="219.0" prefHeight="25.0" prefWidth="310.0" promptText="Fight Type ID" />
+                                          <TextField fx:id="planeTypeField" layoutX="23.0" layoutY="272.0" prefHeight="25.0" prefWidth="310.0" promptText="Plane Type ID" />
+                                          <TextField fx:id="departureField" layoutX="24.0" layoutY="322.0" prefHeight="25.0" prefWidth="310.0" promptText="Departute Time" />
+                                          <Button fx:id="submitButton" layoutX="152.0" layoutY="388.0" mnemonicParsing="false" onAction="#handleSubmit" text="Submit">
+                                             <font>
+                                                <Font name="Consolas" size="12.0" />
+                                             </font></Button>
+                                       </children></AnchorPane>
                                 </items>
                               </SplitPane>
                            </children>
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                            <children>
-                              <Label fx:id="statusMessage" alignment="CENTER" contentDisplay="CENTER" layoutX="34.0" layoutY="9.0" prefHeight="50.0" prefWidth="1128.0" text="Status: " textAlignment="CENTER" wrapText="true">
+                              <Label fx:id="statusMessage" alignment="CENTER" contentDisplay="CENTER" layoutX="34.0" layoutY="9.0" prefHeight="25.0" prefWidth="1128.0" text="Status: " textAlignment="CENTER" wrapText="true">
                                  <font>
                                     <Font name="Consolas Bold" size="14.0" />
                                  </font></Label>
+                              <Label fx:id="holdingMessage" alignment="CENTER" contentDisplay="CENTER" layoutX="34.0" layoutY="34.0" prefHeight="25.0" prefWidth="1128.0" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font name="Consolas Bold" size="14.0" />
+                                 </font>
+                              </Label>
                            </children></AnchorPane>
                     </items>
                   </SplitPane>
