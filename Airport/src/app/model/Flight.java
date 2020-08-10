@@ -7,8 +7,8 @@ public class Flight {
 
     public AnchorPane pos;
     public Station station;
-    public int flight_type, plane_type, min2departure;
     public String city, flight_id;
+    public int flight_type, plane_type, min2departure;
 
     public void setInfo(String flight_id, String city, int flight_type, int plane_type, int min2departure){
         this.city = city;
