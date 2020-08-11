@@ -1,12 +1,14 @@
 package app.model;
 
 import app.model.station.Station;
+import javafx.animation.Timeline;
 import javafx.scene.layout.AnchorPane;
 
 public class Flight {
 
     public AnchorPane pos;
     public Station station;
+    public Timeline timeline;
     public String city, flight_id;
     public int flight_type, plane_type, min2departure;
 

@@ -9,7 +9,6 @@ import java.io.File;
 import java.net.URL;
 import java.util.List;
 import java.util.Arrays;
-
 import javafx.fxml.FXML;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -34,7 +33,7 @@ public class Controller implements Initializable {
 
     public MenuBar menuBar;
     public Button submitButton;
-    public Label timerLabel, statusMessage, holdingMessage;
+    public Label timerLabel, statusMessage, holdingMessage, incomeLabel, parkedLabel, departingLabel;
     public TextField flightIdField, destinationField, flightTypeField, planeTypeField, departureField;
 
     @FXML
@@ -198,12 +197,13 @@ public class Controller implements Initializable {
         for (int i=0; i<airport.flightListServiced.size(); i++){
             Flight curr = airport.flightListServiced.get(i);
             Timeline timeline = new Timeline(new KeyFrame(
-                    Duration.millis(curr.min2departure*1000),
+                    Duration.millis(curr.min2departure*5000),
                     ae -> departingFlights(curr)));
             timeline.play();
+            airport.flightListServiced.get(i).timeline = timeline;
         }
         while (!airport.flightListServiced.isEmpty()){
-            airport.flightListServiced.remove(0);
+            airport.flightListDeparted.add(airport.flightListServiced.remove(0));
         }
     }
 
@@ -236,6 +236,7 @@ public class Controller implements Initializable {
             airport.longTermStationList.add((LongTermStation) flight.station);
             airport.longTermAnchorList.add(flight.pos);
         }
+        airport.departing -= 1;
         flight.pos.setStyle("-fx-background-color: seagreen; -fx-border-color: white");
     }
 
@@ -259,6 +260,8 @@ public class Controller implements Initializable {
                         && (airport.gateStationList.get(0).canServePlane(airport.flightListQueue.get(i).plane_type))) {
                     airport.flightListServiced.add(airport.flightListQueue.get(i));
                     airport.gateAnchorList.get(0).setStyle("-fx-background-color: crimson; -fx-border-color: white");
+                    airport.income += airport.gateStationList.get(0).cost;
+                    airport.parked ++;
                     airport.flightListServiced.get(airport.flightListServiced.size()-1).pos = airport.gateAnchorList.remove(0);
                     airport.flightListServiced.get(airport.flightListServiced.size()-1).station = airport.gateStationList.remove(0);
                     continue;
@@ -269,6 +272,8 @@ public class Controller implements Initializable {
                         && (airport.tradeStationList.get(0).canServePlane(airport.flightListQueue.get(i).plane_type))) {
                     airport.flightListServiced.add(airport.flightListQueue.get(i));
                     airport.tradeAnchorList.get(0).setStyle("-fx-background-color: crimson; -fx-border-color: white");
+                    airport.income += airport.tradeStationList.get(0).cost;
+                    airport.parked ++;
                     airport.flightListServiced.get(airport.flightListServiced.size()-1).pos = airport.tradeAnchorList.remove(0);
                     airport.flightListServiced.get(airport.flightListServiced.size()-1).station = airport.tradeStationList.remove(0);
                     continue;
@@ -279,6 +284,8 @@ public class Controller implements Initializable {
                         && (airport.zoneAStationList.get(0).canServePlane(airport.flightListQueue.get(i).plane_type))) {
                     airport.flightListServiced.add(airport.flightListQueue.get(i));
                     airport.zoneAAnchorList.get(0).setStyle("-fx-background-color: crimson; -fx-border-color: white");
+                    airport.income += airport.zoneAStationList.get(0).cost;
+                    airport.parked ++;
                     airport.flightListServiced.get(airport.flightListServiced.size()-1).pos = airport.zoneAAnchorList.remove(0);
                     airport.flightListServiced.get(airport.flightListServiced.size()-1).station = airport.zoneAStationList.remove(0);
                     continue;
@@ -289,6 +296,8 @@ public class Controller implements Initializable {
                         && (airport.zoneBStationList.get(0).canServePlane(airport.flightListQueue.get(i).plane_type))) {
                     airport.flightListServiced.add(airport.flightListQueue.get(i));
                     airport.zoneBAnchorList.get(0).setStyle("-fx-background-color: crimson; -fx-border-color: white");
+                    airport.income += airport.zoneBStationList.get(0).cost;
+                    airport.parked ++;
                     airport.flightListServiced.get(airport.flightListServiced.size()-1).pos = airport.zoneBAnchorList.remove(0);
                     airport.flightListServiced.get(airport.flightListServiced.size()-1).station = airport.zoneBStationList.remove(0);
                     continue;
@@ -299,6 +308,8 @@ public class Controller implements Initializable {
                         && (airport.zoneCStationList.get(0).canServePlane(airport.flightListQueue.get(i).plane_type))) {
                     airport.flightListServiced.add(airport.flightListQueue.get(i));
                     airport.zoneCAnchorList.get(0).setStyle("-fx-background-color: crimson; -fx-border-color: white");
+                    airport.income += airport.zoneCStationList.get(0).cost;
+                    airport.parked ++;
                     airport.flightListServiced.get(airport.flightListServiced.size()-1).pos = airport.zoneCAnchorList.remove(0);
                     airport.flightListServiced.get(airport.flightListServiced.size()-1).station = airport.zoneCStationList.remove(0);
                     continue;
@@ -309,6 +320,8 @@ public class Controller implements Initializable {
                         && (airport.generalStationList.get(0).canServePlane(airport.flightListQueue.get(i).plane_type))) {
                     airport.flightListServiced.add(airport.flightListQueue.get(i));
                     airport.generalAnchorList.get(0).setStyle("-fx-background-color: crimson; -fx-border-color: white");
+                    airport.income += airport.generalStationList.get(0).cost;
+                    airport.parked ++;
                     airport.flightListServiced.get(airport.flightListServiced.size()-1).pos = airport.generalAnchorList.remove(0);
                     airport.flightListServiced.get(airport.flightListServiced.size()-1).station = airport.generalStationList.remove(0);
                     continue;
@@ -319,6 +332,8 @@ public class Controller implements Initializable {
                         && (airport.longTermStationList.get(0).canServePlane(airport.flightListQueue.get(i).plane_type))) {
                     airport.flightListServiced.add(airport.flightListQueue.get(i));
                     airport.longTermAnchorList.get(0).setStyle("-fx-background-color: crimson; -fx-border-color: white");
+                    airport.income += airport.longTermStationList.get(0).cost;
+                    airport.parked ++;
                     airport.flightListServiced.get(airport.flightListServiced.size()-1).pos = airport.longTermAnchorList.remove(0);
                     airport.flightListServiced.get(airport.flightListServiced.size()-1).station = airport.longTermStationList.remove(0);
                     continue;
@@ -326,6 +341,8 @@ public class Controller implements Initializable {
             }
         }
         airport.flightListQueue.removeAll(airport.flightListServiced);
+        parkedLabel.textProperty().set("Total Planes Parked: " + Integer.toString(airport.parked));
+        incomeLabel.textProperty().set("Total Income: " + Integer.toString(airport.income));
         scheduleDeparture();
     }
 
@@ -334,11 +351,12 @@ public class Controller implements Initializable {
         minutes = 0;
         String defaultTimer = timerLabel.textProperty().get(); // setup timer
         timerLabel.textProperty().set(defaultTimer + "00:00");
-        Timeline timeline = new Timeline(new KeyFrame(
+        // Timer Timeline
+        Timeline timer = new Timeline(new KeyFrame(
                 Duration.millis(5000),
                 ae -> runTimer(defaultTimer)));
-        timeline.setCycleCount(Animation.INDEFINITE);
-        timeline.play();
+        timer.setCycleCount(Animation.INDEFINITE);
+        timer.play();
 
         setupState();
         serviceFlights();
