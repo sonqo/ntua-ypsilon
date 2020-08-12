@@ -7,8 +7,6 @@ import app.model.station.*;
 import java.awt.*;
 import java.io.File;
 import java.net.URL;
-import java.security.Key;
-import java.sql.Time;
 import java.util.List;
 import java.util.Arrays;
 import javafx.fxml.FXML;
@@ -63,8 +61,8 @@ public class Controller implements Initializable {
 
     int hours = 0;
     int minutes = 0;
-    String defaultSetup = "C:/Users/Sonqo/Desktop/Ntua_Lambda/6_MediaLab/Airport/medialab/setup_SCENARIO-01.txt";
-    String defaultAirport = "C:/Users/Sonqo/Desktop/Ntua_Lambda/6_MediaLab/Airport/medialab/airport_SCENARIO-01.txt";
+    String defaultSetup = "medialab/setup_SCENARIO-01.txt";
+    String defaultAirport = "medialab/airport_SCENARIO-01.txt";
 
     private final Airport airport = new Airport();
 

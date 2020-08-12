@@ -13,7 +13,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("MediaLab Airport");
-        primaryStage.getIcons().add(new Image("file:/C:/Users/Sonqo/Desktop/Ntua_Lambda/6_MediaLab/Airport/images/stackoverflow_v1.png"));
+        primaryStage.getIcons().add(new Image("file:images/stackoverflow_v1.png"));
         primaryStage.setScene(new Scene(root, 1200, 800));
         primaryStage.show();
     }
