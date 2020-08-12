@@ -7,6 +7,8 @@ import app.model.station.*;
 import java.awt.*;
 import java.io.File;
 import java.net.URL;
+import java.security.Key;
+import java.sql.Time;
 import java.util.List;
 import java.util.Arrays;
 import javafx.fxml.FXML;
@@ -181,78 +183,6 @@ public class Controller implements Initializable {
         statusMessage.textProperty().set("Status: Airport state initialized, initial flights serviced"); // setting status message
     }
 
-    private void holdingMessage(){
-        String msg;
-        if (!airport.flightListQueue.isEmpty()){
-            msg = "Holding Flights: ";
-            for (int i=0; i<airport.flightListQueue.size(); i++){
-                msg += airport.flightListQueue.get(i).flight_id;
-                msg += " ";
-            }
-            holdingMessage.textProperty().set(msg);
-        }
-    }
-
-    private void scheduleDeparture(){
-        for (int i=0; i<airport.flightListServiced.size(); i++){
-            Flight curr = airport.flightListServiced.get(i);
-            Timeline timeline = new Timeline(new KeyFrame(
-                    Duration.millis(curr.min2departure*5000),
-                    ae -> departingFlights(curr)));
-            timeline.play();
-            airport.flightListServiced.get(i).timeline = timeline;
-        }
-        while (!airport.flightListServiced.isEmpty()){
-            airport.flightListDeparted.add(airport.flightListServiced.remove(0));
-        }
-    }
-
-    private void departingFlights(Flight flight){
-        if (flight.station instanceof GateStation){
-            airport.gateStationList.add((GateStation) flight.station);
-            airport.gateAnchorList.add(flight.pos);
-        }
-        else if (flight.station instanceof TradeStation){
-            airport.tradeStationList.add((TradeStation) flight.station);
-            airport.tradeAnchorList.add(flight.pos);
-        }
-        else if (flight.station instanceof ZoneAStation){
-            airport.zoneAStationList.add((ZoneAStation) flight.station);
-            airport.zoneAAnchorList.add(flight.pos);
-        }
-        else if (flight.station instanceof ZoneBStation){
-            airport.zoneBStationList.add((ZoneBStation) flight.station);
-            airport.zoneBAnchorList.add(flight.pos);
-        }
-        else if (flight.station instanceof ZoneCStation){
-            airport.zoneCStationList.add((ZoneCStation) flight.station);
-            airport.zoneCAnchorList.add(flight.pos);
-        }
-        else if (flight.station instanceof GeneralStation){
-            airport.generalStationList.add((GeneralStation) flight.station);
-            airport.generalAnchorList.add(flight.pos);
-        }
-        else if (flight.station instanceof LongTermStation){
-            airport.longTermStationList.add((LongTermStation) flight.station);
-            airport.longTermAnchorList.add(flight.pos);
-        }
-        airport.departing -= 1;
-        flight.pos.setStyle("-fx-background-color: seagreen; -fx-border-color: white");
-    }
-
-    private void runTimer(String name){
-        minutes ++;
-        if (minutes == 60){
-            minutes = 0;
-            hours++;
-        }
-        if (hours == 24){
-            minutes = 0;
-            hours = 0;
-        }
-        timerLabel.textProperty().set(name + String.format("%02d:%02d", hours, minutes));
-    }
-
     private void serviceFlights(){
         for (int i=0; i<airport.flightListQueue.size(); i++){
             if (!airport.gateStationList.isEmpty()){
@@ -346,6 +276,93 @@ public class Controller implements Initializable {
         scheduleDeparture();
     }
 
+    private void scheduleDeparture(){
+        for (int i=0; i<airport.flightListServiced.size(); i++){
+            Flight curr = airport.flightListServiced.get(i);
+            Timeline timeline = new Timeline(new KeyFrame(
+                    Duration.millis(curr.min2departure*5000),
+                    ae -> departingFlights(curr)));
+            timeline.play();
+            airport.flightListServiced.get(i).timeline = timeline;
+        }
+        while (!airport.flightListServiced.isEmpty()){
+            airport.flightListDeparting.add(airport.flightListServiced.remove(0));
+        }
+    }
+
+    private void departingFlights(Flight flight){
+        if (flight.station instanceof GateStation){
+            airport.gateStationList.add((GateStation) flight.station);
+            airport.gateAnchorList.add(flight.pos);
+        }
+        else if (flight.station instanceof TradeStation){
+            airport.tradeStationList.add((TradeStation) flight.station);
+            airport.tradeAnchorList.add(flight.pos);
+        }
+        else if (flight.station instanceof ZoneAStation){
+            airport.zoneAStationList.add((ZoneAStation) flight.station);
+            airport.zoneAAnchorList.add(flight.pos);
+        }
+        else if (flight.station instanceof ZoneBStation){
+            airport.zoneBStationList.add((ZoneBStation) flight.station);
+            airport.zoneBAnchorList.add(flight.pos);
+        }
+        else if (flight.station instanceof ZoneCStation){
+            airport.zoneCStationList.add((ZoneCStation) flight.station);
+            airport.zoneCAnchorList.add(flight.pos);
+        }
+        else if (flight.station instanceof GeneralStation){
+            airport.generalStationList.add((GeneralStation) flight.station);
+            airport.generalAnchorList.add(flight.pos);
+        }
+        else if (flight.station instanceof LongTermStation){
+            airport.longTermStationList.add((LongTermStation) flight.station);
+            airport.longTermAnchorList.add(flight.pos);
+        }
+        airport.departing -= 1;
+        flight.pos.setStyle("-fx-background-color: seagreen; -fx-border-color: white");
+    }
+
+    private void holdingMessage(){
+        String msg;
+        if (!airport.flightListQueue.isEmpty()){
+            msg = "Holding Flights: ";
+            for (int i=0; i<airport.flightListQueue.size(); i++){
+                msg += airport.flightListQueue.get(i).flight_id;
+                msg += " ";
+            }
+            holdingMessage.textProperty().set(msg);
+        }
+    }
+
+    private void runTimer(String name){
+        minutes ++;
+        if (minutes == 60){
+            minutes = 0;
+            hours++;
+        }
+        if (hours == 24){
+            minutes = 0;
+            hours = 0;
+        }
+        for (int i=0; i<airport.flightListDeparting.size(); i++){ // tracking min2departure variable
+            airport.flightListDeparting.get(i).min2departure -= 1;
+        }
+        timerLabel.textProperty().set(name + String.format("%02d:%02d", hours, minutes));
+    }
+
+    private void runCounter(){
+        List<Flight> curr = new ArrayList<>();
+        for (int i=0; i<airport.flightListDeparting.size(); i++){ // tracking min2departure variable
+            if (airport.flightListDeparting.get(i).min2departure <= 10){
+                airport.departing ++;
+                curr.add(airport.flightListDeparting.get(i));
+            }
+        }
+        airport.flightListDeparting.removeAll(curr);
+        departingLabel.textProperty().set("Departing in <10 Minutes: " + airport.departing);
+    }
+
     public void startApp(ActionEvent actionEvent) throws IOException { // Start button
         hours = 0;
         minutes = 0;
@@ -357,6 +374,12 @@ public class Controller implements Initializable {
                 ae -> runTimer(defaultTimer)));
         timer.setCycleCount(Animation.INDEFINITE);
         timer.play();
+        // Counter Timeline
+        Timeline counter = new Timeline(new KeyFrame(
+                Duration.millis(50),
+                ae -> runCounter()));
+        counter.setCycleCount(Animation.INDEFINITE);
+        counter.play();
 
         setupState();
         serviceFlights();

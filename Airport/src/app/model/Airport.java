@@ -15,7 +15,7 @@ public class Airport {
 
     public List<Flight> flightListQueue = new ArrayList<>();
     public List<Flight> flightListServiced = new ArrayList<>();
-    public List<Flight> flightListDeparted = new ArrayList<>();
+    public List<Flight> flightListDeparting = new ArrayList<>();
 
     public List<AnchorPane> gateAnchorList;
     public List<GateStation> gateStationList = new ArrayList<>();
