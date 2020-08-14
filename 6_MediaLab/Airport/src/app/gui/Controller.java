@@ -81,7 +81,7 @@ public class Controller implements Initializable {
             if (Integer.parseInt(rtmp.get(0)) == 1) {
                 for (int i=0; i<Integer.parseInt(rtmp.get(1)); i++) {
                     GateStation stat = new GateStation();
-                    stat.setInfo(Integer.parseInt(rtmp.get(0)), Integer.parseInt(rtmp.get(2)), rtmp.get(3) + Integer.toString(i+1));
+                    stat.setInfo(Integer.parseInt(rtmp.get(0)), Integer.parseInt(rtmp.get(2)), rtmp.get(3) + i+1);
                     airport.gateStationList.add(stat);
                     validGateAnchorList.add(globalGateAnchorList.remove(0));
                 }
@@ -93,7 +93,7 @@ public class Controller implements Initializable {
             else if (Integer.parseInt(rtmp.get(0)) == 2){
                 for (int i=0; i<Integer.parseInt(rtmp.get(1)); i++) {
                     TradeStation stat = new TradeStation();
-                    stat.setInfo(Integer.parseInt(rtmp.get(0)), Integer.parseInt(rtmp.get(2)), rtmp.get(3) + Integer.toString(i+1));
+                    stat.setInfo(Integer.parseInt(rtmp.get(0)), Integer.parseInt(rtmp.get(2)), rtmp.get(3) + i+1);
                     airport.tradeStationList.add(stat);
                     validTradeAnchorList.add(globalTradeAnchorList.remove(0));
                 }
@@ -105,7 +105,7 @@ public class Controller implements Initializable {
             else if (Integer.parseInt(rtmp.get(0)) == 3){
                 for (int i=0; i<Integer.parseInt(rtmp.get(1)); i++) {
                     ZoneAStation stat = new ZoneAStation();
-                    stat.setInfo(Integer.parseInt(rtmp.get(0)), Integer.parseInt(rtmp.get(2)), rtmp.get(3) + Integer.toString(i+1));
+                    stat.setInfo(Integer.parseInt(rtmp.get(0)), Integer.parseInt(rtmp.get(2)), rtmp.get(3) + i+1);
                     airport.zoneAStationList.add(stat);
                     validZoneAAnchorList.add(globalZoneAAnchorList.remove(0));
                 }
@@ -117,7 +117,7 @@ public class Controller implements Initializable {
             else if (Integer.parseInt(rtmp.get(0)) == 4){
                 for (int i=0; i<Integer.parseInt(rtmp.get(1)); i++) {
                     ZoneBStation stat = new ZoneBStation();
-                    stat.setInfo(Integer.parseInt(rtmp.get(0)), Integer.parseInt(rtmp.get(2)), rtmp.get(3) + Integer.toString(i+1));
+                    stat.setInfo(Integer.parseInt(rtmp.get(0)), Integer.parseInt(rtmp.get(2)), rtmp.get(3) + i+1);
                     airport.zoneBStationList.add(stat);
                     validZoneBAnchorList.add(globalZoneBAnchorList.remove(0));
                 }
@@ -129,7 +129,7 @@ public class Controller implements Initializable {
             else if (Integer.parseInt(rtmp.get(0)) == 5){
                 for (int i=0; i<Integer.parseInt(rtmp.get(1)); i++) {
                     ZoneCStation stat = new ZoneCStation();
-                    stat.setInfo(Integer.parseInt(rtmp.get(0)), Integer.parseInt(rtmp.get(2)), rtmp.get(3) + Integer.toString(i+1));
+                    stat.setInfo(Integer.parseInt(rtmp.get(0)), Integer.parseInt(rtmp.get(2)), rtmp.get(3) + i+1);
                     airport.zoneCStationList.add(stat);
                     validZoneCAnchorList.add(globalZoneCAnchorList.remove(0));
                 }
@@ -141,7 +141,7 @@ public class Controller implements Initializable {
             else if (Integer.parseInt(rtmp.get(0)) == 6){
                 for (int i=0; i<Integer.parseInt(rtmp.get(1)); i++) {
                     GeneralStation stat = new GeneralStation();
-                    stat.setInfo(Integer.parseInt(rtmp.get(0)), Integer.parseInt(rtmp.get(2)), rtmp.get(3) + Integer.toString(i+1));
+                    stat.setInfo(Integer.parseInt(rtmp.get(0)), Integer.parseInt(rtmp.get(2)), rtmp.get(3) + i+1);
                     airport.generalStationList.add(stat);
                     validGeneralAnchorList.add(globalGeneralAnchorList.remove(0));
                 }
@@ -153,7 +153,7 @@ public class Controller implements Initializable {
             else if (Integer.parseInt(rtmp.get(0)) == 7){
                 for (int i=0; i<Integer.parseInt(rtmp.get(1)); i++) {
                     LongTermStation stat = new LongTermStation();
-                    stat.setInfo(Integer.parseInt(rtmp.get(0)), Integer.parseInt(rtmp.get(2)), rtmp.get(3) + Integer.toString(i+1));
+                    stat.setInfo(Integer.parseInt(rtmp.get(0)), Integer.parseInt(rtmp.get(2)), rtmp.get(3) + i+1);
                     airport.longTermStationList.add(stat);
                     validLongTermAnchorList.add(globalLongTermAnchorList.remove(0));
                 }
@@ -264,13 +264,12 @@ public class Controller implements Initializable {
                     airport.parked ++;
                     airport.flightListServiced.get(airport.flightListServiced.size()-1).pos = airport.longTermAnchorList.remove(0);
                     airport.flightListServiced.get(airport.flightListServiced.size()-1).station = airport.longTermStationList.remove(0);
-                    continue;
                 }
             }
         }
         airport.flightListQueue.removeAll(airport.flightListServiced);
-        parkedLabel.textProperty().set("Total Planes Parked: " + Integer.toString(airport.parked));
-        incomeLabel.textProperty().set("Total Income: " + Integer.toString(airport.income));
+        parkedLabel.textProperty().set("Total Planes Parked: " + airport.parked);
+        incomeLabel.textProperty().set("Total Income: " + airport.income);
         scheduleDeparture();
     }
 
@@ -281,7 +280,6 @@ public class Controller implements Initializable {
                         && (airport.gateStationList.get(0).canServePlane(airport.flightListQueue.get(i).plane_type))) {
                     airport.flightListServiced.add(airport.flightListQueue.get(i));
                     airport.gateAnchorList.get(0).setStyle("-fx-background-color: darkorange; -fx-border-color: white");
-                    airport.income += airport.gateStationList.get(0).cost;
                     airport.flightListServiced.get(airport.flightListServiced.size() - 1).pos = airport.gateAnchorList.remove(0);
                     airport.flightListServiced.get(airport.flightListServiced.size() - 1).station = airport.gateStationList.remove(0);
                     continue;
@@ -292,7 +290,6 @@ public class Controller implements Initializable {
                         && (airport.tradeStationList.get(0).canServePlane(airport.flightListQueue.get(i).plane_type))) {
                     airport.flightListServiced.add(airport.flightListQueue.get(i));
                     airport.tradeAnchorList.get(0).setStyle("-fx-background-color: darkorange; -fx-border-color: white");
-                    airport.income += airport.tradeStationList.get(0).cost;
                     airport.flightListServiced.get(airport.flightListServiced.size() - 1).pos = airport.tradeAnchorList.remove(0);
                     airport.flightListServiced.get(airport.flightListServiced.size() - 1).station = airport.tradeStationList.remove(0);
                     continue;
@@ -303,7 +300,6 @@ public class Controller implements Initializable {
                         && (airport.zoneAStationList.get(0).canServePlane(airport.flightListQueue.get(i).plane_type))) {
                     airport.flightListServiced.add(airport.flightListQueue.get(i));
                     airport.zoneAAnchorList.get(0).setStyle("-fx-background-color: darkorange; -fx-border-color: white");
-                    airport.income += airport.zoneAStationList.get(0).cost;
                     airport.flightListServiced.get(airport.flightListServiced.size() - 1).pos = airport.zoneAAnchorList.remove(0);
                     airport.flightListServiced.get(airport.flightListServiced.size() - 1).station = airport.zoneAStationList.remove(0);
                     continue;
@@ -314,7 +310,6 @@ public class Controller implements Initializable {
                         && (airport.zoneBStationList.get(0).canServePlane(airport.flightListQueue.get(i).plane_type))) {
                     airport.flightListServiced.add(airport.flightListQueue.get(i));
                     airport.zoneBAnchorList.get(0).setStyle("-fx-background-color: darkorange; -fx-border-color: white");
-                    airport.income += airport.zoneBStationList.get(0).cost;
                     airport.flightListServiced.get(airport.flightListServiced.size() - 1).pos = airport.zoneBAnchorList.remove(0);
                     airport.flightListServiced.get(airport.flightListServiced.size() - 1).station = airport.zoneBStationList.remove(0);
                     continue;
@@ -325,7 +320,6 @@ public class Controller implements Initializable {
                         && (airport.zoneCStationList.get(0).canServePlane(airport.flightListQueue.get(i).plane_type))) {
                     airport.flightListServiced.add(airport.flightListQueue.get(i));
                     airport.zoneCAnchorList.get(0).setStyle("-fx-background-color: darkorange; -fx-border-color: white");
-                    airport.income += airport.zoneCStationList.get(0).cost;
                     airport.flightListServiced.get(airport.flightListServiced.size() - 1).pos = airport.zoneCAnchorList.remove(0);
                     airport.flightListServiced.get(airport.flightListServiced.size() - 1).station = airport.zoneCStationList.remove(0);
                     continue;
@@ -336,7 +330,6 @@ public class Controller implements Initializable {
                         && (airport.generalStationList.get(0).canServePlane(airport.flightListQueue.get(i).plane_type))) {
                     airport.flightListServiced.add(airport.flightListQueue.get(i));
                     airport.generalAnchorList.get(0).setStyle("-fx-background-color: darkorange; -fx-border-color: white");
-                    airport.income += airport.generalStationList.get(0).cost;
                     airport.flightListServiced.get(airport.flightListServiced.size() - 1).pos = airport.generalAnchorList.remove(0);
                     airport.flightListServiced.get(airport.flightListServiced.size() - 1).station = airport.generalStationList.remove(0);
                     continue;
@@ -347,10 +340,8 @@ public class Controller implements Initializable {
                         && (airport.longTermStationList.get(0).canServePlane(airport.flightListQueue.get(i).plane_type))) {
                     airport.flightListServiced.add(airport.flightListQueue.get(i));
                     airport.longTermAnchorList.get(0).setStyle("-fx-background-color: darkorange; -fx-border-color: white");
-                    airport.income += airport.longTermStationList.get(0).cost;
                     airport.flightListServiced.get(airport.flightListServiced.size() - 1).pos = airport.longTermAnchorList.remove(0);
                     airport.flightListServiced.get(airport.flightListServiced.size() - 1).station = airport.longTermStationList.remove(0);
-                    continue;
                 }
             }
         }
@@ -359,7 +350,14 @@ public class Controller implements Initializable {
     }
 
     private void scheduleLanding(){
-        //TODO LANDING AND DEPARTURE HANDLING FOR INCOMING FLIGHTS
+        for (int i=0; i<airport.flightListServiced.size(); i++){
+            Flight curr = airport.flightListServiced.get(i);
+            Timeline timeline = new Timeline(new KeyFrame(
+                    Duration.millis(curr.plane_type*2*5000),
+                    ae -> departingFlights(curr, true)));
+            timeline.play();
+            airport.flightListServiced.get(i).timeline = timeline;
+        }
     }
 
     private void scheduleDeparture(){
@@ -367,7 +365,7 @@ public class Controller implements Initializable {
             Flight curr = airport.flightListServiced.get(i);
             Timeline timeline = new Timeline(new KeyFrame(
                     Duration.millis(curr.min2departure*5000),
-                    ae -> departingFlights(curr)));
+                    ae -> departingFlights(curr, false)));
             timeline.play();
             airport.flightListServiced.get(i).timeline = timeline;
         }
@@ -376,7 +374,7 @@ public class Controller implements Initializable {
         }
     }
 
-    private void departingFlights(Flight flight){
+    private void departingFlights(Flight flight, boolean flag){
         if (flight.station instanceof GateStation){
             airport.gateStationList.add((GateStation) flight.station);
             airport.gateAnchorList.add(flight.pos);
@@ -384,29 +382,42 @@ public class Controller implements Initializable {
         else if (flight.station instanceof TradeStation){
             airport.tradeStationList.add((TradeStation) flight.station);
             airport.tradeAnchorList.add(flight.pos);
+            airport.income += airport.tradeStationList.get(0).cost;
         }
         else if (flight.station instanceof ZoneAStation){
             airport.zoneAStationList.add((ZoneAStation) flight.station);
             airport.zoneAAnchorList.add(flight.pos);
+            airport.income += airport.zoneAStationList.get(0).cost;
         }
         else if (flight.station instanceof ZoneBStation){
             airport.zoneBStationList.add((ZoneBStation) flight.station);
             airport.zoneBAnchorList.add(flight.pos);
+            airport.income += airport.zoneBStationList.get(0).cost;
         }
         else if (flight.station instanceof ZoneCStation){
             airport.zoneCStationList.add((ZoneCStation) flight.station);
             airport.zoneCAnchorList.add(flight.pos);
+            airport.income += airport.zoneCStationList.get(0).cost;
         }
         else if (flight.station instanceof GeneralStation){
             airport.generalStationList.add((GeneralStation) flight.station);
             airport.generalAnchorList.add(flight.pos);
+            airport.income += airport.generalStationList.get(0).cost;
         }
         else if (flight.station instanceof LongTermStation){
             airport.longTermStationList.add((LongTermStation) flight.station);
             airport.longTermAnchorList.add(flight.pos);
+            airport.income += airport.longTermStationList.get(0).cost;
         }
-        airport.departing -= 1;
-        flight.pos.setStyle("-fx-background-color: seagreen; -fx-border-color: white");
+        if (!flag) {
+            airport.departing -= 1;
+            flight.pos.setStyle("-fx-background-color: seagreen; -fx-border-color: white");
+        }
+        else{
+            airport.parked += 1;
+            flight.pos.setStyle("-fx-background-color: crimson; -fx-border-color: white");
+            scheduleDeparture();
+        }
     }
 
     private void holdingMessage(){
