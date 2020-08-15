@@ -9,7 +9,7 @@ public class Airport {
 
     double fuel = 0.25, cleaning = 0.02, transport = 0.02, loading = 0.05;
 
-    public int parked = 0, income = 0, departing = 0;
+    public int parked = 0, income = 0, departing = 0, landing = 0;
 
     public List<Station> stationList = new ArrayList<>();
 
