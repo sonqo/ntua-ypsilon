@@ -1,2 +1,2 @@
 14,City A,1,2,40
-B2,Atlantis,2,3,2
+B2,Atlantis,2,3,85

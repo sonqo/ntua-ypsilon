@@ -678,10 +678,20 @@
                                           <TextField fx:id="flightTypeField" layoutX="24.0" layoutY="219.0" prefHeight="25.0" prefWidth="310.0" promptText="Fight Type ID" />
                                           <TextField fx:id="planeTypeField" layoutX="23.0" layoutY="272.0" prefHeight="25.0" prefWidth="310.0" promptText="Plane Type ID" />
                                           <TextField fx:id="departureField" layoutX="24.0" layoutY="322.0" prefHeight="25.0" prefWidth="310.0" promptText="Departute Time" />
-                                          <Button fx:id="submitButton" layoutX="150.0" layoutY="386.0" mnemonicParsing="false" onAction="#handleSubmit" text="Submit">
+                                          <Button fx:id="submitButton" layoutX="150.0" layoutY="366.0" mnemonicParsing="false" onAction="#handleSubmit" text="Submit">
                                              <font>
                                                 <Font size="13.0" />
                                              </font></Button>
+                                          <Label fx:id="landingMessage" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="23.0" layoutY="439.0" prefHeight="68.0" prefWidth="310.0" text="Landing Info: " textAlignment="CENTER" wrapText="true">
+                                             <font>
+                                                <Font name="Consolas Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="departingMessage" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="23.0" layoutY="525.0" prefHeight="68.0" prefWidth="310.0" text="Departing Info: " textAlignment="CENTER" wrapText="true">
+                                             <font>
+                                                <Font name="Consolas Bold" size="14.0" />
+                                             </font>
+                                          </Label>
                                        </children></AnchorPane>
                                 </items>
                               </SplitPane>
@@ -689,11 +699,7 @@
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                            <children>
-                              <Label fx:id="statusMessage" alignment="CENTER" contentDisplay="CENTER" layoutX="34.0" layoutY="9.0" prefHeight="25.0" prefWidth="1128.0" text="Status: " textAlignment="CENTER" wrapText="true">
-                                 <font>
-                                    <Font name="Consolas Bold" size="14.0" />
-                                 </font></Label>
-                              <Label fx:id="holdingMessage" alignment="CENTER" contentDisplay="CENTER" layoutX="34.0" layoutY="34.0" prefHeight="25.0" prefWidth="1128.0" textAlignment="CENTER" wrapText="true">
+                              <Label fx:id="statusMessage" alignment="CENTER" contentDisplay="CENTER" layoutX="34.0" layoutY="11.0" prefHeight="48.0" prefWidth="1128.0" textAlignment="CENTER" wrapText="true">
                                  <font>
                                     <Font name="Consolas Bold" size="14.0" />
                                  </font>
