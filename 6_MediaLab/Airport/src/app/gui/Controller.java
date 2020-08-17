@@ -25,13 +25,11 @@ import javafx.animation.Animation;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import java.net.URISyntaxException;
-import javafx.scene.control.MenuBar;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 public class Controller implements Initializable {
 
-    public MenuBar menuBar;
     public Button submitButton;
     public TextField flightIdField, destinationField, flightTypeField, planeTypeField, departureField;
     public Label timerLabel, statusMessage, holdingMessage, incomeLabel, parkedLabel, departingLabel, landingLabel, landingMessage, departingMessage;
@@ -71,7 +69,7 @@ public class Controller implements Initializable {
 
     }
 
-    private void setupState() throws IOException{
+    private void setupState() throws IOException, InterruptedException {
 
         // Reading Airport_Scenario
         BufferedReader reader = new BufferedReader(new FileReader(defaultAirport)); // Reading Airport_Scenario
@@ -179,7 +177,11 @@ public class Controller implements Initializable {
         reader.close();
 
         globalMessage();
-        statusMessage.textProperty().set("Status: Airport state initialized, initial flights serviced"); // setting status message
+        statusMessage.textProperty().set("Status: Airport state initialized, initial flights serviced"); // setting status message, clear time
+        Timeline timeline = new Timeline(new KeyFrame(
+                Duration.millis(5000),
+                ae -> clearMessage(statusMessage, "")));
+        timeline.play();
     }
 
     private void serviceFlights(){
@@ -483,10 +485,24 @@ public class Controller implements Initializable {
     private void statusMessage(Flight flight, boolean departing){
         if (departing) {
             departingMessage.textProperty().set("Departing Info:\n Flight " + flight.flight_id + " departed");
+            Timeline timeline = new Timeline(new KeyFrame(
+                    Duration.millis(5000),
+                    ae -> clearMessage(departingMessage, "Departing Info:")
+            ));
+            timeline.play();
         }
         else{ // landing
             landingMessage.textProperty().set("Landing Info:\n Flight " + flight.flight_id + " commenced landing procedure");
+            Timeline timeline = new Timeline(new KeyFrame(
+                    Duration.millis(flight.plane_type*2*5000),
+                    ae -> clearMessage(landingMessage, "Landing Info:")
+            ));
+            timeline.play();
         }
+    }
+
+    private void clearMessage(Label label, String def){
+        label.textProperty().set(def);
     }
 
     private void holdingMessage(){
@@ -522,7 +538,7 @@ public class Controller implements Initializable {
         departingLabel.textProperty().set("Departing in <10 Minutes: " + airport.departing);
     }
 
-    public void startApp(ActionEvent actionEvent) throws IOException { // Start button
+    public void startApp(ActionEvent actionEvent) throws IOException, InterruptedException { // Start button
         hours = 0;
         minutes = 0;
         String defaultTimer = timerLabel.textProperty().get(); // setup timer
@@ -570,11 +586,9 @@ public class Controller implements Initializable {
         flight.setInfo(flightIdField.textProperty().get(), destinationField.textProperty().get(), Integer.parseInt(flightTypeField.textProperty().get()),
                 Integer.parseInt(planeTypeField.textProperty().get()), Integer.parseInt(departureField.textProperty().get()));
         airport.flightListQueue.add(flight);
-
         serviceLandingFlights();
 
         holdingMessage();
         statusMessage(flight, false);
     }
-
 }

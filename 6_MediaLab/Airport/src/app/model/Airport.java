@@ -1,8 +1,8 @@
 package app.model;
 
 import java.util.List;
-import java.util.ArrayList;
 import app.model.station.*;
+import java.util.ArrayList;
 import javafx.scene.layout.AnchorPane;
 
 public class Airport {
