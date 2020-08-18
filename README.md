@@ -31,11 +31,11 @@ Details about each directory is given in the following sections.
 
 - **Machine-Learning-Based Classification**  
 _Classification techniques on [UCI](https://archive.ics.uci.edu/ml/index.php) datasets._  
-Data preparation, class imbalance handling, standardization, Recursive Feature Elimination (RFE), Principal Component Analysis (PCA), Independent Component Analysis (ICA), KNeighbors/GaussianNB/MLP classifiers tested.
+Data preparation, class imbalance handling, standardization, Recursive Feature Elimination, Principal Component Analysis, Independent Component Analysis, KNeighbors/GaussianNB/MLP classifiers tested.
 
 - **Recommender System & SOM Clustering**  
 _Movie recommender system and movie clustering based on IMDb summaries._  
-Data preparation, Term Frequency-Inverse Document Frequency represantation, Cosine Similarity, Stemming, Tokenizers, Self-Organizing-Maps, topological analysis.
+Data preparation, Term Frequency-Inverse Document Frequency represantation, cosine similarity, stemming, tokenizers, Self-Organizing-Maps, topological analysis.
 
 - **CIFAR-100 Image Classification**  
 _CIFAR dataset optimization with achieved accuracy ≈ 75%._  
