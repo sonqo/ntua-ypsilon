@@ -32,14 +32,15 @@ Details about each directory is given in the following sections.
 ### Neural Networks and Intelligent Systems
 
 - **Machine-Learning-Based Classification**  
-Classification techniques on two [UCI](https://archive.ics.uci.edu/ml/index.php) datasets.  
+_Classification techniques on [UCI](https://archive.ics.uci.edu/ml/index.php) datasets._  
 Data preparation, class imbalance handling, Standardization, Recursive Feature Elimination, Principal Component Analysis, Independent Component Analysis, KNeighbors/GaussianNB/MLP classifiers tested.
 
 - **Recommender System & SOM Clustering**  
-Movie recommender system and movie clustering based on IMDb reviews.  
-Data preparation, Term Frequency-Inverse Document Frequency represantation, Cosine Similarity, Stemming, Tokenizers, Self-Organizing-Maps clustering, topological analysis.
+_Movie recommender system and movie clustering based on IMDb summaries._  
+Data preparation, Term Frequency-Inverse Document Frequency represantation, Cosine Similarity, Stemming, Tokenizers, Self-Organizing-Maps, topological analysis.
 
 - **CIFAR-100 Image Classification**  
-Data preparation, Convolution Neural Network arhitectures tested, Data Augmentation, Transfer Learning
+_CIFAR dataset optimization with achieved accuracy ≈75%._
+Data preparation, various Convolution Neural Network arhitectures tested, Data Augmentation, Transfer Learning
 
-:computer: Technologies used: ***Python***_(sklearn, tensorflow, somoclu)_
+:computer: Technologies used: ***Python***_(imblearn, sklearn, tensorflow, somoclu)_
