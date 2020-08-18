@@ -7,31 +7,39 @@ Details about each directory is given in the following sections.
 
 ### Microprocessors
 
+:computer: Technologies used: ******
 
 ### Microprocessors Laboratory
 
+:computer: Technologies used: ******
 
 ### Operating Systems
 
+:computer: Technologies used: ******
 
 ### Multimedia Technology
 
+:computer: Technologies used: ******
 
 ### Image and Video Analysis and Technology
 
-- Image Cartoonification & Video Motion Detection
+- **Image Cartoonification & Video Motion Detection**  
 
-- CIFAR-100 Image Classification
+- **CIFAR-100 Image Classification**  
+
+:computer: Technologies used: ******
 
 ### Neural Networks and Intelligent Systems
 
 - **Machine-Learning-Based Classification**  
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Classification techniques on two [UCI](https://archive.ics.uci.edu/ml/index.php) datasets.  
+Data preparation, class imbalance handling, Standardization, Recursive Feature Elimination, Principal Component Analysis, Independent Component Analysis, KNeighbors/GaussianNB/MLP classifiers tested.
 
-- **Recommender System & Self-Organizing-Maps Clustering**  
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+- **Recommender System & SOM Clustering**  
+Movie recommender system and movie clustering based on IMDb reviews.  
+Data preparation, Term Frequency-Inverse Document Frequency represantation, Cosine Similarity, Stemming, Tokenizers, Self-Organizing-Maps clustering, topological analysis.
 
 - **CIFAR-100 Image Classification**  
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Data preparation, Convolution Neural Network arhitectures tested, Data Augmentation, Transfer Learning
 
-:computer: Technologies used: ***Python***
+:computer: Technologies used: ***Python***_(sklearn, tensorflow, somoclu)_
