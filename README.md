@@ -38,7 +38,7 @@ _Movie recommender system and movie clustering based on IMDb summaries._
 Data preparation, Term Frequency-Inverse Document Frequency represantation, Cosine Similarity, Stemming, Tokenizers, Self-Organizing-Maps, topological analysis.
 
 - **CIFAR-100 Image Classification**  
-_CIFAR dataset optimization with achieved accuracy ≈75%._  
+_CIFAR dataset optimization with achieved accuracy ≈ 75%._  
 Data preparation, various Convolution Neural Network arhitectures tested, Data Augmentation, Transfer Learning
 
 :computer: Technologies used: ***Python*** _(imblearn, sklearn, tensorflow, somoclu)_
