@@ -41,4 +41,4 @@ Data preparation, Term Frequency-Inverse Document Frequency represantation, Cosi
 _CIFAR dataset optimization with achieved accuracy ≈ 75%._  
 Data preparation, various Convolution Neural Network arhitectures tested, Data Augmentation, Transfer Learning
 
-:desktop_computer: Technologies used: ***Python*** _(imblearn, sklearn, tensorflow, somoclu)_
+:bulb: Technologies used: ***Python*** _(imblearn, sklearn, tensorflow, somoclu)_
