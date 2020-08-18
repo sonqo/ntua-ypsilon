@@ -1,1 +1,1 @@
-## National Technical University of Athens - Electrical and Computer Engineering - Ypsilon Flow
+## NTUA - Electrical and Computer Engineering - Ypsilon Flow
