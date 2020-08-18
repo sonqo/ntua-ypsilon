@@ -19,20 +19,19 @@ Details about each directory is given in the following sections.
 
 ### Image and Video Analysis and Technology
 
+- Image Cartoonification & Video Motion Detection
+
+- CIFAR-100 Image Classification
 
 ### Neural Networks and Intelligent Systems
 
-#### Machine Learning based Classification
+- Machine-Learning-Based Classification
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
-:computer: Technologies used:
-
-#### Recommender System - Self-Organizing-Maps Clustering
+- Recommender System & Self-Organizing-Maps Clustering
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
-:computer: Technologies used:
-
-#### CIFAR-100 Image Classification
+- CIFAR-100 Image Classification
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
-:computer: Technologies used:
+:computer: Technologies used: Python
