@@ -6,4 +6,4 @@ This repository contains my personal academic projects while following the Compu
 
 <br/>
 
-### [1. Microprocessors](https://<span></span>github.com/Sonqo/Ntua_Ypsilon/tree/master/1_Micro_Computers)
+### [1. Microprocessors](https://github.com/Sonqo/Ntua_Ypsilon/tree/master/1_Micro_Computers)
