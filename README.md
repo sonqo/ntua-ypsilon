@@ -4,12 +4,16 @@ This repository contains my personal academic projects while following the Compu
 Details about each directory is given in the following sections.
 
 ### Microprocessors
+_Basic AVR programming._  
+Stack pointer handling, function generator, input and output exercises.
 
-:bulb: Technologies used: ******
+:bulb: Technologies used: ***AVR Assembly, C***
 
 ### Microprocessors Laboratory
+_Various AVR applications._
+Stack pointer handling, interrupts, LCD and Keypad functionalities, DS1820 sensor, Asynchronous Receiver/Transimitter communication, Internet of Things applet.
 
-:bulb: Technologies used: ******
+:bulb: Technologies used: ***8085 Assembly, AVR Assembly, C***
 
 ### Operating Systems
 
@@ -38,7 +42,7 @@ _Movie recommender system and movie clustering based on IMDb summaries._
 Data preparation, Term Frequency-Inverse Document Frequency represantation, cosine similarity, stemming, tokenizers, Self-Organizing-Maps, topological analysis.
 
 - **CIFAR-100 Image Classification**  
-_CIFAR dataset optimization with achieved accuracy ≈ 75%._  
+_CNN model optimization on CIFAR-100 dataset with achieved accuracy ≈ 75%._  
 Data preparation, various Convolution Neural Network arhitectures tested, Data Augmentation, VGG19 Transfer Learning
 
 :bulb: Technologies used: ***Python*** _(imblearn, sklearn, tensorflow, somoclu)_
