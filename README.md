@@ -24,7 +24,7 @@ Child process handling, signal communication, monitoring multiple file descripto
 ### Multimedia Technology
 
 - **Aiport**  
-_GUI application designed for flight management system._  
+_GUI application designed for a flight management system._  
 Object oriented approach, interface design, event handling, timelines, animations.
 
 :bulb: Technologies used: ***Java*** _(JavaFX, SceneBuilder)_
@@ -33,7 +33,7 @@ Object oriented approach, interface design, event handling, timelines, animation
 
 - **Image Cartoonification & Video Motion Detection**  
 _Edge detection applications on images and videos._  
-Color space selection, noise reduction, filtering, Laplacian/Canny/Marr-Hildreth edge detectors tested, Shi-Tomashi/Harris corner detector tested, Lucas-Kanade motion prediction.
+Color space selection, noise reduction, filtering, Laplacian/Canny/Marr-Hildreth edge detectors tested, Shi-Tomashi/Harris corner detectors tested, Lucas-Kanade motion prediction.
 
 - **CIFAR-100 Image Classification**  
 _CNN model optimizations on CIFAR-100 dataset with achieved accuracy ≈ 80%._  
