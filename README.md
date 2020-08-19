@@ -16,8 +16,10 @@ Stack pointer handling, interrupts, LCD and Keypad functionalities, DS1820 senso
 :bulb: Technologies used: ***8085 Assembly, AVR Assembly, C***
 
 ### Operating Systems
+_Unix system programming._  
+Child process handling, signal communication, monitoring multiple file descriptors, pipe communication, socket application.
 
-:bulb: Technologies used: ******
+:bulb: Technologies used: ***C*** _(sys/wait.h, sys/types.h, sys/select.h, sys/socket.h)_
 
 ### Multimedia Technology
 
