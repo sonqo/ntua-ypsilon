@@ -24,7 +24,7 @@ Child process handling, signal communication, monitoring multiple file descripto
 
 - **Aiport**  
 _GUI application designed for a flight management system._  
-Object oriented approach, interface design, event handling, timelines, animations.
+Object-oriented approach, interface design, event handling, timelines, animations.
 
 :bulb: Technologies used: ***Java*** _(JavaFX, SceneBuilder)_
 
