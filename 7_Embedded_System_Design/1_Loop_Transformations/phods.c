@@ -11,26 +11,26 @@ void read_sequence(int current[N][M], int previous[N][M]) {
 	int i, j;
     FILE *picture0, *picture1;
 
-    if((picture0=fopen("akiyo0.y","rb")) == NULL) {
+    if ((picture0=fopen("akiyo0.y","rb")) == NULL) {
 		printf("Previous frame doesn't exist.\n");
 		exit(-1);
 	}
 
-	if((picture1=fopen("akiyo1.y","rb")) == NULL) {
+	if ((picture1=fopen("akiyo1.y","rb")) == NULL) {
 		printf("Current frame doesn't exist.\n");
 		exit(-1);
 	}
 
     //Input for the previous frame
-    for(i=0; i<N; i++) {
-        for(j=0; j<M; j++) {
+    for (i=0; i<N; i++) {
+        for (j=0; j<M; j++) {
             previous[i][j] = fgetc(picture0);
         }
     }
 
 	//Input for the current frame
-	for(i=0; i<N; i++) {
-		for(j=0; j<M; j++) {
+	for (i=0; i<N; i++) {
+		for (j=0; j<M; j++) {
 			current[i][j] = fgetc(picture1);
         }
     }
@@ -48,28 +48,28 @@ void phods_motion_estimation(int current[N][M], int previous[N][M], int vectors_
     disty = 0; 
 
   //Initialize the vector motion matrices
-    for(i=0; i<N/B; i++) {
-        for(j=0; j<M/B; j++) {
+    for (i=0; i<N/B; i++) {
+        for (j=0; j<M/B; j++) {
             vectors_x[i][j] = 0;
             vectors_y[i][j] = 0;
         }
     }
 
     //For all blocks in the current frame
-    for(x=0; x<N/B; x++) {
-        for(y=0; y<M/B; y++) {
+    for (x=0; x<N/B; x++) {
+        for (y=0; y<M/B; y++) {
             S = 4;
-            while(S > 0) {
+            while (S > 0) {
                 min1 = 255*B*B;
                 min2 = 255*B*B;
                 //For all candidate blocks in X dimension
-                for(i=-S; i<S+1; i+=S) {
+                for (i=-S; i<S+1; i+=S) {
                     distx = 0;
                     //For all pixels in the block
-                    for(k=0; k<B; k++) {
-                        for(l=0; l<B; l++) {
+                    for (k=0; k<B; k++) {
+                        for (l=0; l<B; l++) {
                             p1 = current[B*x+k][B*y+l];
-                            if((B*x + vectors_x[x][y] + i + k) < 0 || (B*x + vectors_x[x][y] + i + k) > (N-1) || (B*y + vectors_y[x][y] + l) < 0 || (B*y + vectors_y[x][y] + l) > (M-1)) {
+                            if ((B*x+vectors_x[x][y]+i+k) < 0 || (B*x+vectors_x[x][y]+i+k) > (N-1) || (B*y+vectors_y[x][y]+l) < 0 || (B*y+vectors_y[x][y]+l) > (M-1)) {
                                 p2 = 0;
                             } else {
                                 p2 = previous[B*x+vectors_x[x][y]+i+k][B*y+vectors_y[x][y]+l];
@@ -77,20 +77,20 @@ void phods_motion_estimation(int current[N][M], int previous[N][M], int vectors_
                             distx += abs(p1-p2);
                         }
                     }
-                    if(distx < min1) {
+                    if (distx < min1) {
                         min1 = distx;
                         bestx = i;
                     }
                 }
                 //For all candidate blocks in Y dimension
-                for(i=-S; i<S+1; i+=S) {
+                for (i=-S; i<S+1; i+=S) {
                     disty = 0;
 
                     //For all pixels in the block
-                    for(k=0; k<B; k++) {
-                        for(l=0; l<B; l++) {
+                    for (k=0; k<B; k++) {
+                        for (l=0; l<B; l++) {
                             p1 = current[B*x+k][B*y+l];
-                            if((B*x + vectors_x[x][y] + k) <0 || (B*x + vectors_x[x][y] + k) > (N-1) || (B*y + vectors_y[x][y] + i + l) < 0 || (B*y + vectors_y[x][y] + i + l) > (M-1)) {
+                            if ((B*x+vectors_x[x][y]+k) < 0 || (B*x+vectors_x[x][y]+k) > (N-1) || (B*y+vectors_y[x][y]+i+l) < 0 || (B*y+vectors_y[x][y]+i+l) > (M-1)) {
                                 q2 = 0;
                             } else {
                                 q2 = previous[B*x+vectors_x[x][y]+k][B*y+vectors_y[x][y]+i+l];
@@ -98,7 +98,7 @@ void phods_motion_estimation(int current[N][M], int previous[N][M], int vectors_
                         disty += abs(p1-q2);
                         }
                     }
-                    if(disty < min2) {
+                    if (disty < min2) {
                         min2 = disty;
                         besty = i;
                     }
