@@ -39,7 +39,6 @@ void read_sequence(int current[N][M], int previous[N][M]) {
 	fclose(picture1);
 }
 
-
 void phods_motion_estimation(int current[N][M], int previous[N][M], int vectors_x[N/B][M/B], int vectors_y[N/B][M/B]) {
   
     int x, y, i, j, k, l, p1, p2, q2, distx, disty, S, min1, min2, bestx, besty;
