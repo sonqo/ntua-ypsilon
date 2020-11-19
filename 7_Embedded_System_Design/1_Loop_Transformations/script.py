@@ -2,12 +2,12 @@ import subprocess
 from subprocess import PIPE
 
 # Default PHODS
-subprocess.run('gcc -O0 phods.c -o phods', shell=True)
+subprocess.run('gcc -O0 phods.c -o phods.app', shell=True)
 sum_default = 0
 max_default = 0
 min_default = 10000
 for i in range(10):
-    curr = subprocess.run('./phods', stdout=PIPE, shell=True)
+    curr = subprocess.run('./phods.app', stdout=PIPE, shell=True)
     info = int(curr.stdout.decode('utf-8').split("'")[0])
     if info < min_default:
         min_default = info
@@ -18,12 +18,12 @@ average_default = sum_default/10
 print(min_default, average_default, max_default)
 
 # Loop Transformed PHODS
-subprocess.run('gcc -O0 phods_opt_v1.c -o phods_opt_v1', shell=True)
+subprocess.run('gcc -O0 phods_opt_v1.c -o phods_opt_v1.app', shell=True)
 sum_opt_v1 = 0
 max_opt_v1 = 0
 min_opt_v1 = 10000
 for i in range(10):
-    curr = subprocess.run('./phods_opt_v1', stdout=PIPE, shell=True)
+    curr = subprocess.run('./phods_opt_v1.app', stdout=PIPE, shell=True)
     info = int(curr.stdout.decode('utf-8').split("'")[0])
     if info < min_opt_v1:
         min_opt_v1 = info
@@ -33,16 +33,16 @@ for i in range(10):
 average_opt_v1 = sum_opt_v1/10
 print(min_opt_v1, average_opt_v1, max_opt_v1)
 
-# Space Exploration PHODS
+# Space Exploration V1_PHODS
 acc = [1, 2, 4, 8, 16]
-subprocess.run('gcc -O0 phods_opt_v2.c -o phods_opt_v2', shell=True)
+subprocess.run('gcc -O0 phods_opt_v2.c -o phods_opt_v2.app', shell=True)
 average_opt_v2 = 10000
 for B in acc:
     curr_sum_opt_v2 = 0
     curr_max_opt_v2 = 0
     curr_min_opt_v2 = 10000
     for i in range(10):
-        curr = subprocess.run('./phods_opt_v2 ' + str(B), stdout=PIPE, shell=True)
+        curr = subprocess.run('./phods_opt_v2.app ' + str(B), stdout=PIPE, shell=True)
         info = int(curr.stdout.decode('utf-8').split("'")[0])
         if info < curr_min_opt_v2:
             curr_min_opt_v2 = info
@@ -56,3 +56,5 @@ for B in acc:
         max_opt_v2 = curr_max_opt_v2
         average_opt_v2 = curr_average_opt_v2
 print(best_B, min_opt_v2, average_opt_v2, max_opt_v2)
+
+# Space Exploration V2_PHODS
