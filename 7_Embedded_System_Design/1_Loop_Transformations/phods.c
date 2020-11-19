@@ -114,7 +114,7 @@ int main() {
     struct timeval start, finish;
     int current[N][M], previous[N][M], motion_vectors_x[N/B][M/B], motion_vectors_y[N/B][M/B], i, j;
 
-    read_sequence(current,previous);
+    read_sequence(current, previous);
 
     gettimeofday(&start, NULL);
     phods_motion_estimation(current,previous,motion_vectors_x,motion_vectors_y);

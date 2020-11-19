@@ -41,7 +41,7 @@ void read_sequence(int current[N][M], int previous[N][M]) {
 
 void phods_motion_estimation(int current[N][M], int previous[N][M], int vectors_x[N/B][M/B], int vectors_y[N/B][M/B]) {
   
-    int x, y, i, j, k, l, p1, p2, q2, distx, disty, S, min1, min2, bestx, besty;
+    int x, y, i, k, l, p1, p2, q2, distx, disty, S, min1, min2, bestx, besty;
 
     distx = 0;
     disty = 0; 
@@ -51,8 +51,8 @@ void phods_motion_estimation(int current[N][M], int previous[N][M], int vectors_
         for (y=(M/B)-1; y--;) {
             S = 4;
             //Initialize the vector motion matrices
-            vectors_x[i][j] = 0;
-            vectors_y[i][j] = 0;
+            vectors_x[x][y] = 0;
+            vectors_y[x][y] = 0;
             while (S > 0) {
                 min1 = 255*B*B;
                 min2 = 255*B*B;
@@ -96,10 +96,10 @@ int main() {
     struct timeval start, finish;
     int current[N][M], previous[N][M], motion_vectors_x[N/B][M/B], motion_vectors_y[N/B][M/B], i, j;
 
-    read_sequence(current,previous);
+    read_sequence(current, previous);
 
     gettimeofday(&start, NULL);
-    phods_motion_estimation(current,previous,motion_vectors_x,motion_vectors_y);
+    phods_motion_estimation(current, previous, motion_vectors_x, motion_vectors_y);
     gettimeofday(&finish, NULL);
 
     printf("%d", finish.tv_usec-start.tv_usec);

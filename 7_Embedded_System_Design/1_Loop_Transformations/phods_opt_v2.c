@@ -4,11 +4,12 @@
 
 #define N 144     //Frame dimension for QCIF format
 #define M 176     //Frame dimension for QCIF format
+// #define B 16      //Block size
 #define p 7       //Search space, restricted in a [-p,p] region around the original location of the block
 
 int B;
 
-void read_sequence(int current[N][M], int previous[N][M]) { 
+void read_sequence(int** current, int** previous) { 
 	int i, j;
     FILE *picture0, *picture1;
 
@@ -40,9 +41,9 @@ void read_sequence(int current[N][M], int previous[N][M]) {
 	fclose(picture1);
 }
 
-void phods_motion_estimation(int current[N][M], int previous[N][M], int vectors_x[N/B][M/B], int vectors_y[N/B][M/B]) {
+void phods_motion_estimation(int** current, int** previous, int** vectors_x, int** vectors_y) {
   
-    int x, y, i, j, k, l, p1, p2, q2, distx, disty, S, min1, min2, bestx, besty;
+    int x, y, i, k, l, p1, p2, q2, distx, disty, S, min1, min2, bestx, besty;
 
     distx = 0;
     disty = 0; 
@@ -52,8 +53,8 @@ void phods_motion_estimation(int current[N][M], int previous[N][M], int vectors_
         for (y=(M/B)-1; y--;) {
             S = 4;
             //Initialize the vector motion matrices
-            vectors_x[i][j] = 0;
-            vectors_y[i][j] = 0;
+            vectors_x[x][y] = 0;
+            vectors_y[x][y] = 0;
             while (S > 0) {
                 min1 = 255*B*B;
                 min2 = 255*B*B;
@@ -92,20 +93,40 @@ void phods_motion_estimation(int current[N][M], int previous[N][M], int vectors_
     }
 } 
 
-int main(int argc, char** argv) {  
+int main(int argc, char* argv[1]) {  
     
     B = atoi(argv[1]);
 
+    int i, j;
     struct timeval start, finish;
-    int current[N][M], previous[N][M], motion_vectors_x[N/B][M/B], motion_vectors_y[N/B][M/B], i, j;
 
-    read_sequence(current,previous);
+    int **current = malloc(N * sizeof(int*));
+    for (i=0; i<N; i++) {
+        current[i] = malloc(M * sizeof(int));
+    }
 
-    // gettimeofday(&start, NULL);
-    phods_motion_estimation(current,previous,motion_vectors_x,motion_vectors_y);
-    // gettimeofday(&finish, NULL);
+    int **previous = malloc(N * sizeof(int*));
+    for (i=0; i<N; i++) {
+        previous[i] = malloc(M * sizeof(int));
+    }
 
-    // printf("%d", finish.tv_usec-start.tv_usec);
+    int **motion_vectors_x = malloc((N/B) * sizeof(int*));
+    for (i=0; i<(N/B); i++) {
+        motion_vectors_x[i] = malloc((M/B) * sizeof(int));
+    }
+
+    int **motion_vectors_y = malloc((N/B) * sizeof(int*));
+    for (i=0; i<(N/B); i++) {
+        motion_vectors_y[i] = malloc((M/B) * sizeof(int));
+    }
+
+    read_sequence(current, previous);
+
+    gettimeofday(&start, NULL);
+    phods_motion_estimation(current, previous, motion_vectors_x, motion_vectors_y);
+    gettimeofday(&finish, NULL);
+
+    printf("%d", finish.tv_usec-start.tv_usec);
 
     return 0;
 }
