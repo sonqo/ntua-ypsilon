@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <sys/time.h>
 
-#define N 144     //Frame dimension for QCIF format
-#define M 176     //Frame dimension for QCIF format
-#define p 7       //Search space, restricted in a [-p,p] region around the original location of the block
+#define N 144 //Frame dimension for QCIF format
+#define M 176 //Frame dimension for QCIF format
+#define p 7 //Search space, restricted in a [-p,p] region around the original location of the block
 
 int B;
 
@@ -48,8 +48,8 @@ void phods_motion_estimation(int** current, int** previous, int** vectors_x, int
     disty = 0; 
 
     //For all blocks in the current frame
-    for (x=(N/B)-1; x--;) {
-        for (y=(M/B)-1; y--;) {
+    for (x=0; x<N/B; x++) {
+        for (y=0; y<M/B; y++) {
             S = 4;
             //Initialize the vector motion matrices
             vectors_x[x][y] = 0;
@@ -62,26 +62,34 @@ void phods_motion_estimation(int** current, int** previous, int** vectors_x, int
                     distx = 0;
                     disty = 0;
                     //For all pixels in the block
-                    for (k=B-1; k--;) {
-                        for (l=B-1; l--;) {
+                    for (k=0; k<B; k++) {
+                        for (l=0; l<B; l++) {
                             p1 = current[B*x+k][B*y+l];
                             if ((B*x+vectors_x[x][y]+i+k) < 0 || (B*x+vectors_x[x][y]+i+k) > (N-1) || (B*y+vectors_y[x][y]+l) < 0 || (B*y+vectors_y[x][y]+l) > (M-1)) {
                                 p2 = 0;
                             } else {
                                 p2 = previous[B*x+vectors_x[x][y]+i+k][B*y+vectors_y[x][y]+l];
                             }
-                            if ((B*x+vectors_x[x][y]+k) < 0 || (B*x+vectors_x[x][y]+k) > (N-1) || (B*y+vectors_y[x][y]+i+l) < 0 || (B*y+vectors_y[x][y]+i+l) > (M-1)) {
-                                q2 = 0;
+                            if (i == 0) {
+                                disty = distx;
                             } else {
-                                q2 = previous[B*x+vectors_x[x][y]+k][B*y+vectors_y[x][y]+i+l];
+                                if ((B*x+vectors_x[x][y]+k) < 0 || (B*x+vectors_x[x][y]+k) > (N-1) || (B*y+vectors_y[x][y]+i+l) < 0 || (B*y+vectors_y[x][y]+i+l) > (M-1)) {
+                                    q2 = 0;
+                                } else {
+                                    q2 = previous[B*x+vectors_x[x][y]+k][B*y+vectors_y[x][y]+i+l];
+                                }
+                                distx += abs(p1-p2);
+                                disty += abs(p1-q2);
                             }
-                            distx += abs(p1-p2);
-                            disty += abs(p1-q2);
                         }
                     }
                     if (distx < min1) {
                         min1 = distx;
                         bestx = i;
+                    }
+                    if (disty < min2) {
+                        min2 = disty;
+                        besty = i;
                     }
                 }
                 S = S/2;
@@ -92,7 +100,7 @@ void phods_motion_estimation(int** current, int** previous, int** vectors_x, int
     }
 } 
 
-int main(int argc, char* argv[1]) {  
+int main(int argc, char* argv[]) {  
     
     B = atoi(argv[1]);
 

@@ -33,6 +33,8 @@ for i in range(10):
 average_opt_v1 = sum_opt_v1/10
 print(min_opt_v1, average_opt_v1, max_opt_v1)
 
+print('space exoloration')
+
 # Space Exploration V1_PHODS
 acc = [1, 2, 4, 8, 16]
 subprocess.run('gcc -O0 phods_opt_v2.c -o phods_opt_v2.app', shell=True)
@@ -50,11 +52,11 @@ for B in acc:
             curr_max_opt_v2 = info
         curr_sum_opt_v2 += info
     curr_average_opt_v2 = curr_sum_opt_v2/10
+    print(B, curr_min_opt_v2, curr_average_opt_v2, curr_max_opt_v2)
     if curr_average_opt_v2 < average_opt_v2:
         best_B = B
         min_opt_v2 = curr_min_opt_v2
         max_opt_v2 = curr_max_opt_v2
         average_opt_v2 = curr_average_opt_v2
-print(best_B, min_opt_v2, average_opt_v2, max_opt_v2)
 
 # Space Exploration V2_PHODS

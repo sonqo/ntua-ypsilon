@@ -2,10 +2,10 @@
 #include <stdlib.h>
 #include <sys/time.h>
 
-#define N 144     //Frame dimension for QCIF format
-#define M 176     //Frame dimension for QCIF format
-#define B 16      //Block size
-#define p 7       //Search space, restricted in a [-p,p] region around the original location of the block
+#define N 144 //Frame dimension for QCIF format
+#define M 176 //Frame dimension for QCIF format
+#define B 16 //Block size
+#define p 7 //Search space, restricted in a [-p,p] region around the original location of the block
 
 void read_sequence(int current[N][M], int previous[N][M]) { 
 	int i, j;
@@ -93,7 +93,7 @@ void phods_motion_estimation(int current[N][M], int previous[N][M], int vectors_
                             } else {
                                 q2 = previous[B*x+vectors_x[x][y]+k][B*y+vectors_y[x][y]+i+l];
                             }
-                        disty += abs(p1-q2);
+                            disty += abs(p1-q2);
                         }
                     }
                     if (disty < min2) {
