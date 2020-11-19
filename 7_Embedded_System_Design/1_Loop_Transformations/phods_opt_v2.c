@@ -4,7 +4,6 @@
 
 #define N 144     //Frame dimension for QCIF format
 #define M 176     //Frame dimension for QCIF format
-// #define B 16      //Block size
 #define p 7       //Search space, restricted in a [-p,p] region around the original location of the block
 
 int B;
