@@ -2,15 +2,16 @@ package app.gui;
 
 import app.model.ship.*;
 
+import java.lang.reflect.Array;
 import java.net.URL;
-import java.util.List;
+import java.util.*;
+
 import javafx.fxml.FXML;
-import java.util.Arrays;
+
 import java.io.FileReader;
-import java.util.ArrayList;
 import java.io.IOException;
 import java.io.BufferedReader;
-import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.MenuItem;
@@ -18,11 +19,13 @@ import javafx.scene.layout.AnchorPane;
 
 public class Controller implements Initializable {
 
-    private List<Ship> enemy = new ArrayList<>();
-    private List<Ship> player = new ArrayList<>();
+    private Ship[] enemy = new Ship[6];
+    private Ship[] player = new Ship[6];
 
     @FXML
-    private List<AnchorPane> playerBoard;
+    public List<AnchorPane> playerBoard;
+
+    public List<AnchorPane> test;
 
     public MenuItem startGame;
     String defaultEnemy = "medialab/enemy_SCENARIO-01.txt";
@@ -33,8 +36,8 @@ public class Controller implements Initializable {
 
     }
 
-    private List readInput(String path) throws IOException{
-        List<Ship> ship_list = new ArrayList<>();
+    private Ship[] readInput(String path) throws IOException{
+        Ship[] ship_array = new Ship[6];
         BufferedReader reader = new BufferedReader(new FileReader(path));
         String line = reader.readLine();
         while (line != null) {
@@ -42,27 +45,27 @@ public class Controller implements Initializable {
             if (Integer.parseInt(rtmp.get(0)) == 1) {
                 Carrier curr = new Carrier();
                 curr.setStats(Integer.parseInt(rtmp.get(1)), Integer.parseInt(rtmp.get(2)), Integer.parseInt(rtmp.get(3)));
-                ship_list.add(curr);
+                ship_array[Integer.parseInt(rtmp.get(0))] = curr;
             } else if (Integer.parseInt(rtmp.get(0)) == 2) {
                 Battleship curr = new Battleship();
                 curr.setStats(Integer.parseInt(rtmp.get(1)), Integer.parseInt(rtmp.get(2)), Integer.parseInt(rtmp.get(3)));
-                ship_list.add(curr);
+                ship_array[Integer.parseInt(rtmp.get(0))] = curr;
             } else if (Integer.parseInt(rtmp.get(0)) == 3) {
                 Cruiser curr = new Cruiser();
                 curr.setStats(Integer.parseInt(rtmp.get(1)), Integer.parseInt(rtmp.get(2)), Integer.parseInt(rtmp.get(3)));
-                ship_list.add(curr);
+                ship_array[Integer.parseInt(rtmp.get(0))] = curr;
             } else if (Integer.parseInt(rtmp.get(0)) == 4) {
                 Submarine curr = new Submarine();
                 curr.setStats(Integer.parseInt(rtmp.get(1)), Integer.parseInt(rtmp.get(2)), Integer.parseInt(rtmp.get(3)));
-                ship_list.add(curr);
+                ship_array[Integer.parseInt(rtmp.get(0))] = curr;
             } else if (Integer.parseInt(rtmp.get(0)) == 5) {
                 Destroyer curr = new Destroyer();
                 curr.setStats(Integer.parseInt(rtmp.get(1)), Integer.parseInt(rtmp.get(2)), Integer.parseInt(rtmp.get(3)));
-                ship_list.add(curr);
+                ship_array[Integer.parseInt(rtmp.get(0))] = curr;
             }
             line = reader.readLine();
         }
-        return ship_list;
+        return ship_array;
     }
 
     public void startApp(ActionEvent actionEvent) throws IOException, InterruptedException {
@@ -72,6 +75,10 @@ public class Controller implements Initializable {
 
         for (int i=0; i<playerBoard.size(); i++){
             playerBoard.get(i).setStyle("-fx-background-color: royalblue; -fx-border-color: white");
+        }
+
+        for (int i=1; i<6; i++) {
+            player[i].fillAnchorList(playerBoard);
         }
 
     }

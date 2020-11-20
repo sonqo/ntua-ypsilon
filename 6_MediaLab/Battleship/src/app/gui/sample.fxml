@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
+<?import java.util.ArrayList?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
 
-<?import java.util.ArrayList?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.gui.Controller">
    <children>
       <SplitPane dividerPositions="0.15" orientation="VERTICAL" prefHeight="900.0" prefWidth="1300.0">
@@ -75,6 +75,7 @@
                                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                         </rowConstraints>
                                                          <children>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0">
@@ -122,6 +123,11 @@
                                                                   <Label layoutX="10.0" layoutY="11.0" prefHeight="17.0" prefWidth="8.0" text="9" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="25.0" />
                                                                </children>
                                                             </AnchorPane>
+                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="9">
+                                                                 <children>
+                                                                     <Label layoutX="7.0" layoutY="20.0" prefHeight="20.0" prefWidth="19.0" text="10" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="20.0" />
+                                                                 </children>
+                                                             </AnchorPane>
                                                          </children>
                                                       </GridPane>
                                                    </children>
@@ -143,6 +149,7 @@
                                                                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                                     </columnConstraints>
                                                                     <rowConstraints>
                                                                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -193,6 +200,11 @@
                                                                               <Label layoutX="31.0" layoutY="10.0" text="F" AnchorPane.topAnchor="13.0" />
                                                                            </children>
                                                                         </AnchorPane>
+                                                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9">
+                                                                           <children>
+                                                                              <Label layoutX="28.0" layoutY="11.0" text="J" AnchorPane.topAnchor="13.0" />
+                                                                           </children>
+                                                                        </AnchorPane>
                                                                      </children>
                                                                   </GridPane>
                                                                </children>
@@ -210,6 +222,7 @@
                                                                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                                     </columnConstraints>
                                                                     <rowConstraints>
                                                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -221,173 +234,212 @@
                                                                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                                     </rowConstraints>
                                                                      <children>
-                                                                        <AnchorPane fx:id="anchor11" prefHeight="200.0" prefWidth="200.0" />
-                                                                        <AnchorPane fx:id="anchor12" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
-                                                                        <AnchorPane fx:id="anchor13" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
-                                                                        <AnchorPane fx:id="anchor14" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" />
-                                                                        <AnchorPane fx:id="anchor15" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" />
-                                                                        <AnchorPane fx:id="anchor16" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" />
-                                                                        <AnchorPane fx:id="anchor17" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" />
-                                                                        <AnchorPane fx:id="anchor18" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" />
-                                                                        <AnchorPane fx:id="anchor19" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" />
-                                                                        <AnchorPane fx:id="anchor21" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
-                                                                        <AnchorPane fx:id="anchor22" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                                        <AnchorPane fx:id="anchor23" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                                                        <AnchorPane fx:id="anchor24" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                                                                        <AnchorPane fx:id="anchor25" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                                                                        <AnchorPane fx:id="anchor26" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-                                                                        <AnchorPane fx:id="anchor27" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-                                                                        <AnchorPane fx:id="anchor28" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="1" />
-                                                                        <AnchorPane fx:id="anchor29" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="1" />
-                                                                        <AnchorPane fx:id="anchor31" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
-                                                                        <AnchorPane fx:id="anchor32" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                                        <AnchorPane fx:id="anchor33" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                                                        <AnchorPane fx:id="anchor34" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                                                                        <AnchorPane fx:id="anchor35" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                                                                        <AnchorPane fx:id="anchor36" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-                                                                        <AnchorPane fx:id="anchor37" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="2" />
-                                                                        <AnchorPane fx:id="anchor38" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="2" />
-                                                                        <AnchorPane fx:id="anchor39" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="2" />
-                                                                        <AnchorPane fx:id="anchor49" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="3" />
-                                                                        <AnchorPane fx:id="anchor48" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="3" />
-                                                                        <AnchorPane fx:id="anchor47" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="3" />
-                                                                        <AnchorPane fx:id="anchor46" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="3" />
-                                                                        <AnchorPane fx:id="anchor45" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                                                                        <AnchorPane fx:id="anchor44" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                                                                        <AnchorPane fx:id="anchor43" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                                                                        <AnchorPane fx:id="anchor42" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                                        <AnchorPane fx:id="anchor41" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3" />
-                                                                        <AnchorPane fx:id="anchor51" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4" />
-                                                                        <AnchorPane fx:id="anchor52" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                                                        <AnchorPane fx:id="anchor53" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                                                                        <AnchorPane fx:id="anchor54" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                                                                        <AnchorPane fx:id="anchor55" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="4" />
-                                                                        <AnchorPane fx:id="anchor56" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="4" />
-                                                                        <AnchorPane fx:id="anchor57" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="4" />
-                                                                        <AnchorPane fx:id="anchor58" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="4" />
-                                                                        <AnchorPane fx:id="anchor59" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="4" />
-                                                                        <AnchorPane fx:id="anchor61" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5" />
-                                                                        <AnchorPane fx:id="anchor71" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6" />
-                                                                        <AnchorPane fx:id="anchor81" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="7" />
-                                                                        <AnchorPane fx:id="anchor91" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="8" />
-                                                                        <AnchorPane fx:id="anchor62" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                                                        <AnchorPane fx:id="anchor72" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                                                                        <AnchorPane fx:id="anchor82" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                                                                        <AnchorPane fx:id="anchor92" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                                                                        <AnchorPane fx:id="anchor73" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-                                                                        <AnchorPane fx:id="anchor83" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-                                                                        <AnchorPane fx:id="anchor63" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                                                                        <AnchorPane fx:id="anchor93" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="8" />
-                                                                        <AnchorPane fx:id="anchor94" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="8" />
-                                                                        <AnchorPane fx:id="anchor95" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="8" />
-                                                                        <AnchorPane fx:id="anchor96" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="8" />
-                                                                        <AnchorPane fx:id="anchor97" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="8" />
-                                                                        <AnchorPane fx:id="anchor98" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="8" />
-                                                                        <AnchorPane fx:id="anchor99" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="8" />
-                                                                        <AnchorPane fx:id="anchor89" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="7" />
-                                                                        <AnchorPane fx:id="anchor88" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="7" />
-                                                                        <AnchorPane fx:id="anchor87" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="7" />
-                                                                        <AnchorPane fx:id="anchor86" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="7" />
-                                                                        <AnchorPane fx:id="anchor85" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="7" />
-                                                                        <AnchorPane fx:id="anchor84" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-                                                                        <AnchorPane fx:id="anchor74" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="6" />
-                                                                        <AnchorPane fx:id="anchor64" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                                                                        <AnchorPane fx:id="anchor65" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="5" />
-                                                                        <AnchorPane fx:id="anchor75" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="6" />
-                                                                        <AnchorPane fx:id="anchor66" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="5" />
-                                                                        <AnchorPane fx:id="anchor76" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="6" />
-                                                                        <AnchorPane fx:id="anchor67" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="5" />
-                                                                        <AnchorPane fx:id="anchor77" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="6" />
-                                                                        <AnchorPane fx:id="anchor68" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="5" />
-                                                                        <AnchorPane fx:id="anchor78" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="6" />
-                                                                        <AnchorPane fx:id="anchor69" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="5" />
-                                                                        <AnchorPane fx:id="anchor79" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="6" />
+                                                                        <AnchorPane fx:id="player11" prefHeight="200.0" prefWidth="200.0" />
+                                                                        <AnchorPane fx:id="player12" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
+                                                                        <AnchorPane fx:id="player13" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
+                                                                        <AnchorPane fx:id="player14" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" />
+                                                                        <AnchorPane fx:id="player15" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" />
+                                                                        <AnchorPane fx:id="player16" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" />
+                                                                        <AnchorPane fx:id="player17" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" />
+                                                                        <AnchorPane fx:id="player18" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" />
+                                                                        <AnchorPane fx:id="player19" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" />
+                                                                        <AnchorPane fx:id="player21" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                                                                        <AnchorPane fx:id="player22" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                                        <AnchorPane fx:id="player23" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                                                        <AnchorPane fx:id="player24" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                                                        <AnchorPane fx:id="player25" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                                                                        <AnchorPane fx:id="player26" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                                                                        <AnchorPane fx:id="player27" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+                                                                        <AnchorPane fx:id="player28" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+                                                                        <AnchorPane fx:id="player29" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="1" />
+                                                                        <AnchorPane fx:id="player31" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
+                                                                        <AnchorPane fx:id="player32" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                                        <AnchorPane fx:id="player33" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                                                        <AnchorPane fx:id="player34" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                                                        <AnchorPane fx:id="player35" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                                                                        <AnchorPane fx:id="player36" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                                                                        <AnchorPane fx:id="player37" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+                                                                        <AnchorPane fx:id="player38" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="2" />
+                                                                        <AnchorPane fx:id="player39" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="2" />
+                                                                        <AnchorPane fx:id="player49" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="3" />
+                                                                        <AnchorPane fx:id="player48" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="3" />
+                                                                        <AnchorPane fx:id="player47" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="3" />
+                                                                        <AnchorPane fx:id="player46" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+                                                                        <AnchorPane fx:id="player45" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                                                                        <AnchorPane fx:id="player44" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                                                        <AnchorPane fx:id="player43" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                                                        <AnchorPane fx:id="player42" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                                        <AnchorPane fx:id="player41" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3" />
+                                                                        <AnchorPane fx:id="player51" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4" />
+                                                                        <AnchorPane fx:id="player52" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                                        <AnchorPane fx:id="player53" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                                                        <AnchorPane fx:id="player54" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                                                                        <AnchorPane fx:id="player55" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                                                                        <AnchorPane fx:id="player56" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+                                                                        <AnchorPane fx:id="player57" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="4" />
+                                                                        <AnchorPane fx:id="player58" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="4" />
+                                                                        <AnchorPane fx:id="player59" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="4" />
+                                                                        <AnchorPane fx:id="player61" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5" />
+                                                                        <AnchorPane fx:id="player71" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6" />
+                                                                        <AnchorPane fx:id="player81" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="7" />
+                                                                        <AnchorPane fx:id="player91" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="8" />
+                                                                        <AnchorPane fx:id="player62" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                                                        <AnchorPane fx:id="player72" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                                                        <AnchorPane fx:id="player82" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                                                        <AnchorPane fx:id="player92" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                                                                        <AnchorPane fx:id="player73" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                                                                        <AnchorPane fx:id="player83" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                                                                        <AnchorPane fx:id="player63" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                                                                        <AnchorPane fx:id="player93" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+                                                                        <AnchorPane fx:id="player94" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+                                                                        <AnchorPane fx:id="player95" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="8" />
+                                                                        <AnchorPane fx:id="player96" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="8" />
+                                                                        <AnchorPane fx:id="player97" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="8" />
+                                                                        <AnchorPane fx:id="player98" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="8" />
+                                                                        <AnchorPane fx:id="player99" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="8" />
+                                                                        <AnchorPane fx:id="player89" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="7" />
+                                                                        <AnchorPane fx:id="player88" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="7" />
+                                                                        <AnchorPane fx:id="player87" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="7" />
+                                                                        <AnchorPane fx:id="player86" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="7" />
+                                                                        <AnchorPane fx:id="player85" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="7" />
+                                                                        <AnchorPane fx:id="player84" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                                                                        <AnchorPane fx:id="player74" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                                                                        <AnchorPane fx:id="player64" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                                                                        <AnchorPane fx:id="player65" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+                                                                        <AnchorPane fx:id="player75" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+                                                                        <AnchorPane fx:id="player66" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="5" />
+                                                                        <AnchorPane fx:id="player76" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="6" />
+                                                                        <AnchorPane fx:id="player67" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+                                                                        <AnchorPane fx:id="player77" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="6" />
+                                                                        <AnchorPane fx:id="player68" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="5" />
+                                                                        <AnchorPane fx:id="player78" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="6" />
+                                                                        <AnchorPane fx:id="player69" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="5" />
+                                                                        <AnchorPane fx:id="player79" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="6" />
+                                                                        <AnchorPane fx:id="player101" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="9" />
+                                                                        <AnchorPane fx:id="player102" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                                                                        <AnchorPane fx:id="player103" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                                                                        <AnchorPane fx:id="player104" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="9" />
+                                                                        <AnchorPane fx:id="player105" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="9" />
+                                                                        <AnchorPane fx:id="player106" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="9" />
+                                                                        <AnchorPane fx:id="player107" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="9" />
+                                                                        <AnchorPane fx:id="player108" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="9" />
+                                                                        <AnchorPane fx:id="player109" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="9" />
+                                                                        <AnchorPane fx:id="player1010" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="9" />
+                                                                        <AnchorPane fx:id="player110" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" />
+                                                                        <AnchorPane fx:id="player210" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="1" />
+                                                                        <AnchorPane fx:id="player310" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="2" />
+                                                                        <AnchorPane fx:id="player410" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="3" />
+                                                                        <AnchorPane fx:id="player510" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="4" />
+                                                                        <AnchorPane fx:id="player610" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="5" />
+                                                                        <AnchorPane fx:id="player710" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="6" />
+                                                                        <AnchorPane fx:id="player810" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="7" />
+                                                                        <AnchorPane fx:id="player910" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="8" />
                                                                      </children>
                                                                       <fx:define>
                                                                           <ArrayList fx:id="playerBoard">
-                                                                              <fx:reference source="anchor11" />
-                                                                              <fx:reference source="anchor12" />
-                                                                              <fx:reference source="anchor13" />
-                                                                              <fx:reference source="anchor14" />
-                                                                              <fx:reference source="anchor15" />
-                                                                              <fx:reference source="anchor16" />
-                                                                              <fx:reference source="anchor17" />
-                                                                              <fx:reference source="anchor18" />
-                                                                              <fx:reference source="anchor19" />
-                                                                              <fx:reference source="anchor21" />
-                                                                              <fx:reference source="anchor22" />
-                                                                              <fx:reference source="anchor23" />
-                                                                              <fx:reference source="anchor24" />
-                                                                              <fx:reference source="anchor25" />
-                                                                              <fx:reference source="anchor26" />
-                                                                              <fx:reference source="anchor27" />
-                                                                              <fx:reference source="anchor28" />
-                                                                              <fx:reference source="anchor29" />
-                                                                              <fx:reference source="anchor31" />                                                                              <fx:reference source="anchor31" />
-                                                                              <fx:reference source="anchor32" />
-                                                                              <fx:reference source="anchor33" />
-                                                                              <fx:reference source="anchor34" />
-                                                                              <fx:reference source="anchor35" />
-                                                                              <fx:reference source="anchor36" />
-                                                                              <fx:reference source="anchor37" />
-                                                                              <fx:reference source="anchor38" />
-                                                                              <fx:reference source="anchor39" />
-                                                                              <fx:reference source="anchor41" />                                                                              <fx:reference source="anchor41" />
-                                                                              <fx:reference source="anchor42" />
-                                                                              <fx:reference source="anchor43" />
-                                                                              <fx:reference source="anchor44" />
-                                                                              <fx:reference source="anchor45" />
-                                                                              <fx:reference source="anchor46" />
-                                                                              <fx:reference source="anchor47" />
-                                                                              <fx:reference source="anchor48" />
-                                                                              <fx:reference source="anchor49" />
-                                                                              <fx:reference source="anchor51" />                                                                              <fx:reference source="anchor51" />
-                                                                              <fx:reference source="anchor52" />
-                                                                              <fx:reference source="anchor53" />
-                                                                              <fx:reference source="anchor54" />
-                                                                              <fx:reference source="anchor55" />
-                                                                              <fx:reference source="anchor56" />
-                                                                              <fx:reference source="anchor57" />
-                                                                              <fx:reference source="anchor58" />
-                                                                              <fx:reference source="anchor59" />
-                                                                              <fx:reference source="anchor61" />                                                                              <fx:reference source="anchor61" />
-                                                                              <fx:reference source="anchor62" />
-                                                                              <fx:reference source="anchor63" />
-                                                                              <fx:reference source="anchor64" />
-                                                                              <fx:reference source="anchor65" />
-                                                                              <fx:reference source="anchor66" />
-                                                                              <fx:reference source="anchor67" />
-                                                                              <fx:reference source="anchor68" />
-                                                                              <fx:reference source="anchor69" />
-                                                                              <fx:reference source="anchor71" />                                                                              <fx:reference source="anchor71" />
-                                                                              <fx:reference source="anchor72" />
-                                                                              <fx:reference source="anchor73" />                                                                              <fx:reference source="anchor71" />
-                                                                              <fx:reference source="anchor74" />
-                                                                              <fx:reference source="anchor75" />
-                                                                              <fx:reference source="anchor76" />
-                                                                              <fx:reference source="anchor77" />
-                                                                              <fx:reference source="anchor78" />
-                                                                              <fx:reference source="anchor79" />
-                                                                              <fx:reference source="anchor81" />                                                                              <fx:reference source="anchor81" />
-                                                                              <fx:reference source="anchor82" />
-                                                                              <fx:reference source="anchor83" />
-                                                                              <fx:reference source="anchor84" />
-                                                                              <fx:reference source="anchor85" />
-                                                                              <fx:reference source="anchor86" />
-                                                                              <fx:reference source="anchor87" />
-                                                                              <fx:reference source="anchor88" />
-                                                                              <fx:reference source="anchor89" />
-                                                                              <fx:reference source="anchor91" />                                                                              <fx:reference source="anchor91" />
-                                                                              <fx:reference source="anchor92" />
-                                                                              <fx:reference source="anchor93" />
-                                                                              <fx:reference source="anchor94" />
-                                                                              <fx:reference source="anchor95" />
-                                                                              <fx:reference source="anchor96" />
-                                                                              <fx:reference source="anchor97" />
-                                                                              <fx:reference source="anchor98" />
-                                                                              <fx:reference source="anchor99" />
+                                                                              <fx:reference source="player11" />
+                                                                              <fx:reference source="player12" />
+                                                                              <fx:reference source="player13" />
+                                                                              <fx:reference source="player14" />
+                                                                              <fx:reference source="player15" />
+                                                                              <fx:reference source="player16" />
+                                                                              <fx:reference source="player17" />
+                                                                              <fx:reference source="player18" />
+                                                                              <fx:reference source="player19" />
+                                                                              <fx:reference source="player110" />
+                                                                              <fx:reference source="player21" />
+                                                                              <fx:reference source="player22" />
+                                                                              <fx:reference source="player23" />
+                                                                              <fx:reference source="player24" />
+                                                                              <fx:reference source="player25" />
+                                                                              <fx:reference source="player26" />
+                                                                              <fx:reference source="player27" />
+                                                                              <fx:reference source="player28" />
+                                                                              <fx:reference source="player29" />
+                                                                              <fx:reference source="player210" />
+                                                                              <fx:reference source="player31" />
+                                                                              <fx:reference source="player32" />
+                                                                              <fx:reference source="player33" />
+                                                                              <fx:reference source="player34" />
+                                                                              <fx:reference source="player35" />
+                                                                              <fx:reference source="player36" />
+                                                                              <fx:reference source="player37" />
+                                                                              <fx:reference source="player38" />
+                                                                              <fx:reference source="player39" />
+                                                                              <fx:reference source="player310" />
+                                                                              <fx:reference source="player41" />
+                                                                              <fx:reference source="player42" />
+                                                                              <fx:reference source="player43" />
+                                                                              <fx:reference source="player44" />
+                                                                              <fx:reference source="player45" />
+                                                                              <fx:reference source="player46" />
+                                                                              <fx:reference source="player47" />
+                                                                              <fx:reference source="player48" />
+                                                                              <fx:reference source="player49" />
+                                                                              <fx:reference source="player410" />
+                                                                              <fx:reference source="player51" />
+                                                                              <fx:reference source="player52" />
+                                                                              <fx:reference source="player53" />
+                                                                              <fx:reference source="player54" />
+                                                                              <fx:reference source="player55" />
+                                                                              <fx:reference source="player56" />
+                                                                              <fx:reference source="player57" />
+                                                                              <fx:reference source="player58" />
+                                                                              <fx:reference source="player59" />
+                                                                              <fx:reference source="player510" />
+                                                                              <fx:reference source="player61" />
+                                                                              <fx:reference source="player62" />
+                                                                              <fx:reference source="player63" />
+                                                                              <fx:reference source="player64" />
+                                                                              <fx:reference source="player65" />
+                                                                              <fx:reference source="player66" />
+                                                                              <fx:reference source="player67" />
+                                                                              <fx:reference source="player68" />
+                                                                              <fx:reference source="player69" />
+                                                                              <fx:reference source="player610" />
+                                                                              <fx:reference source="player71" />
+                                                                              <fx:reference source="player72" />
+                                                                              <fx:reference source="player73" />
+                                                                              <fx:reference source="player74" />
+                                                                              <fx:reference source="player75" />
+                                                                              <fx:reference source="player76" />
+                                                                              <fx:reference source="player77" />
+                                                                              <fx:reference source="player78" />
+                                                                              <fx:reference source="player79" />
+                                                                              <fx:reference source="player710" />
+                                                                              <fx:reference source="player81" />
+                                                                              <fx:reference source="player82" />
+                                                                              <fx:reference source="player83" />
+                                                                              <fx:reference source="player84" />
+                                                                              <fx:reference source="player85" />
+                                                                              <fx:reference source="player86" />
+                                                                              <fx:reference source="player87" />
+                                                                              <fx:reference source="player88" />
+                                                                              <fx:reference source="player89" />
+                                                                              <fx:reference source="player810" />
+                                                                              <fx:reference source="player91" />
+                                                                              <fx:reference source="player92" />
+                                                                              <fx:reference source="player93" />
+                                                                              <fx:reference source="player94" />
+                                                                              <fx:reference source="player95" />
+                                                                              <fx:reference source="player96" />
+                                                                              <fx:reference source="player97" />
+                                                                              <fx:reference source="player98" />
+                                                                              <fx:reference source="player99" />
+                                                                              <fx:reference source="player910" />
+                                                                              <fx:reference source="player101" />
+                                                                              <fx:reference source="player102" />
+                                                                              <fx:reference source="player103" />
+                                                                              <fx:reference source="player104" />
+                                                                              <fx:reference source="player105" />
+                                                                              <fx:reference source="player106" />
+                                                                              <fx:reference source="player107" />
+                                                                              <fx:reference source="player108" />
+                                                                              <fx:reference source="player109" />
+                                                                              <fx:reference source="player1010" />
                                                                           </ArrayList>
                                                                       </fx:define>
                                                                   </GridPane>
