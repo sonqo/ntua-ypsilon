@@ -46,7 +46,6 @@ public class Ship {
     }
 
     public void fillAnchorList(List<AnchorPane> list){
-//        int base = getFinish();
         LinkedList<AnchorPane> curr = getAnchorList();
         if (getOrientation() == 1) {
             for (int i=0; i<getSize(); i++) {
