@@ -1,10 +1,12 @@
 package app.model.ship;
 
-import java.util.LinkedList;
 import java.util.List;
+import java.util.LinkedList;
 import javafx.scene.layout.AnchorPane;
 
 public class Ship {
+
+    public String color;
 
     public int start, finish, orientation;
     public int size, hit_points, destroy_points;
@@ -41,6 +43,10 @@ public class Ship {
         return destroy_points;
     }
 
+    public String getColor() {
+        return color;
+    }
+
     public LinkedList<AnchorPane> getAnchorList(){
         return anchorList;
     }
@@ -58,7 +64,8 @@ public class Ship {
             }
         }
         for (int i=0; i<getSize(); i++) {
-            curr.get(i).setStyle("-fx-background-color: darkgrey; -fx-border-color: white");
+            System.out.println(getSize());
+            curr.get(i).setStyle("-fx-background-color: " + getColor() + "; -fx-border-color: white");
         }
     }
 }

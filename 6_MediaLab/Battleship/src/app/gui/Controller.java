@@ -2,16 +2,12 @@ package app.gui;
 
 import app.model.ship.*;
 
-import java.lang.reflect.Array;
-import java.net.URL;
 import java.util.*;
-
+import java.net.URL;
 import javafx.fxml.FXML;
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.BufferedReader;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.MenuItem;
@@ -74,7 +70,7 @@ public class Controller implements Initializable {
         player = readInput(defaultPlayer); // reading player's scenario
 
         for (int i=0; i<playerBoard.size(); i++){
-            playerBoard.get(i).setStyle("-fx-background-color: royalblue; -fx-border-color: white");
+            playerBoard.get(i).setStyle("-fx-background-color: #CFE0E8; -fx-border-color: white");
         }
 
         for (int i=1; i<6; i++) {
