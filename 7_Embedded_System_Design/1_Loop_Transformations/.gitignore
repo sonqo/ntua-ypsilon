@@ -2,3 +2,4 @@ phods
 *.y
 *.app
 .vscode
+*.json
