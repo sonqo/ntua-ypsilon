@@ -1,4 +1,5 @@
 package app.model.ship;
+import app.model.player.Player;
 
 import java.util.List;
 import java.util.LinkedList;
@@ -51,21 +52,23 @@ public class Ship {
         return anchorList;
     }
 
-    public void fillAnchorList(List<AnchorPane> list){
+    public void fillAnchorList(List<AnchorPane> list, Player user){
         LinkedList<AnchorPane> curr = getAnchorList();
         if (getOrientation() == 1) {
             for (int i=0; i<getSize(); i++) {
                 curr.add(list.get(10*getStart()+getFinish()+i));
+                user.board[getStart()+1][getFinish()+i+1] = 1;
             }
 
         } else {
-            for (int i=0; i<getSize()*10; i+=10) {
-                curr.add(list.get(10*getStart()+getFinish()+i));
+            for (int i=0; i<getSize(); i++) {
+                curr.add(list.get(10*getStart()+getFinish()+10*i));
+                user.board[getStart()+i+1][getFinish()+1] = 1;
             }
         }
         for (int i=0; i<getSize(); i++) {
-            System.out.println(getSize());
             curr.get(i).setStyle("-fx-background-color: " + getColor() + "; -fx-border-color: white");
         }
+//            list.get(10*(6-1) + (6-1)).setStyle("-fx-background-color:red");
     }
 }

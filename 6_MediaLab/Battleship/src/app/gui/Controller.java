@@ -1,6 +1,7 @@
 package app.gui;
 
 import app.model.ship.*;
+import app.model.player.Player;
 
 import java.util.*;
 import java.net.URL;
@@ -15,13 +16,11 @@ import javafx.scene.layout.AnchorPane;
 
 public class Controller implements Initializable {
 
-    private Ship[] enemy = new Ship[6];
-    private Ship[] player = new Ship[6];
+    public Player enemy = new Player();
+    public Player player = new Player();
 
     @FXML
     public List<AnchorPane> playerBoard;
-
-    public List<AnchorPane> test;
 
     public MenuItem startGame;
     String defaultEnemy = "medialab/enemy_SCENARIO-01.txt";
@@ -66,15 +65,15 @@ public class Controller implements Initializable {
 
     public void startApp(ActionEvent actionEvent) throws IOException, InterruptedException {
 
-        enemy = readInput(defaultEnemy); // reading enemy's scenario
-        player = readInput(defaultPlayer); // reading player's scenario
+        enemy.ship_array = readInput(defaultEnemy); // reading enemy's scenario
+        player.ship_array = readInput(defaultPlayer); // reading player's scenario
 
-        for (int i=0; i<playerBoard.size(); i++){
+        for (int i=0; i<playerBoard.size(); i++){ // painting see board
             playerBoard.get(i).setStyle("-fx-background-color: #CFE0E8; -fx-border-color: white");
         }
 
-        for (int i=1; i<6; i++) {
-            player[i].fillAnchorList(playerBoard);
+        for (int i=1; i<6; i++) { // register player's ships position, create player's flag-board
+            player.ship_array[i].fillAnchorList(playerBoard, player);
         }
 
     }
