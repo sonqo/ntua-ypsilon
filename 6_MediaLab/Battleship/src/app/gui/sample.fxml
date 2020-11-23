@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.util.ArrayList?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.control.*?>
 
+<?import java.util.ArrayList?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.gui.Controller">
    <children>
       <SplitPane dividerPositions="0.15" orientation="VERTICAL" prefHeight="900.0" prefWidth="1300.0">
@@ -16,8 +16,8 @@
                       <Menu mnemonicParsing="false" text="Application">
                         <items>
                           <MenuItem fx:id="startGame" mnemonicParsing="false" onAction="#startApp" text="Start Game" />
-                              <MenuItem mnemonicParsing="false" text="Load Scenarios" />
-                              <MenuItem mnemonicParsing="false" text="Quit" />
+                              <MenuItem mnemonicParsing="false" onAction="#loadApp" text="Load Scenarios" />
+                              <MenuItem mnemonicParsing="false" onAction="#exitApp" text="Quit" />
                         </items>
                       </Menu>
                       <Menu mnemonicParsing="false" text="Details">
@@ -39,12 +39,12 @@
                         <Image url="file:images/battleship_v1.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="449.0" layoutY="33.0" prefHeight="20.0" prefWidth="200.0" text="Player's Points:" AnchorPane.leftAnchor="450.0" AnchorPane.topAnchor="32.0" />
-                  <Label layoutX="450.0" layoutY="68.0" prefHeight="20.0" prefWidth="200.0" text="Player's Functional Ships:" AnchorPane.leftAnchor="450.0" AnchorPane.topAnchor="65.0" />
-                  <Label layoutX="450.0" layoutY="92.0" prefHeight="20.0" prefWidth="200.0" text="Player's Successful Shots:" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="450.0" />
-                  <Label layoutX="811.0" layoutY="35.0" prefHeight="20.0" prefWidth="200.0" text="Enemy's Points:" AnchorPane.leftAnchor="820.0" AnchorPane.topAnchor="32.0" />
-                  <Label layoutX="811.0" layoutY="62.0" prefHeight="20.0" prefWidth="200.0" text="Enemy's Functional Ships:" AnchorPane.leftAnchor="820.0" AnchorPane.topAnchor="65.0" />
-                  <Label layoutX="811.0" layoutY="97.0" prefHeight="20.0" prefWidth="200.0" text="Enemy's Successful Shots:" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="820.0" />
+                  <Label fx:id="playersPoints" layoutX="449.0" layoutY="33.0" prefHeight="20.0" prefWidth="200.0" text="Player's Points:" AnchorPane.leftAnchor="450.0" AnchorPane.topAnchor="32.0" />
+                  <Label fx:id="playersShips" layoutX="450.0" layoutY="68.0" prefHeight="20.0" prefWidth="200.0" text="Player's Functional Ships:" AnchorPane.leftAnchor="450.0" AnchorPane.topAnchor="65.0" />
+                  <Label fx:id="playersShots" layoutX="450.0" layoutY="92.0" prefHeight="20.0" prefWidth="200.0" text="Player's Successful Shots:" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="450.0" />
+                  <Label fx:id="enemysPoints" layoutX="811.0" layoutY="35.0" prefHeight="20.0" prefWidth="200.0" text="Enemy's Points:" AnchorPane.leftAnchor="820.0" AnchorPane.topAnchor="32.0" />
+                  <Label fx:id="enemysShips" layoutX="811.0" layoutY="62.0" prefHeight="20.0" prefWidth="200.0" text="Enemy's Functional Ships:" AnchorPane.leftAnchor="820.0" AnchorPane.topAnchor="65.0" />
+                  <Label fx:id="enemysShots" layoutX="811.0" layoutY="97.0" prefHeight="20.0" prefWidth="200.0" text="Enemy's Successful Shots:" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="820.0" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
@@ -633,47 +633,47 @@
                                                          <children>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                                                <children>
-                                                                  <Label layoutX="11.0" layoutY="26.0" text="1" AnchorPane.rightAnchor="14.5" />
+                                                                  <Label layoutX="11.0" layoutY="21.0" text="1" AnchorPane.rightAnchor="14.5" />
                                                                </children>
                                                             </AnchorPane>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                                                                <children>
-                                                                  <Label layoutX="11.0" layoutY="26.0" text="2" AnchorPane.rightAnchor="14.5" />
+                                                                  <Label layoutX="11.0" layoutY="21.0" text="2" AnchorPane.rightAnchor="14.0" />
                                                                </children>
                                                             </AnchorPane>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                                                                <children>
-                                                                  <Label layoutX="11.0" layoutY="34.0" text="3" AnchorPane.rightAnchor="14.5" />
+                                                                  <Label layoutX="11.0" layoutY="21.0" text="3" AnchorPane.rightAnchor="14.0" />
                                                                </children>
                                                             </AnchorPane>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
                                                                <children>
-                                                                  <Label layoutX="11.0" layoutY="34.0" text="4" AnchorPane.rightAnchor="14.5" />
+                                                                  <Label layoutX="11.0" layoutY="26.0" text="4" AnchorPane.rightAnchor="14.0" />
                                                                </children>
                                                             </AnchorPane>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
                                                                <children>
-                                                                  <Label layoutX="11.0" layoutY="25.0" text="5" AnchorPane.rightAnchor="14.5" />
+                                                                  <Label layoutX="11.0" layoutY="25.0" text="5" AnchorPane.rightAnchor="14.0" />
                                                                </children>
                                                             </AnchorPane>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5">
                                                                <children>
-                                                                  <Label layoutX="13.0" layoutY="25.0" text="6" AnchorPane.rightAnchor="14.5" />
+                                                                  <Label layoutX="11.0" layoutY="21.0" text="6" AnchorPane.rightAnchor="14.0" />
                                                                </children>
                                                             </AnchorPane>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6">
                                                                <children>
-                                                                  <Label layoutX="11.0" layoutY="25.0" text="7" AnchorPane.rightAnchor="14.5" />
+                                                                  <Label layoutX="11.0" layoutY="21.0" text="7" AnchorPane.rightAnchor="14.0" />
                                                                </children>
                                                             </AnchorPane>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="7">
                                                                <children>
-                                                                  <Label layoutX="11.0" layoutY="25.0" text="8" AnchorPane.rightAnchor="14.5" />
+                                                                  <Label layoutX="11.0" layoutY="21.0" text="8" AnchorPane.rightAnchor="14.0" />
                                                                </children>
                                                             </AnchorPane>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="8">
                                                                <children>
-                                                                  <Label layoutX="13.0" layoutY="25.0" text="9" AnchorPane.rightAnchor="14.5" />
+                                                                  <Label layoutX="13.0" layoutY="21.0" text="9" AnchorPane.rightAnchor="12.0" />
                                                                </children>
                                                             </AnchorPane>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="9">

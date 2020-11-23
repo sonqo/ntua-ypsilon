@@ -16,8 +16,8 @@
                       <Menu mnemonicParsing="false" text="Application">
                         <items>
                           <MenuItem fx:id="startGame" mnemonicParsing="false" onAction="#startApp" text="Start Game" />
-                              <MenuItem mnemonicParsing="false" text="Load Scenarios" />
-                              <MenuItem mnemonicParsing="false" text="Quit" />
+                              <MenuItem mnemonicParsing="false" onAction="#loadApp" text="Load Scenarios" />
+                              <MenuItem mnemonicParsing="false" onAction="#exitApp" text="Quit" />
                         </items>
                       </Menu>
                       <Menu mnemonicParsing="false" text="Details">
@@ -39,12 +39,12 @@
                         <Image url="file:images/battleship_v1.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="449.0" layoutY="33.0" prefHeight="20.0" prefWidth="200.0" text="Player's Points:" AnchorPane.leftAnchor="450.0" AnchorPane.topAnchor="32.0" />
-                  <Label layoutX="450.0" layoutY="68.0" prefHeight="20.0" prefWidth="200.0" text="Player's Functional Ships:" AnchorPane.leftAnchor="450.0" AnchorPane.topAnchor="65.0" />
-                  <Label layoutX="450.0" layoutY="92.0" prefHeight="20.0" prefWidth="200.0" text="Player's Successful Shots:" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="450.0" />
-                  <Label layoutX="811.0" layoutY="35.0" prefHeight="20.0" prefWidth="200.0" text="Enemy's Points:" AnchorPane.leftAnchor="820.0" AnchorPane.topAnchor="32.0" />
-                  <Label layoutX="811.0" layoutY="62.0" prefHeight="20.0" prefWidth="200.0" text="Enemy's Functional Ships:" AnchorPane.leftAnchor="820.0" AnchorPane.topAnchor="65.0" />
-                  <Label layoutX="811.0" layoutY="97.0" prefHeight="20.0" prefWidth="200.0" text="Enemy's Successful Shots:" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="820.0" />
+                  <Label fx:id="playersPoints" layoutX="449.0" layoutY="33.0" prefHeight="20.0" prefWidth="200.0" text="Player's Points:" AnchorPane.leftAnchor="450.0" AnchorPane.topAnchor="32.0" />
+                  <Label fx:id="playersShips" layoutX="450.0" layoutY="68.0" prefHeight="20.0" prefWidth="200.0" text="Player's Functional Ships:" AnchorPane.leftAnchor="450.0" AnchorPane.topAnchor="65.0" />
+                  <Label fx:id="playersShots" layoutX="450.0" layoutY="92.0" prefHeight="20.0" prefWidth="200.0" text="Player's Successful Shots:" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="450.0" />
+                  <Label fx:id="enemysPoints" layoutX="811.0" layoutY="35.0" prefHeight="20.0" prefWidth="200.0" text="Enemy's Points:" AnchorPane.leftAnchor="820.0" AnchorPane.topAnchor="32.0" />
+                  <Label fx:id="enemysShips" layoutX="811.0" layoutY="62.0" prefHeight="20.0" prefWidth="200.0" text="Enemy's Functional Ships:" AnchorPane.leftAnchor="820.0" AnchorPane.topAnchor="65.0" />
+                  <Label fx:id="enemysShots" layoutX="811.0" layoutY="97.0" prefHeight="20.0" prefWidth="200.0" text="Enemy's Successful Shots:" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="820.0" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
@@ -340,106 +340,26 @@
                                                                      </children>
                                                                       <fx:define>
                                                                           <ArrayList fx:id="playerBoard">
-                                                                              <fx:reference source="player11" />
-                                                                              <fx:reference source="player12" />
-                                                                              <fx:reference source="player13" />
-                                                                              <fx:reference source="player14" />
-                                                                              <fx:reference source="player15" />
-                                                                              <fx:reference source="player16" />
-                                                                              <fx:reference source="player17" />
-                                                                              <fx:reference source="player18" />
-                                                                              <fx:reference source="player19" />
-                                                                              <fx:reference source="player110" />
-                                                                              <fx:reference source="player21" />
-                                                                              <fx:reference source="player22" />
-                                                                              <fx:reference source="player23" />
-                                                                              <fx:reference source="player24" />
-                                                                              <fx:reference source="player25" />
-                                                                              <fx:reference source="player26" />
-                                                                              <fx:reference source="player27" />
-                                                                              <fx:reference source="player28" />
-                                                                              <fx:reference source="player29" />
-                                                                              <fx:reference source="player210" />
-                                                                              <fx:reference source="player31" />
-                                                                              <fx:reference source="player32" />
-                                                                              <fx:reference source="player33" />
-                                                                              <fx:reference source="player34" />
-                                                                              <fx:reference source="player35" />
-                                                                              <fx:reference source="player36" />
-                                                                              <fx:reference source="player37" />
-                                                                              <fx:reference source="player38" />
-                                                                              <fx:reference source="player39" />
-                                                                              <fx:reference source="player310" />
-                                                                              <fx:reference source="player41" />
-                                                                              <fx:reference source="player42" />
-                                                                              <fx:reference source="player43" />
-                                                                              <fx:reference source="player44" />
-                                                                              <fx:reference source="player45" />
-                                                                              <fx:reference source="player46" />
-                                                                              <fx:reference source="player47" />
-                                                                              <fx:reference source="player48" />
-                                                                              <fx:reference source="player49" />
-                                                                              <fx:reference source="player410" />
-                                                                              <fx:reference source="player51" />
-                                                                              <fx:reference source="player52" />
-                                                                              <fx:reference source="player53" />
-                                                                              <fx:reference source="player54" />
-                                                                              <fx:reference source="player55" />
-                                                                              <fx:reference source="player56" />
-                                                                              <fx:reference source="player57" />
-                                                                              <fx:reference source="player58" />
-                                                                              <fx:reference source="player59" />
-                                                                              <fx:reference source="player510" />
-                                                                              <fx:reference source="player61" />
-                                                                              <fx:reference source="player62" />
-                                                                              <fx:reference source="player63" />
-                                                                              <fx:reference source="player64" />
-                                                                              <fx:reference source="player65" />
-                                                                              <fx:reference source="player66" />
-                                                                              <fx:reference source="player67" />
-                                                                              <fx:reference source="player68" />
-                                                                              <fx:reference source="player69" />
-                                                                              <fx:reference source="player610" />
-                                                                              <fx:reference source="player71" />
-                                                                              <fx:reference source="player72" />
-                                                                              <fx:reference source="player73" />
-                                                                              <fx:reference source="player74" />
-                                                                              <fx:reference source="player75" />
-                                                                              <fx:reference source="player76" />
-                                                                              <fx:reference source="player77" />
-                                                                              <fx:reference source="player78" />
-                                                                              <fx:reference source="player79" />
-                                                                              <fx:reference source="player710" />
-                                                                              <fx:reference source="player81" />
-                                                                              <fx:reference source="player82" />
-                                                                              <fx:reference source="player83" />
-                                                                              <fx:reference source="player84" />
-                                                                              <fx:reference source="player85" />
-                                                                              <fx:reference source="player86" />
-                                                                              <fx:reference source="player87" />
-                                                                              <fx:reference source="player88" />
-                                                                              <fx:reference source="player89" />
-                                                                              <fx:reference source="player810" />
-                                                                              <fx:reference source="player91" />
-                                                                              <fx:reference source="player92" />
-                                                                              <fx:reference source="player93" />
-                                                                              <fx:reference source="player94" />
-                                                                              <fx:reference source="player95" />
-                                                                              <fx:reference source="player96" />
-                                                                              <fx:reference source="player97" />
-                                                                              <fx:reference source="player98" />
-                                                                              <fx:reference source="player99" />
-                                                                              <fx:reference source="player910" />
-                                                                              <fx:reference source="player101" />
-                                                                              <fx:reference source="player102" />
-                                                                              <fx:reference source="player103" />
-                                                                              <fx:reference source="player104" />
-                                                                              <fx:reference source="player105" />
-                                                                              <fx:reference source="player106" />
-                                                                              <fx:reference source="player107" />
-                                                                              <fx:reference source="player108" />
-                                                                              <fx:reference source="player109" />
-                                                                              <fx:reference source="player1010" />
+                                                                              <fx:reference source="player11" /><fx:reference source="player12" /><fx:reference source="player13" /><fx:reference source="player14" /><fx:reference source="player15" />
+                                                                              <fx:reference source="player16" /><fx:reference source="player17" /><fx:reference source="player18" /><fx:reference source="player19" /><fx:reference source="player110" />
+                                                                              <fx:reference source="player21" /><fx:reference source="player22" /><fx:reference source="player23" /><fx:reference source="player24" /><fx:reference source="player25" />
+                                                                              <fx:reference source="player26" /><fx:reference source="player27" /><fx:reference source="player28" /><fx:reference source="player29" /><fx:reference source="player210" />
+                                                                              <fx:reference source="player31" /><fx:reference source="player32" /><fx:reference source="player33" /><fx:reference source="player34" /><fx:reference source="player35" />
+                                                                              <fx:reference source="player36" /><fx:reference source="player37" /><fx:reference source="player38" /><fx:reference source="player39" /><fx:reference source="player310" />
+                                                                              <fx:reference source="player41" /><fx:reference source="player42" /><fx:reference source="player43" /><fx:reference source="player44" /><fx:reference source="player45" />
+                                                                              <fx:reference source="player46" /><fx:reference source="player47" /><fx:reference source="player48" /><fx:reference source="player49" /><fx:reference source="player410" />
+                                                                              <fx:reference source="player51" /><fx:reference source="player52" /><fx:reference source="player53" /><fx:reference source="player54" /><fx:reference source="player55" />
+                                                                              <fx:reference source="player56" /><fx:reference source="player57" /><fx:reference source="player58" /><fx:reference source="player59" /><fx:reference source="player510" />
+                                                                              <fx:reference source="player61" /><fx:reference source="player62" /><fx:reference source="player63" /><fx:reference source="player64" /><fx:reference source="player65" />
+                                                                              <fx:reference source="player66" /><fx:reference source="player67" /><fx:reference source="player68" /><fx:reference source="player69" /><fx:reference source="player610" />
+                                                                              <fx:reference source="player71" /><fx:reference source="player72" /><fx:reference source="player73" /><fx:reference source="player74" /><fx:reference source="player75" />
+                                                                              <fx:reference source="player76" /><fx:reference source="player77" /><fx:reference source="player78" /><fx:reference source="player79" /><fx:reference source="player710" />
+                                                                              <fx:reference source="player81" /><fx:reference source="player82" /><fx:reference source="player83" /><fx:reference source="player84" /><fx:reference source="player85" />
+                                                                              <fx:reference source="player86" /><fx:reference source="player87" /><fx:reference source="player88" /><fx:reference source="player89" /><fx:reference source="player810" />
+                                                                              <fx:reference source="player91" /><fx:reference source="player92" /><fx:reference source="player93" /><fx:reference source="player94" /><fx:reference source="player95" />
+                                                                              <fx:reference source="player96" /><fx:reference source="player97" /><fx:reference source="player98" /><fx:reference source="player99" /><fx:reference source="player910" />
+                                                                              <fx:reference source="player101" /><fx:reference source="player102" /><fx:reference source="player103" /><fx:reference source="player104" /><fx:reference source="player105" />
+                                                                              <fx:reference source="player106" /><fx:reference source="player107" /><fx:reference source="player108" /><fx:reference source="player109" /><fx:reference source="player1010" />
                                                                           </ArrayList>
                                                                       </fx:define>
                                                                   </GridPane>
@@ -663,106 +583,26 @@
                                                                      </children>
                                                                       <fx:define>
                                                                           <ArrayList fx:id="enemyBoard">
-                                                                              <fx:reference source="enemy11" />
-                                                                              <fx:reference source="enemy12" />
-                                                                              <fx:reference source="enemy13" />
-                                                                              <fx:reference source="enemy14" />
-                                                                              <fx:reference source="enemy15" />
-                                                                              <fx:reference source="enemy16" />
-                                                                              <fx:reference source="enemy17" />
-                                                                              <fx:reference source="enemy18" />
-                                                                              <fx:reference source="enemy19" />
-                                                                              <fx:reference source="enemy110" />
-                                                                              <fx:reference source="enemy21" />
-                                                                              <fx:reference source="enemy22" />
-                                                                              <fx:reference source="enemy23" />
-                                                                              <fx:reference source="enemy24" />
-                                                                              <fx:reference source="enemy25" />
-                                                                              <fx:reference source="enemy26" />
-                                                                              <fx:reference source="enemy27" />
-                                                                              <fx:reference source="enemy28" />
-                                                                              <fx:reference source="enemy29" />
-                                                                              <fx:reference source="enemy210" />
-                                                                              <fx:reference source="enemy31" />
-                                                                              <fx:reference source="enemy32" />
-                                                                              <fx:reference source="enemy33" />
-                                                                              <fx:reference source="enemy34" />
-                                                                              <fx:reference source="enemy35" />
-                                                                              <fx:reference source="enemy36" />
-                                                                              <fx:reference source="enemy37" />
-                                                                              <fx:reference source="enemy38" />
-                                                                              <fx:reference source="enemy39" />
-                                                                              <fx:reference source="enemy310" />
-                                                                              <fx:reference source="enemy41" />
-                                                                              <fx:reference source="enemy42" />
-                                                                              <fx:reference source="enemy43" />
-                                                                              <fx:reference source="enemy44" />
-                                                                              <fx:reference source="enemy45" />
-                                                                              <fx:reference source="enemy46" />
-                                                                              <fx:reference source="enemy47" />
-                                                                              <fx:reference source="enemy48" />
-                                                                              <fx:reference source="enemy49" />
-                                                                              <fx:reference source="enemy410" />
-                                                                              <fx:reference source="enemy51" />
-                                                                              <fx:reference source="enemy52" />
-                                                                              <fx:reference source="enemy53" />
-                                                                              <fx:reference source="enemy54" />
-                                                                              <fx:reference source="enemy55" />
-                                                                              <fx:reference source="enemy56" />
-                                                                              <fx:reference source="enemy57" />
-                                                                              <fx:reference source="enemy58" />
-                                                                              <fx:reference source="enemy59" />
-                                                                              <fx:reference source="enemy510" />
-                                                                              <fx:reference source="enemy61" />
-                                                                              <fx:reference source="enemy62" />
-                                                                              <fx:reference source="enemy63" />
-                                                                              <fx:reference source="enemy64" />
-                                                                              <fx:reference source="enemy65" />
-                                                                              <fx:reference source="enemy66" />
-                                                                              <fx:reference source="enemy67" />
-                                                                              <fx:reference source="enemy68" />
-                                                                              <fx:reference source="enemy69" />
-                                                                              <fx:reference source="enemy610" />
-                                                                              <fx:reference source="enemy71" />
-                                                                              <fx:reference source="enemy72" />
-                                                                              <fx:reference source="enemy73" />
-                                                                              <fx:reference source="enemy74" />
-                                                                              <fx:reference source="enemy75" />
-                                                                              <fx:reference source="enemy76" />
-                                                                              <fx:reference source="enemy77" />
-                                                                              <fx:reference source="enemy78" />
-                                                                              <fx:reference source="enemy79" />
-                                                                              <fx:reference source="enemy710" />
-                                                                              <fx:reference source="enemy81" />
-                                                                              <fx:reference source="enemy82" />
-                                                                              <fx:reference source="enemy83" />
-                                                                              <fx:reference source="enemy84" />
-                                                                              <fx:reference source="enemy85" />
-                                                                              <fx:reference source="enemy86" />
-                                                                              <fx:reference source="enemy87" />
-                                                                              <fx:reference source="enemy88" />
-                                                                              <fx:reference source="enemy89" />
-                                                                              <fx:reference source="enemy810" />
-                                                                              <fx:reference source="enemy91" />
-                                                                              <fx:reference source="enemy92" />
-                                                                              <fx:reference source="enemy93" />
-                                                                              <fx:reference source="enemy94" />
-                                                                              <fx:reference source="enemy95" />
-                                                                              <fx:reference source="enemy96" />
-                                                                              <fx:reference source="enemy97" />
-                                                                              <fx:reference source="enemy98" />
-                                                                              <fx:reference source="enemy99" />
-                                                                              <fx:reference source="enemy910" />
-                                                                              <fx:reference source="enemy101" />
-                                                                              <fx:reference source="enemy102" />
-                                                                              <fx:reference source="enemy103" />
-                                                                              <fx:reference source="enemy104" />
-                                                                              <fx:reference source="enemy105" />
-                                                                              <fx:reference source="enemy106" />
-                                                                              <fx:reference source="enemy107" />
-                                                                              <fx:reference source="enemy108" />
-                                                                              <fx:reference source="enemy109" />
-                                                                              <fx:reference source="enemy1010" />
+                                                                              <fx:reference source="enemy11" /><fx:reference source="enemy12" /><fx:reference source="enemy13" /><fx:reference source="enemy14" /><fx:reference source="enemy15" />
+                                                                              <fx:reference source="enemy16" /><fx:reference source="enemy17" /><fx:reference source="enemy18" /><fx:reference source="enemy19" /><fx:reference source="enemy110" />
+                                                                              <fx:reference source="enemy21" /><fx:reference source="enemy22" /><fx:reference source="enemy23" /><fx:reference source="enemy24" /><fx:reference source="enemy25" />
+                                                                              <fx:reference source="enemy26" /><fx:reference source="enemy27" /><fx:reference source="enemy28" /><fx:reference source="enemy29" /><fx:reference source="enemy210" />
+                                                                              <fx:reference source="enemy31" /><fx:reference source="enemy32" /><fx:reference source="enemy33" /><fx:reference source="enemy34" /><fx:reference source="enemy35" />
+                                                                              <fx:reference source="enemy36" /><fx:reference source="enemy37" /><fx:reference source="enemy38" /><fx:reference source="enemy39" /><fx:reference source="enemy310" />
+                                                                              <fx:reference source="enemy41" /><fx:reference source="enemy42" /><fx:reference source="enemy43" /><fx:reference source="enemy44" /><fx:reference source="enemy45" />
+                                                                              <fx:reference source="enemy46" /><fx:reference source="enemy47" /><fx:reference source="enemy48" /><fx:reference source="enemy49" /><fx:reference source="enemy410" />
+                                                                              <fx:reference source="enemy51" /><fx:reference source="enemy52" /><fx:reference source="enemy53" /><fx:reference source="enemy54" /><fx:reference source="enemy55" />
+                                                                              <fx:reference source="enemy56" /><fx:reference source="enemy57" /><fx:reference source="enemy58" /><fx:reference source="enemy59" /><fx:reference source="enemy510" />
+                                                                              <fx:reference source="enemy61" /><fx:reference source="enemy62" /><fx:reference source="enemy63" /><fx:reference source="enemy64" /><fx:reference source="enemy65" />
+                                                                              <fx:reference source="enemy66" /><fx:reference source="enemy67" /><fx:reference source="enemy68" /><fx:reference source="enemy69" /><fx:reference source="enemy610" />
+                                                                              <fx:reference source="enemy71" /><fx:reference source="enemy72" /><fx:reference source="enemy73" /><fx:reference source="enemy74" /><fx:reference source="enemy75" />
+                                                                              <fx:reference source="enemy76" /><fx:reference source="enemy77" /><fx:reference source="enemy78" /><fx:reference source="enemy79" /><fx:reference source="enemy710" />
+                                                                              <fx:reference source="enemy81" /><fx:reference source="enemy82" /><fx:reference source="enemy83" /><fx:reference source="enemy84" /><fx:reference source="enemy85" />
+                                                                              <fx:reference source="enemy86" /><fx:reference source="enemy87" /><fx:reference source="enemy88" /><fx:reference source="enemy89" /><fx:reference source="enemy810" />
+                                                                              <fx:reference source="enemy91" /><fx:reference source="enemy92" /><fx:reference source="enemy93" /><fx:reference source="enemy94" /><fx:reference source="enemy95" />
+                                                                              <fx:reference source="enemy96" /><fx:reference source="enemy97" /><fx:reference source="enemy98" /><fx:reference source="enemy99" /><fx:reference source="enemy910" />
+                                                                              <fx:reference source="enemy101" /><fx:reference source="enemy102" /><fx:reference source="enemy103" /><fx:reference source="enemy104" /><fx:reference source="enemy105" />
+                                                                              <fx:reference source="enemy106" /><fx:reference source="enemy107" /><fx:reference source="enemy108" /><fx:reference source="enemy109" /><fx:reference source="enemy1010" />
                                                                           </ArrayList>
                                                                       </fx:define>
                                                                   </GridPane>
@@ -793,47 +633,47 @@
                                                          <children>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                                                <children>
-                                                                  <Label layoutX="11.0" layoutY="26.0" text="1" AnchorPane.rightAnchor="14.5" />
+                                                                  <Label layoutX="11.0" layoutY="21.0" text="1" AnchorPane.rightAnchor="14.5" />
                                                                </children>
                                                             </AnchorPane>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                                                                <children>
-                                                                  <Label layoutX="11.0" layoutY="26.0" text="2" AnchorPane.rightAnchor="14.5" />
+                                                                  <Label layoutX="11.0" layoutY="21.0" text="2" AnchorPane.rightAnchor="14.0" />
                                                                </children>
                                                             </AnchorPane>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                                                                <children>
-                                                                  <Label layoutX="11.0" layoutY="34.0" text="3" AnchorPane.rightAnchor="14.5" />
+                                                                  <Label layoutX="11.0" layoutY="21.0" text="3" AnchorPane.rightAnchor="14.0" />
                                                                </children>
                                                             </AnchorPane>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
                                                                <children>
-                                                                  <Label layoutX="11.0" layoutY="34.0" text="4" AnchorPane.rightAnchor="14.5" />
+                                                                  <Label layoutX="11.0" layoutY="26.0" text="4" AnchorPane.rightAnchor="14.0" />
                                                                </children>
                                                             </AnchorPane>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
                                                                <children>
-                                                                  <Label layoutX="11.0" layoutY="25.0" text="5" AnchorPane.rightAnchor="14.5" />
+                                                                  <Label layoutX="11.0" layoutY="25.0" text="5" AnchorPane.rightAnchor="14.0" />
                                                                </children>
                                                             </AnchorPane>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5">
                                                                <children>
-                                                                  <Label layoutX="13.0" layoutY="25.0" text="6" AnchorPane.rightAnchor="14.5" />
+                                                                  <Label layoutX="11.0" layoutY="21.0" text="6" AnchorPane.rightAnchor="14.0" />
                                                                </children>
                                                             </AnchorPane>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6">
                                                                <children>
-                                                                  <Label layoutX="11.0" layoutY="25.0" text="7" AnchorPane.rightAnchor="14.5" />
+                                                                  <Label layoutX="11.0" layoutY="21.0" text="7" AnchorPane.rightAnchor="14.0" />
                                                                </children>
                                                             </AnchorPane>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="7">
                                                                <children>
-                                                                  <Label layoutX="11.0" layoutY="25.0" text="8" AnchorPane.rightAnchor="14.5" />
+                                                                  <Label layoutX="11.0" layoutY="21.0" text="8" AnchorPane.rightAnchor="14.0" />
                                                                </children>
                                                             </AnchorPane>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="8">
                                                                <children>
-                                                                  <Label layoutX="13.0" layoutY="25.0" text="9" AnchorPane.rightAnchor="14.5" />
+                                                                  <Label layoutX="13.0" layoutY="21.0" text="9" AnchorPane.rightAnchor="12.0" />
                                                                </children>
                                                             </AnchorPane>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="9">
