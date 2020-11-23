@@ -10,7 +10,7 @@ public class Ship {
     public String color;
 
     public int start, finish, orientation;
-    public int size, hit_points, destroy_points;
+    public int size, hit_points, destroy_points, state;
 
     public LinkedList<AnchorPane> anchorList = new LinkedList();
 
@@ -42,6 +42,10 @@ public class Ship {
 
     public int getDestroy_points() {
         return destroy_points;
+    }
+
+    public int getState() {
+        return state;
     }
 
     public String getColor() {

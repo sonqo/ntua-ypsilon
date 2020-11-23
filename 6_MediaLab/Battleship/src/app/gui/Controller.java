@@ -3,6 +3,7 @@ package app.gui;
 import app.model.ship.*;
 import app.model.player.Player;
 
+import java.io.FileNotFoundException;
 import java.util.*;
 import java.net.URL;
 import javafx.fxml.FXML;
@@ -31,6 +32,16 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+    }
+
+    private void checkInput(String path, Player user) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(path));
+        String line = reader.readLine();
+        while (line != null) {
+            List<String> rtmp = Arrays.asList(line.split(","));
+            
+            line = reader.readLine();
+        }
     }
 
     private Ship[] readInput(String path) throws IOException{
