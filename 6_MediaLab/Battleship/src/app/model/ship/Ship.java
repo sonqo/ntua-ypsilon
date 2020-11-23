@@ -52,7 +52,7 @@ public class Ship {
         return anchorList;
     }
 
-    public void fillAnchorList(List<AnchorPane> list, Player user){
+    public void fillAnchorList(List<AnchorPane> list, Player user, int flag){
         LinkedList<AnchorPane> curr = getAnchorList();
         if (getOrientation() == 1) {
             for (int i=0; i<getSize(); i++) {
@@ -66,8 +66,10 @@ public class Ship {
                 user.board[getStart()+i+1][getFinish()+1] = 1;
             }
         }
-        for (int i=0; i<getSize(); i++) {
-            curr.get(i).setStyle("-fx-background-color: " + getColor() + "; -fx-border-color: white");
+        if (flag == 1) {
+            for (int i = 0; i < getSize(); i++) {
+                curr.get(i).setStyle("-fx-background-color: " + getColor() + "; -fx-border-color: white");
+            }
         }
 //            list.get(10*(6-1) + (6-1)).setStyle("-fx-background-color:red");
     }

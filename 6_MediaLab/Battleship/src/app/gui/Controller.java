@@ -20,6 +20,8 @@ public class Controller implements Initializable {
     public Player player = new Player();
 
     @FXML
+    public List<AnchorPane> enemyBoard;
+    @FXML
     public List<AnchorPane> playerBoard;
 
     public MenuItem startGame;
@@ -69,11 +71,13 @@ public class Controller implements Initializable {
         player.ship_array = readInput(defaultPlayer); // reading player's scenario
 
         for (int i=0; i<playerBoard.size(); i++){ // painting see board
+            enemyBoard.get(i).setStyle("-fx-background-color: #87BDD8; -fx-border-color: white");
             playerBoard.get(i).setStyle("-fx-background-color: #CFE0E8; -fx-border-color: white");
         }
 
         for (int i=1; i<6; i++) { // register player's ships position, create player's flag-board
-            player.ship_array[i].fillAnchorList(playerBoard, player);
+            enemy.ship_array[i].fillAnchorList(enemyBoard, enemy, 0);
+            player.ship_array[i].fillAnchorList(playerBoard, player, 1);
         }
 
     }
