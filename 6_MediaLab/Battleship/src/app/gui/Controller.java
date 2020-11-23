@@ -3,8 +3,10 @@ package app.gui;
 import app.model.ship.*;
 import app.model.player.Player;
 
+import java.awt.*;
 import java.util.*;
 import java.net.URL;
+import java.util.List;
 import javafx.fxml.FXML;
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,6 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import java.net.URISyntaxException;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.TextInputDialog;
@@ -124,6 +127,10 @@ public class Controller implements Initializable {
                 alert.showAndWait();
             }
         }
+    }
+
+    public void aboutApp() throws IOException, URISyntaxException {
+        Desktop.getDesktop().browse(new URL("https://github.com/Sonqo/Ntua_Ypsilon/tree/master/6_MediaLab/Battleship").toURI());
     }
 
     public void exitApp() {
