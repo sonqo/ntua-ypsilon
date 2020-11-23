@@ -22,13 +22,9 @@ Child process handling, signal communication, monitoring multiple file descripto
 
 ### Multimedia Technology
 
-- **Aiport**  
-_GUI application designed for a flight management system._  
+- **Aiport & Battleship**  
+_GUI applications on a flight management system and the well-known board game._  
 Object-oriented approach, interface design, event handling, timelines, animations.
-
-- **Battleship**    
-_GUI application based on the well-known board game._   
-Object-oriented approach.
 
 :bulb: Technologies used: ***Java*** _(JavaFX, SceneBuilder)_
 
