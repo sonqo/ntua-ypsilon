@@ -1,5 +1,7 @@
 package app.model.ship;
 import app.model.player.Player;
+import app.model.exception.OverlapException;
+import app.model.exception.OversizeException;
 
 import java.util.List;
 import java.util.LinkedList;
@@ -77,14 +79,46 @@ public class Ship {
         LinkedList<AnchorPane> curr = getAnchorList();
         if (getOrientation() == 1) {
             for (int i=0; i<getSize(); i++) {
-                curr.add(list.get(10*getStart()+getFinish()+i));
-                user.board[getStart()+1][getFinish()+i+1] = getId();
-            }
+                try {
+                    if ((getStart()+1 < 0) || (getStart()+1 > 9) || (getFinish()+i+1 < 0) || (getFinish()+i+1 > 9)) {
+                        throw new OversizeException();
+                    } else {
+                        try {
+                            if (user.board[getStart()+1][getFinish()+i+1] != 0) {
+                                throw new OverlapException();
+                            } else {
+                                curr.add(list.get(10*getStart()+getFinish()+i));
+                                user.board[getStart()+1][getFinish()+i+1] = getId();
+                            }
+                        } catch (OverlapException e) {
+                            e.handleException();
+                        }
 
+                    }
+                } catch (OversizeException e) {
+                    e.handleException();
+                }
+            }
         } else {
             for (int i=0; i<getSize(); i++) {
-                curr.add(list.get(10*getStart()+getFinish()+10*i));
-                user.board[getStart()+i+1][getFinish()+1] = getId();
+                try {
+                    if ((getStart()+i+1 < 0) || (getStart()+i+1 > 9) || (getFinish()+1 < 0) || (getFinish()+1 > 9)) {
+                        throw new OversizeException();
+                    } else {
+                        try {
+                            if (user.board[getStart()+i+1][getFinish()+1] != 0) {
+                                throw new OverlapException();
+                            } else {
+                                curr.add(list.get(10*getStart()+getFinish()+10*i));
+                                user.board[getStart()+i+1][getFinish()+1] = getId();
+                            }
+                        } catch (OverlapException e) {
+                            e.handleException();
+                        }
+                    }
+                } catch (OversizeException e) {
+                    e.handleException();
+                }
             }
         }
         if (flag == 1) {
@@ -92,6 +126,5 @@ public class Ship {
                 curr.get(i).setStyle("-fx-background-color: " + getColor() + "; -fx-border-color: white");
             }
         }
-//            list.get(10*(6-1) + (6-1)).setStyle("-fx-background-color:red");
     }
 }

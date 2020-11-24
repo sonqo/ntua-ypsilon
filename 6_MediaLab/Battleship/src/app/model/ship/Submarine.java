@@ -29,16 +29,6 @@ public class Submarine extends Ship{
     }
 
     @Override
-    public void setDamaged() {
-        this.state = "Damaged";
-    }
-
-    @Override
-    public void setSunken() {
-        this.state = "Sunken";
-    }
-
-    @Override
     public String getColor() {
         return color;
     }

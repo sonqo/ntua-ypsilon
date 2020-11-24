@@ -11,15 +11,14 @@ public class Player {
 
     public LinkedList<Shot> shots = new LinkedList();
 
-    public int[][] board = new int[11][11];
-    public int turn, points, functional_ships, successful_shots, ship_count, shot_count;
+    public int[][] board = new int[10][10];
+    public int turn, points, functional_ships, successful_shots, shot_count;
 
     public Player() {
 
         turn = 1;
         points = 0;
         shot_count = 0;
-        ship_count = 5;
         successful_shots = 0;
         functional_ships = 5;
 
@@ -55,19 +54,8 @@ public class Player {
         this.successful_shots++;
     }
 
-    public int getShip_count() {
-        return ship_count;
-    }
-
-    public int getShot_count() {
-        return shot_count;
-    }
-
-    public LinkedList getShots() {
-        return shots;
-    }
-
     public int getTurn() {
         return turn;
     }
+
 }

@@ -3,22 +3,23 @@ package app.gui;
 import app.model.Shot;
 import app.model.ship.*;
 import app.model.player.Player;
+import app.model.exception.InvalidCountException;
 
 import java.awt.*;
 import java.util.*;
 import java.net.URL;
 import java.util.List;
-
-import javafx.beans.property.BooleanProperty;
 import javafx.fxml.FXML;
+import javafx.stage.Stage;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.BufferedReader;
+import javafx.scene.image.Image;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Button;
 import java.net.URISyntaxException;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
@@ -37,10 +38,7 @@ public class Controller implements Initializable {
     public TextField xCoord, yCoord;
     public Label playersPoints, enemysPoints, playersShips, enemysShips, playersShots, enemysShots;
 
-    public Player enemy;
-    public Player player;
-
-    private int x, y;
+    public Player player, enemy;
 
     String defaultEnemy = "medialab/enemy_SCENARIO-01.txt";
     String defaultPlayer = "medialab/player_SCENARIO-01.txt";
@@ -50,11 +48,8 @@ public class Controller implements Initializable {
 
     }
 
-    private void checkInput(String path, Player user) throws IOException {
-
-    }
-
     private Ship[] readInput(String path) throws IOException{
+        int acc[] = new int [6];
         Ship[] ship_array = new Ship[6];
         BufferedReader reader = new BufferedReader(new FileReader(path));
         String line = reader.readLine();
@@ -81,6 +76,14 @@ public class Controller implements Initializable {
                 curr.setStats(Integer.parseInt(rtmp.get(1)), Integer.parseInt(rtmp.get(2)), Integer.parseInt(rtmp.get(3)));
                 ship_array[Integer.parseInt(rtmp.get(0))] = curr;
             }
+            acc[Integer.parseInt(rtmp.get(0))]++;
+            try {
+                if (acc[Integer.parseInt(rtmp.get(0))] == 2) {
+                    throw new InvalidCountException();
+                }
+            } catch (InvalidCountException e) {
+                e.handleException();
+            }
             line = reader.readLine();
         }
         return ship_array;
@@ -98,34 +101,30 @@ public class Controller implements Initializable {
 
     public void handleSubmit() {
 
-        x = Integer.parseInt(xCoord.textProperty().get());
-        y = Integer.parseInt(yCoord.textProperty().get());
+        int x = Integer.parseInt(xCoord.textProperty().get());
+        int y = Integer.parseInt(yCoord.textProperty().get());
 
         Shot curr = new Shot(x, y, player.getTurn());
 
-        if (enemy.board[x][y] == 0) {
+        if (enemy.board[x][y] == 0) { // missed shot
 
             curr.ship = 0;
             curr.status = "Miss";
-            enemyBoard.get(10*(x-1) + (y-1)).setStyle("-fx-background-color:#3b444b; -fx-border-color: white");
+            enemyBoard.get(10*(x -1) + (y -1)).setStyle("-fx-background-color:#3b444b; -fx-border-color: white");
 
-        } else if (enemy.board[x][y] > 0) {
-
+        } else if (enemy.board[x][y] > 0) { // successful shot
 
             curr.status = "Hit";
             curr.ship = enemy.board[x][y];
-
             if (enemy.ship_array[enemy.board[x][y]].getState().equals("Intact")) {
                 enemy.ship_array[enemy.board[x][y]].setSize();
                 enemy.ship_array[enemy.board[x][y]].setDamaged();
                 player.setSuccessful_shots();
                 player.setPoints(enemy.ship_array[enemy.board[x][y]].getHit_points());
-
             } else if (enemy.ship_array[enemy.board[x][y]].getState().equals("Damaged")) {
                 if (enemy.ship_array[enemy.board[x][y]].getSize() > 1) {
                     enemy.ship_array[enemy.board[x][y]].setSize();
                     player.setPoints(enemy.ship_array[enemy.board[x][y]].getHit_points());
-
                 } else {
                     enemy.setFunctional_ships();
                     enemy.ship_array[enemy.board[x][y]].setSunken();
@@ -133,14 +132,14 @@ public class Controller implements Initializable {
                 }
                 player.setSuccessful_shots();
             }
-
             enemy.board[x][y] = -1;
-            enemyBoard.get(10*(x-1) + (y-1)).setStyle("-fx-background-color:crimson; -fx-border-color: white");
+            enemyBoard.get(10*(x -1) + (y -1)).setStyle("-fx-background-color:crimson; -fx-border-color: white");
 
         } else {
             curr.ship = 0;
             curr.status = "Miss";
         }
+
         player.shots.add(curr);
 
         xCoord.clear();
@@ -150,8 +149,10 @@ public class Controller implements Initializable {
 
         handleLabels();
 
-        if (enemy.getFunctional_ships() == 4) {
-            gameOver();
+        if (enemy.getFunctional_ships() == 0) {
+            gameOver(1);
+        } else if (player.getTurn() == 41) {
+            gameOver(3);
         }
 
     }
@@ -183,6 +184,8 @@ public class Controller implements Initializable {
         dialog.setHeaderText(null);
         dialog.setContentText("ID: ");
         dialog.setTitle("Load Scenario");
+        Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image("file:images/battleship_v2.jpg"));
         Optional<String> res = dialog.showAndWait();
         if (res.isPresent()) {
             try {
@@ -196,15 +199,24 @@ public class Controller implements Initializable {
                 alert.setHeaderText(null);
                 alert.setTitle("Load Scenario");
                 alert.setContentText("Scenario ID not found!");
+                stage = (Stage) alert.getDialogPane().getScene().getWindow();
+                stage.getIcons().add(new Image("file:images/battleship_v2.jpg"));
                 alert.showAndWait();
             }
         }
     }
 
-    public void gameOver() {
+    public void gameOver(int state) {
         xCoord.setEditable(false);
         yCoord.setEditable(false);
         fireButton.setDisable(true);
+        if (state == 1) { // player wins
+
+        } else if (state == 2) { // enemy wins
+
+        } else { // turn limit reached
+
+        }
     }
 
     public void enemyShipsHandler() {
@@ -214,6 +226,8 @@ public class Controller implements Initializable {
         dialog.setHeaderText(null);
         dialog.setContentText(curr);
         dialog.setTitle("Enemy's Ships Info");
+        Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image("file:images/battleship_v2.jpg"));
         dialog.showAndWait();
     }
 
@@ -232,6 +246,8 @@ public class Controller implements Initializable {
         dialog.setHeaderText(null);
         dialog.setContentText(string);
         dialog.setTitle("Player's Last 5 Shots Info");
+        Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image("file:images/battleship_v2.jpg"));
         dialog.showAndWait();
     }
 
@@ -250,6 +266,8 @@ public class Controller implements Initializable {
         dialog.setHeaderText(null);
         dialog.setContentText(string);
         dialog.setTitle("Enemy's Last 5 Shots Info");
+        Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image("file:images/battleship_v2.jpg"));
         dialog.showAndWait();
     }
 
