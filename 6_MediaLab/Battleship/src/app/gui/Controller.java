@@ -36,7 +36,7 @@ public class Controller implements Initializable {
     public Button fireButton;
     public MenuItem startGame;
     public TextField xCoord, yCoord;
-    public Label playersPoints, enemysPoints, playersShips, enemysShips, playersShots, enemysShots;
+    public Label playersPoints, enemysPoints, playersShips, enemysShips, playersShots, enemysShots, turnLabel;
 
     public Player player, enemy;
 
@@ -97,6 +97,8 @@ public class Controller implements Initializable {
         playersPoints.textProperty().set("Player's Points: " + player.getPoints());
         playersShips.textProperty().set("Player's Functional Ships: " + player.getFunctional_ships());
         playersShots.textProperty().set("Player's Successful Shots: " + player.getSuccessful_shots());
+
+        turnLabel.textProperty().set("Game Turn: " + player.getTurn());
     }
 
     public void handleSubmit() {

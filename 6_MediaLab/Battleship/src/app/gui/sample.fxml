@@ -39,12 +39,13 @@
                         <Image url="file:images/battleship_v1.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="playersPoints" layoutX="449.0" layoutY="33.0" prefHeight="20.0" prefWidth="200.0" text="Player's Points:" AnchorPane.leftAnchor="450.0" AnchorPane.topAnchor="32.0" />
-                  <Label fx:id="playersShips" layoutX="450.0" layoutY="68.0" prefHeight="20.0" prefWidth="200.0" text="Player's Functional Ships:" AnchorPane.leftAnchor="450.0" AnchorPane.topAnchor="65.0" />
-                  <Label fx:id="playersShots" layoutX="450.0" layoutY="92.0" prefHeight="20.0" prefWidth="200.0" text="Player's Successful Shots:" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="450.0" />
-                  <Label fx:id="enemysPoints" layoutX="811.0" layoutY="35.0" prefHeight="20.0" prefWidth="200.0" text="Enemy's Points:" AnchorPane.leftAnchor="820.0" AnchorPane.topAnchor="32.0" />
-                  <Label fx:id="enemysShips" layoutX="811.0" layoutY="62.0" prefHeight="20.0" prefWidth="200.0" text="Enemy's Functional Ships:" AnchorPane.leftAnchor="820.0" AnchorPane.topAnchor="65.0" />
-                  <Label fx:id="enemysShots" layoutX="811.0" layoutY="97.0" prefHeight="20.0" prefWidth="200.0" text="Enemy's Successful Shots:" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="820.0" />
+                  <Label fx:id="playersPoints" layoutX="417.0" layoutY="33.0" prefHeight="20.0" prefWidth="200.0" text="Player's Points:" AnchorPane.leftAnchor="417.0" AnchorPane.topAnchor="33.0" />
+                  <Label fx:id="playersShips" layoutX="417.0" layoutY="66.0" prefHeight="20.0" prefWidth="200.0" text="Player's Functional Ships:" AnchorPane.leftAnchor="417.0" AnchorPane.topAnchor="66.0" />
+                  <Label fx:id="playersShots" layoutX="417.0" layoutY="103.0" prefHeight="20.0" prefWidth="200.0" text="Player's Successful Shots:" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="417.0" />
+                  <Label fx:id="enemysPoints" layoutX="787.0" layoutY="33.0" prefHeight="20.0" prefWidth="200.0" text="Enemy's Points:" AnchorPane.leftAnchor="787.0" AnchorPane.topAnchor="33.0" />
+                  <Label fx:id="enemysShips" layoutX="787.0" layoutY="66.0" prefHeight="20.0" prefWidth="200.0" text="Enemy's Functional Ships:" AnchorPane.leftAnchor="787.0" AnchorPane.topAnchor="66.0" />
+                  <Label fx:id="enemysShots" layoutX="787.0" layoutY="103.0" prefHeight="20.0" prefWidth="200.0" text="Enemy's Successful Shots:" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="787.0" />
+                  <Label fx:id="turnLabel" layoutX="1066.0" layoutY="35.0" prefHeight="17.0" prefWidth="96.0" text="Game Turn:" AnchorPane.topAnchor="33.0" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
