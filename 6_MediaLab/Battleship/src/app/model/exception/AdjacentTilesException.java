@@ -10,7 +10,7 @@ public class AdjacentTilesException extends Exception {
         return ("At least two ships are too close with each other!");
     }
 
-    public void handleSubmit() {
+    public void handleException() {
         Alert dialog = new Alert(Alert.AlertType.ERROR);
         dialog.setHeaderText(null);
         dialog.setContentText(toString());

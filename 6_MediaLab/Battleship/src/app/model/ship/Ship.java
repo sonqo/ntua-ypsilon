@@ -1,4 +1,5 @@
 package app.model.ship;
+import app.model.exception.AdjacentTilesException;
 import app.model.player.Player;
 import app.model.exception.OverlapException;
 import app.model.exception.OversizeException;
@@ -87,8 +88,16 @@ public class Ship {
                             if (user.board[getStart()+1][getFinish()+i+1] != 0) {
                                 throw new OverlapException();
                             } else {
-                                curr.add(list.get(10*getStart()+getFinish()+i));
-                                user.board[getStart()+1][getFinish()+i+1] = getId();
+                                try {
+                                    if (checkNeighbors(user.board, getStart()+1, getFinish()+i+1, getId())) {
+                                        curr.add(list.get(10*getStart()+getFinish()+i));
+                                        user.board[getStart()+1][getFinish()+i+1] = getId();
+                                    } else {
+                                        throw new AdjacentTilesException();
+                                    }
+                                } catch (AdjacentTilesException e) {
+                                    e.handleException();
+                                }
                             }
                         } catch (OverlapException e) {
                             e.handleException();
@@ -109,8 +118,16 @@ public class Ship {
                             if (user.board[getStart()+i+1][getFinish()+1] != 0) {
                                 throw new OverlapException();
                             } else {
-                                curr.add(list.get(10*getStart()+getFinish()+10*i));
-                                user.board[getStart()+i+1][getFinish()+1] = getId();
+                                try {
+                                    if (checkNeighbors(user.board, getStart()+i+1, getFinish()+1, getId())) {
+                                        curr.add(list.get(10*getStart()+getFinish()+10*i));
+                                        user.board[getStart()+i+1][getFinish()+1] = getId();
+                                    } else {
+                                        throw new AdjacentTilesException();
+                                    }
+                                } catch (AdjacentTilesException e) {
+                                    e.handleException();
+                                }
                             }
                         } catch (OverlapException e) {
                             e.handleException();
@@ -127,4 +144,22 @@ public class Ship {
             }
         }
     }
+
+    public boolean checkNeighbors(int[][] array, int x, int y, int num) {
+
+        int startPosX = (x - 1 < 0) ? x : x-1;
+        int startPosY = (y - 1 < 0) ? y : y-1;
+        int endPosX =   (x + 1 > 9) ? x : x+1;
+        int endPosY =   (y + 1 > 9) ? y : y+1;
+
+        for (int i=startPosX; i<=endPosX; i++) {
+            for (int j=startPosY; j<=endPosY; j++) {
+                if ((array[i][j] != num) && (array[i][j] != 0)){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
 }
