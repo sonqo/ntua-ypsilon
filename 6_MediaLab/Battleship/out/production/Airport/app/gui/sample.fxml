@@ -22,9 +22,9 @@
                       </Menu>
                       <Menu mnemonicParsing="false" text="Details">
                         <items>
-                          <MenuItem mnemonicParsing="false" text="Enemy Ships" />
-                              <MenuItem mnemonicParsing="false" text="Player Shots" />
-                              <MenuItem mnemonicParsing="false" text="Enemy Shots" />
+                          <MenuItem mnemonicParsing="false" onAction="#enemyShipsHandler" text="Enemy Ships" />
+                              <MenuItem mnemonicParsing="false" onAction="#playerShotsHandler" text="Player Shots" />
+                              <MenuItem mnemonicParsing="false" onAction="#enemyShotsHandler" text="Enemy Shots" />
                         </items>
                       </Menu>
                       <Menu mnemonicParsing="false" text="About">
@@ -692,7 +692,14 @@
                               </SplitPane>
                            </children>
                         </AnchorPane>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <TextField focusTraversable="false" layoutX="271.0" layoutY="22.0" prefHeight="25.0" prefWidth="168.0" fx:id="xCoord" />
+                              <TextField fx:id="yCoord" focusTraversable="false" layoutX="271.0" layoutY="64.0" prefHeight="25.0" prefWidth="168.0" />
+                              <Label layoutX="187.0" layoutY="26.0" text="X-Coordinate:" />
+                              <Label layoutX="187.0" layoutY="68.0" text="Y-Coordinate:" />
+                              <Button fx:id="fireButton" focusTraversable="false" layoutX="483.0" layoutY="43.0" mnemonicParsing="false" onAction="#handleSubmit" text="Fire!" />
+                           </children></AnchorPane>
                     </items>
                   </SplitPane>
                </children>
