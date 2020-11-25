@@ -1,6 +1,5 @@
 package app.gui;
 
-import app.model.Shot;
 import app.model.ship.*;
 import app.model.player.Player;
 import app.model.exception.InvalidCountException;
@@ -49,7 +48,7 @@ public class Controller implements Initializable {
     }
 
     private Ship[] readInput(String path) throws IOException{
-        int acc[] = new int [6];
+        int[] acc = new int [6];
         Ship[] ship_array = new Ship[6];
         BufferedReader reader = new BufferedReader(new FileReader(path));
         String line = reader.readLine();
@@ -90,6 +89,8 @@ public class Controller implements Initializable {
     }
 
     public void handleLabels() {
+        turnLabel.textProperty().set("Game Turn: " + player.getTurn());
+
         enemysPoints.textProperty().set("Enemy's Points: " + enemy.getPoints());
         enemysShips.textProperty().set("Enemy's Functional Ships: " + enemy.getFunctional_ships());
         enemysShots.textProperty().set("Enemy's Successful Shots: " + enemy.getSuccessful_shots());
@@ -97,20 +98,23 @@ public class Controller implements Initializable {
         playersPoints.textProperty().set("Player's Points: " + player.getPoints());
         playersShips.textProperty().set("Player's Functional Ships: " + player.getFunctional_ships());
         playersShots.textProperty().set("Player's Successful Shots: " + player.getSuccessful_shots());
-
-        turnLabel.textProperty().set("Game Turn: " + player.getTurn());
     }
 
-    public void handleSubmit() throws IOException {
+    public void handleSubmit() {
 
         int x = Integer.parseInt(xCoord.textProperty().get());
         int y = Integer.parseInt(yCoord.textProperty().get());
 
-        handleTurn(player, enemy, enemyBoard, x, y);
+        player.turnHandler(enemy, enemyBoard, x, y);
+
+        handleLabels();
+
+        xCoord.clear();
+        yCoord.clear();
 
         if (enemy.getFunctional_ships() == 0) {
             gameOver(1);
-        } else if ((player.getTurn() == 11) && (player.getTurn() == enemy.getTurn())){
+        } else if ((player.getTurn() == 41) && (player.getTurn() == enemy.getTurn())){
             enemy.turn = 0;
             gameOver(3);
         } else {
@@ -118,85 +122,54 @@ public class Controller implements Initializable {
         }
     }
 
-    public void enemysTurn() throws IOException {
+    public void enemysTurn() {
 
-        Random rand = new Random();
-        int x = rand.nextInt(10) + 1;
-        int y = rand.nextInt(10) + 1;
-        while (enemy.tries[x][y] != 0) {
-            x = rand.nextInt(10) + 1;
-            y = rand.nextInt(10) + 1;
-        }
+        int[] coords = enemy.prophetFunction();
 
-        handleTurn(enemy, player, playerBoard, x, y);
-
-        if (player.getFunctional_ships() == 0) {
-            gameOver(2);
-        } else if ((enemy.getTurn() == 11) && (enemy.getTurn() == player.getTurn())) {
-            player.turn = 0;
-            gameOver(3);
-        }
-
-    }
-
-    public void handleTurn(Player player, Player opponent, List<AnchorPane> opponentBoard, int x, int y) {
-
-        Shot curr = new Shot(x, y, player.getTurn());
-
-        if (opponent.board[x][y] == 0) { // missed shot
-
-            curr.ship = 0;
-            curr.status = "Miss";
-            try {
-                opponentBoard.get(10 * (x - 1) + (y - 1)).setStyle("-fx-background-color:#3b444b; -fx-border-color: white");
-            } catch (Exception e) {
-                System.out.println(x);
-                System.out.println(y);
-            }
-
-        } else if (opponent.board[x][y] > 0) { // successful shot
-
-            curr.status = "Hit";
-            curr.ship = opponent.board[x][y];
-            if (opponent.ship_array[opponent.board[x][y]].getState().equals("Intact")) {
-                opponent.ship_array[opponent.board[x][y]].setSize();
-                opponent.ship_array[opponent.board[x][y]].setDamaged();
-                player.setSuccessful_shots();
-                player.setPoints(opponent.ship_array[opponent.board[x][y]].getHit_points());
-            } else if (opponent.ship_array[opponent.board[x][y]].getState().equals("Damaged")) {
-                if (opponent.ship_array[opponent.board[x][y]].getSize() > 1) {
-                    opponent.ship_array[opponent.board[x][y]].setSize();
-                    player.setPoints(opponent.ship_array[opponent.board[x][y]].getHit_points());
-                } else {
-                    opponent.setFunctional_ships();
-                    opponent.ship_array[opponent.board[x][y]].setSunken();
-                    player.setPoints(opponent.ship_array[opponent.board[x][y]].getDestroy_bonus());
-                }
-                player.setSuccessful_shots();
-            }
-            opponent.board[x][y] = -1;
-            opponentBoard.get(10*(x -1) + (y -1)).setStyle("-fx-background-color:crimson; -fx-border-color: white");
-
-        } else {
-            curr.ship = 0;
-            curr.status = "Miss";
-        }
-
-        player.shots.add(curr);
-
-        xCoord.clear();
-        yCoord.clear();
-
-        player.turn += 1;
+        enemy.turnHandler(player, playerBoard, coords[0], coords[1]);
 
         handleLabels();
 
+        if (player.getFunctional_ships() == 0) {
+            gameOver(2);
+        } else if ((enemy.getTurn() == 41) && (enemy.getTurn() == player.getTurn())) {
+            player.turn = 0;
+            gameOver(3);
+        }
     }
 
-    public void initializeApp(ActionEvent actionEvent) throws IOException {
+    public void gameOver(int state) {
 
-        enemy = new Player();
-        player = new Player();
+        xCoord.setEditable(false);
+        yCoord.setEditable(false);
+        fireButton.setDisable(true);
+
+        Alert dialog = new Alert(Alert.AlertType.WARNING);
+        dialog.setHeaderText(null);
+        dialog.setTitle("Game Over");
+        Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image("file:images/battleship_v2.jpg"));
+
+        if (state == 1) {
+            dialog.setContentText("Player wins!");
+        } else if (state == 2) {
+            dialog.setContentText("Enemy wins");
+        } else {
+            if (player.getPoints() > enemy.getPoints()) {
+                dialog.setContentText("Limit of turns reached, player wins!");
+            } else if (player.getPoints() < enemy.getPoints()) {
+                dialog.setContentText("Limit of turns reached, enemy wins!");
+            } else{
+                dialog.setContentText("Limit of turns reached, tie!");
+            }
+        }
+        dialog.showAndWait();
+    }
+
+    public void initializeApp(ActionEvent actionEvent) throws IOException { // Menu -> Application -> Start Game
+
+        enemy = new Player("Enemy");
+        player = new Player("Player");
 
         xCoord.setEditable(true);
         yCoord.setEditable(true);
@@ -236,7 +209,7 @@ public class Controller implements Initializable {
         }
     }
 
-    public void loadApp(){
+    public void loadApp(){ // Menu -> Application -> Load Scenarios
         TextInputDialog dialog = new TextInputDialog();
         dialog.setHeaderText(null);
         dialog.setContentText("ID: ");
@@ -263,90 +236,24 @@ public class Controller implements Initializable {
         }
     }
 
-    public void gameOver(int state) {
-
-        xCoord.setEditable(false);
-        yCoord.setEditable(false);
-        fireButton.setDisable(true);
-
-        Alert dialog = new Alert(Alert.AlertType.WARNING);
-        dialog.setHeaderText(null);
-        dialog.setTitle("Game Over");
-        Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
-        stage.getIcons().add(new Image("file:images/battleship_v2.jpg"));
-
-        if (state == 1) {
-            dialog.setContentText("Player wins!");
-        } else if (state == 2) {
-            dialog.setContentText("Enemy wins");
-        } else {
-            if (player.getPoints() > enemy.getPoints()) {
-                dialog.setContentText("Limit of turns reached, player wins!");
-            } else if (player.getPoints() < enemy.getPoints()) {
-                dialog.setContentText("Limit of turns reached, enemy wins!");
-            } else{
-                dialog.setContentText("Limit of turns reached, tie!");
-            }
-        }
-        dialog.showAndWait();
-    }
-
-    public void enemyShipsHandler() {
-        Alert dialog = new Alert(Alert.AlertType.INFORMATION);
-        String curr = "Carrier:\t\t\t\t" + enemy.ship_array[1].getState() + "\nBattleship:\t\t\t" + enemy.ship_array[2].getState() +
-                "\nCruiser:\t\t\t\t" + enemy.ship_array[3].getState() + "\nSubmarine:\t\t\t" + enemy.ship_array[4].getState() + "\nDestroyer:\t\t\t" + enemy.ship_array[5].getState();
-        dialog.setHeaderText(null);
-        dialog.setContentText(curr);
-        dialog.setTitle("Enemy's Ships Info");
-        Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
-        stage.getIcons().add(new Image("file:images/battleship_v2.jpg"));
-        dialog.showAndWait();
-    }
-
-    public void playerShotsHandler() {
-        Shot curr;
-        String string = "";
-        for (int i=0; i<player.shots.size(); i++) {
-            if (i == 5) {
-                break;
-            }
-            curr = player.shots.get(player.shots.size()-i-1);
-            string += String.format("Turn: %02d %10s (%02d,%02d) %10s %4s %20s\n", curr.getTurn(), "", curr.getX(), curr.getY(), "", curr.getStatus(), curr.getShip());
-        }
-        Alert dialog = new Alert(Alert.AlertType.INFORMATION);
-        dialog.setHeaderText(null);
-        dialog.setContentText(string);
-        dialog.setTitle("Player's Last 5 Shots Info");
-        Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
-        stage.getIcons().add(new Image("file:images/battleship_v2.jpg"));
-        dialog.showAndWait();
-    }
-
-    public void enemyShotsHandler() {
-        Shot curr;
-        String string = "";
-        for (int i=0; i<enemy.shots.size(); i++) {
-            if (i == 5) {
-                break;
-            }
-            curr = enemy.shots.get(enemy.shots.size()-i-1);
-            string += String.format("Turn: %02d %10s (%02d,%02d) %10s %4s %20s\n", curr.getTurn(), "", curr.getX(), curr.getY(), "", curr.getStatus(), curr.getShip());
-        }
-        Alert dialog = new Alert(Alert.AlertType.INFORMATION);
-        dialog.setHeaderText(null);
-        dialog.setContentText(string);
-        dialog.setTitle("Enemy's Last 5 Shots Info");
-        Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
-        stage.getIcons().add(new Image("file:images/battleship_v2.jpg"));
-        dialog.showAndWait();
-    }
-
-    public void aboutApp() throws IOException, URISyntaxException {
-        Desktop.getDesktop().browse(new URL("https://github.com/Sonqo/Ntua_Ypsilon/tree/master/6_MediaLab/Battleship").toURI());
-    }
-
-    public void exitApp() {
+    public void exitApp() { // Menu -> Application -> Quit Game
         System.exit(0);
+    }
+
+    public void enemyShipsInfoHandler() { // Menu -> Details -> Enemy Ships
+        enemy.shipsInfoHandler();
+    }
+
+    public void playerShotsInfoHandler() { // Menu -> Details -> Player Shots
+        player.shotsInfoHandler();
+    }
+
+    public void enemyShotsInfoHandler() { // Menu -> Details -> Enemy Shots
+        enemy.shotsInfoHandler();
+    }
+
+    public void aboutApp() throws IOException, URISyntaxException { // Menu -> About
+        Desktop.getDesktop().browse(new URL("https://github.com/Sonqo/Ntua_Ypsilon/tree/master/6_MediaLab/Battleship").toURI());
     }
 
 }

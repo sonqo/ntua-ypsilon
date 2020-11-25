@@ -22,9 +22,9 @@
                       </Menu>
                       <Menu mnemonicParsing="false" text="Details">
                         <items>
-                          <MenuItem mnemonicParsing="false" onAction="#enemyShipsHandler" text="Enemy Ships" />
-                              <MenuItem mnemonicParsing="false" onAction="#playerShotsHandler" text="Player Shots" />
-                              <MenuItem mnemonicParsing="false" onAction="#enemyShotsHandler" text="Enemy Shots" />
+                          <MenuItem mnemonicParsing="false" onAction="#enemyShipsInfoHandler" text="Enemy Ships" />
+                              <MenuItem mnemonicParsing="false" onAction="#playerShotsInfoHandler" text="Player Shots" />
+                              <MenuItem mnemonicParsing="false" onAction="#enemyShotsInfoHandler" text="Enemy Shots" />
                         </items>
                       </Menu>
                       <Menu mnemonicParsing="false" text="About">
