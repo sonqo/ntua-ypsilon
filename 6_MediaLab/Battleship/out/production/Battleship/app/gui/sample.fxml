@@ -1,0 +1,711 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.util.ArrayList?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.gui.Controller">
+   <children>
+      <SplitPane dividerPositions="0.15" orientation="VERTICAL" prefHeight="900.0" prefWidth="1300.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <MenuBar prefHeight="25.0" prefWidth="1300.0">
+                    <menus>
+                      <Menu mnemonicParsing="false" text="Application">
+                        <items>
+                          <MenuItem fx:id="startGame" mnemonicParsing="false" onAction="#initializeApp" text="Start Game" />
+                              <MenuItem mnemonicParsing="false" onAction="#loadApp" text="Load Scenarios" />
+                              <MenuItem mnemonicParsing="false" onAction="#exitApp" text="Quit" />
+                        </items>
+                      </Menu>
+                      <Menu mnemonicParsing="false" text="Details">
+                        <items>
+                          <MenuItem mnemonicParsing="false" onAction="#enemyShipsInfoHandler" text="Enemy Ships" />
+                              <MenuItem mnemonicParsing="false" onAction="#playerShotsInfoHandler" text="Player Shots" />
+                              <MenuItem mnemonicParsing="false" onAction="#enemyShotsInfoHandler" text="Enemy Shots" />
+                        </items>
+                      </Menu>
+                      <Menu mnemonicParsing="false" text="About">
+                        <items>
+                          <MenuItem mnemonicParsing="false" onAction="#aboutApp" text="Github" />
+                        </items>
+                      </Menu>
+                    </menus>
+                  </MenuBar>
+                  <ImageView fitHeight="96.0" fitWidth="323.0" layoutX="11.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="960.0" AnchorPane.topAnchor="30.0">
+                     <image>
+                        <Image url="file:images/battleship_v1.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="playersPoints" layoutX="417.0" layoutY="33.0" prefHeight="20.0" prefWidth="200.0" text="Player's Points:" AnchorPane.leftAnchor="417.0" AnchorPane.topAnchor="33.0" />
+                  <Label fx:id="playersShips" layoutX="417.0" layoutY="66.0" prefHeight="20.0" prefWidth="200.0" text="Player's Functional Ships:" AnchorPane.leftAnchor="417.0" AnchorPane.topAnchor="66.0" />
+                  <Label fx:id="playersShots" layoutX="417.0" layoutY="103.0" prefHeight="20.0" prefWidth="200.0" text="Player's Successful Shots:" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="417.0" />
+                  <Label fx:id="enemysPoints" layoutX="787.0" layoutY="33.0" prefHeight="20.0" prefWidth="200.0" text="Enemy's Points:" AnchorPane.leftAnchor="787.0" AnchorPane.topAnchor="33.0" />
+                  <Label fx:id="enemysShips" layoutX="787.0" layoutY="66.0" prefHeight="20.0" prefWidth="200.0" text="Enemy's Functional Ships:" AnchorPane.leftAnchor="787.0" AnchorPane.topAnchor="66.0" />
+                  <Label fx:id="enemysShots" layoutX="787.0" layoutY="103.0" prefHeight="20.0" prefWidth="200.0" text="Enemy's Successful Shots:" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="787.0" />
+                  <Label fx:id="turnLabel" layoutX="1066.0" layoutY="35.0" prefHeight="17.0" prefWidth="96.0" text="Game Turn:" AnchorPane.topAnchor="33.0" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <SplitPane dividerPositions="0.85" orientation="VERTICAL" prefHeight="760.0" prefWidth="1298.0">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <SplitPane dividerPositions="0.5" prefHeight="641.0" prefWidth="1300.0">
+                                <items>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="639.0" prefWidth="662.0">
+                                       <children>
+                                          <SplitPane dividerPositions="0.05" prefHeight="639.0" prefWidth="646.0">
+                                            <items>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                   <children>
+                                                      <GridPane layoutY="31.0" prefHeight="607.0" prefWidth="29.0">
+                                                        <columnConstraints>
+                                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                        </columnConstraints>
+                                                        <rowConstraints>
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                        </rowConstraints>
+                                                         <children>
+                                                            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                                               <children>
+                                                                  <Label layoutX="10.0" layoutY="11.0" prefHeight="17.0" prefWidth="8.0" text="1" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="25.0" />
+                                                               </children>
+                                                            </AnchorPane>
+                                                            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                                               <children>
+                                                                  <Label layoutX="10.0" layoutY="11.0" prefHeight="17.0" prefWidth="8.0" text="2" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="25.0" />
+                                                               </children>
+                                                            </AnchorPane>
+                                                            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                                                               <children>
+                                                                  <Label layoutX="10.0" layoutY="11.0" prefHeight="17.0" prefWidth="8.0" text="3" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="25.0" />
+                                                               </children>
+                                                            </AnchorPane>
+                                                            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
+                                                               <children>
+                                                                  <Label layoutX="10.0" layoutY="11.0" prefHeight="17.0" prefWidth="8.0" text="4" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="25.0" />
+                                                               </children>
+                                                            </AnchorPane>
+                                                            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
+                                                               <children>
+                                                                  <Label layoutX="10.0" layoutY="11.0" prefHeight="17.0" prefWidth="8.0" text="5" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="25.0" />
+                                                               </children>
+                                                            </AnchorPane>
+                                                            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5">
+                                                               <children>
+                                                                  <Label layoutX="10.0" layoutY="11.0" prefHeight="17.0" prefWidth="8.0" text="6" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="25.0" />
+                                                               </children>
+                                                            </AnchorPane>
+                                                            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6">
+                                                               <children>
+                                                                  <Label layoutX="10.0" layoutY="11.0" prefHeight="17.0" prefWidth="8.0" text="7" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="25.0" />
+                                                               </children>
+                                                            </AnchorPane>
+                                                            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="7">
+                                                               <children>
+                                                                  <Label layoutX="10.0" layoutY="11.0" prefHeight="17.0" prefWidth="8.0" text="8" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="25.0" />
+                                                               </children>
+                                                            </AnchorPane>
+                                                            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="8">
+                                                               <children>
+                                                                  <Label layoutX="10.0" layoutY="11.0" prefHeight="17.0" prefWidth="8.0" text="9" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="25.0" />
+                                                               </children>
+                                                            </AnchorPane>
+                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="9">
+                                                                 <children>
+                                                                     <Label layoutX="7.0" layoutY="20.0" prefHeight="20.0" prefWidth="19.0" text="10" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="20.0" />
+                                                                 </children>
+                                                             </AnchorPane>
+                                                         </children>
+                                                      </GridPane>
+                                                   </children>
+                                                </AnchorPane>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                   <children>
+                                                      <SplitPane dividerPositions="0.05" layoutX="-37.0" layoutY="-4.0" orientation="VERTICAL" prefHeight="646.0" prefWidth="646.0">
+                                                        <items>
+                                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="117.0" prefWidth="644.0">
+                                                               <children>
+                                                                  <GridPane layoutX="35.0" layoutY="-4.0" prefHeight="38.0" prefWidth="610.0">
+                                                                    <columnConstraints>
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                    </columnConstraints>
+                                                                    <rowConstraints>
+                                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                    </rowConstraints>
+                                                                     <children>
+                                                                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                                                           <children>
+                                                                              <Label layoutX="29.0" layoutY="11.0" text="A" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="13.0" />
+                                                                           </children>
+                                                                        </AnchorPane>
+                                                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                                                           <children>
+                                                                              <Label layoutX="30.0" layoutY="11.0" text="B" AnchorPane.topAnchor="13.0" />
+                                                                           </children>
+                                                                        </AnchorPane>
+                                                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+                                                                           <children>
+                                                                              <Label layoutX="30.0" layoutY="11.0" text="C" AnchorPane.topAnchor="13.0" />
+                                                                           </children>
+                                                                        </AnchorPane>
+                                                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
+                                                                           <children>
+                                                                              <Label layoutX="30.0" layoutY="11.0" text="D" AnchorPane.topAnchor="13.0" />
+                                                                           </children>
+                                                                        </AnchorPane>
+                                                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4">
+                                                                           <children>
+                                                                              <Label layoutX="31.0" layoutY="10.0" text="E" AnchorPane.topAnchor="13.0" />
+                                                                           </children>
+                                                                        </AnchorPane>
+                                                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6">
+                                                                           <children>
+                                                                              <Label layoutX="30.0" layoutY="10.0" text="G" AnchorPane.topAnchor="13.0" />
+                                                                           </children>
+                                                                        </AnchorPane>
+                                                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7">
+                                                                           <children>
+                                                                              <Label layoutX="29.0" layoutY="10.0" text="H" AnchorPane.topAnchor="13.0" />
+                                                                           </children>
+                                                                        </AnchorPane>
+                                                                        <AnchorPane prefHeight="38.0" prefWidth="61.0" GridPane.columnIndex="8">
+                                                                           <children>
+                                                                              <Label layoutX="32.0" layoutY="10.0" text="I" AnchorPane.topAnchor="13.0" />
+                                                                           </children>
+                                                                        </AnchorPane>
+                                                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5">
+                                                                           <children>
+                                                                              <Label layoutX="31.0" layoutY="10.0" text="F" AnchorPane.topAnchor="13.0" />
+                                                                           </children>
+                                                                        </AnchorPane>
+                                                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9">
+                                                                           <children>
+                                                                              <Label layoutX="28.0" layoutY="11.0" text="J" AnchorPane.topAnchor="13.0" />
+                                                                           </children>
+                                                                        </AnchorPane>
+                                                                     </children>
+                                                                  </GridPane>
+                                                               </children>
+                                                            </AnchorPane>
+                                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="609.0" prefWidth="730.0">
+                                                               <children>
+                                                                  <GridPane layoutX="35.0" prefHeight="608.0" prefWidth="610.0">
+                                                                    <columnConstraints>
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                    </columnConstraints>
+                                                                    <rowConstraints>
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                    </rowConstraints>
+                                                                     <children>
+                                                                        <AnchorPane fx:id="player11" prefHeight="200.0" prefWidth="200.0" />
+                                                                        <AnchorPane fx:id="player12" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
+                                                                        <AnchorPane fx:id="player13" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
+                                                                        <AnchorPane fx:id="player14" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" />
+                                                                        <AnchorPane fx:id="player15" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" />
+                                                                        <AnchorPane fx:id="player16" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" />
+                                                                        <AnchorPane fx:id="player17" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" />
+                                                                        <AnchorPane fx:id="player18" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" />
+                                                                        <AnchorPane fx:id="player19" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" />
+                                                                        <AnchorPane fx:id="player21" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                                                                        <AnchorPane fx:id="player22" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                                        <AnchorPane fx:id="player23" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                                                        <AnchorPane fx:id="player24" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                                                        <AnchorPane fx:id="player25" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                                                                        <AnchorPane fx:id="player26" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                                                                        <AnchorPane fx:id="player27" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+                                                                        <AnchorPane fx:id="player28" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+                                                                        <AnchorPane fx:id="player29" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="1" />
+                                                                        <AnchorPane fx:id="player31" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
+                                                                        <AnchorPane fx:id="player32" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                                        <AnchorPane fx:id="player33" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                                                        <AnchorPane fx:id="player34" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                                                        <AnchorPane fx:id="player35" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                                                                        <AnchorPane fx:id="player36" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                                                                        <AnchorPane fx:id="player37" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+                                                                        <AnchorPane fx:id="player38" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="2" />
+                                                                        <AnchorPane fx:id="player39" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="2" />
+                                                                        <AnchorPane fx:id="player49" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="3" />
+                                                                        <AnchorPane fx:id="player48" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="3" />
+                                                                        <AnchorPane fx:id="player47" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="3" />
+                                                                        <AnchorPane fx:id="player46" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+                                                                        <AnchorPane fx:id="player45" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                                                                        <AnchorPane fx:id="player44" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                                                        <AnchorPane fx:id="player43" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                                                        <AnchorPane fx:id="player42" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                                        <AnchorPane fx:id="player41" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3" />
+                                                                        <AnchorPane fx:id="player51" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4" />
+                                                                        <AnchorPane fx:id="player52" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                                        <AnchorPane fx:id="player53" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                                                        <AnchorPane fx:id="player54" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                                                                        <AnchorPane fx:id="player55" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                                                                        <AnchorPane fx:id="player56" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+                                                                        <AnchorPane fx:id="player57" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="4" />
+                                                                        <AnchorPane fx:id="player58" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="4" />
+                                                                        <AnchorPane fx:id="player59" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="4" />
+                                                                        <AnchorPane fx:id="player61" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5" />
+                                                                        <AnchorPane fx:id="player71" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6" />
+                                                                        <AnchorPane fx:id="player81" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="7" />
+                                                                        <AnchorPane fx:id="player91" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="8" />
+                                                                        <AnchorPane fx:id="player62" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                                                        <AnchorPane fx:id="player72" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                                                        <AnchorPane fx:id="player82" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                                                        <AnchorPane fx:id="player92" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                                                                        <AnchorPane fx:id="player73" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                                                                        <AnchorPane fx:id="player83" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                                                                        <AnchorPane fx:id="player63" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                                                                        <AnchorPane fx:id="player93" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+                                                                        <AnchorPane fx:id="player94" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+                                                                        <AnchorPane fx:id="player95" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="8" />
+                                                                        <AnchorPane fx:id="player96" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="8" />
+                                                                        <AnchorPane fx:id="player97" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="8" />
+                                                                        <AnchorPane fx:id="player98" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="8" />
+                                                                        <AnchorPane fx:id="player99" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="8" />
+                                                                        <AnchorPane fx:id="player89" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="7" />
+                                                                        <AnchorPane fx:id="player88" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="7" />
+                                                                        <AnchorPane fx:id="player87" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="7" />
+                                                                        <AnchorPane fx:id="player86" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="7" />
+                                                                        <AnchorPane fx:id="player85" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="7" />
+                                                                        <AnchorPane fx:id="player84" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                                                                        <AnchorPane fx:id="player74" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                                                                        <AnchorPane fx:id="player64" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                                                                        <AnchorPane fx:id="player65" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+                                                                        <AnchorPane fx:id="player75" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+                                                                        <AnchorPane fx:id="player66" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="5" />
+                                                                        <AnchorPane fx:id="player76" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="6" />
+                                                                        <AnchorPane fx:id="player67" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+                                                                        <AnchorPane fx:id="player77" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="6" />
+                                                                        <AnchorPane fx:id="player68" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="5" />
+                                                                        <AnchorPane fx:id="player78" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="6" />
+                                                                        <AnchorPane fx:id="player69" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="5" />
+                                                                        <AnchorPane fx:id="player79" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="6" />
+                                                                        <AnchorPane fx:id="player101" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="9" />
+                                                                        <AnchorPane fx:id="player102" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                                                                        <AnchorPane fx:id="player103" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                                                                        <AnchorPane fx:id="player104" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="9" />
+                                                                        <AnchorPane fx:id="player105" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="9" />
+                                                                        <AnchorPane fx:id="player106" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="9" />
+                                                                        <AnchorPane fx:id="player107" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="9" />
+                                                                        <AnchorPane fx:id="player108" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="9" />
+                                                                        <AnchorPane fx:id="player109" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="9" />
+                                                                        <AnchorPane fx:id="player1010" prefHeight="74.0" prefWidth="71.0" GridPane.columnIndex="9" GridPane.rowIndex="9" />
+                                                                        <AnchorPane fx:id="player110" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" />
+                                                                        <AnchorPane fx:id="player210" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="1" />
+                                                                        <AnchorPane fx:id="player310" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="2" />
+                                                                        <AnchorPane fx:id="player410" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="3" />
+                                                                        <AnchorPane fx:id="player510" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="4" />
+                                                                        <AnchorPane fx:id="player610" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="5" />
+                                                                        <AnchorPane fx:id="player710" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="6" />
+                                                                        <AnchorPane fx:id="player810" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="7" />
+                                                                        <AnchorPane fx:id="player910" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="8" />
+                                                                     </children>
+                                                                      <fx:define>
+                                                                          <ArrayList fx:id="playerBoard">
+                                                                              <fx:reference source="player11" /><fx:reference source="player12" /><fx:reference source="player13" /><fx:reference source="player14" /><fx:reference source="player15" />
+                                                                              <fx:reference source="player16" /><fx:reference source="player17" /><fx:reference source="player18" /><fx:reference source="player19" /><fx:reference source="player110" />
+                                                                              <fx:reference source="player21" /><fx:reference source="player22" /><fx:reference source="player23" /><fx:reference source="player24" /><fx:reference source="player25" />
+                                                                              <fx:reference source="player26" /><fx:reference source="player27" /><fx:reference source="player28" /><fx:reference source="player29" /><fx:reference source="player210" />
+                                                                              <fx:reference source="player31" /><fx:reference source="player32" /><fx:reference source="player33" /><fx:reference source="player34" /><fx:reference source="player35" />
+                                                                              <fx:reference source="player36" /><fx:reference source="player37" /><fx:reference source="player38" /><fx:reference source="player39" /><fx:reference source="player310" />
+                                                                              <fx:reference source="player41" /><fx:reference source="player42" /><fx:reference source="player43" /><fx:reference source="player44" /><fx:reference source="player45" />
+                                                                              <fx:reference source="player46" /><fx:reference source="player47" /><fx:reference source="player48" /><fx:reference source="player49" /><fx:reference source="player410" />
+                                                                              <fx:reference source="player51" /><fx:reference source="player52" /><fx:reference source="player53" /><fx:reference source="player54" /><fx:reference source="player55" />
+                                                                              <fx:reference source="player56" /><fx:reference source="player57" /><fx:reference source="player58" /><fx:reference source="player59" /><fx:reference source="player510" />
+                                                                              <fx:reference source="player61" /><fx:reference source="player62" /><fx:reference source="player63" /><fx:reference source="player64" /><fx:reference source="player65" />
+                                                                              <fx:reference source="player66" /><fx:reference source="player67" /><fx:reference source="player68" /><fx:reference source="player69" /><fx:reference source="player610" />
+                                                                              <fx:reference source="player71" /><fx:reference source="player72" /><fx:reference source="player73" /><fx:reference source="player74" /><fx:reference source="player75" />
+                                                                              <fx:reference source="player76" /><fx:reference source="player77" /><fx:reference source="player78" /><fx:reference source="player79" /><fx:reference source="player710" />
+                                                                              <fx:reference source="player81" /><fx:reference source="player82" /><fx:reference source="player83" /><fx:reference source="player84" /><fx:reference source="player85" />
+                                                                              <fx:reference source="player86" /><fx:reference source="player87" /><fx:reference source="player88" /><fx:reference source="player89" /><fx:reference source="player810" />
+                                                                              <fx:reference source="player91" /><fx:reference source="player92" /><fx:reference source="player93" /><fx:reference source="player94" /><fx:reference source="player95" />
+                                                                              <fx:reference source="player96" /><fx:reference source="player97" /><fx:reference source="player98" /><fx:reference source="player99" /><fx:reference source="player910" />
+                                                                              <fx:reference source="player101" /><fx:reference source="player102" /><fx:reference source="player103" /><fx:reference source="player104" /><fx:reference source="player105" />
+                                                                              <fx:reference source="player106" /><fx:reference source="player107" /><fx:reference source="player108" /><fx:reference source="player109" /><fx:reference source="player1010" />
+                                                                          </ArrayList>
+                                                                      </fx:define>
+                                                                  </GridPane>
+                                                               </children></AnchorPane>
+                                                        </items>
+                                                      </SplitPane>
+                                                   </children>
+                                                </AnchorPane>
+                                            </items>
+                                          </SplitPane>
+                                       </children></AnchorPane>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="637.0" prefWidth="586.0">
+                                       <children>
+                                          <SplitPane dividerPositions="0.95" prefHeight="639.0" prefWidth="646.0">
+                                            <items>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="637.0" prefWidth="632.0">
+                                                   <children>
+                                                      <SplitPane dividerPositions="0.051" layoutY="-5.0" orientation="VERTICAL" prefHeight="646.0" prefWidth="610.0">
+                                                        <items>
+                                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                               <children>
+                                                                  <GridPane layoutX="-4.0" layoutY="1.0" prefHeight="30.0" prefWidth="608.0">
+                                                                    <columnConstraints>
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                    </columnConstraints>
+                                                                    <rowConstraints>
+                                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                    </rowConstraints>
+                                                                     <children>
+                                                                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                                                           <children>
+                                                                              <Label layoutX="30.0" layoutY="8.0" text="A" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="9.0" />
+                                                                           </children>
+                                                                        </AnchorPane>
+                                                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                                                           <children>
+                                                                              <Label layoutX="27.0" layoutY="8.0" text="B" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="9.0" />
+                                                                           </children>
+                                                                        </AnchorPane>
+                                                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+                                                                           <children>
+                                                                              <Label layoutX="27.0" layoutY="8.0" text="C" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="9.0" />
+                                                                           </children>
+                                                                        </AnchorPane>
+                                                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
+                                                                           <children>
+                                                                              <Label layoutX="26.0" layoutY="8.0" text="D" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="9.0" />
+                                                                           </children>
+                                                                        </AnchorPane>
+                                                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4">
+                                                                           <children>
+                                                                              <Label layoutX="27.0" layoutY="8.0" text="E" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="9.0" />
+                                                                           </children>
+                                                                        </AnchorPane>
+                                                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5">
+                                                                           <children>
+                                                                              <Label layoutX="28.0" layoutY="8.0" text="F" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="9.0" />
+                                                                           </children>
+                                                                        </AnchorPane>
+                                                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6">
+                                                                           <children>
+                                                                              <Label layoutX="26.0" layoutY="8.0" text="G" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="9.0" />
+                                                                           </children>
+                                                                        </AnchorPane>
+                                                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7">
+                                                                           <children>
+                                                                              <Label layoutX="26.0" layoutY="8.0" text="H" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="9.0" />
+                                                                           </children>
+                                                                        </AnchorPane>
+                                                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8">
+                                                                           <children>
+                                                                              <Label layoutX="29.0" layoutY="8.0" text="I" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="9.0" />
+                                                                           </children>
+                                                                        </AnchorPane>
+                                                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9">
+                                                                           <children>
+                                                                              <Label layoutX="28.0" layoutY="8.0" text="J" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="9.0" />
+                                                                           </children>
+                                                                        </AnchorPane>
+                                                                     </children>
+                                                                  </GridPane>
+                                                               </children>
+                                                            </AnchorPane>
+                                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                               <children>
+                                                                  <GridPane prefHeight="608.0" prefWidth="610.0">
+                                                                    <columnConstraints>
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                    </columnConstraints>
+                                                                    <rowConstraints>
+                                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                    </rowConstraints>
+                                                                     <children>
+                                                                        <AnchorPane fx:id="enemy11" prefHeight="200.0" prefWidth="200.0" />
+                                                                        <AnchorPane fx:id="enemy12" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
+                                                                        <AnchorPane fx:id="enemy13" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
+                                                                        <AnchorPane fx:id="enemy14" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" />
+                                                                        <AnchorPane fx:id="enemy21" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                                                                        <AnchorPane fx:id="enemy22" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                                        <AnchorPane fx:id="enemy23" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                                                        <AnchorPane fx:id="enemy24" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                                                        <AnchorPane fx:id="enemy31" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
+                                                                        <AnchorPane fx:id="enemy32" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                                        <AnchorPane fx:id="enemy33" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                                                        <AnchorPane fx:id="enemy34" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                                                        <AnchorPane fx:id="enemy15" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" />
+                                                                        <AnchorPane fx:id="enemy25" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                                                                        <AnchorPane fx:id="enemy35" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                                                                        <AnchorPane fx:id="enemy45" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                                                                        <AnchorPane fx:id="enemy44" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                                                        <AnchorPane fx:id="enemy43" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                                                        <AnchorPane fx:id="enemy42" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                                        <AnchorPane fx:id="enemy41" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3" />
+                                                                        <AnchorPane fx:id="enemy51" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4" />
+                                                                        <AnchorPane fx:id="enemy52" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                                        <AnchorPane fx:id="enemy53" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                                                        <AnchorPane fx:id="enemy54" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                                                                        <AnchorPane fx:id="enemy55" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                                                                        <AnchorPane fx:id="enemy56" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+                                                                        <AnchorPane fx:id="enemy57" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="4" />
+                                                                        <AnchorPane fx:id="enemy58" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="4" />
+                                                                        <AnchorPane fx:id="enemy59" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="4" />
+                                                                        <AnchorPane fx:id="enemy49" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="3" />
+                                                                        <AnchorPane fx:id="enemy48" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="3" />
+                                                                        <AnchorPane fx:id="enemy47" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="3" />
+                                                                        <AnchorPane fx:id="enemy46" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+                                                                        <AnchorPane fx:id="enemy36" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                                                                        <AnchorPane fx:id="enemy37" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+                                                                        <AnchorPane fx:id="enemy38" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="2" />
+                                                                        <AnchorPane fx:id="enemy39" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="2" />
+                                                                        <AnchorPane fx:id="enemy29" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="1" />
+                                                                        <AnchorPane fx:id="enemy19" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" />
+                                                                        <AnchorPane fx:id="enemy18" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" />
+                                                                        <AnchorPane fx:id="enemy28" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+                                                                        <AnchorPane fx:id="enemy17" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" />
+                                                                        <AnchorPane fx:id="enemy27" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+                                                                        <AnchorPane fx:id="enemy16" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" />
+                                                                        <AnchorPane fx:id="enemy26" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                                                                        <AnchorPane fx:id="enemy69" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="5" />
+                                                                        <AnchorPane fx:id="enemy68" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="5" />
+                                                                        <AnchorPane fx:id="enemy79" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="6" />
+                                                                        <AnchorPane fx:id="enemy89" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="7" />
+                                                                        <AnchorPane fx:id="enemy99" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="8" />
+                                                                        <AnchorPane fx:id="enemy98" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="8" />
+                                                                        <AnchorPane fx:id="enemy88" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="7" />
+                                                                        <AnchorPane fx:id="enemy78" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="6" />
+                                                                        <AnchorPane fx:id="enemy67" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+                                                                        <AnchorPane fx:id="enemy77" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="6" />
+                                                                        <AnchorPane fx:id="enemy87" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="7" />
+                                                                        <AnchorPane fx:id="enemy97" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="8" />
+                                                                        <AnchorPane fx:id="enemy96" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="8" />
+                                                                        <AnchorPane fx:id="enemy86" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="7" />
+                                                                        <AnchorPane fx:id="enemy76" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="6" />
+                                                                        <AnchorPane fx:id="enemy66" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="5" />
+                                                                        <AnchorPane fx:id="enemy65" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+                                                                        <AnchorPane fx:id="enemy64" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                                                                        <AnchorPane fx:id="enemy63" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                                                                        <AnchorPane fx:id="enemy62" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                                                        <AnchorPane fx:id="enemy61" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5" />
+                                                                        <AnchorPane fx:id="enemy71" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6" />
+                                                                        <AnchorPane fx:id="enemy75" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+                                                                        <AnchorPane fx:id="enemy74" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                                                                        <AnchorPane fx:id="enemy73" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                                                                        <AnchorPane fx:id="enemy72" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                                                        <AnchorPane fx:id="enemy81" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="7" />
+                                                                        <AnchorPane fx:id="enemy91" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="8" />
+                                                                        <AnchorPane fx:id="enemy82" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                                                        <AnchorPane fx:id="enemy92" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                                                                        <AnchorPane fx:id="enemy83" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                                                                        <AnchorPane fx:id="enemy93" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+                                                                        <AnchorPane fx:id="enemy84" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                                                                        <AnchorPane fx:id="enemy94" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+                                                                        <AnchorPane fx:id="enemy85" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="7" />
+                                                                        <AnchorPane fx:id="enemy95" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="8" />
+                                                                        <AnchorPane fx:id="enemy110" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" />
+                                                                        <AnchorPane fx:id="enemy210" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="1" />
+                                                                        <AnchorPane fx:id="enemy310" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="2" />
+                                                                        <AnchorPane fx:id="enemy410" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="3" />
+                                                                        <AnchorPane fx:id="enemy510" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="4" />
+                                                                        <AnchorPane fx:id="enemy610" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="5" />
+                                                                        <AnchorPane fx:id="enemy710" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="6" />
+                                                                        <AnchorPane fx:id="enemy810" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="7" />
+                                                                        <AnchorPane fx:id="enemy910" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="8" />
+                                                                        <AnchorPane fx:id="enemy1010" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="9" />
+                                                                        <AnchorPane fx:id="enemy109" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="9" />
+                                                                        <AnchorPane fx:id="enemy108" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="9" />
+                                                                        <AnchorPane fx:id="enemy107" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="9" />
+                                                                        <AnchorPane fx:id="enemy106" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="9" />
+                                                                        <AnchorPane fx:id="enemy105" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="9" />
+                                                                        <AnchorPane fx:id="enemy104" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="9" />
+                                                                        <AnchorPane fx:id="enemy103" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                                                                        <AnchorPane fx:id="enemy102" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                                                                        <AnchorPane fx:id="enemy101" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="9" />
+                                                                     </children>
+                                                                      <fx:define>
+                                                                          <ArrayList fx:id="enemyBoard">
+                                                                              <fx:reference source="enemy11" /><fx:reference source="enemy12" /><fx:reference source="enemy13" /><fx:reference source="enemy14" /><fx:reference source="enemy15" />
+                                                                              <fx:reference source="enemy16" /><fx:reference source="enemy17" /><fx:reference source="enemy18" /><fx:reference source="enemy19" /><fx:reference source="enemy110" />
+                                                                              <fx:reference source="enemy21" /><fx:reference source="enemy22" /><fx:reference source="enemy23" /><fx:reference source="enemy24" /><fx:reference source="enemy25" />
+                                                                              <fx:reference source="enemy26" /><fx:reference source="enemy27" /><fx:reference source="enemy28" /><fx:reference source="enemy29" /><fx:reference source="enemy210" />
+                                                                              <fx:reference source="enemy31" /><fx:reference source="enemy32" /><fx:reference source="enemy33" /><fx:reference source="enemy34" /><fx:reference source="enemy35" />
+                                                                              <fx:reference source="enemy36" /><fx:reference source="enemy37" /><fx:reference source="enemy38" /><fx:reference source="enemy39" /><fx:reference source="enemy310" />
+                                                                              <fx:reference source="enemy41" /><fx:reference source="enemy42" /><fx:reference source="enemy43" /><fx:reference source="enemy44" /><fx:reference source="enemy45" />
+                                                                              <fx:reference source="enemy46" /><fx:reference source="enemy47" /><fx:reference source="enemy48" /><fx:reference source="enemy49" /><fx:reference source="enemy410" />
+                                                                              <fx:reference source="enemy51" /><fx:reference source="enemy52" /><fx:reference source="enemy53" /><fx:reference source="enemy54" /><fx:reference source="enemy55" />
+                                                                              <fx:reference source="enemy56" /><fx:reference source="enemy57" /><fx:reference source="enemy58" /><fx:reference source="enemy59" /><fx:reference source="enemy510" />
+                                                                              <fx:reference source="enemy61" /><fx:reference source="enemy62" /><fx:reference source="enemy63" /><fx:reference source="enemy64" /><fx:reference source="enemy65" />
+                                                                              <fx:reference source="enemy66" /><fx:reference source="enemy67" /><fx:reference source="enemy68" /><fx:reference source="enemy69" /><fx:reference source="enemy610" />
+                                                                              <fx:reference source="enemy71" /><fx:reference source="enemy72" /><fx:reference source="enemy73" /><fx:reference source="enemy74" /><fx:reference source="enemy75" />
+                                                                              <fx:reference source="enemy76" /><fx:reference source="enemy77" /><fx:reference source="enemy78" /><fx:reference source="enemy79" /><fx:reference source="enemy710" />
+                                                                              <fx:reference source="enemy81" /><fx:reference source="enemy82" /><fx:reference source="enemy83" /><fx:reference source="enemy84" /><fx:reference source="enemy85" />
+                                                                              <fx:reference source="enemy86" /><fx:reference source="enemy87" /><fx:reference source="enemy88" /><fx:reference source="enemy89" /><fx:reference source="enemy810" />
+                                                                              <fx:reference source="enemy91" /><fx:reference source="enemy92" /><fx:reference source="enemy93" /><fx:reference source="enemy94" /><fx:reference source="enemy95" />
+                                                                              <fx:reference source="enemy96" /><fx:reference source="enemy97" /><fx:reference source="enemy98" /><fx:reference source="enemy99" /><fx:reference source="enemy910" />
+                                                                              <fx:reference source="enemy101" /><fx:reference source="enemy102" /><fx:reference source="enemy103" /><fx:reference source="enemy104" /><fx:reference source="enemy105" />
+                                                                              <fx:reference source="enemy106" /><fx:reference source="enemy107" /><fx:reference source="enemy108" /><fx:reference source="enemy109" /><fx:reference source="enemy1010" />
+                                                                          </ArrayList>
+                                                                      </fx:define>
+                                                                  </GridPane>
+                                                               </children>
+                                                            </AnchorPane>
+                                                        </items>
+                                                      </SplitPane>
+                                                   </children>
+                                                </AnchorPane>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="22.0">
+                                                   <children>
+                                                      <GridPane layoutX="-1.0" layoutY="31.0" prefHeight="607.0" prefWidth="32.0">
+                                                        <columnConstraints>
+                                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                        </columnConstraints>
+                                                        <rowConstraints>
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints maxHeight="68.0" minHeight="10.0" prefHeight="68.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints maxHeight="67.0" minHeight="10.0" prefHeight="67.0" vgrow="SOMETIMES" />
+                                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                        </rowConstraints>
+                                                         <children>
+                                                            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                                               <children>
+                                                                  <Label layoutX="11.0" layoutY="21.0" text="1" AnchorPane.rightAnchor="14.5" />
+                                                               </children>
+                                                            </AnchorPane>
+                                                            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                                               <children>
+                                                                  <Label layoutX="11.0" layoutY="21.0" text="2" AnchorPane.rightAnchor="14.0" />
+                                                               </children>
+                                                            </AnchorPane>
+                                                            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                                                               <children>
+                                                                  <Label layoutX="11.0" layoutY="21.0" text="3" AnchorPane.rightAnchor="14.0" />
+                                                               </children>
+                                                            </AnchorPane>
+                                                            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
+                                                               <children>
+                                                                  <Label layoutX="11.0" layoutY="26.0" text="4" AnchorPane.rightAnchor="14.0" />
+                                                               </children>
+                                                            </AnchorPane>
+                                                            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
+                                                               <children>
+                                                                  <Label layoutX="11.0" layoutY="25.0" text="5" AnchorPane.rightAnchor="14.0" />
+                                                               </children>
+                                                            </AnchorPane>
+                                                            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5">
+                                                               <children>
+                                                                  <Label layoutX="11.0" layoutY="21.0" text="6" AnchorPane.rightAnchor="14.0" />
+                                                               </children>
+                                                            </AnchorPane>
+                                                            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6">
+                                                               <children>
+                                                                  <Label layoutX="11.0" layoutY="21.0" text="7" AnchorPane.rightAnchor="14.0" />
+                                                               </children>
+                                                            </AnchorPane>
+                                                            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="7">
+                                                               <children>
+                                                                  <Label layoutX="11.0" layoutY="21.0" text="8" AnchorPane.rightAnchor="14.0" />
+                                                               </children>
+                                                            </AnchorPane>
+                                                            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="8">
+                                                               <children>
+                                                                  <Label layoutX="13.0" layoutY="21.0" text="9" AnchorPane.rightAnchor="12.0" />
+                                                               </children>
+                                                            </AnchorPane>
+                                                            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="9">
+                                                               <children>
+                                                                  <Label layoutX="4.0" layoutY="21.0" text="10" AnchorPane.rightAnchor="11.5" />
+                                                               </children>
+                                                            </AnchorPane>
+                                                         </children>
+                                                      </GridPane>
+                                                   </children>
+                                                </AnchorPane>
+                                            </items>
+                                          </SplitPane>
+                                       </children></AnchorPane>
+                                </items>
+                              </SplitPane>
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <TextField focusTraversable="false" layoutX="271.0" layoutY="22.0" prefHeight="25.0" prefWidth="168.0" fx:id="xCoord" />
+                              <TextField fx:id="yCoord" focusTraversable="false" layoutX="271.0" layoutY="64.0" prefHeight="25.0" prefWidth="168.0" />
+                              <Label layoutX="187.0" layoutY="26.0" text="X-Coordinate:" />
+                              <Label layoutX="187.0" layoutY="68.0" text="Y-Coordinate:" />
+                              <Button fx:id="fireButton" focusTraversable="false" layoutX="483.0" layoutY="43.0" mnemonicParsing="false" onAction="#handleSubmit" text="Fire!" />
+                           </children></AnchorPane>
+                    </items>
+                  </SplitPane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
