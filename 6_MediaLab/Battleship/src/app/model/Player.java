@@ -10,6 +10,23 @@ import javafx.scene.image.Image;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 
+/** @author Efstratios "Sonqo" Karipiadis
+ *
+ * Player class, modeling the user of the Battleship Application.
+ *
+ * - Each player has unique name, points, functional ships, successful shots and turn.
+ * - A ship_array is used to save all unique ship classes for each player, with IDs ranging from 1-5, containing
+ * information on their coordinates, hit points, destroy bonus points, status and undamaged areas.
+ * - A LinkedList shots accumulates all shots made by the player, each one of them containing respective information on
+ * coordinates, status and ship target.
+ * - The LinkedList prophet is used only for the 'AI' player, keeping track of potential target positions by appending
+ * all neighboring coordinates of a successful shot. The LinkedList prophet is emptied as soon as the 'AI' player sinks
+ * an enemy ship, increasing the winning potential for the 'AI' player.
+ * - Two dimensional array board keep track of the player's ship positioning, specifying each different ship with it's
+ * respective ID.
+ * - Two dimensional array tries is used only for the 'AI' player, preventing him from making shots in already tried
+ * coordinates.
+*/
 public class Player {
 
     public Ship[] ship_array = new Ship[6];
@@ -20,49 +37,81 @@ public class Player {
     public String name;
     public int[][] board = new int[11][11];
     public int[][] tries = new int[11][11];
-    public int turn, points, functional_ships, successful_shots, shot_count;
+    public int turn, points, functional_ships, successful_shots;
 
+    /**
+     * Class constructor specifying the name of the player.
+    */
     public Player(String name) {
         turn = 1;
         points = 0;
-        shot_count = 0;
         successful_shots = 0;
         functional_ships = 5;
         this.name = name;
     }
 
+    /**
+     * Return total points of the player.
+    */
     public int getPoints() {
         return points;
     }
 
+    /**
+     * Setter method to increase player's score by the points provided.
+     * @param points points to be added to player's score
+    */
     public void setPoints(int points) {
         this.points += points;
     }
 
+    /**
+     * Return the name of the player.
+    */
     public String getName() {
         return name;
     }
 
+    /**
+     * Return the number of functional ships for the player.
+    */
     public int getFunctional_ships() {
         return functional_ships;
     }
 
+    /**
+     * Decrease the number of functional ships for the player, after sunken status.
+    */
     public void setFunctional_ships() {
         this.functional_ships--;
     }
 
+    /**
+     * Return the number of successful shots for the player.
+    */
     public int getSuccessful_shots() {
         return successful_shots;
     }
 
+    /**
+     * Increase the number of successful shots for the player, after hit status.
+    */
     public void setSuccessful_shots() {
         this.successful_shots++;
     }
 
+    /**
+     * Return the current turn for the player.
+    */
     public int getTurn() {
         return turn;
     }
 
+    /**
+     * Function used only by the 'AI' player. If the prophet list isn't empty, coordinates of potential target is
+     * returned. If the prophet list is empty, random coordinates are generated as soon as the player hasn't tried them.
+     * @return coords array, containing x-coordinate on its first position and y-coordinate on its second position.
+    */
     public int[] prophetFunction() {
 
         int x, y;
@@ -89,6 +138,15 @@ public class Player {
         return coords;
     }
 
+    /**
+     * Check the opponent's board for successful shot. Handles ship damage status as well as functional ship count and
+     * player's score for the opponent and player, respectively. If the 'AI' player is playing, potential target are
+     * generated and saved in the prophet LinkedList. Increases player's turn by 1.
+     * @param opponent of the player calling the function
+     * @param opponentBoard of the player calling the function. Immediate access to the GUI board.
+     * @param x coordinate selected by the player calling the function
+     * @param y coordinate selected by the player calling the function
+    */
     public void turnHandler(Player opponent, List<AnchorPane> opponentBoard, int x, int y) {
 
         Shot curr = new Shot(x, y, getTurn()); // create a current shot
@@ -152,6 +210,10 @@ public class Player {
     }
 
 
+    /**
+     * Generates pop-up window providing information on ship status for all the ship of the player calling the function.
+     * Ship status include Intact, Damaged or Sunken.
+    */
     public void shipsInfoHandler() {
         Alert dialog = new Alert(Alert.AlertType.INFORMATION);
         String curr = "Carrier:\t\t\t\t" + ship_array[1].getState() + "\nBattleship:\t\t\t" + ship_array[2].getState() + "\nCruiser:\t\t\t\t" + ship_array[3].getState() +
@@ -164,6 +226,10 @@ public class Player {
         dialog.showAndWait();
     }
 
+    /**
+     * Generated pop-up window proving information on the last 5 shots made by the player calling the function. These
+     * include turn count, coordinates tried, hit or miss status, as well as ship name, in case of a successful shot.
+    */
     public void shotsInfoHandler() {
         Shot curr;
         StringBuilder string = new StringBuilder();
