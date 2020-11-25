@@ -37,7 +37,7 @@ public class Player {
     public String name;
     public int[][] board = new int[11][11];
     public int[][] tries = new int[11][11];
-    public int turn, points, functional_ships, successful_shots;
+    public int turn, points, functional_ships, successful_shots, shot_count;
 
     /**
      * Class constructor specifying the name of the player.
@@ -45,6 +45,7 @@ public class Player {
     public Player(String name) {
         turn = 1;
         points = 0;
+        shot_count = 0;
         successful_shots = 0;
         functional_ships = 5;
         this.name = name;
@@ -98,6 +99,20 @@ public class Player {
     */
     public void setSuccessful_shots() {
         this.successful_shots++;
+    }
+
+    /**
+     * Get total number of shots made by the player.
+    */
+    public int getShot_count() {
+        return shot_count;
+    }
+
+    /**
+     * Increase total amount of shots made by the player.
+    */
+    public void setShot_count() {
+        this.shot_count++;
     }
 
     /**
@@ -206,6 +221,7 @@ public class Player {
         }
 
         shots.add(curr); // save current shot
+        setShot_count();
         turn += 1;
     }
 

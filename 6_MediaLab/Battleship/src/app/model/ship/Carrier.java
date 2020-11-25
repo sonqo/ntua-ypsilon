@@ -5,7 +5,7 @@ public class Carrier extends Ship{
     public int id = 1;
     public int size = 5;
     public int hit_points = 350;
-    public int destroy_bonus = 100;
+    public int destroy_bonus = 1000;
 
     public String color="#034F84";
 

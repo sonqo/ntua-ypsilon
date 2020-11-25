@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.BufferedReader;
+import java.text.DecimalFormat;
 import javafx.scene.image.Image;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -41,6 +42,8 @@ public class Controller implements Initializable {
 
     String defaultEnemy = "medialab/enemy_SCENARIO-01.txt";
     String defaultPlayer = "medialab/player_SCENARIO-01.txt";
+
+    private static DecimalFormat df = new DecimalFormat("##.##");
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -89,15 +92,29 @@ public class Controller implements Initializable {
     }
 
     public void handleLabels() {
+
         turnLabel.textProperty().set("Game Turn: " + player.getTurn());
+
+        double percentage_enemy;
+        double percentage_player;
+        if (player.getShot_count() == 0) {
+            percentage_player = 0.0;
+        } else {
+            percentage_player = ((double)player.getSuccessful_shots()/player.getShot_count())*100;
+        }
+        if (enemy.getShot_count() == 0) {
+            percentage_enemy = 0.0;
+        } else {
+            percentage_enemy = ((double)enemy.getSuccessful_shots()/enemy.getShot_count())*100;
+        }
 
         enemysPoints.textProperty().set("Enemy's Points: " + enemy.getPoints());
         enemysShips.textProperty().set("Enemy's Functional Ships: " + enemy.getFunctional_ships());
-        enemysShots.textProperty().set("Enemy's Successful Shots: " + enemy.getSuccessful_shots());
+        enemysShots.textProperty().set("Enemy's Successful Shots: " + df.format(percentage_enemy) + "%");
 
         playersPoints.textProperty().set("Player's Points: " + player.getPoints());
         playersShips.textProperty().set("Player's Functional Ships: " + player.getFunctional_ships());
-        playersShots.textProperty().set("Player's Successful Shots: " + player.getSuccessful_shots());
+        playersShots.textProperty().set("Player's Successful Shots: " + df.format(percentage_player) + "%");
     }
 
     public void handleSubmit() {
