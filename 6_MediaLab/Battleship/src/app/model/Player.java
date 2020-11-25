@@ -1,7 +1,5 @@
-package app.model.player;
+package app.model;
 
-import app.model.Shot;
-import app.model.Coords;
 import app.model.ship.Ship;
 
 import java.util.List;
@@ -137,6 +135,7 @@ public class Player {
                     }
                     opponent.setFunctional_ships();
                     opponent.ship_array[opponent.board[x][y]].setSunken();
+                    setPoints(opponent.ship_array[opponent.board[x][y]].getHit_points());
                     setPoints(opponent.ship_array[opponent.board[x][y]].getDestroy_bonus());
                 }
                 setSuccessful_shots();

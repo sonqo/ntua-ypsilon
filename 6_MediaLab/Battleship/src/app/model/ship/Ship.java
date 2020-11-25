@@ -1,8 +1,9 @@
 package app.model.ship;
-import app.model.exception.AdjacentTilesException;
-import app.model.player.Player;
+
+import app.model.Player;
 import app.model.exception.OverlapException;
 import app.model.exception.OversizeException;
+import app.model.exception.AdjacentTilesException;
 
 import java.util.List;
 import java.util.LinkedList;

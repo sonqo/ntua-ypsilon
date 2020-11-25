@@ -1,7 +1,7 @@
 package app.gui;
 
 import app.model.ship.*;
-import app.model.player.Player;
+import app.model.Player;
 import app.model.exception.InvalidCountException;
 
 import java.awt.*;
@@ -159,7 +159,7 @@ public class Controller implements Initializable {
                 dialog.setContentText("Limit of turns reached, player wins!");
             } else if (player.getPoints() < enemy.getPoints()) {
                 dialog.setContentText("Limit of turns reached, enemy wins!");
-            } else{
+            } else {
                 dialog.setContentText("Limit of turns reached, tie!");
             }
         }
