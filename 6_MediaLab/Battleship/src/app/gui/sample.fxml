@@ -15,7 +15,7 @@
                     <menus>
                       <Menu mnemonicParsing="false" text="Application">
                         <items>
-                          <MenuItem fx:id="startGame" mnemonicParsing="false" onAction="#startApp" text="Start Game" />
+                          <MenuItem fx:id="startGame" mnemonicParsing="false" onAction="#initializeApp" text="Start Game" />
                               <MenuItem mnemonicParsing="false" onAction="#loadApp" text="Load Scenarios" />
                               <MenuItem mnemonicParsing="false" onAction="#exitApp" text="Quit" />
                         </items>

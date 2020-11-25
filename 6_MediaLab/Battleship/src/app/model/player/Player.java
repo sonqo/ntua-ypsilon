@@ -11,7 +11,8 @@ public class Player {
 
     public LinkedList<Shot> shots = new LinkedList();
 
-    public int[][] board = new int[10][10];
+    public int[][] board = new int[11][11];
+    public int[][] tries = new int[11][11];
     public int turn, points, functional_ships, successful_shots, shot_count;
 
     public Player() {
@@ -21,12 +22,6 @@ public class Player {
         shot_count = 0;
         successful_shots = 0;
         functional_ships = 5;
-
-        for (int i=0; i<10; i++) {
-            for (int j=0; j<10; j++) {
-                board[i][j] = 0;
-            }
-        }
 
     }
 
