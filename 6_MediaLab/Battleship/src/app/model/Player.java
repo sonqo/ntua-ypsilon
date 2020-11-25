@@ -12,7 +12,7 @@ import javafx.scene.layout.AnchorPane;
 
 /** @author Efstratios "Sonqo" Karipiadis
  *
- * Player class, modeling the user of the Battleship Application.
+ * Player class, modeling each user of the Battleship Application.
  *
  * - Each player has unique name, points, functional ships, successful shots and turn.
  * - A ship_array is used to save all unique ship classes for each player, with IDs ranging from 1-5, containing
@@ -108,9 +108,9 @@ public class Player {
     }
 
     /**
-     * Function used only by the 'AI' player. If the prophet list isn't empty, coordinates of potential target is
-     * returned. If the prophet list is empty, random coordinates are generated as soon as the player hasn't tried them.
-     * @return coords array, containing x-coordinate on its first position and y-coordinate on its second position.
+     * Method used only by the 'AI' player. If the prophet list isn't empty, coordinates of potential target is
+     * returned. If the prophet list is empty, random coordinates are generated as soon as the 'AI' hasn't tried them.
+     * @return coords array, containing x-coordinate on its first position and y-coordinate on its second position
     */
     public int[] prophetFunction() {
 
@@ -140,10 +140,10 @@ public class Player {
 
     /**
      * Check the opponent's board for successful shot. Handles ship damage status as well as functional ship count and
-     * player's score for the opponent and player, respectively. If the 'AI' player is playing, potential target are
-     * generated and saved in the prophet LinkedList. Increases player's turn by 1.
+     * player's score for the opponent and player, respectively. If the 'AI' player is playing, potential targets are
+     * generated and saved in the prophet LinkedList. Increases player's turn by 1. Updates GUI respectively.
      * @param opponent of the player calling the function
-     * @param opponentBoard of the player calling the function. Immediate access to the GUI board.
+     * @param opponentBoard of the player calling the function. Immediate access to the GUI board
      * @param x coordinate selected by the player calling the function
      * @param y coordinate selected by the player calling the function
     */
@@ -211,8 +211,8 @@ public class Player {
 
 
     /**
-     * Generates pop-up window providing information on ship status for all the ship of the player calling the function.
-     * Ship status include Intact, Damaged or Sunken.
+     * Generates pop-up window providing information on ship status for all the ships of the player calling the
+     * function. Ship status include Intact, Damaged or Sunken.
     */
     public void shipsInfoHandler() {
         Alert dialog = new Alert(Alert.AlertType.INFORMATION);
