@@ -203,7 +203,8 @@ public class Player {
                 } else {
                     if (getName().equals("Enemy")) {
                         while (!prophet.isEmpty()) {
-                            prophet.pop();
+                            Coords c = prophet.pop();
+                            tries[c.x][c.y] = 1;
                         }
                     }
                     opponent.setFunctional_ships();
@@ -224,7 +225,6 @@ public class Player {
         setShot_count();
         turn += 1;
     }
-
 
     /**
      * Generates pop-up window providing information on ship status for all the ships of the player calling the

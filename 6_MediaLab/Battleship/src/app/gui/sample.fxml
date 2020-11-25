@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.util.ArrayList?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.control.*?>
 
+<?import java.util.ArrayList?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.gui.Controller">
    <children>
       <SplitPane dividerPositions="0.15" orientation="VERTICAL" prefHeight="900.0" prefWidth="1300.0">
@@ -81,52 +81,52 @@
                                                          <children>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                                                <children>
-                                                                  <Label layoutX="10.0" layoutY="11.0" prefHeight="17.0" prefWidth="8.0" text="1" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="25.0" />
+                                                                  <Label layoutX="10.0" layoutY="11.0" prefHeight="17.0" prefWidth="8.0" text="1" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="24.0" />
                                                                </children>
                                                             </AnchorPane>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                                                                <children>
-                                                                  <Label layoutX="10.0" layoutY="11.0" prefHeight="17.0" prefWidth="8.0" text="2" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="25.0" />
+                                                                  <Label layoutX="10.0" layoutY="11.0" prefHeight="17.0" prefWidth="8.0" text="2" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="23.0" />
                                                                </children>
                                                             </AnchorPane>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                                                                <children>
-                                                                  <Label layoutX="10.0" layoutY="11.0" prefHeight="17.0" prefWidth="8.0" text="3" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="25.0" />
+                                                                  <Label layoutX="10.0" layoutY="11.0" prefHeight="17.0" prefWidth="8.0" text="3" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="24.0" />
                                                                </children>
                                                             </AnchorPane>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
                                                                <children>
-                                                                  <Label layoutX="10.0" layoutY="11.0" prefHeight="17.0" prefWidth="8.0" text="4" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="25.0" />
+                                                                  <Label layoutX="10.0" layoutY="11.0" prefHeight="17.0" prefWidth="8.0" text="4" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="24.0" />
                                                                </children>
                                                             </AnchorPane>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
                                                                <children>
-                                                                  <Label layoutX="10.0" layoutY="11.0" prefHeight="17.0" prefWidth="8.0" text="5" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="25.0" />
+                                                                  <Label layoutX="10.0" layoutY="11.0" prefHeight="17.0" prefWidth="8.0" text="5" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="24.0" />
                                                                </children>
                                                             </AnchorPane>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5">
                                                                <children>
-                                                                  <Label layoutX="10.0" layoutY="11.0" prefHeight="17.0" prefWidth="8.0" text="6" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="25.0" />
+                                                                  <Label layoutX="10.0" layoutY="11.0" prefHeight="17.0" prefWidth="8.0" text="6" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="24.0" />
                                                                </children>
                                                             </AnchorPane>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6">
                                                                <children>
-                                                                  <Label layoutX="10.0" layoutY="11.0" prefHeight="17.0" prefWidth="8.0" text="7" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="25.0" />
+                                                                  <Label layoutX="10.0" layoutY="11.0" prefHeight="17.0" prefWidth="8.0" text="7" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="24.0" />
                                                                </children>
                                                             </AnchorPane>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="7">
                                                                <children>
-                                                                  <Label layoutX="10.0" layoutY="11.0" prefHeight="17.0" prefWidth="8.0" text="8" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="25.0" />
+                                                                  <Label layoutX="10.0" layoutY="11.0" prefHeight="17.0" prefWidth="8.0" text="8" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="23.0" />
                                                                </children>
                                                             </AnchorPane>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="8">
                                                                <children>
-                                                                  <Label layoutX="10.0" layoutY="11.0" prefHeight="17.0" prefWidth="8.0" text="9" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="25.0" />
+                                                                  <Label layoutX="10.0" layoutY="11.0" prefHeight="17.0" prefWidth="8.0" text="9" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="22.0" />
                                                                </children>
                                                             </AnchorPane>
                                                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="9">
                                                                  <children>
-                                                                     <Label layoutX="7.0" layoutY="20.0" prefHeight="20.0" prefWidth="19.0" text="10" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="20.0" />
+                                                                     <Label layoutX="7.0" layoutY="20.0" prefHeight="20.0" prefWidth="19.0" text="10" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="18.0" />
                                                                  </children>
                                                              </AnchorPane>
                                                          </children>
@@ -173,32 +173,32 @@
                                                                         </AnchorPane>
                                                                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
                                                                            <children>
-                                                                              <Label layoutX="30.0" layoutY="11.0" text="D" AnchorPane.topAnchor="13.0" />
+                                                                              <Label layoutX="30.0" layoutY="11.0" text="D" AnchorPane.leftAnchor="28.0" AnchorPane.topAnchor="13.0" />
                                                                            </children>
                                                                         </AnchorPane>
                                                                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4">
                                                                            <children>
-                                                                              <Label layoutX="31.0" layoutY="10.0" text="E" AnchorPane.topAnchor="13.0" />
+                                                                              <Label layoutX="31.0" layoutY="10.0" text="E" AnchorPane.leftAnchor="28.0" AnchorPane.topAnchor="13.0" />
                                                                            </children>
                                                                         </AnchorPane>
                                                                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6">
                                                                            <children>
-                                                                              <Label layoutX="30.0" layoutY="10.0" text="G" AnchorPane.topAnchor="13.0" />
+                                                                              <Label layoutX="30.0" layoutY="10.0" text="G" AnchorPane.leftAnchor="28.0" AnchorPane.topAnchor="13.0" />
                                                                            </children>
                                                                         </AnchorPane>
                                                                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7">
                                                                            <children>
-                                                                              <Label layoutX="29.0" layoutY="10.0" text="H" AnchorPane.topAnchor="13.0" />
+                                                                              <Label layoutX="29.0" layoutY="10.0" text="H" AnchorPane.leftAnchor="28.0" AnchorPane.topAnchor="13.0" />
                                                                            </children>
                                                                         </AnchorPane>
                                                                         <AnchorPane prefHeight="38.0" prefWidth="61.0" GridPane.columnIndex="8">
                                                                            <children>
-                                                                              <Label layoutX="32.0" layoutY="10.0" text="I" AnchorPane.topAnchor="13.0" />
+                                                                              <Label layoutX="32.0" layoutY="10.0" text="I" AnchorPane.leftAnchor="28.0" AnchorPane.topAnchor="13.0" />
                                                                            </children>
                                                                         </AnchorPane>
                                                                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5">
                                                                            <children>
-                                                                              <Label layoutX="31.0" layoutY="10.0" text="F" AnchorPane.topAnchor="13.0" />
+                                                                              <Label layoutX="31.0" layoutY="10.0" text="F" AnchorPane.leftAnchor="28.0" AnchorPane.topAnchor="13.0" />
                                                                            </children>
                                                                         </AnchorPane>
                                                                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9">
@@ -441,12 +441,12 @@
                                                                         </AnchorPane>
                                                                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8">
                                                                            <children>
-                                                                              <Label layoutX="29.0" layoutY="8.0" text="I" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="9.0" />
+                                                                              <Label layoutX="29.0" layoutY="8.0" text="I" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="9.0" />
                                                                            </children>
                                                                         </AnchorPane>
                                                                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9">
                                                                            <children>
-                                                                              <Label layoutX="28.0" layoutY="8.0" text="J" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="9.0" />
+                                                                              <Label layoutX="28.0" layoutY="8.0" text="J" AnchorPane.leftAnchor="33.0" AnchorPane.topAnchor="9.0" />
                                                                            </children>
                                                                         </AnchorPane>
                                                                      </children>
@@ -634,52 +634,52 @@
                                                          <children>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                                                <children>
-                                                                  <Label layoutX="11.0" layoutY="21.0" text="1" AnchorPane.rightAnchor="14.5" />
+                                                                  <Label layoutX="11.0" layoutY="20.0" text="1" AnchorPane.rightAnchor="14.5" />
                                                                </children>
                                                             </AnchorPane>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                                                                <children>
-                                                                  <Label layoutX="11.0" layoutY="21.0" text="2" AnchorPane.rightAnchor="14.0" />
+                                                                  <Label layoutX="11.0" layoutY="17.0" text="2" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="23.0" />
                                                                </children>
                                                             </AnchorPane>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                                                                <children>
-                                                                  <Label layoutX="11.0" layoutY="21.0" text="3" AnchorPane.rightAnchor="14.0" />
+                                                                  <Label layoutX="11.0" layoutY="17.0" text="3" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="25.0" />
                                                                </children>
                                                             </AnchorPane>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
                                                                <children>
-                                                                  <Label layoutX="11.0" layoutY="26.0" text="4" AnchorPane.rightAnchor="14.0" />
+                                                                  <Label layoutX="11.0" layoutY="22.0" text="4" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="26.0" />
                                                                </children>
                                                             </AnchorPane>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
                                                                <children>
-                                                                  <Label layoutX="11.0" layoutY="25.0" text="5" AnchorPane.rightAnchor="14.0" />
+                                                                  <Label layoutX="11.0" layoutY="21.0" text="5" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="23.0" />
                                                                </children>
                                                             </AnchorPane>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5">
                                                                <children>
-                                                                  <Label layoutX="11.0" layoutY="21.0" text="6" AnchorPane.rightAnchor="14.0" />
+                                                                  <Label layoutX="11.0" layoutY="14.0" text="6" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="20.0" />
                                                                </children>
                                                             </AnchorPane>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6">
                                                                <children>
-                                                                  <Label layoutX="11.0" layoutY="21.0" text="7" AnchorPane.rightAnchor="14.0" />
+                                                                  <Label layoutX="11.0" layoutY="19.0" text="7" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="19.0" />
                                                                </children>
                                                             </AnchorPane>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="7">
                                                                <children>
-                                                                  <Label layoutX="11.0" layoutY="21.0" text="8" AnchorPane.rightAnchor="14.0" />
+                                                                  <Label layoutX="11.0" layoutY="19.0" text="8" AnchorPane.rightAnchor="14.0" />
                                                                </children>
                                                             </AnchorPane>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="8">
                                                                <children>
-                                                                  <Label layoutX="13.0" layoutY="21.0" text="9" AnchorPane.rightAnchor="12.0" />
+                                                                  <Label layoutX="13.0" layoutY="17.0" text="9" AnchorPane.rightAnchor="14.0" />
                                                                </children>
                                                             </AnchorPane>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="9">
                                                                <children>
-                                                                  <Label layoutX="4.0" layoutY="21.0" text="10" AnchorPane.rightAnchor="11.5" />
+                                                                  <Label layoutX="4.0" layoutY="19.0" text="10" AnchorPane.rightAnchor="11.5" />
                                                                </children>
                                                             </AnchorPane>
                                                          </children>
