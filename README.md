@@ -55,3 +55,9 @@ _CNN model optimizations on CIFAR-100 dataset with achieved accuracy ≈ 75%._
 Data preparation, various Convolution Neural Network arhitectures tested, Data Augmentation, VGG19 Transfer Learning
 
 :bulb: Technologies used: ***Python*** _(imblearn, sklearn, tensorflow, somoclu)_
+
+### Embedded System Design
+
+- **Loop Transformations**  
+_Loop transformation techniques used for improving energy consumption and execution time of programms._ 
+Loop Fusion, Design Spce Exploration
