@@ -60,6 +60,6 @@ Data preparation, various Convolution Neural Network arhitectures tested, Data A
 
 - **Loop Transformations**  
 _Techniques for improving energy consumption and execution time of functions._  
-Loop Fusion, Unrolling Factors testing, Design Spce Exploration
+Loop Fusion, Unrolling Factor testing, Design Spce Exploration
 
 :bulb: Technologies used: ***C, Orio Tool***
