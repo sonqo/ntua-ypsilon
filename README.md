@@ -59,5 +59,7 @@ Data preparation, various Convolution Neural Network arhitectures tested, Data A
 ### Embedded System Design
 
 - **Loop Transformations**  
-_Loop transformation techniques used for improving energy consumption and execution time of programms._ 
-Loop Fusion, Design Spce Exploration
+_Techniques for improving energy consumption and execution time of functions._  
+Loop Fusion, Unrolling Factors testing, Design Spce Exploration
+
+:bulb: Technologies used: ***C, Orio Tool***
