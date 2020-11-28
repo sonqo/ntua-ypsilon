@@ -21,9 +21,7 @@ Child process handling, signal communication, monitoring multiple file descripto
 :bulb: Technologies used: ***C*** _(sys/wait.h, sys/types.h, sys/select.h, sys/socket.h)_
 
 ### Multimedia Technology
-
-- **Aiport & Battleship**  
-_GUI applications on a flight management system and the well-known board game._  
+_GUI applications on a flight management system and α well-known board game._  
 Object-oriented approach, interface design, event handling, timelines, animations.
 
 :bulb: Technologies used: ***Java*** _(JavaFX, SceneBuilder)_
