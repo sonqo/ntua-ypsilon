@@ -56,7 +56,7 @@
             clientList = cdsl_dyn_array_init();	
         #endif
 
-        unsigned a=0;
+        unsigned a = 0;
         int rounds = 1783;
 
         while (a < rounds) {
@@ -73,7 +73,7 @@
             }
             for (k = 0; k < frees[a]; k++) {
                 Packet* forwarded_packet = forward_packet(node_head);
-                if(forwarded_packet!=NULL) {	
+                if (forwarded_packet!=NULL) {	
                     free(forwarded_packet);
                 }
             }
@@ -108,7 +108,7 @@
             end = clientList->iter_end(clientList);
             for (;it != end; it = clientList->iter_next(it)) {
                 v = (Node*)(clientList->iter_deref(clientList, it));
-                if((v->src_ip == packet->src) && (v->dst_ip == packet->dst)) {
+                if ((v->src_ip == packet->src) && (v->dst_ip == packet->dst)) {
                     return v;
                 }
             }
@@ -167,7 +167,7 @@
             it = clientList->iter_begin(clientList);
             for (;it != end; it = clientList->iter_next(it)) {
                 v = (Node*)(clientList->iter_deref(clientList, it));
-                if(v != NULL && v->src_ip != 0 && v->no_of_packets > 0) { // making sure it is not the deficit_head	
+                if (v != NULL && v->src_ip != 0 && v->no_of_packets > 0) { // making sure it is not the deficit_head	
                     first_packet = v->pList->get_head(0, v->pList);
                     if(v->deficit >= first_packet->size) {
                         v->deficit -= first_packet->size;
