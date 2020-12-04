@@ -7,6 +7,14 @@
     #include <stdlib.h>
     #include "dijkstra.h"
 
+    #ifndef _FUNCTIONS_INSTANTIATIONS_
+        
+         #define _FUNCTIONS_INSTANTIATIONS_
+
+        
+
+    #endif
+
     #define NONE 9999
     #define NUM_NODES 100
 
@@ -91,13 +99,13 @@
           enqueue (chStart, 0, NONE);
         
           while (qcount() > 0) {
-              dequeue (&iNode, &iDist, &iPrev);
+              dequeue(&iNode, &iDist, &iPrev);
               for (i = 0; i < NUM_NODES; i++) {
                   if ((iCost = AdjMatrix[iNode][i]) != NONE) {
                       if ((NONE == rgnNodes[i].iDist) || (rgnNodes[i].iDist > (iCost + iDist))) {
                           rgnNodes[i].iDist = iDist + iCost;
                           rgnNodes[i].iPrev = iNode;
-                          enqueue (i, iDist + iCost, iNode);
+                          enqueue(i, iDist + iCost, iNode);
                       }
                   }
               }

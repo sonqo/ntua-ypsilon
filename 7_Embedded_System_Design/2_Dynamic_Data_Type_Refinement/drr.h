@@ -23,10 +23,10 @@ typedef struct Packet_struct {
 } Packet;
 
 typedef struct Node_struct { 
-  	unsigned int src_ip; // source IP of the node
-  	unsigned int dst_ip; // destination IP of the node
-  	unsigned int no_of_packets;
+  	unsigned int src_ip;
+  	unsigned int dst_ip;
 	unsigned int deficit;
+  	unsigned int no_of_packets;
 
     #if defined(SLL_PK)
         cdsl_sll *pList;

@@ -7,16 +7,19 @@
     #include <stdio.h>
 
     #ifndef _FUNCTIONS_INSTANTIATIONS_
+        
         #define _FUNCTIONS_INSTANTIATIONS_
 
+        void insert_packet(Packet* packet, Node* node);
+
         // Creates a new packet
+        Packet* forward_packet(Node* node_head);
         Packet* get_next_packet(unsigned int psrc_ip, unsigned int pdst_ip, unsigned int size);
 
         // Finds the node that holds the packet with the lowest finish time
         Node* min_fin_node(Node* node_head);
         Node* find_node(Packet* packet, Node* node_head);
-        void insert_packet(Packet* packet, Node* node);
-        Packet* forward_packet(Node* node_head);
+
     #endif
 
     #define QUANTUM 9216 // the value to be added to increment the deficit - see CISCO router
@@ -34,15 +37,14 @@
         
         int k, i;
 
-        // Node-head
         Node* node_head = (Node*)malloc(sizeof(Node));
         node_head->src_ip = 0;
         node_head->dst_ip = 0;
-        node_head->no_of_packets = 0;
         node_head->deficit = 0;
+        node_head->no_of_packets = 0;
+        
         Node *v;
 
-        // Packet
         Packet* packet = NULL;
 
         #if defined (SLL_CL)
@@ -85,17 +87,17 @@
         #define _GET_NEXT_PACKET_
         Packet* get_next_packet(unsigned int psrc_ip, unsigned int pdst_ip, unsigned int size) { 
             Packet *npacket = (Packet*)malloc(sizeof(Packet));
+            npacket->size = size;
             npacket->src = psrc_ip;
             npacket->dst = pdst_ip;
-            npacket->size = size;
             return npacket;
         }
     #endif
 
     #ifndef _FIND_NODE_
         #define _FIND_NODE_
+        // Find the destination
         Node* find_node(Packet* packet, Node* node_head) {
-            // Find the destination
             Node *v;
             #if defined (SLL_CL)
                 iterator_cdsl_sll it, end;
@@ -113,10 +115,10 @@
                 }
             }
             Node* new_node = (Node*)malloc(sizeof(Node));
+            new_node->deficit = DEFICIT;
+            new_node->no_of_packets = 0;
             new_node->src_ip = packet->src;
             new_node->dst_ip = packet->dst;
-            new_node->no_of_packets = 0;
-            new_node->deficit = DEFICIT;
             #if defined (SLL_PK)
                 new_node->pList = cdsl_sll_init();
             #elif defined (DLL_PK)
@@ -139,7 +141,6 @@
             }
             else {		
                 node->no_of_packets++;
-                // Place the packet in the last position of the packet list
                 node->pList->enqueue(0, node->pList, (void*)packet);
             }
         }
