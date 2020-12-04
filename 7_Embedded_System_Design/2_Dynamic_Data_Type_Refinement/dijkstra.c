@@ -2,23 +2,22 @@
   
     #define _DIJKSTRA_C_
 
-    // DONE
     #include <stdio.h>
     #include <stdlib.h>
     #include "dijkstra.h"
 
     #ifndef _FUNCTIONS_INSTANTIATIONS_
         
-         #define _FUNCTIONS_INSTANTIATIONS_
+        #define _FUNCTIONS_INSTANTIATIONS_
 
-        
+        QITEM* dequeue_node();
+        void insert_node(int iNode, int iDist, int iPrev);
 
     #endif
 
     #define NONE 9999
     #define NUM_NODES 100
 
-    // DONE
     #if defined(SLL)
       cdsl_sll *queue;
     #elif defined(DLL)
@@ -27,15 +26,12 @@
       cdsl_dyn_array *queue;
     #endif
 
-    // DONE
     int AdjMatrix[NUM_NODES][NUM_NODES];
 
-    // DONE
     int g_qCount = 0;
     NODE rgnNodes[NUM_NODES];
     int i, ch, iPrev, iNode, iCost, iDist;
 
-    // DONE
     void print_path (NODE *rgnNodes, int chNode) {
         if (rgnNodes[chNode].iPrev != NONE) {
             print_path(rgnNodes, rgnNodes[chNode].iPrev);
@@ -44,77 +40,48 @@
         fflush(stdout);
     }
 
-    void enqueue (int iNode, int iDist, int iPrev) {
-        QITEM *qNew = (QITEM *) malloc(sizeof(QITEM));
-        QITEM *qLast = qHead;
-        if (!qNew) {
-            fprintf(stderr, "Out of memory.\n");
-            exit(1);
-        }
-        qNew->iNode = iNode;
-        qNew->iDist = iDist;
-        qNew->iPrev = iPrev;
-        qNew->qNext = NULL;
-        if (!qLast) {
-            qHead = qNew;
-        }
-        else {
-            while (qLast->qNext) qLast = qLast->qNext;
-            qLast->qNext = qNew;
-        }
-        g_qCount++;
-    }
-
-    void dequeue (int *piNode, int *piDist, int *piPrev) {
-        QITEM *qKill = qHead;
-        if (qHead) {
-            *piNode = qHead->iNode;
-            *piDist = qHead->iDist;
-            *piPrev = qHead->iPrev;
-            qHead = qHead->qNext;
-            free(qKill);
-            g_qCount--;
-        }
-    }
-
-    // DONE
     int qcount (void) {
         return(g_qCount);
     }
 
     int dijkstra(int chStart, int chEnd) {
-      
-      for (ch = 0; ch < NUM_NODES; ch++) {
-          rgnNodes[ch].iDist = NONE;
-          rgnNodes[ch].iPrev = NONE;
-      }
+        
+        QITEM* curr_item;
 
-      if (chStart == chEnd) {
-          printf("Shortest path is 0 in cost. Just stay where you are.\n");
-      }
-      else {
-          rgnNodes[chStart].iDist = 0;
-          rgnNodes[chStart].iPrev = NONE;
+        for (ch = 0; ch < NUM_NODES; ch++) {
+            rgnNodes[ch].iDist = NONE;
+            rgnNodes[ch].iPrev = NONE;
+        }
+
+        if (chStart == chEnd) {
+            printf("Shortest path is 0 in cost. Just stay where you are.\n");
+        }
+        else {
+            rgnNodes[chStart].iDist = 0;
+            rgnNodes[chStart].iPrev = NONE;
         
-          enqueue (chStart, 0, NONE);
+            insert_node(chStart, 0, NONE);
         
-          while (qcount() > 0) {
-              dequeue(&iNode, &iDist, &iPrev);
-              for (i = 0; i < NUM_NODES; i++) {
-                  if ((iCost = AdjMatrix[iNode][i]) != NONE) {
-                      if ((NONE == rgnNodes[i].iDist) || (rgnNodes[i].iDist > (iCost + iDist))) {
-                          rgnNodes[i].iDist = iDist + iCost;
-                          rgnNodes[i].iPrev = iNode;
-                          enqueue(i, iDist + iCost, iNode);
-                      }
-                  }
-              }
-          }
-          printf("Shortest path is %d in cost. ", rgnNodes[chEnd].iDist);
-          printf("Path is: ");
-          print_path(rgnNodes, chEnd);
-          printf("\n");
-      }
+            while (qcount() > 0) {
+                curr_item = dequeue_node();
+                iNode = curr_item->iNode;
+                iDist = curr_item->iDist;
+                iPrev = curr_item->iPrev;
+                for (i = 0; i < NUM_NODES; i++) {
+                    if ((iCost = AdjMatrix[iNode][i]) != NONE) {
+                        if ((NONE == rgnNodes[i].iDist) || (rgnNodes[i].iDist > (iCost + iDist))) {
+                            rgnNodes[i].iDist = iDist + iCost;
+                            rgnNodes[i].iPrev = iNode;
+                            insert_node(i, iDist+iCost, iNode);
+                        }
+                    }
+                }
+            }
+            printf("Shortest path is %d in cost. ", rgnNodes[chEnd].iDist);
+            printf("Path is: ");
+            print_path(rgnNodes, chEnd);
+            printf("\n");
+        }
     }
 
     int main(int argc, char *argv[]) {
@@ -153,5 +120,35 @@
 
         return 0;
     }
+
+    #ifndef _INSERT_NODE_
+        #define _INSERT_NODE_
+        void insert_node(int iNode, int iDist, int iPrev) {
+            QITEM *qNew = (QITEM *) malloc(sizeof(QITEM));
+            QITEM *qLast = qHead;
+            if (!qNew) {
+                fprintf(stderr, "Out of memory.\n");
+                exit(1);
+            }
+            qNew->iNode = iNode;
+            qNew->iDist = iDist;
+            qNew->iPrev = iPrev;
+            qNew->qNext = NULL;
+            queue->enqueue(0, queue, (void*)qNew);
+            g_qCount++;
+        }
+    #endif
+
+    #ifndef _DELETE_NODE_
+        #define _DELETE_NODE_
+        QITEM* dequeue_node() {
+            QITEM *head = queue->get_head(0, queue);
+            if (head) {
+                queue->remove(0, queue, head);
+                g_qCount--;
+            }
+            return head;        
+        }            
+    #endif
 
 #endif
