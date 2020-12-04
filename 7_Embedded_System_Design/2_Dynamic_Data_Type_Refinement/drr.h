@@ -7,7 +7,7 @@
 //#define DYN_ARR_PK
 
 #if defined(SLL_CL) || defined(SLL_PK)
-    #include "./synch_implementations/cdsl_queue.h"
+#include "./synch_implementations/cdsl_queue.h"
 #endif
 #if defined(DLL_CL) || defined(DLL_PK)
     #include "./synch_implementations/cdsl_deque.h"
@@ -35,5 +35,4 @@ typedef struct Node_struct {
     #else
         cdsl_dyn_array *pList;
     #endif
-
 } Node; 
