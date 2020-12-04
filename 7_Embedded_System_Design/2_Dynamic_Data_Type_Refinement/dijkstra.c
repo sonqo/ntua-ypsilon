@@ -10,8 +10,13 @@
         
         #define _FUNCTIONS_INSTANTIATIONS_
 
-        QITEM* dequeue_node();
+        QITEM* delete_node();
+
+        void print_path(NODE *rgnNodes, int chNode);
         void insert_node(int iNode, int iDist, int iPrev);
+
+        int qcount(void);
+        int dijkstra(int chStart, int chEnd);
 
     #endif
 
@@ -31,58 +36,6 @@
     int g_qCount = 0;
     NODE rgnNodes[NUM_NODES];
     int i, ch, iPrev, iNode, iCost, iDist;
-
-    void print_path (NODE *rgnNodes, int chNode) {
-        if (rgnNodes[chNode].iPrev != NONE) {
-            print_path(rgnNodes, rgnNodes[chNode].iPrev);
-        }
-        printf (" %d", chNode);
-        fflush(stdout);
-    }
-
-    int qcount (void) {
-        return(g_qCount);
-    }
-
-    int dijkstra(int chStart, int chEnd) {
-        
-        QITEM* curr_item;
-
-        for (ch = 0; ch < NUM_NODES; ch++) {
-            rgnNodes[ch].iDist = NONE;
-            rgnNodes[ch].iPrev = NONE;
-        }
-
-        if (chStart == chEnd) {
-            printf("Shortest path is 0 in cost. Just stay where you are.\n");
-        }
-        else {
-            rgnNodes[chStart].iDist = 0;
-            rgnNodes[chStart].iPrev = NONE;
-        
-            insert_node(chStart, 0, NONE);
-        
-            while (qcount() > 0) {
-                curr_item = dequeue_node();
-                iNode = curr_item->iNode;
-                iDist = curr_item->iDist;
-                iPrev = curr_item->iPrev;
-                for (i = 0; i < NUM_NODES; i++) {
-                    if ((iCost = AdjMatrix[iNode][i]) != NONE) {
-                        if ((NONE == rgnNodes[i].iDist) || (rgnNodes[i].iDist > (iCost + iDist))) {
-                            rgnNodes[i].iDist = iDist + iCost;
-                            rgnNodes[i].iPrev = iNode;
-                            insert_node(i, iDist+iCost, iNode);
-                        }
-                    }
-                }
-            }
-            printf("Shortest path is %d in cost. ", rgnNodes[chEnd].iDist);
-            printf("Path is: ");
-            print_path(rgnNodes, chEnd);
-            printf("\n");
-        }
-    }
 
     int main(int argc, char *argv[]) {
       
@@ -125,7 +78,7 @@
         #define _INSERT_NODE_
         void insert_node(int iNode, int iDist, int iPrev) {
             QITEM *qNew = (QITEM *) malloc(sizeof(QITEM));
-            QITEM *qLast = qHead;
+            QITEM *qLast = queue->get_head(0, queue);
             if (!qNew) {
                 fprintf(stderr, "Out of memory.\n");
                 exit(1);
@@ -136,12 +89,13 @@
             qNew->qNext = NULL;
             queue->enqueue(0, queue, (void*)qNew);
             g_qCount++;
+            return;
         }
     #endif
 
     #ifndef _DELETE_NODE_
         #define _DELETE_NODE_
-        QITEM* dequeue_node() {
+        QITEM* delete_node() {
             QITEM *head = queue->get_head(0, queue);
             if (head) {
                 queue->remove(0, queue, head);
@@ -149,6 +103,67 @@
             }
             return head;        
         }            
+    #endif
+
+    #ifndef _QCOUNT_
+        #define _QCOUNT_
+        int qcount (void) {
+            return(g_qCount);
+        }
+    #endif
+
+    #ifndef _PRINT_PATH_
+        #define _PRINT_PATH_
+        void print_path (NODE *rgnNodes, int chNode) {
+        if (rgnNodes[chNode].iPrev != NONE) {
+            print_path(rgnNodes, rgnNodes[chNode].iPrev);
+        }
+        printf (" %d", chNode);
+        fflush(stdout);
+    }
+    #endif
+    
+    #ifndef _DIJKSTRA_
+        #define _DIJKSTRA_
+        int dijkstra(int chStart, int chEnd) {
+            
+            QITEM* curr_item;
+
+            for (ch = 0; ch < NUM_NODES; ch++) {
+                rgnNodes[ch].iDist = NONE;
+                rgnNodes[ch].iPrev = NONE;
+            }
+
+            if (chStart == chEnd) {
+                printf("Shortest path is 0 in cost. Just stay where you are.\n");
+            }
+            else {
+                rgnNodes[chStart].iDist = 0;
+                rgnNodes[chStart].iPrev = NONE;
+            
+                insert_node(chStart, 0, NONE);
+            
+                while (qcount() > 0) {
+                    curr_item = delete_node();
+                    iNode = curr_item->iNode;
+                    iDist = curr_item->iDist;
+                    iPrev = curr_item->iPrev;
+                    for (i = 0; i < NUM_NODES; i++) {
+                        if ((iCost = AdjMatrix[iNode][i]) != NONE) {
+                            if ((NONE == rgnNodes[i].iDist) || (rgnNodes[i].iDist > (iCost + iDist))) {
+                                rgnNodes[i].iDist = iDist + iCost;
+                                rgnNodes[i].iPrev = iNode;
+                                insert_node(i, iDist+iCost, iNode);
+                            }
+                        }
+                    }
+                }
+                printf("Shortest path is %d in cost. ", rgnNodes[chEnd].iDist);
+                printf("Path is: ");
+                print_path(rgnNodes, chEnd);
+                printf("\n");
+            }
+        }
     #endif
 
 #endif
