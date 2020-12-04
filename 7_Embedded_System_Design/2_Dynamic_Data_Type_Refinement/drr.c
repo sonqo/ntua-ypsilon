@@ -20,7 +20,7 @@
     #endif
 
     #define QUANTUM 9216 // the value to be added to increment the deficit - see CISCO router
-    #define DEFICIT 16384 //initial value of deficit in a newly created node - see CISCO router
+    #define DEFICIT 16384 // initial value of deficit in a newly created node - see CISCO router
 
     #if defined(SLL_CL)
         cdsl_sll *clientList;
@@ -31,6 +31,7 @@
     #endif
 
     int main(int argc, char **argv) {
+        
         int k, i;
 
         // Node-head
@@ -59,7 +60,6 @@
         int rounds = 1783;
 
         while (a < rounds) {
-            //printf("round: %d\n", a);
             a++;
             for (k = 0; k < mallocs[a]; k++) {
                 packet = get_next_packet(psrc[a], pdst[a], psize[a]);
@@ -68,17 +68,12 @@
             }
             it = clientList->iter_begin(clientList);
             end = clientList->iter_end(clientList);
-
-            //printf("---------------------\n");
             for (;it != end; it = clientList->iter_next(it)) {		
                 v = (Node*)(clientList->iter_deref(clientList, it));
-                //printf("node: %d with deficit: %d\n", v->src_ip, v->deficit);
             }
-            //printf("---------------------\n");
             for (k = 0; k < frees[a]; k++) {
                 Packet* forwarded_packet = forward_packet(node_head);
                 if(forwarded_packet!=NULL) {	
-                    //printf("forwarded with: %d\n", forwarded_packet->size);
                     free(forwarded_packet);
                 }
             }
@@ -144,7 +139,7 @@
             }
             else {		
                 node->no_of_packets++;
-                //Place the packet in the last position of the packet list
+                // Place the packet in the last position of the packet list
                 node->pList->enqueue(0, node->pList, (void*)packet);
             }
         }
@@ -155,36 +150,36 @@
         Packet* forward_packet(Node* node_head) {
             Node *v;
             Packet* first_packet = NULL;
-        #if defined (SLL_CL)
-            iterator_cdsl_sll it, end;
-        #elif defined (DLL_CL)
-            iterator_cdsl_dll it, end;
-        #else
-            iterator_cdsl_dyn_array it, end;
-        #endif
-        it = clientList->iter_begin(clientList);
-        end = clientList->iter_end(clientList);
-        //increment the deficit in each node by QUANTUM
-        for (;it != end; it = clientList->iter_next(it)) {
-            v = (Node*)(clientList->iter_deref(clientList, it));
-            v->deficit += QUANTUM;
-        }
-        it = clientList->iter_begin(clientList);
-        for (;it != end; it = clientList->iter_next(it)) {
-            v = (Node*)(clientList->iter_deref(clientList, it));
-            if(v != NULL && v->src_ip != 0 && v->no_of_packets > 0) { //making sure it is not the deficit_head	
-                first_packet = v->pList->get_head(0, v->pList);
-                if(v->deficit >= first_packet->size) {
-                    v->deficit -= first_packet->size;
-                    v->no_of_packets--;
-                    v->pList->dequeue(0, (v->pList));
-                    if (v->no_of_packets == 0) {
-                        clientList->remove(0, clientList, v);
+            #if defined (SLL_CL)
+                iterator_cdsl_sll it, end;
+            #elif defined (DLL_CL)
+                iterator_cdsl_dll it, end;
+            #else
+                iterator_cdsl_dyn_array it, end;
+            #endif
+            it = clientList->iter_begin(clientList);
+            end = clientList->iter_end(clientList);
+            // Increment the deficit in each node by QUANTUM
+            for (;it != end; it = clientList->iter_next(it)) {
+                v = (Node*)(clientList->iter_deref(clientList, it));
+                v->deficit += QUANTUM;
+            }
+            it = clientList->iter_begin(clientList);
+            for (;it != end; it = clientList->iter_next(it)) {
+                v = (Node*)(clientList->iter_deref(clientList, it));
+                if(v != NULL && v->src_ip != 0 && v->no_of_packets > 0) { // making sure it is not the deficit_head	
+                    first_packet = v->pList->get_head(0, v->pList);
+                    if(v->deficit >= first_packet->size) {
+                        v->deficit -= first_packet->size;
+                        v->no_of_packets--;
+                        v->pList->dequeue(0, (v->pList));
+                        if (v->no_of_packets == 0) {
+                            clientList->remove(0, clientList, v);
+                        }
                     }
                 }
             }
-        }
-        return first_packet;
+            return first_packet;
         }
     #endif
 
