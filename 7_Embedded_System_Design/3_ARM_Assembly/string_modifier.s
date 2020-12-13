@@ -89,4 +89,3 @@ addrBuffer: .word bufferInput
 addrResult: .word bufferOutput
 addrInputFormat: .word inputFormat
 addrOutputFormat: .word outputFormat
-
