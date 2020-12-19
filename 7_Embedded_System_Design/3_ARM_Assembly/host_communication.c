@@ -18,6 +18,7 @@ int main() {
         write(1, "Please give a string to send to host: ", 38);
         n_read = read(0, buffer, BUFFER_SIZE);
         write(fd, buffer, n_read);
+        sleep(1);
     }
  
     close(fd);
