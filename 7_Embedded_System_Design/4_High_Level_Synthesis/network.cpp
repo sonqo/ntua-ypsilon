@@ -24,7 +24,6 @@ void forward_propagation(float *x, float *y) {
 	l_quantized_type layer_1_out[M1];
 	l_quantized_type layer_2_out[M2];
 
-
 	//limit resources to max DSP number of Zybo - do not change
 	#pragma HLS ALLOCATION instances=mul limit=80 operation
 

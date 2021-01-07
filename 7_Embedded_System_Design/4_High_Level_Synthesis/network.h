@@ -22,6 +22,7 @@ typedef ap_fixed<BITS+9,9,AP_RND> l_quantized_type;	// intermediate results
 #pragma SDS data copy(x[0:392], y[0:392])
 #pragma SDS data access_pattern(x:SEQUENTIAL, y:SEQUENTIAL)
 #pragma SDS data data_mover(x:AXIDMA_SIMPLE, y:AXIDMA_SIMPLE)
+
 void forward_propagation(float *x, float *y);
 
 #endif
