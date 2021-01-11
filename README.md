@@ -50,7 +50,7 @@ Data preparation, Term Frequency-Inverse Document Frequency represantation, cosi
 
 - **CIFAR-100 Image Classification**  
 _CNN model optimizations on CIFAR-100 dataset with achieved accuracy ≈ 75%._  
-Data preparation, various Convolution Neural Network arhitectures tested, Data Augmentation, VGG19 Transfer Learning
+Data preparation, various Convolution Neural Network arhitectures tested, Data Augmentation, VGG19 Transfer Learning.
 
 :bulb: Technologies used: ***Python*** _(imblearn, sklearn, tensorflow, somoclu)_
 
@@ -58,14 +58,14 @@ Data preparation, various Convolution Neural Network arhitectures tested, Data A
 
 - **Loop Transformations**  
 _Techniques for improving energy consumption and execution time of functions._  
-Loop Fusion, Unrolling Factor testing, Design Spce Exploration
+Loop Fusion, Unrolling Factor testing, Design Spce Exploration.
 
 - **Dynamic Data Type Refinement**  
 _Space exploration on different data structures in pursuit of data efficiency._  
-Code preparation for Valgrind suite applications, Memory Accesses & Memory Footprint analysis
+Code preparation for Valgrind suite applications, Memory Accesses & Memory Footprint analysis.
 
 - **ARM Assembly**  
 _Applications written in ARM assembly and executed in QEMU._  
-Input/String manipulation, host-guest serial port communcation, ARM and C code linking
+Input/String manipulation, host-guest serial port communcation, ARM and C code linking.
 
 :bulb: Technologies used: ***C, Orio Tool, Valgrind*** _(Massif, Lackey)_***, ARM Assembly, QEMU***
