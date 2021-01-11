@@ -60,4 +60,12 @@ Data preparation, various Convolution Neural Network arhitectures tested, Data A
 _Techniques for improving energy consumption and execution time of functions._  
 Loop Fusion, Unrolling Factor testing, Design Spce Exploration
 
-:bulb: Technologies used: ***C, Orio Tool***
+- **Dynamic Data Type Refinement**  
+_Space exploration on different data structures in pursuit of data efficiency._  
+Code preparation for Valgrind suite applications, Memory Accesses & Memory Footprint analysis
+
+- **ARM Assembly**  
+_Applications written in ARM assembly and executed in QEMU._  
+Input/String manipulation, host-guest serial port communcation, ARM and C code linking
+
+:bulb: Technologies used: ***C, Orio Tool, Massif/Lackey (Valgrind), ARM Assembly, QEMU***
