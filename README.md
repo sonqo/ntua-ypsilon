@@ -68,4 +68,4 @@ Code preparation for Valgrind suite applications, Memory Accesses & Memory Footp
 _Applications written in ARM assembly and executed in QEMU._  
 Input/String manipulation, host-guest serial port communcation, ARM and C code linking
 
-:bulb: Technologies used: ***C, Orio Tool, Massif/Lackey (Valgrind), ARM Assembly, QEMU***
+:bulb: Technologies used: ***C, Orio Tool, Valgrind*** _(Massif, Lackey)_ ***, ARM Assembly, QEMU***
