@@ -65,7 +65,7 @@ _Space exploration on different data structures in pursuit of data efficiency._
 Code preparation for Valgrind suite applications, Memory Accesses & Memory Footprint analysis.
 
 - **ARM Assembly**  
-_Applications written in ARM assembly and executed in QEMU._  
+_Applications written in ARM assembly and executed on QEMU simulator._  
 Input/String manipulation, host-guest serial port communcation, ARM and C code linking.
 
 - **High Level Synthesis**  
