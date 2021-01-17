@@ -22,7 +22,7 @@ Child process handling, signal communication, monitoring multiple file descripto
 
 ### Multimedia Technology
 _GUI applications on a flight management system and α well-known board game._  
-Object-oriented approach, interface design, event handling, timelines, animations.
+Object-oriented approach, interface design, input handling, event handling, timelines, animations.
 
 :bulb: Technologies used: ***Java*** _(JavaFX, SceneBuilder)_
 
