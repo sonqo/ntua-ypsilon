@@ -10,13 +10,13 @@ Stack pointer handling, function generator, input and output exercises.
 
 ### Microprocessors Laboratory
 _Various AVR applications._  
-Stack pointer handling, interrupts, LCD and Keypad functionalities, DS1820 sensor, Asynchronous Receiver/Transmitter communication, Internet of Things applet.
+Stack pointer handling, interrupts, LCD and Keypad functionalities, DS1820 sensor application, Asynchronous Receiver/Transmitter communication, IoT applet.
 
 :bulb: Technologies used: ***8085 Assembly, AVR Assembly, C***
 
 ### Operating Systems
 _Unix system programming._  
-Child process handling, signal communication, monitoring multiple file descriptors, pipe communication, socket application.
+Child process handling, signal communication, monitoring multiple file descriptors, pipe communication, socket communication.
 
 :bulb: Technologies used: ***C*** _(sys/wait.h, sys/types.h, sys/select.h, sys/socket.h)_
 
