@@ -68,4 +68,8 @@ Code preparation for Valgrind suite applications, Memory Accesses & Memory Footp
 _Applications written in ARM assembly and executed in QEMU._  
 Input/String manipulation, host-guest serial port communcation, ARM and C code linking.
 
-:bulb: Technologies used: ***C, Orio Tool, Valgrind*** _(Massif, Lackey)_***, ARM Assembly, QEMU***
+- **High Level Synthesis**  
+_HLS application and optimizations on MNIST GANs, run on ZYnq BOard._  
+Hardware pragmas optimizations, various bit reconstruction accuracies tested.
+
+:bulb: Technologies used: ***C, Orio Tool, Valgrind*** _(Massif, Lackey)_***, ARM Assembly, QEMU, SDSoC***
