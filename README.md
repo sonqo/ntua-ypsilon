@@ -72,4 +72,7 @@ Input/String manipulation, host-guest serial port communcation, ARM and C code l
 _HLS application and optimizations on MNIST GANs, run on ZYnq BOard._  
 Hardware pragmas optimizations, various bit reconstruction accuracies tested.
 
+- **Linux Kernel Cross-Compiling**  
+_Cross-compiling a linux kernel for ARM architecture._  
+
 :bulb: Technologies used: ***C, Orio Tool, Valgrind*** _(Massif, Lackey)_***, ARM Assembly, QEMU, SDSoC***
