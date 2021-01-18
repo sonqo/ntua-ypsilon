@@ -73,6 +73,6 @@ _HLS application and optimizations on MNIST GANs, run on ZYnq BOard._
 Hardware pragmas optimizations, various bit reconstruction accuracies tested.
 
 - **Linux Kernel Cross-Compiling**  
-_Cross-compiling a linux kernel for ARM architecture._  
+_Cross-compiling a linux kernel for ARM architecture, simulated on QEMU._  
 
 :bulb: Technologies used: ***C, Orio Tool, Valgrind*** _(Massif, Lackey)_***, ARM Assembly, QEMU, SDSoC***
