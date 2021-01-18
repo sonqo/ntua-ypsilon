@@ -18,7 +18,7 @@ Stack pointer handling, interrupts, LCD and Keypad functionalities, DS1820 senso
 _Unix system programming._  
 Child process handling, signal communication, monitoring multiple file descriptors, pipe communication, socket communication.
 
-:bulb: Technologies used: ***C*** _(sys/wait.h, sys/types.h, sys/select.h, sys/socket.h)_
+:bulb: Technologies used: ***C***
 
 ### Multimedia Technology
 _GUI applications on a flight management system and α well-known board game._  
