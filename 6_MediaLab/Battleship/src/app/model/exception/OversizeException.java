@@ -7,7 +7,7 @@ import javafx.scene.control.Alert;
 public class OversizeException extends Exception {
 
     public String toString() {
-        return ("Ship coordinates out of borders!");
+        return ("Ship coordinates out of borders!\nThe application will now close.");
     }
 
     public void handleException() {

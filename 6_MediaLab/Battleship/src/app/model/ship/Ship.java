@@ -82,7 +82,7 @@ public class Ship {
         if (getOrientation() == 1) {
             for (int i=0; i<getSize(); i++) {
                 try {
-                    if ((getStart()+1 < 0) || (getStart()+1 > 9) || (getFinish()+i+1 < 0) || (getFinish()+i+1 > 9)) {
+                    if ((getStart()+1 < 0) || (getStart()+1 > 10) || (getFinish()+i+1 < 0) || (getFinish()+i+1 > 10)) {
                         throw new OversizeException();
                     } else {
                         try {

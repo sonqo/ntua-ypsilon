@@ -7,7 +7,7 @@ import javafx.scene.control.Alert;
 public class AdjacentTilesException extends Exception {
 
     public String toString() {
-        return ("At least two ships are too close with each other!");
+        return ("At least two ships are too close with each other!\nThe application will now close.");
     }
 
     public void handleException() {

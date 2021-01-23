@@ -7,7 +7,7 @@ import javafx.scene.control.Alert;
 public class OverlapException extends Exception {
 
     public String toString() {
-        return ("At least two ships overlap with each other!");
+        return ("At least two ships overlap with each other!\nThe application will now close.");
     }
 
     public void handleException() {

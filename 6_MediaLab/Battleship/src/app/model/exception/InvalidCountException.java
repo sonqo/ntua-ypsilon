@@ -7,7 +7,7 @@ import javafx.scene.control.Alert;
 public class InvalidCountException extends Exception {
 
     public String toString() {
-        return ("Too many ships of the same type found!");
+        return ("Too many ships of the same type found!\nThe application will now close.");
     }
 
     public void handleException() {
