@@ -2,31 +2,31 @@
 
 This repository contains my personal academic projects while following the Computer Systems flow at the National Technical University of Athens.
 
-### Microprocessors
+### 1. Microprocessors
 _Basic AVR programming._  
 Stack pointer handling, function generator, input and output exercises.
 
 :bulb: Technologies used: ***AVR Assembly, C***
 
-### Microprocessors Laboratory
+### 2. Microprocessors Laboratory
 _Various AVR applications._  
 Stack pointer handling, interrupts, LCD and Keypad functionalities, DS1820 sensor application, Asynchronous Receiver/Transmitter communication, IoT applet.
 
 :bulb: Technologies used: ***8085 Assembly, AVR Assembly, C***
 
-### Operating Systems
+### 3. Operating Systems
 _Unix system programming._  
 Child process handling, signal communication, monitoring multiple file descriptors, pipe communication, socket communication.
 
 :bulb: Technologies used: ***C***
 
-### Multimedia Technology
+### 4. Multimedia Technology
 _GUI applications on a flight management system and α well-known board game._  
 Object-oriented approach, interface design, input handling, event handling, timelines, animations.
 
 :bulb: Technologies used: ***Java*** _(JavaFX, SceneBuilder)_
 
-### Image and Video Analysis and Technology
+### 5. Image and Video Analysis and Technology
 
 - **Image Cartoonification & Video Motion Detection**  
 _Edge detection applications on images and videos._  
@@ -38,7 +38,7 @@ Data preparation, various Convolutional Neural Network architectures tested, Dro
 
 :bulb: Technologies used: ***Python*** _(skimage, opencv, tensorflow)_
 
-### Neural Networks and Intelligent Systems
+### 6. Neural Networks and Intelligent Systems
 
 - **Machine-Learning-Based Classification**  
 _Classification techniques on [UCI](https://archive.ics.uci.edu/ml/index.php) datasets._  
@@ -54,7 +54,7 @@ Data preparation, various Convolution Neural Network arhitectures tested, Data A
 
 :bulb: Technologies used: ***Python*** _(imblearn, sklearn, tensorflow, somoclu)_
 
-### Embedded System Design
+### 7. Embedded System Design
 _Embedded applications and optimizations._   
 Loop Transformations for improving energy consumption and execution time, Dynamic Data Type Refinement in pursuit of data efficiency, ARM Assembly applications, High Level Synthesis on MNIST GANs, Linux Kernel Cross-Compiling for ARM architecture.
 
