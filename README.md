@@ -55,24 +55,7 @@ Data preparation, various Convolution Neural Network arhitectures tested, Data A
 :bulb: Technologies used: ***Python*** _(imblearn, sklearn, tensorflow, somoclu)_
 
 ### Embedded System Design
-
-- **Loop Transformations**  
-_Techniques for improving energy consumption and execution time of functions._  
-Loop Fusion, Unrolling Factor testing, Design Spce Exploration.
-
-- **Dynamic Data Type Refinement**  
-_Space exploration on different data structures in pursuit of data efficiency._  
-Code preparation for Valgrind suite applications, Memory Accesses & Memory Footprint analysis.
-
-- **ARM Assembly**  
-_Applications written in ARM assembly and executed on QEMU simulator._  
-Input/String manipulation, host-guest serial port communcation, ARM and C code linking.
-
-- **High Level Synthesis**  
-_HLS application and optimizations on MNIST GANs, run on ZYnq BOard._  
-Hardware pragmas optimizations, various bit reconstruction accuracies tested.
-
-- **Linux Kernel Cross-Compiling**  
-_Cross-compiling a linux kernel for ARM architecture, simulated on QEMU._  
+_Embedded applications and optimizations._   
+Loop Transformations for improving energy consumption and execution time, Dynamic Data Type Refinement in pursuit of data efficiency, ARM Assembly applications, High Level Synthesis on MNIST GANs, Linux Kernel Cross-Compiling for ARM architecture.
 
 :bulb: Technologies used: ***C, Orio Tool, Valgrind*** _(Massif, Lackey)_***, ARM Assembly, QEMU, SDSoC***
