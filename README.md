@@ -1,6 +1,6 @@
 ## NTUA - Electrical and Computer Engineering - Ypsilon Flow
 
-This repository contains my personal academic projects while following the Computer Systems flow at the National Technical University of Athens.
+Personal academic projects from the Computer Systems flow at the National Technical University of Athens.
 
 ### 1. Microprocessors
 Basic AVR programming.\
